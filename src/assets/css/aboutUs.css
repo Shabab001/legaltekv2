@@ -1,0 +1,323 @@
+.aboutUs .banner {
+  display: flex;
+  position: relative;
+}
+.aboutUs .banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.aboutUs .bannerCall {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 100%;
+  margin: auto;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translate3d(0, -50%, 0);
+  align-items: center;
+  position: absolute;
+  overflow: hidden;
+}
+
+.aboutUs .bannerCall h2 {
+  margin-bottom: 10px;
+  font-size: 44px;
+  text-align: center;
+  color: white;
+  font-family: Avenir_heavy;
+}
+
+.aboutUs .bannerCall h5 {
+  margin-top: 0px;
+  text-align: center;
+  color: white;
+  font-family: Avenir_heavy;
+}
+
+.aboutUs .bannerCall p {
+  text-align: center;
+  color: white;
+  font-family: Avenir_light;
+}
+
+.aboutUs .bannerCall button {
+  margin-top: 30px;
+  /* color: white; */
+}
+
+.aboutUs .aboutUs-second-section {
+  display: flex;
+  height: 250px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ghostwhite; 
+  padding: 0px 5px;
+}
+
+.aboutUs .aboutUs-second-section h3 {
+  font-size: 32px;
+  width: 480px;
+  max-width: 100%;
+  text-align: center;
+  font-family: Avenir_black;
+}
+
+.aboutUs .aboutUs-second-section p {
+  width: 480px;
+  max-width: 100%;
+  font-size: 14px;
+  font-family: Avenir_heavy;
+  text-align: center;
+  color: gray;
+  
+}
+
+.aboutUs .aboutUs-sixth-section-outer-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: ghostwhite;
+    padding: 20px 0px;
+    height: fit-content;
+} 
+
+.aboutUs .aboutUs-sixth-section-outer-container button{
+    margin-top: 20px;
+}
+.aboutUs .aboutUs-third-section-container, .aboutUs .aboutUs-sixth-section-container {
+  display: flex;
+  overflow: auto;
+  align-items: flex-start;
+  flex-direction: column;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+  background-color: ghostwhite;
+}
+
+.aboutUs .aboutUs-sixth-section-container::-webkit-scrollbar{
+    display:none;
+}
+
+.aboutUs .aboutUs-third-section-container button{
+    text-transform: none;
+    width: fit-content;
+    padding: 10px 15px;
+}
+.aboutUs .aboutUs-third-section, .aboutUs .aboutUs-sixth-section {
+  display: flex;
+  height: auto;
+  width: 1000px;
+  max-width: fit-content;
+  padding: 0px 20px;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.aboutUs .aboutUs-third-section > div, .aboutUs .aboutUs-sixth-section .aboutUs-sixth-section-item {
+  margin: 30px;
+  height: 150px;
+  width: 250px;
+  max-width: 250px;
+  min-width: 250px;
+  flex: 1 0 33%;
+  scroll-snap-align: center;
+}
+.aboutUs .aboutUs-third-section i.fa{
+    background-color: rgba(229,0,119, 0.1);
+    color: #e50077;
+    padding: 10px;
+    border-radius: 50%;
+}
+.aboutUs .aboutUs-third-section > div h4{
+    margin-bottom:10px;
+    margin-top:15px;
+    font-family: Avenir_heavy;
+    font-size:16px;
+}
+
+.aboutUs .aboutUs-third-section > div p{
+    font-family: Avenir_light;
+    font-size: 12px;
+}
+
+
+.aboutUs .aboutUs-fourth-section{
+    display: flex;
+    height: 350px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: ghostwhite; 
+    background-image: url('../img//food2.jpg');
+    background-size: cover;
+    position: relative;
+    background-position: 90% 80%;
+    padding: 0px 5px;
+}
+
+.aboutUs .aboutUs-fourth-section .overlay{
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.aboutUs .aboutUs-fourth-section h3{
+    z-index: 1;
+    color: white;
+    font-size: 32px;
+    width: 500px;
+    max-width: 100%;
+    text-align: center;
+    font-family: Avenir_heavy;
+}
+
+.aboutUs .aboutUs-fourth-section p{
+    z-index: 1;
+    width: 450px;
+    color: gainsboro;
+    font-family: Avenir_light;
+    text-align: center;
+    max-width: 100%;
+}
+
+.aboutUs .aboutUs-fourth-section button{
+    z-index: 1;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.aboutUs .aboutUs-sixth-section {
+    width:fit-content;
+}
+
+
+.aboutUs .aboutUs-sixth-section  .aboutUs-sixth-section-item{
+    background-color: white;
+    padding: 25px;
+    height:200px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    flex: 1 0 25%;
+    margin: 15px;
+}
+.aboutUs .stories .card{
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    /* padding:20px; */
+    margin:auto 20px;
+    min-height:250px;
+    height:215px;
+    overflow: hidden;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.aboutUs .stories.card .img-container{
+    padding-top: 56.25%;
+    position: relative;
+    overflow: hidden;
+    max-height: 100px;
+}
+.aboutUs .stories .card img{
+    object-fit: cover;
+    width: 100%;
+    height:180px;
+    /* position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0; */
+
+}
+.aboutUs .stories .card h4, .aboutUs .stories .card p{
+    padding: 0px 10px;
+}
+.aboutUs .stories .card p{
+    font-family: Avenir_light;
+    font-size: 12px;
+}
+.aboutUs .stories .card h4{
+    margin-top:15px;
+    margin-bottom: 5px;
+    color: #e50077;
+    font-size: 14px;
+    font-family: Avenir_black;
+}
+/* .slick-slide{
+    min-width: fit-content;
+}
+.slick-slide > div{
+    display:flex;
+    min-width: fit-content;
+    justify-content: center !important;
+} */
+
+
+.aboutUs-stories{
+    height:fit-content;
+    /* display:flex; */
+    /* align-items: center; */
+    overflow: hidden;
+    
+}
+.aboutUs .stories .aboutUs-second-section{
+    height:fit-content;
+    padding-bottom: 50px;
+    padding-top:50px;
+}
+.aboutUs .stories{
+    display:flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+    /* padding-top: 50px; */
+    justify-content: center;
+}
+
+.aboutUs .stories button{
+    margin:auto;
+    margin-top: 20px;
+    font-family: Avenir_light;
+}
+.stories .aboutUs-second-section{
+    background-color: white;
+}
+
+.aboutUs-sixth-section-item h4{
+    font-family:Avenir_heavy;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.aboutUs-sixth-section-item p{
+    font-family:Avenir_light;
+    font-size: 12px;
+}
+
+
+@media only screen and (max-width: 450px){
+    .aboutUs .aboutUs-third-section{
+        /* flex-wrap: nowrap; */
+        width: auto;
+    }
+
+    .aboutUs .aboutUs-sixth-section{
+        width: auto;
+        flex-wrap: nowrap;
+    }
+
+    .aboutUs .aboutUs-third-section div:nth-child(n+4){
+        display:none;
+    }
+}

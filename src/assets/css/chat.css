@@ -1,0 +1,127 @@
+.chatContacts{
+    position: absolute;
+    left: -360px;
+    top: 0px;
+    bottom: 0px;
+    width: 360px;
+    background-color: whitesmoke;
+    top: 130px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    display:none;
+    flex-direction: column;
+    
+}
+
+.chatContacts .newConversationBtn{
+    display:flex;
+    height: 60px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    margin: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+.chatContacts .newConversationBtn .addBtn{
+    height: 100%;
+    width: 70px;
+    display:flex;
+    align-items: center;
+    border-right: 1px solid #dddddd;
+    justify-content: center;
+}
+
+.chatContacts .newConversationBtn >div:nth-child(2){
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: #e50077;
+    flex: 1 0 0;
+    font-family: Avenir_heavy;
+    font-size: 18px;
+}
+
+.chatContacts .newConversationBtn .addBtn i{
+    color: #e50077;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.chatWindow{
+    border-radius: 8px;
+    min-height: 65vh;
+    max-width: 100%;
+    width: 1170px;
+    max-height: fit-content;
+    height: fit-content;
+    
+    /* background-color: red; */
+    /* box-shadow: 0px 2px 6px rgba(0,0,0,0.5); */
+}
+
+.chatWindow *:not(i){
+    font-family: Avenir_light;
+}
+.chatWindow .container-fluid{
+    padding: 0px !important;
+}
+.add-people{
+    position: relative;
+}
+.chatList{
+    display:flex;
+    flex-direction: column;
+    width:200px;
+    background-color: white;
+    position: absolute;
+    box-shadow:0px 2px 6px rgba(0,0,0,0.3);
+    top: 100%;
+    right:0;
+    z-index: 2;
+    max-height:fit-content;
+    border-radius: 8px;
+}
+
+.chatList .header{
+    display: block;
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.chatList ul{
+    display:flex;
+    flex-direction: column;
+    list-style: none;
+    padding: none;
+    margin-top: 10px;
+}
+
+.chatList ul li{
+    padding: 5px 15px;
+    font-family: Avenir_heavy !important;
+    font-weight: 100 !important;
+    color: #e50077;
+    display:flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 14px;
+}
+
+.chatList ul li:hover{
+    background-color: #e50077;
+    color: white;
+    transition: none;
+    cursor: context-menu;
+}
+
+.chatList ul li img{
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 1024px){
+    .chatWindow{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+}

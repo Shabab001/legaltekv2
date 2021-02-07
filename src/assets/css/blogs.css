@@ -1,0 +1,116 @@
+.blog-card-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.blog-card {
+  overflow: hidden;
+  border-radius: 10px;
+  height: fit-content;
+  width: 270px;
+  box-shadow: 0px 2px 6px gainsboro;
+  margin: 15px 5px;
+  transition: box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.blog-card:hover {
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.blog-card:hover .blog-card-content h5 {
+  text-decoration: underline;
+}
+
+.blog-card .img-container {
+  height: 150px;
+  width: 270px;
+  overflow: hidden;
+}
+
+.blog-card .blog-cat {
+  border-radius: 20px;
+  text-transform: uppercase;
+  background-color: burlywood;
+  color: ghostwhite;
+  width: fit-content;
+  padding: 2px 10px;
+  font-family: Avenir_heavy;
+  font-size: 14px;
+  height: fit-content;
+}
+.blog-card .blog-cat.cat-1 {
+  background-color: dodgerblue;
+}
+
+.blog-card .blog-cat.cat-2 {
+  background-color: #e50077;
+}
+
+.blog-card .blog-cat.cat-3 {
+  background-color: goldenrod;
+}
+
+.blog-card .blog-cat span {
+  font-size: 8px;
+}
+
+.blog-card-content {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px;
+}
+
+.blog-card-content h5 {
+  font-family: Avenir_heavy;
+  margin-bottom: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: left;
+  color: #545d67;
+}
+
+.blog-card-content p {
+  font-family: Avenir_book;
+  margin-top: 0px;
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: #7b8d94;
+}
+.blog-card-author {
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+}
+.blog-card-author .avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
+}
+
+.blog-card-author .author-name {
+  font-family: Avenir_black;
+  color: darkslategray;
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 11px;
+}
+
+.blog-card-author .published-at {
+  font-family: Avenir_light;
+  color: darkslategray;
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 11px;
+}
+
+@media only screen and (max-width: 956px) {
+  .blog-card-row {
+    justify-content: center;
+  }
+}

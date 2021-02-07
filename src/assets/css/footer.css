@@ -1,0 +1,136 @@
+.footerN{
+    display:flex;
+    padding: 0px 80px;
+    justify-content: space-between;
+    align-self: flex-end;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    margin-top: auto;
+}
+
+.footerN::before{
+    display:flex;
+    width:80%;
+    height:2px;
+    background-color: #303030;
+}
+
+.footerN .cont{
+    width: 100%;
+    max-width: 1550px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height:69px;
+    align-items: center;
+    
+}
+
+
+.footerN .cont .left, .footerN .cont .right{
+    display:flex;
+    align-items: center;
+    width: fit-content;
+}
+.footerN .cont .left > div, .footerN .cont .right > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+.footerN .cont .left > div a, .footerN .cont .right > div a {
+    color: black;
+    line-height: 18px;
+}
+.dot-divider{
+    /* padding:5px; */
+    display: flex;
+    align-items: center;
+    height:5px;
+    width:5px;
+    font-size: 14px;
+    margin:0px 3px;
+    justify-content: center;
+}
+
+
+.footerN .cont .right a.social{
+    margin-top:-2px;
+    height:fit-content;
+}
+
+
+@media only screen and (max-width: 1045px){
+    .footerN{
+        padding:0px;
+        flex-wrap: wrap;
+        height:auto;
+        min-height: auto !important;
+        max-height: auto !important;
+    }
+    .footerN .cont{
+        height:auto;
+        min-height: auto !important;
+        max-height: auto !important;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap !important;
+        justify-content: center;
+    }
+    .footerN .right{
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-top:10px !important;
+    }
+    
+}
+
+.last-footer{
+    height:40px;
+    background-color:#e50077;
+    /* color: #e50077; */
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    width:100%;
+}
+.last-footer > .cont{
+    padding: 0px 20px;
+    width: 100%;
+    max-width: 1920px;
+    margin:auto;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.last-footer p{
+    font-family:Open sans;
+    font-weight: 500;
+    margin-bottom: 0px;
+    color: white;
+    
+}
+
+@media only screen and (max-width: 560px){
+    .footerN{
+        padding:20px;
+    }
+    .footerN .left{
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .footerN .cont .left{
+        flex-direction: column;
+    }
+    .footerN .cont .right{
+        flex-direction: row;
+    }
+
+    .footerN .cont .left > div a, .footerN .cont .right > div a {
+        font-size: 12px;
+    }
+
+}

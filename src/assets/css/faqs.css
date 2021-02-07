@@ -1,0 +1,307 @@
+.faqs .banner {
+  height: 350px !important;
+  width: 100%;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  display: flex;
+  position: relative;
+  background-position: 0% 10% !important;
+}
+
+.faqs-userTypes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+
+}
+
+.faqs-userTypes > div button.active {
+  border-bottom: 1px solid #e50077;
+  color: #e50077;
+}
+
+.faqs-userTypes > div button {
+  height: 100%;
+  width: 150px;
+  background-color: transparent;
+  font-family: Avenir_black;
+  font-family: 16px;
+  outline: none;
+}
+
+.faqs-userTypes > div {
+  width: 350px;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+.faqs .banner .bannerInfo {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  /* margin:auto; */
+  position: absolute;
+  top: 100px;
+  left: 350px;
+  height: fit-content;
+  padding: 20px;
+}
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: fit-content;
+  max-width: 100%;
+}
+
+.hero-title h1 {
+  color: #e50077;
+  font-family: open sans;
+  font-size: 32px;
+}
+.hero-title p {
+  font-family: open sans;
+  color: #feb500;
+  width: 300px;
+  font-size: 14px;
+}
+
+.faqs .faq-first-section-outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: ghostwhite;
+  padding: 20px 0px;
+  height: fit-content;
+}
+
+.faqs .faq-first-section-container {
+  display: flex;
+  overflow: auto;
+  align-items: flex-start;
+  flex-direction: column;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+  background-color: ghostwhite;margin-bottom: 20px;
+}
+
+
+.faqs .faq-first-section {
+  display: flex;
+  height: auto;
+  width: 1920px;
+  /* max-width: 100%; */
+  max-width: fit-content;
+  padding: 0px 20px;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.faqs .faq-first-section > div,
+.faqs .faq-first-section .faq-first-section-item {
+  margin: 30px;
+  height: 120px;
+  width: 250px;
+  max-width: 250px;
+  min-width: 250px;
+  flex: 1 0 33%;
+  scroll-snap-align: center;
+}
+.faqs .faq-first-section i.fa {
+  background-color: rgba(229, 0, 119, 0.1);
+  color: #e50077;
+  padding: 10px;
+  border-radius: 50%;
+}
+.faqs .faq-first-section > div h4 {
+  margin-bottom: 10px;
+  margin-top: 15px;
+  font-family: Open sans;
+  text-align: center;
+  font-size: 14px;
+}
+
+.faqs .faq-first-section > div p {
+  font-family: Open sans;
+  font-size: 12px;
+  text-align: center;
+}
+
+.faqs .faq-first-section .svg-container{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.faqs .faq-first-section .faq-first-section-item {
+  background-color: white;
+  padding: 25px;
+  height: 160px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  flex: 1 0 25%;
+  margin: 15px;
+
+  width: 220px;
+  max-width: 200px;
+  min-width: 220px;
+  /* flex: 1 0 33%; */
+  scroll-snap-align: center;
+}
+
+.faqs .faq-first-section .faq-first-section-item h4{
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-family: Open sans;
+    font-weight: 800;
+    font-size: 14px;
+}
+.faqs .faq-first-section .faq-first-section-item p{
+    font-family: Open sans;
+    font-size: 11px;
+}
+
+.faq-second-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+}
+
+.faq-second-container .accordion{
+    display:flex;
+    flex-direction: column;
+    min-height: 100px;
+    height:fit-content;
+    width:600px;
+    max-width: 100%;
+    position: relative;
+    margin: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 1;
+    background-color: aliceblue;
+    -webkit-transition: height 1s ease;
+    -moz-transition: height 1s ease;
+    -o-transition: height 1s ease;
+    transition: height 1s ease;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+
+.faq-second-container .accordion .acc-cover{
+    background-color: aliceblue;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.faq-second-container .accordion .acc-panel{
+    background-color: aliceblue;
+    /* display:none; */
+    flex-direction: column;
+    /* height: 0px; */
+    height:0px;
+    /* transition: 2.4s height ease-in-out; */
+    -webkit-transition: height 0.4s ease;
+    -moz-transition: height 0.4s ease;
+    -o-transition: height 0.4s ease;
+    transition: height 0.4s ease;
+    padding: 20px;
+    display: flex;
+}
+
+.faq-second-container .accordion .acc-panel > .close-acc {
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.faq-second-container .accordion .acc-panel > .close-acc .fa-close{
+    padding:5px;
+}
+
+.faq-second-container .accordion .acc-cover > div{
+    display:flex;
+    align-items: center;
+}
+.faq-second-container .accordion .acc-cover > div p{
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-family: Open sans, sans-serif;
+}
+
+.faq-second-container .accordion .acc-cover > div i{
+    margin-left: 10px;
+    height:fit-content;
+}
+
+.faq-second-container .accordion.open .acc-cover{
+    animation: coverClose 0.4s ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-transition: height 0.4s ease;
+    -moz-transition: height 0.4s ease;
+    -o-transition: height 0.4s ease;
+    transition: height 0.4s ease;
+}
+
+.faq-second-container .accordion.open .acc-panel{
+    /* height: 450px; */
+    background-color: white;
+    
+    height:450px;
+    overflow-y: scroll;
+    /* transition: 2.4s height ease-in-out; */
+    -webkit-transition: height 0.4s ease;
+    -moz-transition: height 0.4s ease;
+    -o-transition: height 0.4s ease;
+    transition: height 0.4s ease;
+}
+
+.faq-second-container .accordion.open .acc-panel::-webkit-scrollbar{
+    display:block;
+    width: 5px;
+}
+
+
+
+@media only screen and (max-width: 450px){
+    .faqs .banner .bannerInfo{
+        left: 0;
+        right: 0;
+        max-width: 100%;
+    }
+
+    .faqs .faq-first-section{
+        flex-wrap: nowrap;
+    }
+    .faqs .faq-first-section-container::-webkit-scrollbar{
+        display: none !important;
+    }
+
+    .faqs-userTypes > div button{
+      width:fit-content;
+    }
+}
+
+@keyframes coverClose{
+    0%{
+        opacity: 1;
+    }
+
+    100%{
+        opacity: 0;
+        height: 0px;
+    }
+
+   
+}
+
+

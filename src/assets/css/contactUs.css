@@ -1,0 +1,387 @@
+.contactUs .banner img {
+  position: absolute;
+  right: 30px;
+  /* height: 100%; */
+  bottom: 0;
+  max-height: 90%;
+  object-fit: cover;
+}
+
+.contactUs .banner{
+    background-size: cover;
+    height: 680px;
+    width: 100%;
+    position: relative;
+}
+
+.contactUs .banner .bannerInfo{
+  position: absolute;
+  left: 250px;
+  top: 180px;
+}
+
+.contactUs .banner .bannerInfo .hero-title-2{
+  margin-top: 80px;
+}
+
+.contactUs .banner .bannerInfo .hero-title-2 h4{
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.contactUs .banner .bannerInfo h1{
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.contactUs .banner .bannerInfo .hero-title-2 > div{
+  display:flex;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  column-gap: 15px;
+}
+.contactUs .banner .bannerInfo .hero-title-2 label{
+  display:flex;
+  flex: 1 0 22%;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 12px;
+}
+.contactUs .banner .bannerInfo .hero-title-2 label span{
+  font-weight: 400;
+  color: gray;
+}
+
+
+.contactUs-first-section,
+.contactUs-second-section,
+.contactUs-third-section
+{
+  max-width: 1920px;
+  margin: auto;
+  width: 100%;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.contactUs-box {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px 40px;
+  width: 1100px;
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+.contactUs-first-section .contactUs-box h3,.contactUs-second-section .contactUs-box h3 {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: 650;
+}
+
+.contactUs-first-section .contactUs-box p,.contactUs-second-section .contactUs-box p {
+  position: relative;
+}
+
+.contactUs-first-section .contactUs-box .infoWithIcon, .contactUs-second-section .contactUs-box .infoWithIcon {
+  padding-left: 30px;
+  margin-bottom: 0px;
+}
+.contactUs-first-section .contactUs-box p:not(:first-child) i,.contactUs-second-section .contactUs-box p:not(:first-child) i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 50%;
+  transform: translatey(-50%);
+}
+.partSection {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  justify-content: flex-start;
+  max-width: 100%;
+  flex: 1 0 40%;
+  margin: 20px 15px;
+}
+
+.contactUs-second-section .contactUs-box {
+  padding: 0px;
+  height: auto;
+  min-height: 400px;
+  max-height: max-content;
+}
+
+.contactUs-second-section .contactUs-box .partSection:nth-child(1) {
+  background-color: aliceblue;
+  margin: 0;
+  padding: 50px;
+}
+.contactUs-second-section .contactUs-box .partSection:nth-child(2){
+    padding: 30px 20px;
+    flex-wrap: wrap;
+}
+.contactUs-second-section .contactUs-box .partSection:nth-child(2) label {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px 0px;
+  min-height: 40px;
+  height: 40px;
+}
+.contactUs-second-section .contactUs-box .partSection:nth-child(2) .textAreaLabel{
+    min-height: 40px;
+    height: fit-content !important;
+}
+.contactUs-second-section .contactUs-box .partSection:nth-child(2) label span {
+  position: absolute;
+  top: 8px;
+  /* transform: translate3d(0px, -50%, 0px); */
+  transition: transform 0.2s ease;
+  left: 20px;
+}
+.contactUs-second-section .contactUs-box .partSection:nth-child(2) label input,
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  textarea {
+  position: relative;
+  height: 100%;
+  padding: 5px 15px;
+  width: 100%;
+}
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  input:focus
+  + span,
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  textarea:focus
+  + span,
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  input +
+  span.active,
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  textarea +
+  span.active
+   {
+  transform: translate3d(-5px, -18px, 0px);
+  font-size: 11px;
+  background-color: white;
+  padding: 0px 2px;
+}
+
+
+.contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2)
+  label
+  textarea{
+      padding: 15px 15px;
+      height:auto;
+      margin-top:15px;
+  }
+  .contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2) .twoPartLabel{
+      display: flex;
+      column-gap: 10px;
+  }
+  .contactUs-second-section
+  .contactUs-box
+  .partSection:nth-child(2) .twoPartLabel label{
+      flex: 1 0 45%;
+      display:flex;
+  }
+  .partSection .pink-btn{
+      margin: 20px auto;
+      width: 100%;
+  }
+
+
+
+
+
+ .contactUs-third-section .contactUs-box .contactUs-box-innerDiv{
+   display:flex;
+   flex-direction: column;
+   margin: auto;
+   width: 500px;
+   max-width: 100%;
+ }
+
+ .contactUs-third-section
+  .contactUs-box
+  label.inputContainer
+  input:focus
+  + span,
+.contactUs-third-section
+  .contactUs-box
+  label.inputContainer
+  textarea:focus
+  + span,
+.contactUs-third-section
+  .contactUs-box
+  label.inputContainer
+  input +
+  span.active,
+.contactUs-third-section
+  .contactUs-box
+  label.inputContainer
+  textarea +
+  span.active
+   {
+  transform: translate3d(-5px, -18px, 0px);
+  font-size: 11px;
+  background-color: white;
+  padding: 0px 2px;
+}
+
+
+.contactUs-third-section .contactUs-box  label.inputContainer {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px 0px;
+  min-height: 40px;
+  height: 40px;
+}
+.contactUs-third-section .contactUs-box  .textAreaLabel{
+    min-height: 40px;
+    height: fit-content !important;
+}
+.contactUs-third-section .contactUs-box  label.inputContainer span {
+  position: absolute;
+  top: 8px;
+  /* transform: translate3d(0px, -50%, 0px); */
+  transition: transform 0.2s ease;
+  left: 20px;
+}
+.contactUs-third-section .contactUs-box  label.inputContainer input,
+.contactUs-third-section
+  .contactUs-box
+  label.inputContainer
+  textarea {
+  position: relative;
+  height: 100%;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+
+.contactUs-third-section
+  .contactUs-box
+  label
+  textarea{
+      padding: 15px 15px;
+      height:auto;
+      margin-top:15px;
+  }
+  .contactUs-third-section
+  .contactUs-box .twoPartLabel{
+      display: flex;
+      column-gap: 10px;
+  }
+  .contactUs-third-section
+  .contactUs-box .twoPartLabel label{
+      flex: 1 0 45%;
+      display:flex;
+  }
+  .contactUs-third-section .pink-btn{
+      margin: 20px auto;
+      width: 100%;
+  }
+
+  .contactUs-third-section h3{
+    text-align: center;
+    font-weight: 650;
+    max-width: 100%;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  .contactUs-third-section p{
+    text-align: center;
+    font-weight: 400;
+    color: gray;
+    max-width: 100%;
+  }
+  .contactUs-third-section .switchLabel{
+    max-width: 100%;
+    margin-top: 20px;
+  }
+  .contactUs-third-section .switchLabel button{
+    margin-right: 10px;
+
+  }
+
+  .contactUs-third-section .switchLabel span{
+    text-decoration: underline;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+
+  @media only screen and (max-width: 450px){
+    .contactUs-first-section, .contactUs-second-section{
+        padding: 0px;
+    }
+
+    .contactUs-box{
+        box-shadow: none;
+        border: none;
+    }
+    .twoPartLabel{
+        flex-direction: column;
+        min-height: fit-content;
+    }
+    .twoPartLabel label{
+        /* margin: 20px 0px; */
+        max-height: 40px;
+    }
+
+    .partSection{
+        margin: 0px;
+    }
+
+    .contactUs-second-section .contactUs-box .partSection:nth-child(2){
+        padding: 30px 10px;
+    }
+    .contactUs-third-section{
+      padding: 10px;
+    }
+    .contactUs-first-section .contactUs-box, .contactUs-third-section .contactUs-box{
+        padding: 0px;
+    }
+
+    .contactUs-first-section .contactUs-box .partSection{
+        max-width: 100%;
+        width: 100%;
+        padding: 50px;
+    }
+    .contactUs .banner .bannerInfo{
+      left: 0;
+      right: 0;
+    }
+   
+    .contactUs .banner img{
+      display: none;
+    }
+    .contactUs .banner .bannerInfo .hero-title-2 > div{
+      flex-wrap: wrap;
+    }
+  }

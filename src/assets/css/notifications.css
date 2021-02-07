@@ -1,0 +1,208 @@
+.notif-cat{
+    width: 200px;
+    overflow: hidden;
+}
+.notif-row{
+    display:flex;
+
+}
+
+.notif-cat ul{
+    list-style: none;
+}
+
+.notif-cat ul li{
+    padding: 5px 10px;
+    font-family: Avenir_book;
+    color: black;
+    display:flex;
+    align-items: center;
+    position: relative;
+}
+
+.notif-cat ul li span{
+    margin-left: auto;
+    padding: 0px 8px;
+    font-size: 10px;
+    border-radius: 20px;
+    color: white;
+}
+
+.notif-cat ul li:hover{
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.notif-cat ul li img, .notif-cat ul li i{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.notif-cat ul li:nth-child(1) i{
+    color: #e50077;
+}
+.notif-cat ul li:nth-child(2) i{
+    color: dodgerblue;
+}
+.notif-cat ul li:nth-child(3) i{
+    color: goldenrod;
+}
+.notif-cat ul li:nth-child(4) i{
+    color: magenta;
+}
+
+.notif-cat ul li:nth-child(1) span{
+    background-color: #e50077;
+}
+
+.notif-cat ul li:nth-child(2) span{
+    background-color: dodgerblue;
+}
+
+.notif-cat ul li:nth-child(3) span{
+    background-color: goldenrod;
+}
+.notif-cat ul li:nth-child(4) span{
+    background-color: magenta;
+}
+
+.notif-list{
+    background-color: #f6f7fb;
+    width:600px;
+    max-width: 100%;
+    margin-left: 40px;
+    position: relative;
+}
+.notif-list .markAll{   
+    position: absolute;
+    top: -30px;
+    color: purple;
+    right: 0px;
+    background-color: #f6f7fb;
+    height:30px;
+    padding: 3px 15px;
+    font-family: Avenir_heavy;
+    font-size: 12px;
+    cursor: pointer;
+}
+.notif-list .markAll:hover{
+    color: #e50077;
+}
+
+.notif-item{
+    background-color: #f6f7fb;
+    height: 80px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 0.1s ease-in-out;
+    
+}
+
+.notif-item:hover{
+    background-color: #fff;
+    margin: 10px 0px;
+    box-shadow: 0px 5px 6px rgba(0,0,0,0.1);
+}
+.notif-item:nth-child(2):hover{
+    background-color: #fff;
+    margin: 0px 0px 10px 0px;
+    margin-top: 0px !important;
+    box-shadow: 0px 5px 6px rgba(0,0,0,0.1);
+}
+
+.notif-detail{
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+}
+.notif-detail p{
+    margin-bottom: 0px;
+    font-family: Avenir_book;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.notif-detail span{
+    margin-bottom: 0px;
+    font-family: Avenir_light;
+    font-size: 12px;
+}
+
+.notif-item .avatar{
+    margin: 20px;
+    height: 32px;
+    width: 32px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.notif-item .avatar img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.notif-actions{
+    margin-left: auto;
+    align-self: center;
+    display:none;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.notif-actions p{
+    font-family: Avenir_light;
+    font-weight: 700;
+    color: gray;
+    cursor: pointer;
+    padding: 3px 0px;
+    width: 100px;
+    font-size: 12px;
+    margin-bottom: 0px;
+    height:40%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.notif-item:hover .notif-actions{
+    display: flex;
+}
+
+.notif-item:hover .notif-actions p:hover{
+    background-color: rgba(229,0,119, 0.8);
+    color: white;
+    border-radius: 20px;
+}
+
+@media only screen and (max-width: 956px) {
+    .notif-row{
+        flex-wrap: wrap;
+    }
+    .notif-list{
+        margin-left: 0px;
+    }
+
+    .notif-item .avatar{
+        margin: 20px 5px 20px 10px;
+    }
+    .notif-item .notif-detail{
+        padding: 5px;
+        width: 70%;
+    }
+  }

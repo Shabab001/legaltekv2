@@ -1,0 +1,251 @@
+.helpCenter {
+  max-width: 1920px;
+  margin: auto;
+  width: 100%;
+  min-height: calc(100vh - 269px);
+}
+
+.helpCenter .banner {
+  height: 350px !important;
+  width: 100%;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  display: flex;
+  position: relative;
+  background-position: center !important;
+}
+
+
+.helpCenter .main-content::-webkit-scrollbar {
+  display: none;
+}
+.helpCenter .bannerInfo {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  /* margin: auto; */
+  position: absolute;
+  top: 100px;
+  left: 250px;
+  height: fit-content;
+  padding: 20px;
+}
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: fit-content;
+}
+
+.hero-title h1 {
+  color: #e50077;
+  font-family: Avenir_Light;
+  font-size: 32px;
+}
+.hero-title p {
+  font-family: Avenir_Book;
+  color: #feb500;
+  width: 300px;
+  font-size: 14px;
+}
+
+.helpCenter-body {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 80px;
+}
+
+.helpCenter-body > h1 {
+  font-family: Avenir_light;
+}
+.helpCenter-body .card-row > div{
+  display:flex;
+  flex: 1 0 25%;
+  min-width: 300px;
+}
+.helpCenter-body .card-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.helpCenter-body .card-row .card {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  max-width: 300px;
+  padding: 20px 30px;
+  max-height: 200px;
+  position: relative;
+  margin: 20px;
+  cursor: context-menu;
+  overflow: hidden;
+}
+.helpCenter-body .card-row .card:hover {
+  box-shadow: none;
+}
+
+.helpCenter-body .card-row .card h3 {
+  font-family: Avenir_Black;
+  color: darkslategray;
+  font-size: 18px;
+}
+
+.helpCenter-body .card-row .card h3::before {
+  font-family: "FontAwesome";
+  content: "\f0eb";
+  position: absolute;
+  left: 0px;
+}
+
+.helpCenter-body .card-row .card p {
+  color: darkslategray;
+  font-family: Avenir_Book;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0px;
+}
+
+.helpCenter-body .card-row .card a {
+  color: #e50077 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.helpCenter-body .divider {
+  height: 1px;
+  background-color: #dddddd;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.helpCenter-body .third-section {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.helpCenter-body .third-section h1 {
+  font-family: Avenir_Book;
+  font-size: calc(1rem + 2vmin);
+  /* padding-left: 10px; */
+}
+.helpCenter-body .third-section p {
+  /* padding-left: 10px; */
+  font-family: Avenir_Book;
+}
+
+.helpCenter-body .topics-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.helpCenter-body .topics-row > div{
+  display:flex;
+  flex: 1 0 25%;
+}
+.helpCenter-body .topics-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 25%;
+  height: 100%;
+  min-width: 300px;
+  margin: 30px 0px;
+}
+
+.helpCenter-body .topics-col span {
+  padding: 0px 10px;
+  font-size: 24px;
+  color: darkslategray;
+}
+
+.helpCenter-body .topics-col h3 {
+  font-family: Avenir_heavy;
+  padding: 10px;
+  font-size: 22px;
+  color: black;
+  margin-top: 10px;
+}
+
+.helpCenter-body .topics-col a {
+  font-family: Avenir_Book;
+  padding: 10px;
+  text-align: left;
+  color: darkslategray !important;
+}
+.helpCenter-body h1{
+    position: relative;
+    font-size: calc(1rem + 2vmin);
+}
+.helpCenter-body h1::before {
+  content: "";
+  display: inline-flex;
+  width: 3px;
+  position: absolute;
+  left: -15px;
+  height: 100%;
+  background-color: #feb300;
+}
+
+@media only screen and (max-width: 1024px) {
+  .helpCenter-body {
+    padding: 40px;
+  }
+  .helpCenter-body .card-row {
+    padding: 0px 0px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .helpCenter .bannerInfo {
+    top: 150px;
+    left: 0;
+    right: 0;
+    width: fit-content !important;
+  }
+
+  .helpCenter-body .side-links {
+    display: none;
+  }
+  .helpCenter-body {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px !important;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .helpCenter-body .main-content {
+    /* padding-left:5px;
+        padding-right:5px; */
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-x: hidden;
+  }
+
+  .text-section {
+    padding: 0px 5px;
+  }
+
+  .helpCenter-body .main-content .text-section p {
+    font-size: 16px;
+  }
+
+  .helpCenter-body .card-row .card {
+    padding: 20px;
+    margin: 20px 0px;
+    width: 100%;
+    max-width: 100%;
+  }
+}

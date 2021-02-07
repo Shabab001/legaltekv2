@@ -1,0 +1,210 @@
+.privacy, .terms{
+    max-width: 1920px;
+    margin: auto;
+    width: 100%;
+    margin-top: 0px;
+}
+.privacy .banner, .terms .banner{
+    height:350px !important;
+    width: 100%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    display:flex;
+    position: relative;
+    background-position: center !important;
+}
+.privacy .main-content::-webkit-scrollbar{
+    display:none;
+}
+.privacy .banner .bannerInfo, .terms .banner .bannerInfo{
+    display:flex;
+    width: fit-content;
+    max-width: 100%;
+    /* margin:auto; */
+    position: absolute;
+    top: 100px;
+    left: 350px;
+    height: fit-content;
+    padding: 20px;
+}
+.hero-title{
+    display:flex;
+    flex-direction: column;
+    color: white;
+    height:fit-content;
+}
+
+.hero-title h1{
+    color: #e50077;
+    font-family: Avenir_Light;
+    font-size: 32px;
+}
+.hero-title p{
+    font-family: Avenir_Book;
+    color: #feb500;
+    width: 300px;
+    font-size: 14px;
+}
+.privacy-body{
+    padding-left:350px;
+    padding-top: 40px;
+    min-height: 654px;
+    /* max-height: 654px; */
+    position: relative;
+}
+.privacy-body .main-content{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: auto;
+    height: 830px;
+    padding-bottom:700px;
+}
+.privacy-body .main-content .title {
+    margin-bottom: 40px;
+}
+.privacy-body .main-content .title h1{
+    font-size: 46px;
+    margin-bottom: 10px;
+}
+.privacy-body .main-content h5{
+    color: gray;
+}
+.privacy-body .main-content h1,.privacy-body .main-content  h3, .privacy-body .main-content h5{
+    font-family: Avenir_Light;
+    margin-bottom:0px;
+    margin-top: 0px;
+    width: fit-content;
+    position: relative;
+    display:flex;
+}
+.privacy-body .main-content  h3{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.privacy-body .main-content  h3::after{
+    content: "";
+    display:inline-block;
+    flex: 1 0 auto;
+    height:1px;
+    justify-self: center;
+    align-self: center;
+    background-color: #dddddd;
+    left: 105%;
+    width:80%;
+    position: absolute;
+}
+
+.privacy-body .main-content .text-section{
+    margin-bottom: 30px;
+    position: relative;
+}
+.privacy-body .main-content .text-section::before{
+    display: block; 
+  content: " "; 
+  margin-top: -285px; 
+  height: 285px; 
+  visibility: hidden; 
+  pointer-events: none;
+}
+.privacy-body .main-content .text-section p {
+    font-size: 18px;
+    font-family: Avenir_light;
+}
+.privacy-body .side-links{
+    display:flex;
+    position: absolute;
+    width: 320px;
+    background-color: #f9f9f9;
+    flex-direction: column;
+    height:fit-content;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+}
+.privacy-body .side-links ul{
+    margin-top:40px;
+    width: 100%;
+}
+.privacy-body .side-links li, .privacy-body .side-links a{
+    color:darkslategray;
+    display:block;
+    font-size: 18px;
+    height: 80px;
+    width: 100%;
+    font-family: Avenir_heavy;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    
+}
+.privacy-body .side-links li{
+    padding-left:30px;
+}
+.privacy-body .side-links li span{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background-color: darkslategray;
+    color: white;
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+.privacy-body .side-links li.active a{
+    color: #e50077;
+
+}
+.privacy-body .side-links li.active span{
+    color: #fff;
+    background-color: #e50077;
+}
+@media only screen and (max-width: 450px){
+    
+    .privacy .bannerInfo, .terms .bannerInfo{
+        top: 150px;
+        left: auto;
+        right: auto;
+        width: fit-content !important;
+    }
+
+    .privacy-body .side-links{
+        display: none;
+    }
+    .privacy-body{
+        padding-left:20px;
+        padding-right:20px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    .privacy-body .main-content{
+        /* padding-left:5px;
+        padding-right:5px; */
+        max-width: 100%;
+        width: 100%;
+        position: relative;
+        box-sizing: border-box;
+        padding-left:0px;
+        padding-right:0px;
+        overflow-x: hidden;
+    }
+    .privacy-body{
+        padding-top:0px;
+        max-width: 100%;
+        width: 100%;
+    }
+    .text-section{
+        padding:0px 5px;
+    }
+
+    .privacy-body .main-content .text-section p{
+        font-size: 16px;
+    }
+    
+}

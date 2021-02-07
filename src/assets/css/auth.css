@@ -1,0 +1,777 @@
+#login {
+  padding-top: 150px;
+  /* background-color: #00100f !important; */
+  background-color: #e50077 !important;
+  min-height: 100vh;
+}
+.form-modal {
+  height: 600px;
+  /* width: 900px; */
+  max-width: fit-content !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -3px 4px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: auto;
+  background-color: white;
+  /* overflow: auto; */
+}
+
+.form-modal > .form {
+  width: 550px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 25px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.form-modal > .form .field input {
+  background-color: rgba(229, 0, 119,0.05) !important;
+}
+.form .field{
+  position: relative;
+}
+.form-modal > .form .field .showPass.fe, .form .field .showPass.fe{
+  position: absolute;
+  right:5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.form-modal > .form .field .icon .icon {
+  /* border-right: 1px solid lavender; */
+}
+
+.facebook-btn{
+  /* padding: 0px 25px; */
+  border-radius: 3px;
+  color: #fff;
+  background-color: #3c5a98;
+  font-size: 12px;
+  font-family: Avenir_light !important;
+  /* margin: 0px 15px, */
+  outline: none!important;
+}
+.efgi  .googleBtn, .efgi > a {
+  font-family: Avenir_light !important;
+}
+.efgi  .googleBtn, .efgi  .googleBtn > div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  /* padding: 0px 25px !important; */
+  margin: 0px !important;
+  border-radius: 4px !important; 
+  color: #fff !important;
+  background-color: #fb1c2e !important;
+  font-size: 14px;
+  box-shadow: none !important;
+  
+}
+
+.efgi .googleBtn > div{
+  width: fit-content;
+  padding: 0px !important;
+}
+
+.efgi .googleBtn > span{
+  font-size: 12px !important;
+  font-family: Avenir_light !important;
+  padding: 0px !important;
+  padding-left: 5px !important;
+}
+
+.form-modal .slick-slider.slick-initialized {
+  width: 500px;
+  max-width: 100%;
+  height: 100%;
+  background-color: darkslategray;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  overflow: hidden;
+}
+
+ #login h3, #login h4, .form-modal h3{
+  font-family: Avenir_light !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  margin-top: 20px !important;
+  margin-bottom:15px !important;
+}
+
+.form-modal h4{
+  font-size: 15px !important;
+  margin-bottom: 15px !important;
+  font-weight: 600;
+}
+
+.form-modal h5{
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 15px !important;
+}
+.brand{
+  /* font-size: 18px !important;
+  margin-bottom: 0px ; 
+  color: #e50077; */
+}
+
+.form-modal .brand a{
+  color: darkslategray;
+  font-family: Antapani-extrabold !important;
+  font-size: 22px;
+  line-height: 22px;
+  color: #000;
+}
+
+.form-modal .brand span{
+  font-family: Antapani-extrabold !important;
+  font-size: 22px;
+  line-height: 22px;
+  color: #e50077;
+  transform: rotate(-45deg) !important;
+}
+
+.form-modal .brand span:hover {
+  transform: rotate(0deg) !important;
+  transition: transform 0.6s ease-in-out;
+}
+
+#login .slick-slider, .form-modal .slick-slider {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+#login .slick-slider h3 {
+  color: white;
+  margin: 10px;
+}
+#login .slick-dots , .form-modal .slick-dots{
+  bottom: 30px !important;
+}
+#login .slick-dots li {
+  height: 3px !important;
+}
+
+#login .slick-list, .form-modal .slick-list{
+  height: 100% !important;
+  width: 100% !important;
+}
+
+#login .slick-track,
+#login .slick-slide,
+#login .slick-slide div,
+.form-modal .slick-track,
+.form-modal .slick-slide,
+.form-modal .slick-slide div
+{
+  height: 100%;
+}
+
+
+.form-modal h2 {
+  text-align: left;
+  /* font-family: Antapani-extrabold !important; */
+}
+
+
+.form-modal h4{
+  font-family: Avenir_light !important;
+}
+
+
+.btm-links-login {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btm-links-login a {
+  color: #e50077;
+}
+
+.efgi button, .efgi a {
+  height: 32px;
+  line-height: 32px;
+  min-width: 110px;
+  outline: none;
+  /* max-width: 100px; */
+  text-align: center;
+  /* padding: 10px 25px !important; */
+}
+
+.efgi a{
+  height: 32px;
+  line-height: 32px;
+  border-radius: 4px;
+}
+
+
+
+.ui.basic.button, .ui.basic.buttons .button{
+  background: #eff3f6 !important;
+}
+
+.ui.left.icon.input input{
+  padding-left: 45px !important;
+}
+.ui.left.icon.input i.icon{
+  background-color: #e50077 !important;
+  color: #fff;
+  height: 37px;
+  /* top: 1px; */
+}
+
+.calendar.link.icon{
+  background-color: #e50077 !important;
+}
+.calendar.link.icon::before{
+  color: white;
+}
+#login p {
+  font-family: Avenir_light;
+}
+.signInBtn{
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background-color: #e50077;
+  /* border: 1px solid#e50077; */
+  align-items: center;
+  height: 38px;
+  text-align: center;
+  font-family: Avenir_light;
+  transition: all 0.6s ease-in-out;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  outline: none !important;
+}
+
+.signInBtn{
+  width: 100%;
+  /* margin-top: 20px; */
+}
+
+.signInBtn:hover{
+  box-shadow: 1px 2px 6px 1px rgb(229,0,119, 0.6);
+}
+.signInBtn::selection{
+  outline: none;
+  border: none !important;
+}
+
+
+#login .social-btns{
+  display:flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top:20px;
+}
+
+#login .social-btns > div{
+  display:flex;
+  flex: 0 1 25%;
+  justify-content: center;
+}
+
+#login .social-btn{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height:40px;
+  width:40px;
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}
+
+
+
+.ui input{
+  transition: all 0.6s ease-in-out !important;
+}
+.ui input:focus{
+  border: 1px solid  #e50077 !important;
+}
+
+
+
+
+/* Rotate */
+.rotate {
+  float: left;
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transition: ease-in-out all 2s;
+  transition: ease-in-out all 2s;
+  cursor: pointer;
+}
+
+.rotate:hover {
+  float: left;
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: ease-in-out all 2s;
+  transition: ease-in-out all 1s;
+}
+
+
+
+
+.SemDatePicker > .field[style]{
+  display: block !important;
+}
+
+
+
+
+
+.efgi2{
+  display:flex;
+  flex-direction: column;
+
+}
+
+.efgi2 button, .efgi2 a, .efgi2 .googleBtn{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  align-items: center;
+  height: 40px;
+  color: #000;
+  background-color: white !important;
+  border: 2px solid silver !important;
+  border-radius: 8px !important;
+  max-height: 40px;
+  margin: 5px 0px !important;
+  font-size: 14px;
+  box-shadow: none !important;
+  display:flex;
+  justify-content: center;
+  position: relative;
+}
+
+.efgi2 .facebook-btn{
+  color :#000;
+}
+.efgi2 .facebook-btn i.icon.facebook{
+  color :#3c5a98;
+}
+
+.efgi2 i{
+  position: absolute;
+  left: 20px;
+  font-size: 20px;
+  /* margin-right: auto !important; */
+}
+.efgi2 .facebook-btn.icon{
+  /* color: blue; */
+}
+
+.efgi2 .googleBtn{
+  background-color: white !important;
+  font-family: Avenir_light;
+  color: #000 !important;
+}
+
+.googleBtn i.icon.google{
+  font-size: 14px;
+  /* margin-top:-2px; */
+}
+
+.efgi2 .googleBtn > div{
+  /* height: fit-content; */
+  padding: 0px !important; 
+}
+
+.efgi2 .googleBtn > div {
+  position: absolute;
+  left: 20px;
+  /* font-size: 15px !important; */
+  /* width: 15px !important;
+  height: auto !important;  */
+}
+
+.efgi2 i.icon.mail{
+  color:#e50077;
+  font-size: 18px;
+}
+
+
+.userType{
+  display:flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  margin-top:20px;
+  /* margin-bottom:20px; */
+}
+.userType button{
+  font-family: Avenir_heavy !important;
+  margin: 0px 10px;
+  background-color: transparent;
+  padding-bottom:5px;
+  outline: none;
+}
+
+.userType button:nth-child(1){
+  margin-left:0px;
+}
+
+.userType button.active{
+  border-bottom: 2px solid #e50077;
+  color:  #e50077;
+}
+
+.social_btns{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+.social_btns > div{
+  display: flex;
+  justify-content: space-between;
+  flex: 0 1 22%;
+  min-width:fit-content;
+  margin:10px auto;
+
+}
+
+.form-modal .form p, .form-modal .form p a{
+  font-size: 12px !important;
+  font-family: Avenir_light,open sans,sans-serif !important;
+}
+
+
+.social_btns > div .social_btn{
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Avenir_light;
+  font-weight: 600;
+  width: 100%;
+  font-size: 12px;
+  min-width: fit-content;
+}
+.social_btns > div .social_btn svg{
+  margin-right: 10px;
+}
+
+.react-tel-input li{
+  display:flex;
+  align-items: baseline;
+
+}
+
+.react-tel-input li.highlight{
+  margin: 0px;
+}
+
+
+.auth-modal{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index: 3;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.4);
+}
+
+
+.auth-box{
+  height: 600px;
+  max-width: 100%;
+  width: 550px;
+  background-color: white;
+  margin:auto;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+
+.auth-modal .brand a{
+  color: darkslategray;
+}
+
+.auth-modal .brand span{
+  color: #e50077;
+}
+
+.auth-modal h2{
+  font-family: Avenir_heavy !important;
+  font-size: 18px;
+}
+
+.auth-box label{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height:30px;
+  padding: 20px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.auth-box .field, .auth-box .field input, .auth-box .field .input{
+  border-radius: 8px;
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+.ui[class*="left icon"].input>i.icon{
+  left:0px !important;
+}
+/* .auth-box  input:focus{
+  box-shadow: 0px 0px 6px #e50077 !important;
+}
+.auth-box .react-tel-input .selected-flag:hover{
+  opacity: 1;
+  background-color: #e50077;
+}
+.auth-box .react-tel-input .flag-dropdown.open .selected-flag{
+  background-color: #e50077;
+  opacity: 1;
+}
+
+.auth-box.react-tel-input .form-control.open{
+  box-shadow: 0px 0px 6px #e50077 !important;
+}
+
+.react-tel-input .flag-dropdown{
+  border:none !important;
+}
+
+.react-tel-input .flag-dropdown.open, .react-tel-input .flag-dropdown{
+  border-top-left-radius:  5px;
+  border-bottom-left-radius:  5px;
+}
+
+.react-tel-input .selected-flag .arrow{
+  border-top: 4px solid #fff !important;
+}
+
+.react-tel-input .selected-flag .arrow.up{
+  border-bottom: 4px solid #fff;
+  border-top: none !important;
+} 
+
+.react-tel-input .flag-dropdown.open .selected-flag,
+.react-tel-input .selected-flag{
+  border-radius: 5px 0px 0px 5px;
+} */
+
+
+
+.form-modal .slick-slider{
+  display:none !important;
+}
+
+
+.field{
+  position: relative;
+  margin-bottom: 20px;
+}
+.field i{
+  top:auto;
+  bottom:auto;
+  position: absolute;
+}
+.field i.left{
+  left:0px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(229,0,119, 0.3);
+  color: #eee;
+  padding: 8px;
+  border-radius: 4px;
+  height:38px;
+  width:35px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  display: flex;
+  align-items: center;
+  transition: 0.4s all ease-in-out;
+  justify-content: center;
+  border: none;
+}
+
+.field .input-container{
+  position: relative;
+}
+.field input{
+  height:38px;
+  padding-left: 45px;
+  width: 100%;
+  padding: 10px 10px 10px 45px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition:0.3s border ease-in-out;
+  font-family: Avenir_Light;
+  font-size: 14px;
+}
+
+input.hidden{
+  display:none;
+}
+
+.react-tel-input .form-control{
+  width: 100%;
+}
+.react-tel-input .form-control:focus{
+  box-shadow: none;
+}
+.field input::placeholder{
+  font-family: Avenir_light;
+  font-weight: 100;
+  color: #bbb;
+}
+
+.field input:focus{
+  border: 1px solid #e50077;
+}
+
+.field input:focus + i.left{
+  background-color: #e50077;
+  color: white;
+}
+.field.checkBoxRow{
+  margin-bottom: 15px;
+}
+.field.checkBoxRow label{
+  display:flex;
+}
+.field label{
+  max-width: 100%;
+}
+.field input[type="checkbox"]{
+  display:none;
+}
+.field input[type="checkbox"]:checked + span{
+  background-color: #e50077;
+  animation: scaleUpDown 0.4s ease-in-out;
+}
+.field input[type="checkbox"] + span {
+  height: 18px;
+  min-height: 18px;
+  min-width: 18px;
+  width: 18px !important;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  background-color: transparent;
+  border: 2px solid #e50077;
+  font-family: Avenir_Heavy;
+  border-radius: 4px;
+  position: relative;
+  transition: 0.4s background-color ease-in-out;
+}
+
+
+
+
+
+@media only screen and (max-width: 450px){
+  .social_btns > div{
+    flex: 0 1 45%; 
+  }
+  .social_btns > div .social_btn svg{
+    margin-right: 0px;
+  }
+  .social_btns > div .social_btn span{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .form-modal, .form {
+    max-width: 100% !important;
+  }
+  .form-modal .slick-slider {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width: 510px) {
+  #login {
+    padding-top: 0px;
+  }
+  .btm-links-login p:nth-child(1) {
+    text-align: left;
+  }
+  .btm-links-login p:nth-child(2) {
+    text-align: right;
+  }
+  .form-modal {
+    border-radius: 0px;
+    max-height: fit-content;
+    height: 100vh;
+    margin: 0 !important;
+    display: flex;
+    flex: 1;
+    max-width: 100% !important;
+  }
+  #login .form-modal .slick-slider{
+    display: none;
+  }
+
+  .form-modal > .form{
+    padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right:20px !important;
+  }
+  .efgi {
+    flex-flow: wrap;
+    justify-content: space-between !important;
+  }
+  .efgi button, .efgi a {
+    width: 45%;
+    margin: 5px 0px !important;
+  }
+  .efgi a{
+    text-align: center;
+    line-height: 32px;
+    vertical-align: middle;
+  }
+}
+
+
+@keyframes scaleUpDown{
+  0%{
+    background-color: none;
+    opacity: 0;
+  }
+
+  50%{
+    transform: scale(1.2, 1.2);
+    background-color: #e50077;
+    /* opacity: 0.5; */
+  }
+
+  100%{
+    transform: scale(1, 1);
+    opacity: 1;
+    background-color: #e50077;
+  }
+}

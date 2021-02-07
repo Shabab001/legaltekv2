@@ -1,0 +1,46 @@
+.userDropdown svg{
+    /* stroke: #e50077 !important; */
+}
+
+.bottomNav li a{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    height:100%;
+    width:100%;
+    justify-content: center;
+}
+.bottomNav .form >.userMenuItems{
+    display: flex;
+    flex-direction: column;
+}
+.bottomNav .form h5{
+    font-size: 18px !important;
+    font-family: Avenir_heavy,open sans, sans-serif !important;
+}
+.bottomNav .form a{
+    font-family: Avenir_heavy,open sans, sans-serif !important;
+    font-size: 14px;
+    padding:15px;
+    display:flex;
+    color: darkslategray;
+}
+.bottomNav .form a svg{
+    margin-right:10px;
+}
+.bottomNav .divider{
+    height: 2px;
+    width: 100%;
+    background-color: rgba(229, 0, 119, 0.1);
+}
+.bottomNav .userDropdownFooter a{
+    position: relative;
+}
+.bottomNav .userDropdownFooter a:not(:last-child)::after{
+    content: "\2022";
+    font-size: 8px;
+    display:flex;
+    right:-8px;
+    color: rgba(0,0,0,0.4);
+    position: absolute;
+}

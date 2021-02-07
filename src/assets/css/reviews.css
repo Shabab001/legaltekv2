@@ -1,0 +1,183 @@
+.b-reviews {
+  position: relative;
+  max-width: 100%;
+  width: 1170px;
+}
+.sort-list {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  align-items: center;
+  font-family: Avenir_heavy;
+}
+
+.sort-list li {
+  margin-right: 30px;
+  font-family: Avenir_light;
+}
+.b-reviews .ant-select-selector {
+  border: none !important;
+}
+
+.b-reviews .divider {
+  height: 1px;
+  background-color: #dddddd;
+  top: -10px;
+  position: relative;
+}
+.b-reviews .ant-select-selector:hover {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.b-reviews .ant-select {
+  width: fit-content !important;
+  margin-left: 10px;
+}
+.b-reviews .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
+  padding-right: 22px;
+}
+.b-reviews
+  .ant-select-dropdown.ant-select-dropdown-placement-bottomLeft.slide-up-leave.slide-up-leave-active.slide-up {
+  width: fit-content;
+}
+
+.b-reviews .rev-first {
+  display: flex;
+  width: 100%;
+}
+.b-reviews .rev-first .detail-container {
+  flex: 1 0 0;
+  padding: 10px 10px;
+  flex-direction: column;
+  display: flex;
+  font-family: Avenir_light;
+}
+.b-reviews .rev-first .detail-container h5 {
+  margin-bottom: 5px;
+  font-family: Avenir_heavy;
+}
+.b-reviews .rev-first .detail-container h6 {
+  font-family: Avenir_light;
+  font-weight: 700;
+}
+.b-reviews .rev-first .detail-container p {
+  width: 140px;
+  font-family: Avenir_light;
+  font-weight: 500;
+}
+.b-reviews .img-container {
+  display: flex;
+  height: 80px;
+  width: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.b-reviews .img-container img {
+  object-fit: cover;
+  /* position: absolute; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  object-position: center;
+}
+
+.b-reviews .main-review {
+  margin-top: 10px;
+}
+
+.b-reviews .main-review p {
+  font-family: Avenir_light;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.b-reviews .main-review .ratingDate{
+  display:flex;
+  align-items: center;
+  margin-bottom: 10px;
+} 
+
+.b-reviews .main-review .ratingDate span{
+  font-family: Avenir_book;
+  color: darkslategray;
+}
+
+.b-reviews .main-review .star-ratings{
+  margin-right: 10px;
+}
+
+.b-reviews .review-menulinks span{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.b-reviews .review-menulinks span:hover{
+  color:#e50077;
+}
+.b-reviews .usefullactions{
+  display: flex;
+  justify-content: space-between;
+}
+
+.b-reviews .usefullCount{
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+}
+.b-reviews .usefullCount i{
+  margin-right: 10px;
+}
+.b-reviews .actions{
+  display:flex;
+  justify-content: flex-end;
+  width: fit-content;
+}
+
+.b-reviews .actions span{
+  height:30px;
+  width: 30px;
+  border-radius: 4px;
+  display:flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px;
+  border: 1px solid #dddddd;
+}
+.b-reviews .actions span:hover i{
+  color:#e50077;
+}
+
+.b-reviews .actions span i{
+  font-size: 12px;
+}
+
+
+@media only screen and (max-width: 756px) {
+  .sort-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 5px;
+  }
+  .sort-list li {
+    width: 100%;
+    margin: 5px 0px;
+    justify-content: flex-start;
+    border: 1px solid #dddddd;
+    display: flex;
+  }
+  .b-reviews .ant-select {
+    width: 100% !important;
+    margin-left: 10px;
+  }
+
+  .b-reviews .ant-select{
+      margin-left:0px;
+  }
+}
