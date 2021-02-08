@@ -1,0 +1,1384 @@
+.stroke-transparent {
+  -webkit-text-stroke: 1px #000;
+  -webkit-text-fill-color: transparent;
+}
+.profile-pic{
+  background-color: grey;
+  width: 70%;
+  height: 8rem;
+  margin: auto;
+  border-radius: 8px;
+}
+.profile-pic + p{
+  font-size: 1.5rem;
+  padding-top: .5rem;
+  text-align: center;
+  padding-bottom: .5rem;
+}
+.newProfile .main .user-profile h1{
+  font-family: Rubik,'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+}
+.newProfile {
+  /* min-height: 100vh; */
+  min-height: calc(100vh - 60px);
+  position: relative;
+  border-top: 1px solid #ddd;
+  height: fit-content;
+  width: 1920px;
+  max-width: 100%;
+  /* margin:auto; */
+}
+.newProfile .sidebar .sidebar-head{
+  position: relative;
+}
+.newProfile.sidebar-collapse .main{
+  margin-left:60px;
+}
+
+.newProfile.sidebar-collapse .sidebar{
+  width:60px;
+}
+
+.newProfile.sidebar-collapse .sidebar h3{
+  display:none;
+}
+.newProfile.sidebar-collapse .sidebar li > .link-title{
+  display:none;
+  white-space: nowrap;
+}
+
+.newProfile.sidebar-collapse .sidebar li{
+  padding: 15px 20px;
+}
+.newProfile.sidebar-collapse .sidebar ul{
+  /* margin-top: 60px; */
+}
+
+
+.newProfile .sidebar button{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0px;
+  width:60px;
+  height:100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: lavenderblush;
+  outline: none;
+}
+
+.newProfile .sidebar button i{
+  font-size: 16px;
+}
+
+.newProfile.sidebar-collapse .sidebar ul {
+  overflow: visible;
+}
+
+.newProfile.sidebar-collapse .sidebar li i{
+  margin-right:0px;
+}
+
+
+.newProfile.sidebar-collapse .sidebar li {
+display:flex;
+align-items: center;
+justify-content: center;
+height:100%;
+}
+
+.newProfile .sidebar li .link-title{
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.newProfile.sidebar-collapse .sidebar a{
+  position: relative;
+  height:50px;
+}
+.newProfile.sidebar-collapse .sidebar a:hover::after{
+  content: attr(data-tooltip);
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  display: block;
+  left: 60px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 15px;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.newProfile .sidebar {
+  transition: width 0.8s ease-in-out;
+  position: fixed;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  width: 280px;
+  border-right: 1px solid #ddd;
+  padding-top: 50px;
+  background-color: lavenderblush;
+  min-height: calc(100vh - 80px);
+}
+ 
+.newProfile .sidebar .sidebar-head{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+  height:40px;
+  margin-bottom: 20px;
+} 
+.newProfile .sidebar h3 {
+  text-align: center;
+  font-size: 18px;
+  white-space: nowrap;
+  margin-bottom: 0px;
+  height:100%;
+  display:flex;
+  align-items: center;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.newProfile .sidebar ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.newProfile .sidebar li {
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  padding: 10px;
+  width: 100%;
+  padding: 15px 30px 15px 60px;
+  margin: 5px 0px;
+  position: relative;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  height:100%;
+  white-space: nowrap;
+  align-items: center;
+  display: flex;
+}
+.newProfile .sidebar li i {
+  margin-right: 15px;
+}
+
+.newProfile .sidebar ul a {
+  color: #000;
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+.newProfile .sidebar li.active {
+  color: var(--secondary);
+  font-weight: 500;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.newProfile .sidebar li.active span:nth-of-type(1) {
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 6px;
+  position: absolute;
+  border-right: 4px solid black;
+}
+
+.newProfile .main {
+  margin-left: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* min-height: 100vh; */
+  padding: 70px 150px;
+  transition: all ease-in-out 0.8s;
+}
+
+.newProfile .ant-picker-input > input{
+  font-weight: 400;
+  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+
+.newProfile .main .profilePic {
+  border-radius: 4px;
+  height: 120px;
+  width: 120px;
+  position: relative;
+  color: black;
+  box-shadow: 0px 15px 54px 20px rgba(252, 97, 43, 0.15);
+}
+.newProfile .main .profileHead {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 115px;
+}
+.newProfile .main .profileHead .profileName {
+  margin-left: 40px;
+  position: relative;
+
+}
+.newProfile .main .profileHead .profileName p {
+  color: #f7f7f7;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.newProfile .main .profileHead span {
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 14px;
+  color: darkslategray;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.newProfile .main .profilePic i {
+  position: absolute;
+  bottom: 20px;
+  right: -12px;
+  font-size: 14px;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: black;
+}
+.newProfile .main .profilePic img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.newProfile .main {
+  padding: 0px;
+}
+
+.newProfile .main > div {
+  padding: 70px;
+}
+
+.newProfile .user-profile {
+  /* padding: 70px 150px !important; */
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.newProfile .tab {
+  flex-direction: column;
+}
+
+.newProfile .tab h1 {
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 24px;
+  margin: 25px 0px;
+}
+
+.newProfile .user-profile label {
+  display: flex;
+  flex-direction: column;
+  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  margin-top: 10px;
+  font-weight: 500;
+  width: fit-content;
+  position: relative;
+}
+
+.newProfile .user-profile label > input,
+.newProfile .user-profile label select,
+.newProfile .user-profile label textarea {
+  border: 1px solid #dddddd;
+  width: 340px;
+  max-width: 100%;
+  font-size: 14px;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 10px;
+  border-radius: 4px;
+  transition: 0.1s border ease-in-out;
+  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+.newProfile .user-profile label .ui.dropdown {
+  width: 340px;
+  height: 40px;
+  font-size: 14px;
+  margin-top: 10px;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.newProfile .user-profile label input:focus,
+.newProfile .user-profile label select:focus,
+.newProfile .user-profile label textarea:focus {
+  border: 2px solid black;
+  
+}
+
+.newProfile .user-profile label p {
+  bottom: -20px;
+  font-family: "Avenir_heavy";
+  font-size: 12px;
+  position: absolute;
+  color: gray;
+  margin-bottom: 0px;
+}
+
+.newProfile .user-profile label.error input {
+  border: 2px solid red;
+}
+.newProfile .user-profile label.error,
+.newProfile .user-profile label.error p {
+  color: red;
+}
+
+.newProfile .user-profile label.textareaLabel {
+  width: 100%;
+  margin-right: 0px !important;
+}
+.newProfile .user-profile label.textareaLabel textarea {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  transition: border 0.1s ease-in-out;
+}
+
+.newProfile label .ant-picker:hover,
+.newProfile label .ant-picker-focused {
+  border-color: black;
+}
+
+.newProfile label .ant-picker-focused {
+  box-shadow: none;
+}
+.newProfile
+  label
+  .ant-picker-dropdown.ant-picker-dropdown-placement-bottomLeft {
+  width: 340px !important;
+}
+
+.newProfile label .ant-picker-date-panel .ant-picker-content,
+.ant-picker-date-panel .ant-picker-content {
+  width: 100% !important;
+}
+
+.newProfile label .ant-picker-panel-container,
+.newProfile .ant-picker-panel,
+.newProfile .ant-picker-date-panel {
+  width: 340px;
+  max-width: 100%;
+}
+
+.newProfile
+  label
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: 1px solidblack;
+}
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background: black !important;
+}
+
+.newProfile label .ant-select-arrow {
+  top: 60%;
+  cursor: pointer;
+}
+
+.newProfile label .ant-select-selector {
+  width: 340px !important;
+  height: 40px !important;
+  display: flex !important ;
+  align-items: center !important;
+  margin-top: 10px !important;
+  font-weight: 400;
+  font-family: "Rubik", 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif !important;
+}
+
+.newProfile .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: black;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+.newProfile
+  .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector {
+  box-shadow: none !important;
+  border-color: black;
+  max-width: 100%;
+}
+.newProfile
+.ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector{
+  max-width: 100%;
+}
+.newProfile
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: black;
+  color: white;
+}
+
+.newProfile .user-profile label.textareaLabel textarea:hover {
+  border: 1px solid black;
+}
+.newProfile .user-profile .input-fields {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 250px; */
+  flex-wrap: wrap;
+  height: fit-content;
+}
+
+.newProfile .user-profile .input-fields .input-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.newProfile .user-profile .input-fields .input-row.checkboxRows {
+  margin-bottom: 0px;
+}
+.newProfile .user-profile .input-fields .input-row .fullLabel {
+  width: 100%;
+  margin-right: 0px !important;
+  position: relative;
+}
+
+.newProfile .user-profile .input-fields .input-row.checkboxRows {
+  align-items: flex-start;
+}
+.newProfile .user-profile .input-fields .input-row.checkboxRows .fullLabel {
+  flex: 0 0 30%;
+  max-width: 280px !important;
+  justify-content: flex-start !important;
+  text-transform: capitalize;
+  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  align-items: flex-start;
+  color: darkslategray;
+  font-size: 12px;
+  min-width: 210px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  #text {
+  width: 100%;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  span {
+  font-family: Avenir_Light;
+  display: flex;
+  width: 100%;
+  text-transform: none;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  > div {
+  position: relative;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  .infoToolTip {
+  position: absolute;
+  top: 0px;
+  left: 140%;
+  padding: 5px;
+  width: 200px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel:not(:last-child) {
+  margin-right: 20px !important;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row
+  .fullLabel
+  label
+  input[type="checkbox"],
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row
+  .fullLabel
+  input[type="checkbox"] {
+  width: fit-content !important;
+  margin-top: 0px;
+  margin-right: 10px;
+  height: fit-content !important;
+}
+.newProfile .user-profile .input-fields .input-row.three-part {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.newProfile .user-profile .input-fields .input-row.two-part {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.newProfile .user-profile .input-fields .input-row.two-part .one-half {
+  width: 250px;
+  margin-bottom: 0px !important;
+  margin-top: 20px !important;
+  flex: 1 0 250px;
+  max-width: 100%;
+  /* min-width: 208px; */
+  /* margin: 0px 10px !important; */
+}
+.newProfile .user-profile .input-fields .input-row.three-part .one-third {
+  width: 220px;
+  margin-bottom: 0px !important;
+  margin-top: 20px !important;
+  flex: 1 0 200px;
+  max-width: 220px;
+  min-width: 220px;
+  /* margin: 0px 10px !important; */
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.three-part
+  .one-third:nth-child(1) {
+  margin-right: 0px !important;
+}
+.newProfile .user-profile .input-fields .input-row .one-third input {
+  width: 100%;
+  font-weight: 400;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+
+.newProfile .user-profile .input-fields .input-row .fullLabel i {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-left: 5px;
+  font-size: 12px;
+  color: black;
+  font-weight: 700;
+}
+.newProfile .user-profile .input-fields .input-row .fullLabel i.fe-info {
+  right: -20px;
+}
+.newProfile .user-profile .input-fields .input-row .fullLabel input {
+  width: 100%;
+  font-weight: 400;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+
+.newProfile .user-profile .input-fields .input-row label {
+  margin: 0px;
+  margin-top: 25px;
+  flex: 1 0 250px;
+  width: 250px;
+}
+.newProfile .user-profile .input-fields .input-row label:nth-child(1) {
+  margin-right: 20px;
+}
+.newProfile .user-profile .input-fields .input-row-btns {
+  display: flex;
+  justify-content: flex-start;
+}
+.newProfile .user-profile .input-fields .input-row-btns button:nth-child(1) {
+  margin-right: 20px;
+}
+.newProfile .user-profile .input-fields .input-row-btns button:nth-child(2) {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+.newProfile .input-row input:hover {
+  border-color: black;
+}
+.newProfile .user-profile .save-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: black;
+  color: #fff;
+  font-family: Avenir_heavy;
+  width: fit-content;
+  padding: 10px 30px;
+  margin-top: 20px;
+  border-radius: 32px;
+}
+
+.newProfile .user-profile .dividerL {
+  display: flex;
+  margin: 30px auto 20px auto;
+  width: 80%;
+  opacity: 0.5;
+  height: 2px !important;
+  border-radius: 8px;
+  background-color: #dddddd;
+}
+
+.newProfile label .ant-select-selection-search {
+  display: flex;
+  align-items: center;
+}
+
+.newProfile label .ant-picker {
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 100%;
+}
+.newProfile label .ant-picker:hover,
+.newProfile label .ant-picker-focused {
+  border-color: black;
+}
+.newProfile label .ant-picker-focused {
+  box-shadow: none;
+}
+.newProfile
+  label
+  .ant-picker-dropdown.ant-picker-dropdown-placement-bottomLeft {
+  width: 340px !important;
+}
+
+.newProfile label .ant-picker-date-panel .ant-picker-content,
+.ant-picker-date-panel .ant-picker-content {
+  width: 100% !important;
+}
+
+.newProfile label .ant-picker-panel-container,
+.ant-picker-panel,
+.ant-picker-date-panel {
+  width: 340px;
+  max-width: 100%;
+}
+
+.newProfile
+  label
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: 1px solid black;
+}
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+.newProfile
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background: black !important;
+}
+
+.newProfile label .ant-select-arrow {
+  top: 60%;
+  cursor: pointer;
+}
+
+.newProfile label .ant-select-selector {
+  width: 340px !important;
+  height: 40px !important;
+  display: flex !important ;
+  align-items: center !important;
+  margin-top: 10px !important;
+  font-weight: 400;
+  font-family: "Rubik", 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif !important;
+}
+
+.newProfile .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: black;
+  border-radius: 4px;
+}
+
+.newProfile
+  .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector {
+  box-shadow: none !important;
+  border-color: black;
+}
+
+.newProfile
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: black;
+  color: white;
+}
+
+.newProfile .user-profile h1 {
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.newProfile .input-row.social label input {
+  padding-left: 40px;
+}
+.newProfile .input-row.social label i {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newProfile #location:hover {
+  border: 1px solid black;
+}
+.newProfile #location {
+  font-weight: 400 !important;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+.newProfile #location {
+  border: 1px solid #dddddd;
+  width: 100%;
+  font-size: 14px;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 10px;
+  border-radius: 4px;
+  transition: 0.1s border ease-in-out;
+}
+.newProfile #location:focus {
+  border: 2px solid black;
+}
+.newProfile .autocomplete-dropdown-container {
+  margin-top: 10px;
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  z-index: 10;
+  width: 100%;
+  box-shadow: 0px 4px 24px rgba(0,0,0,0.2);
+  padding: 5px 0px;
+  border-radius: 4px;
+}
+.newProfile .autocomplete-dropdown-container .suggestion-item, .newProfile .autocomplete-dropdown-container .suggestion-item--active{
+  padding: 10px;
+}
+.newProfile .autocomplete-dropdown-container .suggestion-item span {
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+.newProfile .autocomplete-dropdown-container .suggestion-item--active {
+  border-radius: 0px;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+
+.newProfile .cur-label .dropdown.icon,
+.cc-label .dropdown.icon {
+  position: absolute;
+  top: 40px;
+  right: 5px;
+  font-size: 12px;
+  opacity: 0.8;
+  line-height: 1.21428571em;
+  cursor: pointer;
+}
+.newProfile .cur-input,
+.cc-input {
+  position: relative;
+  transition: 0s ease-in-out;
+  min-width: 100%;
+}
+.newProfile .cc-input.padded {
+  padding-left: 20px !important;
+}
+
+.newProfile .cc-label .plus-icon {
+  color: black;
+  font-weight: 500;
+  font-family: Avenir_light;
+  font-style: normal !important;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  transform: translateY(50%);
+  left: 10px;
+  font-size: 14px;
+  transition: none;
+  z-index: 5;
+}
+.newProfile .cur-input:focus,
+.cc-input:focus {
+  border: 1px solid black !important;
+  border-bottom: none !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.newProfile .cur-input:focus + .currencyDrop ul,
+.cc-input:focus + .countryDrop ul {
+  border-top: none !important;
+}
+
+.newProfile .cur-label,
+.cc-label {
+  max-width: 340px;
+  position: relative;
+  /* width: 100%; */
+}
+
+.newProfile .cur-label.focused input,
+.cc-label.focused input {
+  border: 1px solidblack !important;
+  border-radius: 4px;
+  /* border-bottom: none !important; */
+  /* border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important; */
+}
+
+.newProfile .currencyDrop,
+.countryDrop {
+  top: 76px;
+  width: 100%;
+  max-height: 200px;
+  /* height: 200px; */
+  position: absolute;
+  z-index: 2;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.20);
+  transition: max-height 2.4s ease-in-out;
+}
+
+.newProfile .cur-label.focused .currencyDrop ul,
+.cc-label.focused .countryDrop ul {
+  transition: 0s ease-in-out;
+  list-style: none;
+  overflow-y: auto;
+  padding: 0px;
+  border-radius: 4px;
+  max-height: 200px;
+  /* height: auto; */
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  transition: max-height 2.4s ease-in-out;
+  /* border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: none; */
+  background-color: white;
+}
+
+.newProfile .currencyDrop ul li,
+.countryDrop ul li {
+  min-height: 40px;
+  padding: 10px;
+  display: flex;
+  font-size: 12px;
+  color: darkslategray;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  align-items: center;
+  background-color: white;
+}
+.newProfile .currencyDrop ul li:hover,
+.countryDrop ul li:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.newProfile .currencyDrop ul li img,
+.countryDrop ul li img {
+  margin-right: 20px;
+}
+
+.newProfile .user-profile .input-fields .input-row.checkboxRows {
+  margin-bottom: 0px;
+}
+.newProfile .user-profile .input-fields .input-row .fullLabel {
+  width: 100%;
+  margin-right: 0px !important;
+  position: relative;
+}
+
+.newProfile .user-profile .input-fields .input-row .fullLabel label,
+.newProfile .user-profile .input-fields .input-row.checkboxRows .fullLabel {
+  width: fit-content !important;
+  /* position: absolute; */
+  /* top:0px; */
+  margin-right: 0px !important;
+  right: 0px;
+  margin-top: 10px;
+  height: fit-content;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+.newProfile input[type="checkbox"] {
+  display: none;
+}
+.newProfile input[type="checkbox"] + span {
+  height: 18px;
+  width: 18px !important;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 2px solid black;
+  font-family: Avenir_Heavy;
+  border-radius: 4px;
+  position: relative;
+}
+
+.newProfile input[type="checkbox"] + span i {
+  margin: auto !important;
+  position: absolute;
+  color: white !important;
+  transform: translateY(10%);
+  font-family: Avenir_Heavy;
+  display: flex;
+  align-self: center;
+}
+
+.newProfile input[type="checkbox"]:checked + span {
+  background-color: black;
+  animation: scaleUpDown 0.5s ease-in-out;
+}
+
+.newProfile .user-profile .input-fields .input-row.checkboxRows {
+  align-items: flex-start;
+}
+.newProfile .user-profile .input-fields .input-row.checkboxRows .fullLabel {
+  flex: 0 0 30%;
+  max-width: 280px !important;
+  justify-content: flex-start !important;
+  text-transform: capitalize;
+  font-weight: 500;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  align-items: flex-start;
+  color: darkslategray;
+  font-size: 12px;
+  min-width: 210px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  #text {
+  width: 100%;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  span {
+  font-family: Avenir_Light;
+  display: flex;
+  width: 100%;
+  text-transform: none;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  > div {
+  position: relative;
+}
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel
+  .infoToolTip {
+  position: absolute;
+  top: 0px;
+  left: 140%;
+  padding: 5px;
+  width: 200px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row.checkboxRows
+  .fullLabel:not(:last-child) {
+  margin-right: 20px !important;
+}
+
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row
+  .fullLabel
+  label
+  input[type="checkbox"],
+.newProfile
+  .user-profile
+  .input-fields
+  .input-row
+  .fullLabel
+  input[type="checkbox"] {
+  width: fit-content !important;
+  margin-top: 0px;
+  margin-right: 10px;
+  height: fit-content !important;
+}
+
+.user-profile .coverImage{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right:0;
+  top: 0;
+  height: 250px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: darkgray;
+  z-index: 0;
+}
+.user-profile .coverImage .img-container{
+  position: relative;
+  height:250px;
+  width:100%;
+  overflow: hidden;
+}
+.user-profile .coverImage img{
+  object-fit: cover;
+  position: absolute;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  height:100%;
+  width:100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.user-profile .coverImage .overlay{
+  height:100%;
+  width: 100%;
+  background-color: transparent;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.user-profile .coverImage .overlay .addCoverImage{
+  width: fit-content;
+}
+
+.user-profile .coverImage:hover .overlay{
+  background-color: rgba(0,0,0,0.5);
+  opacity: 1;
+  
+}
+.user-profile .coverImage:hover img{
+  filter: blur(5px);
+}
+
+
+
+.newProfile .ant-picker-input input:focus{
+  border:none !important;
+  outline: none !important;
+}
+.nav-prompt{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.nav-prompt .form-modal{
+  border-radius: 4px;
+  height:220px;
+  min-height: fit-content;
+  background-color: #fff;
+  width: 450px;
+  max-width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+.nav-prompt .form-modal > div{
+  border:none;
+}
+.nav-prompt .form-modal .modal-title{
+  width: 100%;
+  height:50px;
+  padding: 10px 15px;
+  
+  border: none;
+  outline:none;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-prompt .form-modal .modal-title p{
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.nav-prompt .form-modal .modal-content{
+  width:100%;
+  flex: 1 0 auto;
+  height: auto;
+  padding: 10px 15px;
+  font-weight: 500;
+}
+.nav-prompt .form-modal .modal-content p{
+  width: 80%;
+  margin:auto;
+}
+
+.nav-prompt .form-modal .modal-actions{
+  width: 100%;
+  height:80px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-prompt .form-modal .modal-actions button:nth-child(1){
+  border: 1px solid #e50077;
+  background-color: transparent;
+  color: #e50077;
+}
+.nav-prompt .form-modal .modal-actions button:nth-child(2){
+  background-color: #e50077;
+  color: white;
+  
+}
+
+.nav-prompt .form-modal .modal-actions button{
+  border-radius: 4px !important;
+  height:35px;
+  width:80px;
+  margin: 0px 20px;
+  font-family: Rubik, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  outline: none;
+}
+
+.nav-prompt .MuiDialog-paperWidthSm{
+  width:450px;
+  max-width: 100% !important;
+  padding: 10px;
+  font-family: Avenir_light;
+}
+
+.nav-prompt .MuiDialogActions-root button{
+  border-radius: 4px !important;
+  height:35px;
+  width:80px;
+  font-family: Avenir_heavy;
+  outline: none;
+}
+
+
+
+sup{
+  position: relative;
+  overflow: visible;
+}
+sup .infoToolTip{
+  position: absolute;
+  left: 100%;
+}
+
+.newProfile
+  .user-profile
+  sup
+  .infoToolTip {
+  position: absolute;
+  top: 0px;
+  left: 140%;
+  padding: 5px;
+  width: 280px;
+  border-radius: 4px;
+  z-index: 1;
+}
+.newProfile
+  .user-profile
+.infoHidden{
+  display:none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .newProfile {
+    margin-top: 60px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .newProfile.sidebar-collapse .main{
+    margin-left: 0px;
+  }
+  .nav-prompt .form-modal .modal-content p{
+    width: 100%;
+  }
+  .newProfile .main > div{
+    padding: 15px;
+  }
+  .newProfile .sidebar {
+    display: none;
+  }
+  .newProfile .main .profileHead {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 170px;
+    position: relative;
+    z-index: 1;
+  }
+  .newProfile .main .profileHead .profileName {
+    margin-left: 0;
+    margin-top: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .newProfile .main .profileHead .profileName p,
+  .newProfile .main .profileHead .profileName span {
+    text-align: center;
+    color:black;
+  }
+  .newProfile .main {
+    margin-left: 0;
+  }
+  .newProfile label .ant-select-selector,
+  .profile label .ant-picker {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .viewOrderDetail {
+    margin-right: auto;
+  }
+  .cardHeaders {
+    align-items: flex-start;
+  }
+  .newProfile .user-profile .input-fields .input-row {
+    justify-content: flex-start;
+  }
+  .newProfile .user-profile .input-fields .input-row label {
+    margin-left: 0px !important;
+    width: 100% !important;
+    margin-right: 0px !important;
+  }
+  .newProfile .user-profile .input-fields .input-row label input,
+  .newProfile .cur-label {
+    width: 100%;
+    font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+  }
+  .newProfile .user-profile .input-fields .input-row label:nth-child(2) {
+    margin-left: 0px;
+  }
+
+  .newProfile .user-profile .input-fields .input-row.three-part .one-third {
+    max-width: 100%;
+  }
+  .newProfile
+  .user-profile h1
+  sup{
+    display:none;
+  }
+  .newProfile
+  .user-profile
+  sup
+  .infoToolTip {
+  display:none;
+}
+.newProfile
+  .user-profile
+.infoHidden{
+  display:block;
+  font-size: 12px;
+}
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes scaleUpDown {
+  0% {
+    background-color: none;
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+    background-color: black;
+    /* opacity: 0.5; */
+  }
+
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+    background-color: black;
+  }
+}

@@ -1,11 +1,11 @@
 #login {
   padding-top: 150px;
   /* background-color: #00100f !important; */
-  background-color: #e50077 !important;
+  background-color: var(--primary) !important;
   min-height: 100vh;
 }
 .form-modal {
-  height: 600px;
+  height: 580px;
   /* width: 900px; */
   max-width: fit-content !important;
   display: flex;
@@ -71,7 +71,7 @@
   margin: 0px !important;
   border-radius: 4px !important; 
   color: #fff !important;
-  background-color: #fb1c2e !important;
+  background-color:var(--secondary) !important;
   font-size: 14px;
   box-shadow: none !important;
   
@@ -136,7 +136,7 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: #e50077;
+  color: var(--secondary);
   transform: rotate(-45deg) !important;
 }
 
@@ -195,7 +195,7 @@
 }
 
 .btm-links-login a {
-  color: #e50077;
+  color: var(--secondary);
 }
 
 .efgi button, .efgi a {
@@ -224,14 +224,14 @@
   padding-left: 45px !important;
 }
 .ui.left.icon.input i.icon{
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
   color: #fff;
   height: 37px;
   /* top: 1px; */
 }
 
 .calendar.link.icon{
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
 }
 .calendar.link.icon::before{
   color: white;
@@ -243,7 +243,7 @@
   display: flex;
   justify-content: center;
   color: #fff;
-  background-color: #e50077;
+  background-color: var(--secondary);
   /* border: 1px solid#e50077; */
   align-items: center;
   height: 38px;
@@ -262,7 +262,7 @@
 }
 
 .signInBtn:hover{
-  box-shadow: 1px 2px 6px 1px rgb(229,0,119, 0.6);
+  box-shadow: 1px 2px 6px 1px var(--secondary);
 }
 .signInBtn::selection{
   outline: none;
@@ -299,7 +299,7 @@
   transition: all 0.6s ease-in-out !important;
 }
 .ui input:focus{
-  border: 1px solid  #e50077 !important;
+  border: 1px solid  var(--secondary) !important;
 }
 
 
@@ -404,7 +404,7 @@
 }
 
 .efgi2 i.icon.mail{
-  color:#e50077;
+  color:var(--secondary);
   font-size: 18px;
 }
 
@@ -429,8 +429,8 @@
 }
 
 .userType button.active{
-  border-bottom: 2px solid #e50077;
-  color:  #e50077;
+  border-bottom: 2px solid var(--secondary);
+  color:  var(--secondary);
 }
 
 .social_btns{
@@ -514,7 +514,7 @@
 }
 
 .auth-modal .brand span{
-  color: #e50077;
+  color: var(--secondary);
 }
 
 .auth-modal h2{
@@ -599,7 +599,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(229,0,119, 0.3);
+  background-color: var(--secondary);
   color: #eee;
   padding: 8px;
   border-radius: 4px;
@@ -629,6 +629,16 @@
   font-size: 14px;
 }
 
+.field .otp-input input{
+  color: #000;
+  font-size: 18px;
+  display: block;
+  opacity: 1;
+  height: 50px;
+  width: 50px;
+  margin: 0px 10px;
+}
+
 input.hidden{
   display:none;
 }
@@ -646,11 +656,11 @@ input.hidden{
 }
 
 .field input:focus{
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
 }
 
 .field input:focus + i.left{
-  background-color: #e50077;
+  background-color: var(--secondary);
   color: white;
 }
 .field.checkBoxRow{
@@ -666,7 +676,7 @@ input.hidden{
   display:none;
 }
 .field input[type="checkbox"]:checked + span{
-  background-color: #e50077;
+  background-color: var(--secondary);
   animation: scaleUpDown 0.4s ease-in-out;
 }
 .field input[type="checkbox"] + span {
@@ -680,11 +690,19 @@ input.hidden{
   color: white;
   justify-content: center;
   background-color: transparent;
-  border: 2px solid #e50077;
+  border: 2px solid var(--secondary);
   font-family: Avenir_Heavy;
   border-radius: 4px;
   position: relative;
   transition: 0.4s background-color ease-in-out;
+}
+.flag-dropdown, .react-tel-input .flag-dropdown.open {
+  background-color: var(--secondary) !important;
+}
+.react-tel-input input:focus ~ .flag-dropdown {
+  border: 1px solid var(--secondary) !important;
+  transition: 0.4s all ease-in-out;
+  background-color: var(--secondary) !important ;
 }
 
 
@@ -692,6 +710,17 @@ input.hidden{
 
 
 @media only screen and (max-width: 450px){
+  .field .otp-input input{
+    color: #000;
+    font-size: 18px;
+    display: block;
+    opacity: 1;
+    height: 40px !important;
+    width: 40px !important;
+    margin: 0px 5px !important;
+    padding:0 !important;
+  }
+  
   .social_btns > div{
     flex: 0 1 45%; 
   }
@@ -765,13 +794,13 @@ input.hidden{
 
   50%{
     transform: scale(1.2, 1.2);
-    background-color: #e50077;
+    background-color: var(--secondary);
     /* opacity: 0.5; */
   }
 
   100%{
     transform: scale(1, 1);
     opacity: 1;
-    background-color: #e50077;
+    background-color: var(--secondary);
   }
 }

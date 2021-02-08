@@ -25,12 +25,11 @@ import {
   InfoCircleFilled,
 } from "@ant-design/icons";
 
-const SignIn = lazy(() => import("../modals/SignInModal"));
-const Register = lazy(() => import("../modals/SignUpModal"));
-const ForgotPass = lazy(() => import("../modals/ForgotPassModal"));
-const SignInWithPhoneModal = lazy(() =>
-  import("../modals/SignInWithPhoneModal")
-);
+import SignIn from "../modals/SignInModal";
+import Register from "../modals/SignUpModal";
+import ForgotPass from "../modals/ForgotPassModal";
+import SignInWithPhoneModal from "../modals/SignInWithPhoneModal";
+
 const SearchBox = lazy(() => import("./SearchBar"));
 const UserIcon = lazy(() => import("../../assets/img/svgs/UserIcon"));
 const HamMenuIcon = lazy(() => import("../../assets/img/svgs/HamMenuIcon"));
@@ -294,7 +293,6 @@ function Header(props) {
   };
 
   useEffect(() => {
-    console.log(props);
     if (props.match && props.match.path !== "/") {
       setShowSearchBar(true);
     } else {
@@ -312,12 +310,11 @@ function Header(props) {
   return (
     <>
       <div className="indexHeader inVisibleSearchBar">
-        {console.log(props)}
         <div className="header-items">
           <div style={{ display: "flex" }}>
             <div className="brand">
-              <span>X</span>
-              <Link to="/">ukini</Link>
+          
+              <Link to="/">Legal<span className="logo-half">Tek</span></Link>
             </div>
             <div
               style={{
@@ -359,7 +356,7 @@ function Header(props) {
                     : locality + "," + localityCountry}
                 </span>
               ) : (
-                <span>Enter your location</span>
+                <span style={{color:"#BA181B"}}>Enter your location</span>
               )}
               {mapDropdown && (
                 <div
@@ -530,30 +527,21 @@ function Header(props) {
           <div className="menu-items">
             <ul>
               <li className="nav-links" id="language">
-                <button>
-                  <i
+                <button className="nav-side-btn">
+                  {/* <i
                     className="fa fa-home"
                     style={{ color: "#e50077", fontSize: 28 }}
-                  ></i>
+                  ></i> */}
+                Join Now
                 </button>
               </li>
-              <li className="nav-links" id="language" ref={language}>
-                <button onClick={() => setOpen(!open)}>
-                  <ShoppingFilled style={{ color: "#e50077", fontSize: 24 }} />
-
-                  <div></div>
-                </button>
-
-                <div className={`languageDropdown ${open && "open"}`}>
-                  <a>Fried Chicken</a>
-                  <a>Fried Rice</a>
-                  <a>Milk Shake</a>
-                </div>
-              </li>
+              
 
               <li className="nav-links" id="userBtn">
                 <button ref={userBtn} onClick={() => setUserOpen(!userOpen)}>
-                  <div style={{ marginRight: 10 }}>
+                  <div style={{
+                    
+                   }}>
                     <HamMenuIcon />
                   </div>
                   <UserIcon />
@@ -584,7 +572,7 @@ function Header(props) {
                         <BriefcaseIcon />
                         For Businesses
                       </Link>
-                      <Link to="/how-it-works">
+                      {/* <Link to="/how-it-works">
                         <BookFilled
                           style={{ color: "lightslategray", fontSize: 32 }}
                         />
@@ -595,7 +583,7 @@ function Header(props) {
                           style={{ color: "lightslategray", fontSize: 32 }}
                         />
                         FAQs
-                      </Link>
+                      </Link> */}
                       <div className="divider"></div>
                       <div
                         className="userDropdownFooter"
@@ -679,7 +667,7 @@ function Header(props) {
                         />
                         Notifications
                       </a>
-                      <div className="divider"></div>
+                      {/* <div className="divider"></div> */}
                       <Link
                         to={{
                           pathname: linkPrefix + "reviews",
@@ -705,24 +693,24 @@ function Header(props) {
                         ></i>
                         Marketplace
                       </a>
-                      <div className="divider"></div>
-                      <Link to="/business">
+                      {/* <div className="divider"></div> */}
+                      {/* <Link to="/business">
                         <BriefcaseIcon />
                         For Businesses
-                      </Link>
-                      <Link to="/how-it-works">
+                      </Link> */}
+                      {/* <Link to="/how-it-works">
                         <BookFilled
                           style={{ color: "lightslategray", fontSize: 32 }}
                         />
                         How Xukini works
-                      </Link>
+                      </Link> */}
                       <div className="divider"></div>
-                      <Link to="/faqs">
+                      {/* <Link to="/faqs">
                         <InfoCircleFilled
                           style={{ color: "lightslategray", fontSize: 32 }}
                         />
                         FAQs
-                      </Link>
+                      </Link> */}
                       <a onClick={(e) => logout(e)}>
                         <LogoutIcon />
                         Logout
@@ -823,9 +811,9 @@ function Header(props) {
         </div>
       </div>
 
-      {props.location && props.location.pathname !== "/" && (
+      {/* {props.location && props.location.pathname !== "/" && (
         <SearchBox {...props} />
-      )}
+      )} */}
     </>
   );
 }

@@ -1,0 +1,81 @@
+     <div className="banner-right" >
+          <Rectangle/>
+          <div className="banner-right-heading">
+            <div>
+
+           <p>Customer Reviews</p>
+            </div>
+           <div className="banner-arrow">
+
+             <div className="banner-arrow-left">
+               <div>
+             <AiOutlineArrowLeft className="leftIcon"/>
+
+               </div>
+               
+             <p>Prev</p>
+
+              
+             </div>
+             <div className="banner-arrow-right">
+               <p>Next</p>
+               <div>
+
+               <AiOutlineArrowRight className="RightIcon"/>
+               </div>
+         
+           </div>
+        
+          </div>
+    
+         
+        </div>
+        <div className="banner-right-lower" >
+          <div style={{width:"3rem"}}>
+
+              <img style={{borderRadius:"50%"}} src={user} alt="user"/>
+          </div>
+          <div>
+
+             <div style={{display:"flex",justifyContent:"space-between"}}>
+                <p>August Comte</p>
+              
+                 <div style={{color:"red",paddingTop:".3rem"}}>
+                   <FaStar />
+               
+                  
+                 </div>
+
+                 <div style={{color:"red",paddingTop:".3rem"}}>
+                   <FaStar />
+               
+                  
+                 </div>
+
+                 <div style={{color:"red",paddingTop:".3rem"}}>
+                   <FaStar />
+               
+                  
+                 </div>
+
+                 <div style={{color:"red",paddingTop:".3rem"}}>
+                   <FaStar />
+               
+                  
+                 </div>
+
+                 <div style={{color:"red",paddingTop:".3rem"}}>
+                   <FaStar />
+               
+                  
+                 </div>
+
+            </div>
+            <div style={{paddingTop:"1rem"}}>
+              <p>some comliments for the lawyer from the users Perspective</p>
+            </div>
+          </div>
+            <div></div>
+           </div>
+             
+           </div>

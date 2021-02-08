@@ -7685,7 +7685,8 @@ a:hover {
   }
 }
 .footer a:not(.btn) {
-  color: #6e7687;
+  /* color: #6e7687; */
+  color: #000;
 }
 @media print {
   .footer {

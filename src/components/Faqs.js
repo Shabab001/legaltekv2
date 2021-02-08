@@ -14,34 +14,24 @@ function Faqs(props) {
   useEffect(() => {
     document.title = "FAQs";
   }, []);
-  const [userType, setUserType] = useState("CUSTOMER")
-  async function openAccordion(e, index) {
-    e.preventDefault();
-    let accordions = document.querySelectorAll(".accordion");
-    for (let i = 0; i < accordions.length; i++) {
+  const [userType, setUserType] = useState("CUSTOMER");
+
+  function toggleAccordion(e, i) {
+    let accordions = document.querySelectorAll(".accordion-item");
+    if (accordions[i].classList.contains("open")) {
       accordions[i].classList.remove("open");
-      console.log(index, i);
-      if (index == i) {
-        accordions[i].classList.add("open");
+    } else {
+      for (let index = 0; index < accordions.length; index++) {
+        accordions[index].classList.remove("open");
       }
+      setTimeout(() => {
+        accordions[i].classList.add("open");
+      }, [100]);
     }
-
-    //  e.target.parentElement.classList.add("open");
   }
 
-  function closeAccordion(e, i) {
-    let accordions = document.querySelectorAll(".accordion");
-    accordions[i].classList.remove("open");
-  }
-
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
   return (
     <>
-
       <div className="faqs">
         <div className="banner" style={{ background: `url(${faqs})` }}>
           <div className="bannerInfo">
@@ -56,14 +46,29 @@ function Faqs(props) {
         </div>
 
         <div className="faqs-userTypes">
-        <div>
-            <button onClick={()=>setUserType("GENERAL")} className={`${userType=='GENERAL'? 'active' : ""}`}>General</button>
+          <div>
+            <button
+              onClick={() => setUserType("GENERAL")}
+              className={`${userType == "GENERAL" ? "active" : ""}`}
+            >
+              General
+            </button>
           </div>
           <div>
-            <button onClick={()=>setUserType("CUSTOMER")} className={`${userType=='CUSTOMER'? 'active' : ""}`}>Customer</button>
+            <button
+              onClick={() => setUserType("CUSTOMER")}
+              className={`${userType == "CUSTOMER" ? "active" : ""}`}
+            >
+              Customer
+            </button>
           </div>
           <div>
-            <button onClick={()=>setUserType("BUSINESS")} className={`${userType=='BUSINESS'? 'active' : ""}`}>Business</button>
+            <button
+              onClick={() => setUserType("BUSINESS")}
+              className={`${userType == "BUSINESS" ? "active" : ""}`}
+            >
+              Business
+            </button>
           </div>
         </div>
 
@@ -132,180 +137,83 @@ function Faqs(props) {
         </div>
 
         <div className="faq-second-container">
-          <div className="accordion">
-            <div className="acc-cover" onClick={(e) => openAccordion(e, 0)}>
-              <div>
-                <p>Where can i find more information on Xukini?</p>
-                <i className="fa fa-caret-down" />
-              </div>
-            </div>
-
-            <div className="acc-panel">
-              <div className="close-acc">
-                <i
-                  className="fa fa-close"
-                  onClick={(e) => closeAccordion(e, 0)}
-                />
-              </div>
+          <div
+            className="accordion-item"
+            onClick={(e) => toggleAccordion(e, 0)}
+          >
+            <a className="accordion-link">
+              Where can i find more information on Xukini?
+              <i className="fa fa-minus"></i>
+              <i className="fa fa-plus"></i>
+            </a>
+            <div className="answer">
               <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-            </div>
-          </div>
-          <div className="accordion">
-            <div className="acc-cover" onClick={(e) => openAccordion(e, 1)}>
-              <div>
-                <p>Where can i find more information on Xukini?</p>
-                <i className="fa fa-caret-down" />
-              </div>
-            </div>
-
-            <div className="acc-panel">
-              <div className="close-acc">
-                <i
-                  className="fa fa-close"
-                  onClick={(e) => closeAccordion(e, 1)}
-                />
-              </div>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
+                Veniam cillum do quis laboris duis nostrud adipisicing occaecat
+                adipisicing occaecat ipsum consequat elit sit. ipsum consequat
+                consequat elit sit. ipsum consequat elit sit. Do elit quis eu
+                sit nisi veniam ex sit.
               </p>
             </div>
           </div>
 
-          <div className="accordion">
-            <div className="acc-cover" onClick={(e) => openAccordion(e, 2)}>
-              <div>
-                <p>Where can i find more information on Xukini?</p>
-                <i className="fa fa-caret-down" />
-              </div>
-            </div>
-
-            <div className="acc-panel">
-              <div className="close-acc">
-                <i
-                  className="fa fa-close"
-                  onClick={(e) => closeAccordion(e, 2)}
-                />
-              </div>
+          <div
+            className="accordion-item"
+            onClick={(e) => toggleAccordion(e, 1)}
+          >
+            <a className="accordion-link">
+              Where can i find more information on Xukini?
+              <i className="fa fa-minus"></i>
+              <i className="fa fa-plus"></i>
+            </a>
+            <div className="answer">
               <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
+                Veniam cillum do quis laboris duis nostrud adipisicing occaecat
+                adipisicing occaecat ipsum consequat elit sit. ipsum consequat
+                consequat elit sit. ipsum consequat elit sit. Do elit quis eu
+                sit nisi veniam ex sit.
               </p>
             </div>
           </div>
 
-
-
-          <div className="accordion">
-            <div className="acc-cover" onClick={(e) => openAccordion(e, 3)}>
-              <div>
-                <p>Where can i find more information on Xukini?</p>
-                <i className="fa fa-caret-down" />
-              </div>
-            </div>
-
-            <div className="acc-panel">
-              <div className="close-acc">
-                <i
-                  className="fa fa-close"
-                  onClick={(e) => closeAccordion(e, 3)}
-                />
-              </div>
+          <div
+            className="accordion-item"
+            onClick={(e) => toggleAccordion(e, 2)}
+          >
+            <a className="accordion-link">
+              Where can i find more information on Xukini?
+              <i className="fa fa-minus"></i>
+              <i className="fa fa-plus"></i>
+            </a>
+            <div className="answer">
               <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
-              </p>
-              <p>
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum
+                Veniam cillum do quis laboris duis nostrud adipisicing occaecat
+                adipisicing occaecat ipsum consequat elit sit. ipsum consequat
+                consequat elit sit. ipsum consequat elit sit. Do elit quis eu
+                sit nisi veniam ex sit.
               </p>
             </div>
           </div>
 
-
+          <div
+            className="accordion-item"
+            onClick={(e) => toggleAccordion(e, 3)}
+          >
+            <a className="accordion-link">
+              Where can i find more information on Xukini?
+              <i className="fa fa-minus"></i>
+              <i className="fa fa-plus"></i>
+            </a>
+            <div className="answer">
+              <p>
+                Veniam cillum do quis laboris duis nostrud adipisicing occaecat
+                adipisicing occaecat ipsum consequat elit sit. ipsum consequat
+                consequat elit sit. ipsum consequat elit sit. Do elit quis eu
+                sit nisi veniam ex sit.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-    
     </>
   );
 }

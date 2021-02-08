@@ -8,9 +8,13 @@ import HIWCustomer from "./HowItWorks/HIWCustomer";
 import HIWBusiness from "./HowItWorks/HIWBusiness";
 import Particles from "react-particles-js";
 import { Suspense } from "react";
+import {useLocation} from "react-router-dom"
 
 function HowItWorks(props) {
-  const [userType, setUserType] = useState("CUSTOMER");
+  console.log(props.user);
+  const {user}=useLocation();
+  console.log(user)
+  const [userType, setUserType] = useState(user);
   return (
     <>
       <div className="howitworks">
@@ -50,7 +54,7 @@ function HowItWorks(props) {
               onClick={() => setUserType("CUSTOMER")}
               className={`${userType == "CUSTOMER" ? "active" : ""}`}
             >
-              Customer
+             Lawyers
             </button>
           </div>
           <div>
@@ -58,7 +62,7 @@ function HowItWorks(props) {
               onClick={() => setUserType("BUSINESS")}
               className={`${userType == "BUSINESS" ? "active" : ""}`}
             >
-              Business
+              Law Firms
             </button>
           </div>
         </div>

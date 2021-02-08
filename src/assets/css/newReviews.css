@@ -1,0 +1,135 @@
+.b-reviews .table {
+    /* min-width:200px; */
+   
+    margin: 20px 0px;
+    overflow: auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.b-reviews table{
+    width: 100%;
+    min-width: fit-content;
+    table-layout: auto;
+}
+
+.b-reviews table th{
+    text-transform: none;
+}
+
+
+
+
+
+.b-reviews .table td > div .img-container{
+    width:50px;
+    height:50px;
+    overflow: hidden;
+    margin-right: 20px;
+    
+}
+.b-reviews .table td:nth-of-type(2) > div img{
+    height:100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.b-reviews .table td:nth-of-type(1) > div img{
+    height:100%;
+    width: 100%;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.b-reviews .table td .img-info{
+    display:flex;
+    flex-direction: column;
+    width: 150px;
+    justify-content: center;
+}
+.b-reviews .table td .img-info p{
+    font-family: Rubik, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.b-reviews .table td .img-info p span{
+    background-color: gray;
+    border-radius: 50px;
+    color:white;
+    font-size: 8px;
+    width:10px;
+    height:10px;
+    padding:3px 8px;
+}
+.b-reviews .table td .img-info span{
+    color: gray;
+}
+
+.b-reviews .table td > div{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.b-reviews .table .reviewCol{
+    display:flex;
+    flex-direction: column;
+    width:400px;
+    font-family: Rubik, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+    font-size: 12px;
+}
+.b-reviews .table .reviewCol h5{
+    font-size: 14px;
+    margin: 10px 0px;
+}
+.b-reviews .table .reviewCol p{
+    
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+    
+}
+
+.b-reviews .table .reviewCol > div{
+    display:flex;
+    justify-content: space-between;
+}
+
+.b-reviews .table .reviewCol > div span{
+    color: gray;
+}
+
+.three-dots {
+    padding: 5px 10px;
+    width: fit-content;
+    cursor: pointer;
+    margin:auto;
+  }
+ .three-dots span {
+    background-color: gray;
+    height: 4px;
+    width: 4px;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+  }
+   .three-dots span:after,
+   .three-dots span:before {
+    content: "";
+    display: inline-block;
+    background-color: gray;
+    height: 4px;
+    width: 4px;
+    position: absolute;
+    border-radius: 50%;
+  }
+ .three-dots span:before {
+    left: -8px;
+    right: auto;
+  }
+  .three-dots span:after {
+    right: -8px;
+    left: auto;
+  }

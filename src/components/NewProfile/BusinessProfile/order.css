@@ -1,0 +1,94 @@
+
+p{
+    margin: 0;
+}
+.order-headings p:nth-child(1){
+font-size: 2rem;
+
+
+}
+.order-headings p:nth-child(2){
+    font-size: 1.2rem;
+}
+.order-percentage{
+    padding:3rem 0
+}
+.order-percentage p{
+font-size: 2rem;
+color:var(--secondary);
+padding-bottom: .5rem;
+}
+.order-percentage-box{
+    display: flex;
+    gap:1rem;
+}
+.percentage-box{
+    background-color: var(--secondary);
+    height: .3rem;
+    width: 5rem;
+}
+.order-required{
+    display: flex;
+    gap:19rem;
+}
+.order-required-first p:nth-child(1){
+font-size: 1.5rem;
+font-weight: bold;
+}
+.order-required-first p:nth-child(2){
+    font-size: 1.1rem;
+}
+.order-required-second{
+border:2px solid rgb(206, 206, 206);
+
+padding:.3rem;
+height: 2.5rem;
+}
+.order-sections{
+    padding-top: 2rem;
+    display: grid;
+    gap:1rem;
+    width: 70rem;
+}
+.Order-sections-first{
+padding:2rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom:2px solid rgb(206, 206, 206);
+border-left:2px solid rgb(206, 206, 206);
+border-top:2px solid rgb(206, 206, 206);
+border-right:16px solid rgb(6, 36, 206);
+
+}
+.order-section-second{
+    padding:2rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom:2px solid rgb(206, 206, 206);
+border-left:2px solid rgb(206, 206, 206);
+border-top:2px solid rgb(206, 206, 206);
+border-right:16px solid rgb(175, 4, 4);
+}
+.order-section-approve{
+    padding:2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:2px solid rgb(206, 206, 206);
+    border-left:2px solid rgb(206, 206, 206);
+    border-top:2px solid rgb(206, 206, 206);
+    border-right:16px solid green
+}
+.order-caution{
+    padding:1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1.5px solid rgb(206, 206, 206);
+    border-left:1.5px solid rgb(206, 206, 206);
+    border-top:1.5px solid rgb(206, 206, 206);
+    border-right:1.5px solid rgb(206, 206, 206);
+    margin-top: 3rem;
+}

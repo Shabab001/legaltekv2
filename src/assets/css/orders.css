@@ -1,0 +1,199 @@
+
+.orders{
+    /* background-color: #ecf0f7; */
+    background-color: #fff;
+    min-height: 100vh;
+}
+.orders .table{
+    /* padding: 20px; */
+    background-color: whitesmoke;
+    border-radius: 15px;
+    margin: 20px 0px;
+    overflow: auto;
+    width: 1200px;
+    max-width: 100%;
+    /* box-shadow: 0px 2px 12px  rgba(0,0,0,0.2); */
+    box-shadow: 0px 15px 54px rgba(252, 97, 43, 0.10);
+
+    font-family: Rubik;
+    
+}
+.orders .table thead th{
+    font-size: 12px !important;
+    font-weight: 500;
+    color: gray;
+    border-radius: 15px;
+}
+.orders .table tr th:not(:nth-child(1)){
+    text-align: center;
+}
+.orders .table tr td:not(:nth-child(1)){
+    text-align: center;
+}
+.orders table{
+    display: table;
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+    /* table-layout: fixed; */
+}
+.orders table thead tr th:nth-child(1){
+    padding-left: 80px;
+}
+.orders tr{
+    /* padding: 15px; */
+    height: 50px;
+    border: 1px solid #fff;
+}
+.orders tr td{
+    vertical-align: middle;
+    font-weight: 500;
+    font-family: Rubik;
+    color:darkslategray;
+    position: relative;
+}
+.orders tr td:nth-child(1){
+    padding-left:80px;
+}
+.orders tr.breakrow .collapseBtn{
+    /* margin-right:20px; */
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 20px;
+    width:22px;
+    top: 50%;
+    transform: translate3d(0px, -50%, 0px);
+}
+.orders tr.expand .fa-plus{
+    display:none;
+}
+.orders tr.expand .fa-minus{
+    display:inline-block;
+}
+.orders td, .orders th{
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+.orders tr.show{
+    display:table-row;
+}
+.orders tr.show td:nth-child(1){
+    position: relative;
+}
+.orders tr td:nth-child(1) > div, .orders tr.show td:nth-child(1) > div{
+    width:150px;
+    word-wrap: none;
+}
+.orders tr.show td:nth-child(1) span{
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translate3d(0px, -50%, 0px);
+    background-color: #fc612b;
+    height:7px;
+    width: 7px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.orders tr.show td:nth-child(1) span::before{
+    content:"";
+    display:block;
+    position: absolute;
+    width:20px;
+    height:2px;
+    background-color: #ecf0f7;
+    top: 50%;
+    left:-25px;
+    transform: translate3d(0px, -50%, 0px);
+}
+.orders tr.expand td:nth-child(1){
+    position: relative;
+}
+.orders tr.expand td{
+ border-bottom: 1px solid#ecf0f7;
+}
+.orders tr .status{
+
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: black;
+    background-color: whitesmoke;
+}
+.orders tr .status.status-approved{
+    background-color: dodgerblue;
+    color: white;
+}
+.orders tr .status.status-failed{
+    background-color: #fc612b;
+    color: white;
+}
+.orders tr .status.status-pending{
+    background-color: limegreen;
+    color: white;
+}
+.orders tr.lastRow td:nth-child(1){
+    position: relative;
+}
+.orders tr.lastRow td:nth-child(1)::after{
+    content:"";
+    display:block;
+    position: absolute;
+    height: 118px;
+    background-color: #ecf0f7;
+    width: 2px;
+    left: 25px;
+    /* top:45%; */
+    bottom: 50%;
+
+}
+.orders .datarow{
+   max-height: 0;
+   height: 0;
+   overflow: hidden;
+   display: none;
+}
+.orders .breakrow .fa-minus{
+    display:none
+}
+
+
+.orders .three-dots {
+    padding: 5px 10px;
+    width: fit-content;
+    cursor: pointer;
+    margin:auto;
+  }
+  .orders .three-dots span {
+    background-color: gainsboro;
+    height: 5px;
+    width: 5px;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+  }
+  .orders .three-dots span:after,
+  .orders .three-dots span:before {
+    content: "";
+    display: inline-block;
+    background-color: gainsboro;
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    border-radius: 50%;
+  }
+  .orders .three-dots span:before {
+    left: -8px;
+    right: auto;
+  }
+  .orders .three-dots span:after {
+    right: -8px;
+    left: auto;
+  }
+
+  @media only screen and (max-width: 450px){
+    .orders table{
+        width: auto;
+        table-layout: auto;
+    }
+  }

@@ -1,0 +1,96 @@
+.search-main{
+    position: absolute;
+    z-index: 1000;
+    top:40vh;
+    width: 100%;
+    height: fit-content;
+
+}
+.search-container{
+
+    background-color: white;
+    max-width: 50rem;
+    width: 100%;
+    margin: auto;
+box-shadow: 1px 3px 5px 2px #B1A7A6;
+transition: all .1s ease-in;
+border-radius: 8px;
+    
+}
+.search-form{
+    display: flex;
+}
+.search-from-container{
+
+    padding-left: 1rem;
+    flex-basis:90%;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    
+    
+}
+.search-icon, .voice-icon{
+    width: 2rem;
+    height: 1.5rem;
+    flex-basis:5%;
+}
+.search-input{
+    flex-basis:90%;
+    padding:.5rem;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+}
+.search-btn{
+    margin:.2rem;
+    padding: .5rem;
+    flex-basis: 15%;
+    border: none;
+    background-color: var(--secondary);
+    color:white;
+    font-weight: bold;
+    border-radius: 8px;
+}
+.fadein{
+    width: 20rem;
+position: fixed;
+top:15px;
+left: 40%;
+border:1px solid black;
+height: 3rem;
+border-radius: 8px  ;
+
+}
+.search-header-grid{
+    margin: 0;
+    display: flex   ;
+    align-items: center;
+    
+    gap:1rem;
+    justify-content: center;
+
+    height: 100%;
+    text-align: center;
+    color:var(--secondary);
+}
+.search-header-grid p{
+
+margin: 0;
+font-size: 1.2rem;
+}
+    .search-header-icon{
+        height: 4rem;
+        width: 2rem;
+        
+    }
+
+    .fadein + .search-align{
+        
+        width: 100%;
+        position: fixed;
+        top:8rem;
+        display: grid;
+       
+        
+    }

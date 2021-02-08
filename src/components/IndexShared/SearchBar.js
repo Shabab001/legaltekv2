@@ -1,237 +1,180 @@
-import React, {useState, useEffect, useRef} from 'react'
-import japaneseFood from "../../assets/img/japanesefood.jpeg";
-import Geolocate from '../MiniComponents/Geolocate';
-import SearchModal from '../modals/SearchModal'
-import ReactDOM from 'react-dom'
+import React,{useState,useEffect} from 'react'
+import { GrSearch } from 'react-icons/gr';
+import { MdKeyboardVoice } from 'react-icons/md';
+import { AiFillPauseCircle } from 'react-icons/ai';
+import "./searchbar.css"
+import SearchSuggestions from "./searchSuggestions"
+const SearchBar = () => {
+  const[sug, setSug]=useState(false);
+  const [recording, setRec]=useState(false);
+  const [voiceInput, setVoiceInput]=useState("");
+  const [textInput, setTextInput]=useState("");
+  const [visible,setVisible] = useState(true)
+   const [dropdown, setDrop]=useState(false);
+  const isFirefox = typeof InstallTrigger !== 'undefined';
 
-function SearchBar(props) {
-  const [initialPos, setInitialPos] = useState('')
-  const searchBox = useRef(null)
-  const catDrop = useRef(null)
-  const [searchModal,setSearchModal] = useState(false)
-  const [categoryDrop, setCategoryDrop] = useState(false)
-  const [chosenCat, setChosenCat] = useState("")
-  const modalRoot = document.getElementById('modal-root')
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  const mic= new SpeechRecognition();
 
-  const searchbarOnScroll = (e) =>{
-    let inputBoxes = document.querySelector('.inputBoxes')
-    let miniLabel = document.querySelector('.miniLabel')
-    if(inputBoxes && miniLabel){
-      if(window.pageYOffset >= 270){
-        inputBoxes.classList.add('minimizedAnimate')
-        miniLabel.classList.add('fadeIn')
-      }
-      else if(window.pageYOffset <= 300){
-        miniLabel.classList.remove('fadeIn')
-        inputBoxes.classList.remove('minimizedAnimate')
-        inputBoxes.classList.remove('expanded')
-        document.querySelector('.indexHeader').classList.remove('expanded')
-      }
-    }
-
-  }
-
-  const closeSearch = () =>{
-    setSearchModal(false)
-  }
-
-  const fixedSearchBar = () => {
-    console.log('hi')
-    let inputBoxes = document.querySelector('.inputBoxes')
-    let indexHeader = document.querySelector('.indexHeader')
-    inputBoxes.classList.add('expanded')
-    indexHeader.classList.add('expanded')
-  }
-  const clickaway = (e) =>{
-    let inputBoxes = document.querySelector('.inputBoxes')
-    let miniLabel = document.querySelector('.miniLabel')
-    let indexHeader = document.querySelector('.indexHeader')
-    if(!(inputBoxes && inputBoxes.contains(e.target) ||  miniLabel && miniLabel.contains(e.target)) ){
-      if(inputBoxes){
-        inputBoxes.classList.remove('expanded')
-      }
-      if(indexHeader){
-        indexHeader.classList.remove('expanded')
-      }
-    }
-
-    if(catDrop && catDrop.current && !catDrop.current.contains(e.target)){
-      setCategoryDrop(false)
-    }
-
-  }
-
-  const miniLabelFunc = (e) =>{
-    e.preventDefault()
-      setSearchModal(true)
-  }
-
-
-  const onResize = (e) =>{
-    e.preventDefault()
-    let miniLabel = document.querySelector('.miniLabel')
-    if(miniLabel){
-      if(document.body.clientWidth>1024){
-        miniLabel.removeEventListener('click',miniLabelFunc)
-        miniLabel.addEventListener('click',fixedSearchBar)
-        setSearchModal(false)
-      }
-      else{
-        miniLabel.removeEventListener('click',fixedSearchBar)
-        miniLabel.addEventListener('click',miniLabelFunc)
-      }
-    }
  
-  }
+ 
+      mic.lang="en-US" 
+      
 
-  useEffect(()=>{
-    // window.onscroll = searchbarOnScroll
-    
-    window.addEventListener('scroll', searchbarOnScroll);
-    window.addEventListener('click',clickaway)
-    window.addEventListener('resize',onResize)
-
-    let miniSearchLabel = document.querySelector('.miniLabel')
-    miniSearchLabel.addEventListener('click',miniLabelFunc)
-
-    return()=>{
-      window.removeEventListener('scroll', searchbarOnScroll);
-      window.removeEventListener('click',clickaway)
-      window.removeEventListener('resize',onResize)
-    }
-  },[])
+const handleDropdown=()=>{
+  setDrop(!dropdown)
+}
 
 
 
-  useEffect(()=>{
-    if(props.location.pathname !== "/"){
-      console.log('hi')
-      window.removeEventListener('scroll', searchbarOnScroll)
-      let inputBoxes = document.querySelector('.inputBoxes')
-      let miniLabel = document.querySelector('.miniLabel')
-       inputBoxes.classList.add('minimizedAnimate')
-          miniLabel.classList.add('fadeIn')
-    }
-  },[props.location.pathname])
 
-    useEffect(() => {
-      let miniLabel = document.querySelector('.miniLabel')
-        let input = document.querySelectorAll('.col-c-3')
-        if(document.body.clientWidth>1024 && miniLabel){
-          miniLabel.removeEventListener('click',miniLabelFunc)
-          miniLabel.addEventListener('click',fixedSearchBar)
-        }
-        else{
-          if(miniLabel){
-            miniLabel.removeEventListener('click',fixedSearchBar)
-            miniLabel.addEventListener('click',miniLabelFunc)
+   useEffect(()=>{
+  handleListen();
+   },[recording])   
+
+ const handleListen=()=>{
+   if(recording){
+     mic.start()
+     
+   }
+   else{
+    setVoiceInput("");
+    setSug(false);
+     mic.stop()
+
+     mic.onend=()=>{
+       console.log("mic stopped");
+     
+     }
+   }
+   mic.onstart=()=>{
+     console.log("Mics on")
+   }
+   mic.onresult = event=>{
+    var results = event.results[0][0].transcript;
+     console.log(typeof results);
+     setVoiceInput(results);
+     setSug(true);
+     mic.onerror=(event)=>{
+       console.log(event.error);
+     }
+   }
+ }
+
+
+
+
+      const handlesug=(e)=>{
+               
+          let value=e.target.value;
+          if(value){
+            setSug(true)
+            setTextInput((input)=>input=value)
           }
-        }
-        input.forEach((el)=>{
-
-          if(el.querySelector('input')){
-            el.querySelector('input').addEventListener('focus',function(){
-              el.classList.add('boxFocused')
-              if(el.previousSibling){
-                  el.previousSibling.style.display="none"
-              }
-              if(el.nextSibling){
-                  el.nextSibling.style.display="none"
-              }
-          })
-          el.querySelector('input').addEventListener('blur',function(){
-            el.classList.remove('boxFocused')
-            if(el.previousSibling){
-                el.previousSibling.style.display=""
-            }
-            if(el.nextSibling){
-                el.nextSibling.style.display=""
-            }
-        })
+          else{
+            setTextInput("")
+            setSug(false)
           }
-         
             
-        })
+          }
+          const handleRecording =()=>{
+            setRec(!recording);
+          }
+      console.log(sug)
+
+      const searchbarOnScroll = (e) =>{
+        console.log(window.pageYOffset);
         
-        return () => {
-            
-        }
-    }, [])
-
-    const categories = [
-      "A la carte",
-      "Catering",
-      "Mealplan",
-      "Hire a chef",
-      "Learn a lesson"
-    ]
-
-    return (
-        <div className="inputBoxContainer" ref={searchBox}>
-        <div className="inputBoxes">
-          <div className="col-c-3">
-            <label>
-              <input placeholder="Make your order" />
-            </label>
-          </div>
-          <div className="vertical-divider"></div>
-          <div className="col-c-3 locationInputBox" ref={catDrop}>
-            <label htmlFor="location" onClick={()=>setCategoryDrop(!categoryDrop)}>
-              Category
-              <p>{chosenCat? chosenCat : "A la carte"}</p>
-              {/* <input id="location" placeholder="Choose location" /> */}
-              {/* <Geolocate /> */}
-            </label>
-            {categoryDrop && 
-            <div className="categoryDrop" onBlur={()=>setCategoryDrop(false)}>
-              <ul>
-              {categories && categories.map((item, index)=>
-              <li key={index} onClick={()=>{setChosenCat(item)
-              setCategoryDrop(false)
-              }}>{item}</li>
-              )}
-              </ul>
-            </div>
+        
+          if(window.pageYOffset >= 220){
+             setVisible(false);
+          
           }
-          </div>
-          <div className="vertical-divider"></div>
-          <div className="col-c-3">
-            <label htmlFor="cuisine">
-              Cuisine
-              <input id="cuisine" placeholder="Choose cuisine" />
-            </label>
-          </div>
-          <div className="vertical-divider"></div>
-          <div className="col-c-3">
-            <label>
-              Filter
-              <p>Additional options</p>
-            </label>
-          </div>
-          <div className="searchBtn">
-            <i className="fa fa-search"></i>
-          </div>
-        </div>
-        <div className="miniLabel">
-          <label>Start your search</label>
-          <div className="searchBtn">
-            <i className="fa fa-search"></i>
-          </div>
-        </div>
+          else{
+             setVisible(true);
+             setDrop(false)
+          }
+        
+    
+      }
 
 
-        {searchModal &&
-        ReactDOM.createPortal(
-         <div className="modal-overlay">
-          <SearchModal
-          closeSearch={closeSearch}
-          /></div>, modalRoot)
+
+      useEffect(()=>{
+        // window.onscroll = searchbarOnScroll
+        
+        window.addEventListener('scroll', searchbarOnScroll);
+        
+
+        return()=>{
+          window.removeEventListener('scroll', searchbarOnScroll);
+       
         }
- 
-      </div>
+      },[])
 
-   
-    )
+
+
+
+  return (
+    <div className="search-main">
+     
+        {visible?(
+          <>
+          
+            <div className="search-container">
+      <form className="search-form">
+      <div className="search-from-container">
+
+      <GrSearch className="search-icon"/>
+      <input type="text" onChange={(e)=>handlesug(e)} className="search-input"  placeholder="search here" value={recording?voiceInput: textInput}/>
+      {!isFirefox && recording? <AiFillPauseCircle className="voice-icon" style={{color: "var(--secondary)"}} onClick={handleRecording}/>
+      :<MdKeyboardVoice className="voice-icon"  onClick={handleRecording}/>}
+
+      </div>
+      <button className="search-btn">Find it now</button>
+    </form>
+    </div>
+       {sug&&<SearchSuggestions change={false}/>}
+</>
+        ):(
+          <div className="search-header-container">
+   <div className="fadein" onClick={handleDropdown}>
+           <div className="search-header-grid">
+             <GrSearch className="search-header-icon" style={{color:"red"}}/>
+               <p>Search Here</p>
+             </div>
+             
+     </div>{
+       dropdown && (
+         < div className="search-align">
+        <div className="search-container">
+        <form className="search-form">
+        <div className="search-from-container">
+  
+        <GrSearch className="search-icon"/>
+        <input type="text" onChange={(e)=>handlesug(e)} className="search-input"  placeholder="search here" value={recording?voiceInput: textInput}/>
+        {!isFirefox && recording? <AiFillPauseCircle className="voice-icon" style={{color: "var(--secondary)"}} onClick={handleRecording}/>
+        :<MdKeyboardVoice className="voice-icon"  onClick={handleRecording}/>}
+  
+        </div>
+        <button className="search-btn">Find it now</button>
+      </form>
+      </div>
+         {sug&&<SearchSuggestions change={true}/>}
+         </div>
+       ) 
+     }
+    
+</div>
+
+        )}
+
+
+      
+      
+    </div>
+  )
 }
 
 export default SearchBar
+

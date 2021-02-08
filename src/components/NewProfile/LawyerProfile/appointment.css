@@ -1,0 +1,117 @@
+.appointment-main{
+    display: flex;
+    gap:2rem;
+    flex-wrap: wrap;
+}
+* p{
+    margin:0
+}
+.appointments-tabs{
+  padding-top: 1rem;
+    display: flex;
+    border-bottom: 3px solid var(--primary);
+    justify-content: space-between;
+
+}
+.appointment-tab-grid{
+    display: flex;  
+}
+.appointment-heading{
+    display: flex;
+    justify-content: space-between;
+}
+.appointment-add-btn{
+    display: flex;
+    align-items: center;
+  
+    padding:0 1rem;
+    cursor: pointer;
+    
+}
+.tab-rates{
+    background-color: rgb(236, 236, 236);
+    padding:1rem 2rem;
+    cursor: pointer;
+}
+.Past,.Appointments,.Current,.Upcomming,.add-btn   {
+    background-color: var(--secondary);
+    
+    color:white
+}
+.appointment-left{
+    flex-basis: 30%;
+}
+.appointment-heading p:nth-child(1){
+font-size: 2rem;
+}
+.appointment-heading p:not(:nth-child(1)){
+    font-size: 1.2rem;
+    padding:0;
+    margin:0;
+    
+
+    }
+    .appointment-set p:nth-child(1){
+        font-size: 1rem;
+    }
+
+    .appointment-form p:nth-child(1){
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--secondary);
+    }
+    .appointment-form p:nth-child(2){
+        padding:0  1rem;
+        padding-top: 2rem;
+        margin:0;
+        }
+        .appointment-search-user{
+            display: flex;
+            align-items: center;
+            margin:.5rem  1.5rem;
+           width:10.5rem;
+            border-bottom: 1px solid black;
+        }
+        .appointment-form p:not(p:nth-child(1),p:nth-child(2)){
+            padding:0  1rem;
+            padding-top: 1rem;
+            margin:0;
+            }
+            .appointment-date{
+                display: flex;
+                align-items: center;
+                margin:.5rem  1.5rem;
+               width:10.5rem;
+                border-bottom: 1px solid black;
+            }
+
+            .appointment-summary{
+                
+                border: 1px solid black;
+                margin:.5rem  1.5rem;
+                width:95%;
+                height: 8rem;
+            }
+            .appointment-btn p:nth-child(1){
+                all:unset;
+                font-size: 1rem;
+                
+                
+
+            }
+            .appointment-btn{
+                margin:0  1rem;
+                margin-top: 1rem;
+                border: 1px solid var(--secondary);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                   color:white;
+                background-color:  var(--secondary);
+                width: 10rem;
+                padding:1rem;
+                 white-space: nowrap;
+            }
+            .appointment-right{
+                flex-basis: 70%;
+            }

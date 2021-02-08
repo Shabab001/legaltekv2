@@ -1,0 +1,30 @@
+.PopularLawyers{
+  width:100%;
+ height: fit-content;
+background-color: #f4f6f9;
+  
+}
+p,h1,h2,h3,h4{
+    margin: 0;
+}
+.lawyers-heading h4{
+    margin-top: 1rem;
+  margin-left: 10rem;
+  font-size: 2rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--secondary);
+}
+.Featured-lawyers{
+    max-width: 1850px;
+    width:100%;
+    height: auto;
+    margin: auto;
+    padding:1rem 9rem;
+    display: grid;
+    grid-template-columns:repeat(5,minmax(280px,1fr));
+    grid-template-rows: repeat(2,minmax(100px,1fr));
+    gap:1rem;
+  
+    
+    
+}

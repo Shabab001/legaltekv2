@@ -12,7 +12,9 @@
 .ml-3, .mx-3{
   margin-left: 1rem!important;
 }
-
+html{
+  scroll-behavior: smooth;
+}
 
 .fe-x-circle:before {
   content: "\ea01";
@@ -27,14 +29,25 @@
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width:8px;
+  background: transparent;
+}
+::-webkit-scrollbar:hover{
+  background-color: gainsboro;
 }
 ::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* background-color: gainsboro; */
+}
+
+::-webkit-scrollbar:hover ::-webkit-scrollbar-track {
   background-color: gainsboro;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #e50077;
 }
+
+
 .fe-x-circle:before {
   content: "\ea01";
 }
@@ -156,7 +169,14 @@ html {
 
 html {
   height: 100%;
+  
 }
+:root {
+  --primary: #161A1D;
+  --secondary: #BA181B;
+  --btn1:#49c5b6;
+}
+
 body {
   min-height: 100%;
   overflow-y: auto;

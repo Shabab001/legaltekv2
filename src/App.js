@@ -30,7 +30,7 @@ function App() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  backgroundColor: "rgba(229,0,119, 1)",
+                  backgroundColor: "#fff",
                 }}
               >
                 <Spin
@@ -60,6 +60,7 @@ function App() {
               <Route exact path="/servererror" component={ServerError} />
               <Route path="/" component={Routes} />
               <Route exact path="*" component={NotFound} />
+              
             </Switch>
           </Suspense>
         </div>

@@ -44,3 +44,7 @@
     color: rgba(0,0,0,0.4);
     position: absolute;
 }
+.nav-side-btn{
+    background-color: #161A1D;
+    height: 20px;
+}

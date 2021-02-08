@@ -4,12 +4,13 @@
   min-height: 100vh;
   background-color: #fff;
   position: relative;
+
 }
 
 .pink-btn__outlined {
   background-color: transparent;
-  border: 1px solid #e50077;
-  color: #e50077;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
   padding: 10px 20px;
   width: 200px;
   border-radius: 4px;
@@ -17,7 +18,7 @@
 }
 
 .pink-btn {
-  background-color: #e50077;
+  background-color: var(--secondary);
   color: white;
   margin: auto;
   padding: 10px 20px;
@@ -28,7 +29,7 @@
 }
 
 .btn--pink {
-  background-color: #e50077;
+  background-color: var(--secondary);
   border-radius: 4px;
   color: white;
   outline: none;
@@ -36,12 +37,16 @@
 .btn--pink-outlined {
   background-color: transparent;
   border-radius: 4px;
-  border: 1px solid #e50077;
-  color: #e50077;
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
   outline: none;
 }
 
 .indexHeader {
+  background-color: white;
+
+  position: relative;
+  z-index:9999;
   /* max-width: 1550px !important; */
   display: flex;
   width: 100%;
@@ -76,11 +81,14 @@
   /* max-width: 1920px; */
 }
 .index .banner {
-  /* background: url(../img/howcuttingdo.jpg); */
-  background-size: cover;
-  height: 680px;
+   /* background: url("../../components/Index/images/Frame\ 1.jpg");  */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+ 
+  height:92vh;
   width: 100%;
-  position: relative;
+overflow: hidden;
 }
 .indexHeader > .header-items {
   display: flex;
@@ -96,13 +104,18 @@
 .indexHeader .menu-items ul > li > a {
   display: flex;
   color: darkslategray;
+  
   align-items: center;
-  /* margin: 0px 10px; */
   font-size: 14px;
   line-height: 18px;
-  /* font-family: Airbnb_bold !important; */
   font-family: Open sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  /* font-family: Airbnb_bold !important; */
+  /* margin: 0px 10px; */
+}
+.nav-side-btn{
+  background-color: #161A1D;
+  height: 20px;
 }
 
 .indexHeader .brand a {
@@ -110,12 +123,12 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: darkslategray;
+ color:#161A1D;
 }
 
 .banner .nav-tabs .nav-link.active {
-  color: #e50077 !important;
-  border-color: #e50077 !important;
+  color: var(--secondary) !important;
+  border-color: var(--secondary) !important;
   font-family: Avenir_black !important;
 }
 
@@ -139,7 +152,7 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: #e50077;
+  color:#BA181B;
   /* transition: transform 0.2s ease-in-out;
   transform: rotate(-45deg) !important; */
   cursor: pointer;
@@ -152,7 +165,7 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: #e50077;
+  color: var(--secondary);
   transform: rotate(-45deg) !important;
 }
 
@@ -218,9 +231,9 @@
 .indexHeader .userDropdown a:hover svg,
 .indexHeader .userDropdown a:hover i,
 .indexHeader .userDropdown a:hover {
-  /* fill: #e50077 !important;
-  color: #e50077; */
-  background-color: #e50077;
+  /* fill: var(--secondary) !important;
+  color: var(--secondary); */
+  background-color: var(--secondary);
   color: white;
   fill: #fff !important;
 }
@@ -256,7 +269,7 @@
   transition: 0.3s box-shadow ease-in-out;
 }
 .indexHeader #userBtn:hover {
-  box-shadow: 0px 2px 6px rgb(229, 0, 119, 0.8);
+  box-shadow: 0px 2px 6px #BA181B;
 }
 .indexHeader .languageDropdown:hover {
   background-color: aliceblue;
@@ -271,9 +284,19 @@
 #userBtn button {
   display: flex;
   justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background-color: transparent;
+  background-color: #161A1D;
+  width: 7rem;
+  height: 2rem;
   outline: none;
+  color:white;
+  font-family:'Avenir_heavy' , 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+}
+#language button:hover{
+  box-shadow: 0px 2px 6px #BA181B;
+  transition: all .3s ease-in;
+  color:#BA181B;
 }
 /* #language button:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -330,7 +353,7 @@
 
 .indexHeader .bus_btn {
   padding: 10px 20px;
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
   background-color: transparent;
   transition: 0.3s box-shadow ease-in-out;
 }
@@ -455,18 +478,270 @@
   justify-content: center;
   width: 50px !important;
   height: 50px !important;
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
   color: white;
   font-size: 16px;
 }
 
 .index .banner .bannerInfo {
-  width: 280px;
-  right: 100px;
-  bottom: 40px;
-  position: absolute;
+}
+.bannerInfo{
+  width: 420px !important;
+ 
+  border-radius: 16px;
+  color:white;
+  height: 160px;
+}
+.banner-right-inner{
+
+  padding:0;
+  margin:0;
+}
+.rect-svg{
+position: absolute;
+}
+* p{
+  margin:0
+}
+.banner-right-heading{
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  
+  justify-content: space-between;
+}
+.banner-right-heading div{
+ 
+  flex-basis: 40%;
+  padding: 0 1rem;
+  gap:1rem;
+}
+.banner-arrow{
+  display: flex;
+  align-items: center;
+}
+.banner-arrow-right,.banner-arrow-left{
+  display: flex;
+
 }
 
+.bannerInfo svg{
+  position: absolute;
+}
+.leftIcon{
+  position: relative;
+top:21px;
+
+}
+.RightIcon{
+  position: relative;
+  top:21px;
+  right:45px;
+
+
+}
+.banner-right-lower{
+  display: flex;
+  padding:0 1rem;
+  gap:1rem;
+  align-items: center;
+}
+.banner-right-main{
+  flex-basis:40%;
+  padding-left: 8rem;
+}
+.banner-left-upper{
+ 
+  padding-top: 8rem;
+  padding-left: 6rem;
+
+}
+.banner-left-headings p:nth-child(1), .banner-left-headings p:nth-child(2){
+font-size: 2rem;
+}
+.banner-left-headings p:nth-child(2){
+  font-weight: bold;
+}
+.banner-left-headings p:nth-child(3){
+  color:grey;
+}
+.banner-upper-btn{
+  display: flex;
+  gap:2rem;
+  padding:2rem 0
+}
+.banner-upper-btn .banner-price p:nth-child(2){
+  font-size: 2rem;
+  position: relative;
+  top:-6px;
+}
+.banner-upper-btn .banner-price p:nth-child(1){
+  text-decoration:line-through;
+  color:grey;
+  
+  margin:0 !important;
+}
+.banner-round-btn{
+  background-color: black;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4rem;
+  border-radius: 50px 50px 50px 50px;
+  cursor: pointer;
+  height: 3.5rem;
+}
+.banner-underlines{
+ 
+  height: .3rem;
+  display: flex;
+  gap:.5rem
+}
+.banner-underline1{
+  background-color: goldenrod;
+  width:3rem;
+}
+.banner-underline2{
+  background-color:grey;
+  width:1rem;
+}
+.banner-underline3{
+  background-color:grey;
+  width:.5rem;
+}
+.banner-underline1,.banner-underline2,.banner-underline3{
+  border-radius: 50px 50px 50px 50px;
+}
+.banner-lower-left{
+  display: flex;
+ 
+  align-items: center;
+  padding-top: 10rem;
+  position: relative;
+  left: -10rem;
+  font-size: 1.2rem;
+  
+}
+.banner-lower-image{
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  overflow: hidden;
+  padding:0  .5rem;
+  margin-right: 1rem;
+
+}
+.banner-lower-left svg{
+  position: relative;
+  left:1.4rem;
+}
+.banner-lower-pic{
+  position: relative;
+  object-position: bottom;
+  object-fit: fill;
+}
+.banner-lower-last{
+  display: flex;
+  align-items: center;
+   gap:.2rem;
+ 
+}
+.banner-lower-last p{
+font-weight: bold;
+  
+}
+.banner-upper-right{
+  position: relative;
+
+  flex-basis: 50%;
+}
+.banner-right-last{
+  padding-top: 37.5rem;
+  padding-left: 18.5rem;
+  padding-right:5rem;
+  color: white;
+}
+.banner-review{
+  
+  width: 28.3rem;
+  display: flex;
+  padding:1.2rem;
+  justify-content: space-between;
+}
+.banner-review-directions div{
+  display: flex;
+  align-items: center;
+}
+.banner-review-directions{
+  display: flex;
+  gap:1rem;
+  font-size: .7rem;
+}
+.banner-last-sec{
+  padding:1rem;
+
+  display: flex;
+  gap:1rem;
+  width: 28.3rem;
+}
+.banner-ratings-sec{
+ 
+  gap:1rem;
+  align-items: flex-start;
+}
+.banner-stars{
+  display: flex;
+  gap:.1rem;
+  position: relative;
+  top:3px;
+}
+.banner-scroll-down{
+  position: absolute;
+bottom: 3rem;
+  left: 50%;
+  
+  transform: translateX(-50%);
+  z-index: 12;
+}
+.scroll-arrow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 5rem;
+  position: relative;
+  animation: down-scroll 1s linear infinite
+  
+}
+.scroll-arrow::before{
+content: "Scroll";
+display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 5rem;
+  position: absolute;
+  transform: rotate(90deg);
+  left:-1rem;
+  top:-1rem;
+  font-size: .8rem;
+ font-weight: bold;  
+}
+.banner-scroll-hide{
+  display: none;
+}
+@keyframes down-scroll{
+  0%{
+   opacity: 0;
+   transform: translateY(-1rem);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(1rem);
+  }
+}
 @media only screen and (max-width: 1024px) {
   .banner > img {
     object-position: 10%;
@@ -475,6 +750,7 @@
 
 @media only screen and (max-width: 450px) {
   .bannerInfo {
+
     width: 250px;
     /* right: 40px; */
     margin: auto;
@@ -489,20 +765,26 @@
     object-position: 20%;
   }
 }
-
+.bannerInfo h3 span{
+  color: #ED1C2E;
+  
+}
 .bannerInfo h3 {
-  color: #feb300;
+  color: black;
   font-size: 32px;
   margin-bottom: 12px;
-  font-family: Avenir_book !important;
+  text-transform: uppercase;
+  font-family: Rubik;
+  line-height: 45px;
 }
 .bannerInfo h5 {
   margin-bottom: 10px;
-  line-height: 14px;
+  line-height: 18px;
   font-size: 18px;
   margin-top: 0px;
   color: darkslategray;
-  font-family: Avenir_light !important;
+  font-weight: 400;
+  font-family: Rubik !important;
 }
 .bannerInfo h5:nth-child(3) {
   margin-bottom: 20px;
@@ -514,7 +796,7 @@
   outline: none;
   padding: 8px 15px;
   border-radius: 4px;
-  background-color: #e50077;
+  background-color: var(--secondary);
   color: #fff;
   height: 40px;
   width: 100%;
@@ -674,10 +956,10 @@
 }
 
 .index .tags p {
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
   padding: 3px 5px;
   margin: 0px 5px;
-  color: #e50077;
+  color: var(--secondary);
 }
 
 .hireACook {
@@ -753,7 +1035,7 @@
   outline: none;
   padding: 8px 15px;
   background-color: transparent;
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
   color: white;
   font-size: 14px;
   font-family: Avenir_light;
@@ -877,7 +1159,7 @@
   outline: none;
   padding: 8px 15px;
   background-color: transparent;
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
   color: #000;
   font-size: 14px;
   font-family: Avenir_light;
@@ -1103,7 +1385,7 @@
   margin-right: -2px;
   border-radius: 50%;
   color: white;
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1116,7 +1398,7 @@
   margin-right: -2px;
   border-radius: 50%;
   color: white;
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1252,7 +1534,7 @@
   right: 0;
   transition: all 0.1s ease-in-out;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  z-index: 6;
 }
 
 .indexHeader.expanded::after {
@@ -1484,7 +1766,7 @@
 }
 
 .mapDropdown #location:focus {
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
 }
 
 .mapDropdown .autocomplete-dropdown-container {
@@ -1521,7 +1803,7 @@
   flex-direction: column;
 }
 .mapDropdown .default-location span {
-  color: #e50077;
+  color: var(--secondary);
 }
 .mapDropdown .default-location span:nth-child(1) {
   font-size: 16px;
@@ -1556,7 +1838,7 @@
 .pinkBtn {
   align-self: flex-end;
   padding: 10px 25px;
-  background-color: #e50077;
+  background-color: var(--secondary);
   color: #fff;
   font-family: Avenir_black;
   display: block;
@@ -1626,16 +1908,16 @@
 }
 
 .ant-radio-wrapper:hover .ant-radio, .ant-radio:hover .ant-radio-inner, .ant-radio-input:focus + .ant-radio-inner{
-  border-color: #e50077;
+  border-color: var(--secondary);
 }
 .ant-radio-inner::after{
-  background-color: #e50077 !important;
+  background-color: var(--secondary) !important;
 }
 .ant-radio-checked::after{
-  border: 1px solid #e50077;
+  border: 1px solid var(--secondary);
 }
 .ant-radio-checked .ant-radio-inner{
-  border-color: #e50077;
+  border-color: var(--secondary);
 }
 .dropOffOptions span {
   display: flex;
@@ -1677,7 +1959,7 @@
     height: 50px;
     color: white;
     width: 100%;
-    background-color: #e50077;
+    background-color: var(--secondary);
   }
 
   .locationView span {
@@ -1829,7 +2111,7 @@
   }
   .index .inputBoxContainer .miniLabel .searchBtn,
   .index .inputBoxContainer .miniLabel.fadeIn .searchBtn {
-    background-color: #e50077;
+    background-color: var(--secondary);
     border-radius: 50%;
     color: white;
     display: flex;

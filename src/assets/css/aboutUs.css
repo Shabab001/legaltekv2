@@ -253,22 +253,19 @@
     font-size: 14px;
     font-family: Avenir_black;
 }
-/* .slick-slide{
-    min-width: fit-content;
-}
-.slick-slide > div{
-    display:flex;
-    min-width: fit-content;
-    justify-content: center !important;
-} */
+
 
 
 .aboutUs-stories{
     height:fit-content;
-    /* display:flex; */
-    /* align-items: center; */
+    display:flex;
+    align-items: center;
     overflow: hidden;
-    
+}
+
+.aboutUs-stories .slick-slider{
+    min-width: 0;
+    min-height: 0;
 }
 .aboutUs .stories .aboutUs-second-section{
     height:fit-content;

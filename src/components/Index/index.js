@@ -1,16 +1,22 @@
 import React,{useState,useEffect,Suspense, lazy} from "react";
 import ReactDOM from 'react-dom'
 import "../../assets/css/index.css";
-// import BottomNav from "../IndexShared/BottomNav";
-// import Footer from "../IndexShared/Footer";
-// import PopularDishes from "../HomePage/PopularDishes";
-// import HireACookSection from "../HomePage/HireACookSection";
-import hireChef from "../../assets/img/hirechef1.webp";
-// import SearchBar from "./../IndexShared/SearchBar"
-// import LearnALesson from "../HomePage/LearnALesson";
-// import LocationChooseModal from "../modals/LocationChoose"
+import { AiOutlineArrowLeft,AiOutlineArrowRight } from 'react-icons/ai';
+import {FaStar } from 'react-icons/fa';
+
+import Rect from "./images/Rectangle 1.svg"
+import hireChef from "../../assets/img/home_law.webp";
+
+import Rectangle from "./rectangle"
+import user from './images/usericon.jpeg'
 import {Link} from 'react-router-dom'
-const PopularDishes = lazy(()=>import("../HomePage/PopularDishes"))
+import Elipse from "./elipse";
+import wave from "./images/frame 1.jpg"
+import law from "./images/law.png"
+import Wave from "./wave"
+import Arrow from "./images/Arrow.png"
+
+const PopularLawyers = lazy(()=>import("../HomePage/PopularLawyers"))
 // const hireChef = lazy(()=>import("../../assets/img/hirechef1.jpg"))
 const HireACookSection = lazy(()=>import("../HomePage/HireACookSection"))
 const LocationChooseModal = lazy(()=>import("../modals/LocationChoose"))
@@ -19,10 +25,10 @@ const BottomNav = lazy(()=>import("../IndexShared/BottomNav"))
 const SearchBar = lazy(()=>import("./../IndexShared/SearchBar"))
 const LearnALesson = lazy(()=>import("../HomePage/LearnALesson"))
 
-
 function NextArrow(props) {
   const { className, style, onClick, color } = props;
-  
+
+
   return (
     <div
       className="fe fe-chevron-right"
@@ -72,7 +78,27 @@ function PrevArrow(props) {
 function Index(props) {
 
   const [location,setLocationModal] = useState(false)
+  const[hidescroll,setScroll]=useState(true);
+  
 
+  const handleScroll=()=>{
+    if(window.scrollY >0){
+        setScroll(false);
+    } else
+    {
+        setScroll(true);
+    }
+}
+
+const handlesection =()=>{
+  window.scroll({
+      top: 1000-100,
+      left: 0,
+      behavior: 'smooth'
+    });
+    
+}
+window.addEventListener('scroll',handleScroll)
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
@@ -96,42 +122,149 @@ function Index(props) {
   return (
     <>
     
-      <div className="banner" >
+      <div className="banner"  style={{position:"relative"}} >
   
-        <img src={hireChef}  style={{position:'absolute', left:0,bottom:0,objectFit:'cover',transition:'0.6s all ease-in-out',height:'100%',width:'100%'}}/>
-
-        <div className="bannerOverlay"></div>
+        <div onClick={handlesection} className={hidescroll?"banner-scroll-down":"banner-scroll-hide" }>
+              
+              <div className="scroll-arrow">
+               <img src={Arrow} alt="arrow"/>
+              </div>
+        </div>
         <div
           style={{
             maxWidth: 1920,
             position: "relative",
             height: "100%",
             margin: "auto",
+             display:"flex",
+             overflow:"hidden",
+             justifyContent:"space-between"
           }}
+
+        
         >
+          {/* <div>
+        <img src={hireChef}  />
+            </div>  */}
          
+         <div className="banner-right-main">
+           <div className="banner-left-upper">
+                <div className="banner-left-headings">
+                  <p>Italian Pasta</p>
+                   <p>With Special Sauce</p>
+                   <p>Best Lawyer with Professional Experiences <br/>you can only find in LegalTek</p>
+                </div>
+                <div className="banner-upper-btn">
+                  <div className="banner-price">
+                    <p>$250</p>
+                    <p>$200</p>
+                  </div>
+                    <div className="banner-round-btn">
+                        <p>Buy Now</p>
+                    </div>
+                </div>
+                <div className="banner-underlines"> 
+                     <div className="banner-underline1"></div>
+                     <div className="banner-underline2"></div>
+                     <div className="banner-underline3"></div>
+                </div>
+                <div className="banner-lower-left">
+                 <Elipse/>
+                  <div  className="banner-lower-image">
+                    <img className="banner-lower-pic"  src={hireChef} />
+
+                  </div>
+                   <div>
+                     <p>
+                       LegalTek's Recommendation
+                       </p>
+                         <div className="banner-lower-last">
+                           <p>See the Popular types</p>
+                           <AiOutlineArrowRight style={{position:"relative",left:"-0px",  fontSize: ".8rem"}}/>
+                         </div>
+                   </div>
+
+                </div>
+           </div>
+       
+         </div>
+         <div className="banner-upper-right" >
+           <img src={wave} style={{height:"100%", width:"100%", position:"absolute" , zIndex:1}}/>
+
+          
+               <div>
+        <img src={law} style={{position:"absolute",zIndex:2,height:"60%",left:"15rem", top:"3rem"}} />
+            </div> 
+                <div className="banner-right-last" style={{position:"relative",zIndex:3}}>
+                  <div style={{position:"absolute"}}>
+                   <Rectangle />
+                   
+                  </div>
+                  <div className="banner-review" style={{position:"relative",zIndex:4}}>
+                    <p>Customer Review</p>
+                    <div className="banner-review-directions">
+                      <div>
+                        <AiOutlineArrowLeft/>
+                        <p>Prev</p>
+                      </div>
+                      <div>
+                        <p>Next</p>
+                        <AiOutlineArrowRight/>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="banner-last-sec" >
+                  <div style={{width:"3rem"} }>
+
+                    <img style={{borderRadius:"50%"}} src={user} alt="user"/>
+                    </div>
+                    <div>
+
+             <div className="banner-ratings-sec" style={{display:"flex"}}>
+                <p>August Comte</p>
+              
+                 <div className="banner-stars" style={{color:"yellow"}}>
+                   <FaStar />
                
-          <div className="locationView" onClick={()=>setLocationModal(true)}>
-          <i className="fe fe-map-pin mr-3"></i> Order to: {locality && localityCountry ? <span className="ml-2">{locality+ ","+  localityCountry}</span>: <span className="ml-2">Enter your location</span>}
+                
+                   <FaStar />
+               
+                  
+             
+                   <FaStar />
+               
+                  
+                 
+                   <FaStar />
+               
+        
+
+                   <FaStar />
+               
+                  
+                 </div>
+
+            </div>
+            <div style={{paddingTop:".3rem"}}>
+              <p>some comliments for the lawyer from the users Perspective</p>
+            </div>
           </div>
-
-
+                  </div>
+                </div>
+          </div>
+        
+               
      
-        <div className="bannerInfo" >
-          <h3>Join Xukini as a Business User</h3>
-          <h5>Love your Hunger! Give your</h5>
-          <h5>Hunger a new Option.</h5>
-          <Link to="/business"><button>Register as a business user</button></Link>
-        </div>
-      
+
+
   
     </div>
   </div>
 
 
-      <SearchBar {...props}/>
+      {/* <SearchBar {...props}/> */}
       <Suspense fallback={<div>Loading...</div>}>
-      <PopularDishes />
+      <PopularLawyers />
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
       <HireACookSection />

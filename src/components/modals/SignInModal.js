@@ -137,32 +137,39 @@ function SignIn(props) {
           }}
         >
           <div className="brand">
-            <span>G</span>
-            <Link to="/">rmnd</Link>
-          </div>
+          <span>L</span>
+              <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
+            </div>
           <a
             onClick={props.closeLogin}
-            style={{ color: "#e50077", fontSize: 20 }}
+            style={{ color: "var(--secondary)", fontSize: 20 }}
           >
             <i className="fa fa-close"></i>
           </a>
         </div>
         <div className="userType">
-          <button
-            value="CUSTOMER"
-            onClick={changeUserType}
-            className={`${userType == "CUSTOMER" && "active"}`}
-          >
-            Customer
-          </button>
-          <button
-            value="BUSINESS"
-            onClick={changeUserType}
-            className={`${userType == "BUSINESS" && "active"}`}
-          >
-            Business
-          </button>
-        </div>
+              <button
+                value="CUSTOMER"
+                onClick={changeUserType}
+                className={`${userType == "CUSTOMER" && "active"}`}
+              >
+                User
+              </button>
+              <button
+                value="BUSINESS"
+                onClick={changeUserType}
+                className={`${userType == "BUSINESS" && "active"}`}
+              >
+                Law Firms
+              </button>
+              <button
+                value="LAWYER"
+                onClick={changeUserType}
+                className={`${userType == "LAWYER" && "active"}`}
+              >
+                Lawyers
+              </button>
+            </div>
         <h3 style={{ textAlign: "left" }}>Sign into your account</h3>
         <div className=".form">
           <div className="field">
@@ -297,7 +304,7 @@ function SignIn(props) {
             </div>
             <div>
               <GoogleLogin
-                clientId="64186221620-sp5ef0aoh285hj2548hvenm76qfp322l.apps.googleusercontent.com"
+                clientId="769714580677-5jh37eqkl71hjkv9l53if687r0pm5s9s.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 className="googleBtn"

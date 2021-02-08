@@ -1,0 +1,25 @@
+.management-main{
+  
+}
+* p{
+    margin:0
+}
+.management-heading p{
+   font-size: 2rem;
+}
+.management-tabs{
+    padding-top:2rem;
+    display: flex;
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 1rem;
+}
+.tab-rates{
+    background-color: rgb(236, 236, 236);
+    padding:1rem 2rem;
+    cursor: pointer;
+}
+.Rates,.Task,.Codes,.Explanation, .Codes,.Types, .of, .Law,.Referal, .Sources{
+    background-color: var(--secondary);
+    
+    color:white
+}

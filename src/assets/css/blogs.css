@@ -1,3 +1,45 @@
+.blogs h1{
+  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 25px 0px;
+}
+.album-action-container{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.album-action-container div{
+  height: 250px;
+  width: 250px;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  flex-direction: column;
+  background-color: ghostwhite;
+  transition: box-shadow 0.3s ease-in-out;
+  border-radius: 4px;
+  border: 2px dotted #e50077;
+}
+.album-action-container div:hover{
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+}
+.album-action-container div i {
+  font-size: 32px;
+  color: rgba(229,0,119, 0.5);
+  padding: 5px;
+  border: 1px solid rgba(229,0,119, 0.5);
+  border-radius: 50%;
+}
+.album-action-container div p{
+  font-family: Rubik, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  margin-top: 20px;
+  color: #e50077;
+}
+
+
 .blog-card-row {
   width: 100%;
   display: flex;

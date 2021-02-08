@@ -122,25 +122,32 @@ function LoginWithPhone(props) {
       <div className="form-modal">
         <div className="form">
         <div className="brand">
-            <span>G</span>
-            <Link to="/">rmnd</Link>
+            <span>L</span>
+            <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
           </div>
           <div className="userType">
-            <button
-              value="CUSTOMER"
-              onClick={changeUserType}
-              className={`${userType == "CUSTOMER" && "active"}`}
-            >
-              Customer
-            </button>
-            <button
-              value="BUSINESS"
-              onClick={changeUserType}
-              className={`${userType == "BUSINESS" && "active"}`}
-            >
-              Business
-            </button>
-          </div>
+              <button
+                value="CUSTOMER"
+                onClick={changeUserType}
+                className={`${userType == "CUSTOMER" && "active"}`}
+              >
+                User
+              </button>
+              <button
+                value="BUSINESS"
+                onClick={changeUserType}
+                className={`${userType == "BUSINESS" && "active"}`}
+              >
+                Law Firms
+              </button>
+              <button
+                value="LAWYER"
+                onClick={changeUserType}
+                className={`${userType == "LAWYER" && "active"}`}
+              >
+                Lawyers
+              </button>
+            </div>
           {!otpInputScreen ? (
             <h3 style={{ textAlign: "left", marginTop: 15 }}>
               {props.regProp ? "Sign up using phone" : "Sign into your account"}

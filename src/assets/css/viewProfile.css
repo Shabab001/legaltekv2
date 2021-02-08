@@ -1,0 +1,387 @@
+.viewProfile {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: whitesmoke;
+}
+
+.viewProfile .container {
+  min-height: 100vh;
+  width: 1500px;
+  max-width: 100%;
+  margin: auto;
+  height: auto;
+  display: flex;
+  column-gap: 20px;
+}
+.viewProfile .three-dot-menu {
+  padding: 5px 10px;
+  width: fit-content;
+  margin-left: auto;
+  cursor: pointer;
+}
+.viewProfile .three-dot-menu span {
+  background-color: gainsboro;
+  height: 5px;
+  width: 5px;
+  display: block;
+  position: relative;
+  border-radius: 50%;
+}
+.viewProfile .three-dot-menu span:after,
+.viewProfile .three-dot-menu span:before {
+  content: "";
+  display: inline-block;
+  background-color: gainsboro;
+  height: 5px;
+  width: 5px;
+  position: absolute;
+  border-radius: 50%;
+}
+.viewProfile .three-dot-menu span:before {
+  left: -8px;
+  right: auto;
+}
+.viewProfile .three-dot-menu span:after {
+  right: -8px;
+  left: auto;
+}
+
+.viewProfile .sideProfileInfo {
+  min-width: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 280px;
+  height: fit-content;
+  background-color: #1e5b98;
+}
+.viewProfile .sideProfileInfo img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+.viewProfile .sideProfileInfo .userName {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.viewProfile .sideProfileInfo span {
+  font-size: 12px;
+}
+.viewProfile .sideProfileInfo .userName,
+.viewProfile .sideProfileInfo span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.viewProfile .sideProfileInfo .likesFriends {
+  display: flex;
+  width: 100%;
+  height: 20px;
+}
+.viewProfile .sideProfileInfo .likesFriends > div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+.viewProfile .mainViewProfile{
+    width: 100%;
+}
+
+.viewProfile .sideProfileDesc {
+  padding: 10px 25px;
+}
+.viewProfile hr {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 10px 0px;
+}
+.viewProfile .sideProfileDesc p {
+  color: white;
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.viewProfile .mainCoverInfo {
+  width: 100%;
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  background-color: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.viewProfile .mainCoverInfo .coverImgContainer {
+  height: 400px;
+  position: relative;
+  width: 100%;
+}
+.viewProfile .mainCoverInfo .coverDesc {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  background-color: white;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.viewProfile .mainCoverInfo hr {
+  margin: 0;
+}
+
+.viewProfile .mainCoverInfo .coverDesc > div span {
+  margin: 0px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: black;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.viewProfile .mainCoverInfo img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+.viewProfile .mainCoverInfo .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+}
+.viewProfile .mainCoverInfo .coverImgContainerInfo {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  color: white;
+  padding: 30px;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.viewProfile .mainCoverInfo .coverImgContainerInfo h3 {
+  color: white;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.viewProfile .profileFavourites {
+  width: 100%;
+  height: fit-content;
+  display:flex;
+  column-gap: 20px;
+  flex-wrap: wrap;
+}
+
+.viewProfile .favouriteDishes {
+  background-color: white;
+  border-radius: 4px;
+  /* width: 400px; */
+  width: auto;
+  min-width: 300px;
+  display:flex;
+  flex: 1 0 48%;
+  flex-direction: column;
+  height: fit-content;
+  margin: 10px 0px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.viewProfile .favouriteDishes.recent {
+    background-color: white;
+    /* width: 400px; */
+    width: auto;
+    min-width: 300px;
+    display:flex;
+    flex: 0;
+    flex-direction: column;
+    height: fit-content;
+    margin: 0px;
+    /* margin: 10px 0px; */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+.viewProfile .favouriteDishes .favDishTitle {
+  padding: 10px 15px;
+}
+
+.viewProfile .favouriteDishes .favDishTitle h5 {
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-family:  'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+.viewProfile .favouriteDishes.recent .favDishTitle h5{
+    font-size: 14px;
+}
+
+.viewProfile .favouriteDishes.recent hr{
+    margin: 5px 0px;
+}
+
+.viewProfile .favouriteDishes .favDishListItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.viewProfile .favouriteDishes .favDishListItems.social{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.viewProfile .favouriteDishes .favDishListItems.social i{
+    display:flex;
+    padding: 20px;
+    justify-content: center;
+    flex: 1 1 25%;
+}
+
+.viewProfile .favouriteDishes .favDishListItem {
+  display: flex;
+  padding: 5px 15px;
+  align-items: center;
+}
+
+.viewProfile .favouriteDishes .favDishListItem .img-container{
+    width: fit-content;
+    height: fit-content;
+}
+.viewProfile .favouriteDishes .favDishListItem img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  padding: 10px 10px 10px 0px;
+}
+.viewProfile .favouriteDishes.recent .favDishListItem{
+    padding: 10px 15px;
+}
+.viewProfile .favouriteDishes.recent .favDishListItem .img-container{
+    width: fit-content;
+    height: fit-content;
+}
+.viewProfile .favouriteDishes.recent .favDishListItem img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  padding: 0px;
+  margin-right: 10px;
+}
+
+.viewProfile .favouriteDishes .favDishListItem .favItemInfo{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+.viewProfile .favouriteDishes .favDishListItem .favItemInfo p{
+    margin-bottom: 0px;
+    font-weight: 500;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+.viewProfile .favouriteDishes.recent .favDishListItem .favItemInfo p{
+    margin-bottom: 0px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+.viewProfile .favouriteDishes .favDishListItem .favItemInfo .favItemDate{
+    color: black;
+}
+
+.viewProfile .favouriteDishes.recent .favDishListItem .favItemInfo .favItemDate, .viewProfile .favouriteDishes.recent .favDishListItem .favItemInfo span{
+    color: black;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.viewProfile .favouriteDishes .favDishListItem .favItemInfo .favItemTitle{
+    margin-bottom: 0px;
+}
+.viewProfile .favouriteDishes .favDishListItem .moreItemInfo{
+    display:flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+.viewProfile .favouriteDishes .favDishListItem .moreItemInfo i{
+    font-size: 20px;
+    color: #1e5b98;
+
+}
+
+.viewProfile .sideProfile{
+    row-gap: 20px;
+    display:flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width: 800px){
+
+
+    .viewProfile .container{
+        flex-direction: column;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .viewProfile .container .sideProfile{
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .viewProfile .favouriteDishes.recent{
+        flex: 1 0 100%;
+        width: 100%;
+    }
+
+    .viewProfile .sideProfileInfo{
+        width: 100%;
+        overflow:visible;
+        position: relative;
+        padding-top: 60px;
+    }
+    .viewProfile .sideProfileInfo .three-dot-menu{
+        position: absolute;
+        top: 20px;
+        right:20px;
+    }
+
+    .viewProfile .sideProfileInfo img{
+        /* border-radius: 50%;
+        height:100px;
+        width: 100px;
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translate3d(-50%, 0px, 0px); */
+        width: 100%;
+        margin: auto;
+        display: flex;
+    }
+
+    .viewProfile .sideProfileInfo .userName{
+        font-size: 34px;
+        font-weight: 300;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .viewProfile .mainCoverInfo .coverImgContainerInfo{
+      padding: 15px;
+    }
+}

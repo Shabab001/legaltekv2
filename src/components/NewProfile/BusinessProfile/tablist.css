@@ -1,0 +1,70 @@
+
+.tablist-main{
+
+     padding: 1rem 1rem;
+    display: flex;
+    border-bottom: 1px solid rgb(233, 231, 231);
+    align-items: center;
+    gap:1rem;
+
+}
+.tablist,.column{
+    flex-basis:50%;
+
+ 
+}
+.tblist-edit{
+    flex-basis: 2%;
+}
+.tablist-update-grid{
+    padding: 1rem 1rem;
+    display: flex;
+    box-shadow: 0px 8px 8px -8px rgba(209, 209, 209, 0.75), 0px -8px 8px -8px rgba(197, 197, 197, 0.75);
+    align-items: center;
+    gap:1rem;
+    background-color:#f5f3f4;
+    position: relative;
+}
+.tblist-update-rate{
+    flex-basis: 50%;
+}
+.tbupdate-btn{
+    flex-basis: 2%;
+    background-color: var(--secondary);
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:.2rem;
+    font-size: .8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.tblist-update-inputs{
+    margin: 0;
+    padding:0;
+    border: 1px solid rgb(233, 232, 232);
+    border-radius: 4px;
+    
+    height: 1.6rem;
+    margin-bottom: .5rem;
+    background-color: white;
+}
+.background{
+    border-left: 1px solid var(--secondary);
+}
+.tblist-search-minimize{
+    min-width:1rem;
+    height: 1rem;
+    display: flex;
+    position: relative;
+
+    border:1px solid rgb(199, 195, 195);
+}
+
+.tblist-minimize2{
+    opacity: 0;
+}
+.tblist-minimize1{
+   opacity: 1;
+}

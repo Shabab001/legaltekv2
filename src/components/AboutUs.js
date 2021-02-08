@@ -7,6 +7,7 @@ import "../assets/css/aboutUs.css";
 import Slider from "react-slick";
 import boy from "../assets/img/boy.jpg";
 import girl from "../assets/img/girl.jpg";
+import girl2 from "../assets/img/girl2.jpg";
 
 function AboutUs(props) {
   var settings = {
@@ -225,8 +226,6 @@ function AboutUs(props) {
           <div className="aboutUs-stories">
             <Slider {...settings}>
               <div className="card">
-                {/* <i className="fa fa-bar-chart" /> */}
-
                 <img src={girl} />
 
                 <h4>Paul Rudd</h4>
@@ -234,27 +233,20 @@ function AboutUs(props) {
               </div>
 
               <div className="card">
-                {/* <i className="fa fa-birthday-cake" /> */}
-
                 <img src={boy} />
                 <h4>Jude Law</h4>
                 <p>Great Service </p>
               </div>
               <div className="card">
-                {/* <i className="fa fa-bar-chart" /> */}
                 <img src={girl} />
-                {/* <div className="img-container">
-                </div> */}
                 <h4>Paul Rudd</h4>
                 <p>Amazing Experience </p>
               </div>
 
               <div className="card">
-                {/* <i className="fa fa-birthday-cake" /> */}
+                <img src={girl2} />
 
-                <img src={boy} />
-
-                <h4>Jude Law</h4>
+                <h4>Carolina Bronx</h4>
                 <p>Great Service </p>
               </div>
             </Slider>

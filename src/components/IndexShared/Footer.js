@@ -7,6 +7,7 @@ import SignInWithPhoneModal from "../modals/SignInWithPhoneModal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
+import {Link} from 'react-router-dom'
 import {
   TwitterOutlined,
   FacebookOutlined,
@@ -30,45 +31,48 @@ function Footer(props) {
             <div>
               <h4>ABOUT</h4>
               <ul>
-                <li>About us</li>
-                <li>How Xukini works</li>
-                <li>Careers</li>
+                <li><Link to="/about-us">About us</Link></li>
+                <li><Link to="/faqs">FAQ</Link></li>
+                
          
               </ul>
             </div>
             <div>
-              <h4>MARKETPLACE</h4>
+              <h4>USERS</h4>
               <ul>
-                <li>Shop</li>
-                <li>List an item</li>
+                <li>How LegalTek Works</li>
+                <li>Services</li>
               </ul>
             </div>
             <div>
-              <h4>SERVICES</h4>
+              <h4>LAWYERS</h4>
               <ul>
-                <li>A la Carte</li>
-                <li>Catering</li>
-                <li>Meal Plans</li>
-                <li>Hire Chef</li>
-                <li>Cooking Lessons</li>
+                <li>Practice with LegalTek</li>
+                <li> <Link to={{pathname:"/how-it-works", user:"CUSTOMER"}}>Requirements </Link></li>
+                
               </ul>
             </div>
             <div>
-              <h4>BUSINESSES</h4>
+              <h4>LAW FIRMS</h4>
               <ul>
-                <li>For Businesses</li>
-                <li onClick={()=>setRegister(true)}>Sign up</li>
-                <li>Schedule a Callback</li>
-                <li>Plans</li>
+                <li><Link to="/business">Practice with LegalTek</Link></li>
+                <li> <Link to={{pathname:"/how-it-works", user:"BUSINESS"}}>Requirements </Link></li>
               </ul>
             </div>
             <div>
-              <h4>SUPPORT</h4>
+              <h4>CONNECT</h4>
               <ul>
-                <li>Help Center</li>
-                <li>FAQ</li>
-                <li>Contact</li>
-                <li>Blogs</li>
+          
+                <li><Link to="/contact-us">Contact</Link></li>
+                <li><Link to="/business/profile">Blogs</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4>ACCOUNT</h4>
+              <ul>
+          
+                <li><Link to="/login">Signin</Link></li>
+                <li><Link to="/register">Signup</Link></li>
               </ul>
             </div>
           </div>
@@ -83,11 +87,11 @@ function Footer(props) {
           </div>
           <span className="dot-divider">·</span>
           <div className="footer-links">
-            <a href="#">Privacy</a>
+            <Link to="Privacy-Policy">Privacy</Link>
           </div>
           <span className="dot-divider">·</span>
           <div className="footer-links">
-            <a href="#">Terms and conditions</a>
+            <Link to="/terms-and-conditions">Terms and conditions</Link>
           </div>
         
         </div>
@@ -132,7 +136,7 @@ function Footer(props) {
      
       
     </div>
-    <div className="last-footer">
+    <div className="last-footer" style={{backgroundColor:"var(--primary)"}}>
       <div className="cont">
       <p>Designed & Developed by SOFT49N</p>
       </div>

@@ -107,8 +107,8 @@ function SignUp(props) {
         <div className="form-modal">
           <div className="form">
             <div className="brand">
-              <span>G</span>
-              <Link to="/">rmnd</Link>
+              <span>L</span>
+              <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
             </div>
             <div className="userType">
               <button
@@ -116,14 +116,21 @@ function SignUp(props) {
                 onClick={changeUserType}
                 className={`${userType == "CUSTOMER" && "active"}`}
               >
-                Customer
+                User
               </button>
               <button
                 value="BUSINESS"
                 onClick={changeUserType}
                 className={`${userType == "BUSINESS" && "active"}`}
               >
-                Business
+                Law Firms
+              </button>
+              <button
+                value="LAWYER"
+                onClick={changeUserType}
+                className={`${userType == "LAWYER" && "active"}`}
+              >
+                Lawyers
               </button>
             </div>
             {/* {showSecondPart && */}
@@ -149,7 +156,7 @@ function SignUp(props) {
 
                   <p style={{ fontSize: 11, fontWeight: 100, color: "gray" }}>
                     We will email you order confirmations, receipts and
-                    marketing messages from Xukini.
+                    marketing messages from LegalTek.
                   </p>
                 </div>
 
@@ -214,7 +221,7 @@ function SignUp(props) {
                           cursor: "pointer",
                         }}
                       >
-                        Xukini's{" "}
+                        LegalTek's{" "}
                       </span>
                       Terms of Services, Payment Terms of Services, Privacy
                       Policy and Nondiscrimination Policy.
