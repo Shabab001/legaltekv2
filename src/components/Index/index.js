@@ -4,26 +4,23 @@ import "../../assets/css/index.css";
 import { AiOutlineArrowLeft,AiOutlineArrowRight } from 'react-icons/ai';
 import {FaStar } from 'react-icons/fa';
 
-import Rect from "./images/Rectangle 1.svg"
+
 import hireChef from "../../assets/img/home_law.webp";
 
 import Rectangle from "./rectangle"
 import user from './images/usericon.jpeg'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import Elipse from "./elipse";
-import wave from "./images/wave.jpg"
+// import wave from "./images/wave.jpg"
 import law from "./images/law.png"
 import Wave from "./wave"
 import Arrow from "./images/Arrow.png"
+import Agencies from "../HomePage/Agencies";
 
 const PopularLawyers = lazy(()=>import("../HomePage/PopularLawyers"))
 // const hireChef = lazy(()=>import("../../assets/img/hirechef1.jpg"))
-const HireACookSection = lazy(()=>import("../HomePage/HireACookSection"))
-const LocationChooseModal = lazy(()=>import("../modals/LocationChoose"))
-const Footer = lazy(()=>import("../IndexShared/Footer"))
-const BottomNav = lazy(()=>import("../IndexShared/BottomNav"))
-const SearchBar = lazy(()=>import("./../IndexShared/SearchBar"))
-const LearnALesson = lazy(()=>import("../HomePage/LearnALesson"))
+const Stats = lazy(()=>import("../HomePage/stats"))
+
 
 function NextArrow(props) {
   const { className, style, onClick, color } = props;
@@ -266,46 +263,14 @@ window.addEventListener('scroll',handleScroll)
 
 
       {/* <SearchBar {...props}/> */}
-      <Suspense fallback={<div>Loading...</div>}>
-      <PopularLawyers />
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-      <HireACookSection />
-      </Suspense>
-
-      <div className="fourthSection">
-        <div className="cont">
-          <div className="col-md-6 col-sm-12">
-            <h1>
-              Nov 3 is Election Day. Let's get you ready to head to the polls
-            </h1>
-            <button>Civic Action Center</button>
-          </div>
-          <div className="col-md-6 col-sm-12">
-            <p>
-              On Election day, you get to have a say in shaping the future. So
-              before you head to the polls, let’s make sure you have everything
-              you need to make your voice heard. Visit Airbnb’s Civic Action
-              center to check your voter registration status, find your polling
-              location and learn about the candidates on your ballot.
-            </p>
-          </div>
-        </div>
-      </div>
-      <Suspense fallback={<div>Loading...</div>}>
-      <LearnALesson/>
-      </Suspense>
-      
-  
-      {location &&
-      ReactDOM.createPortal(
-        <div className="modal-overlay">
-        <LocationChooseModal
-        closeLocationChooser={()=>setLocationModal(false)}
-        />
-        </div>, document.getElementById("modal-root"))
      
-      }
+      <PopularLawyers />
+    
+     
+      <Stats />
+  
+     <Agencies/>
+ 
     </>
   );
 }
