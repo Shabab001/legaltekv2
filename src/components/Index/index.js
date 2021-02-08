@@ -11,7 +11,7 @@ import Rectangle from "./rectangle"
 import user from './images/usericon.jpeg'
 import {Link} from 'react-router-dom'
 import Elipse from "./elipse";
-import wave from "./images/frame 1.jpg"
+import wave from "./images/wave.jpg"
 import law from "./images/law.png"
 import Wave from "./wave"
 import Arrow from "./images/Arrow.png"
@@ -188,14 +188,17 @@ window.addEventListener('scroll',handleScroll)
            </div>
        
          </div>
-         <div className="banner-upper-right" >
-           <img src={wave} style={{height:"100%", width:"100%", position:"absolute" , zIndex:1}}/>
+         <div className="banner-upper-right"  style={{ width:"100%", position:"relative" , zIndex:1}}>
+           {/* <img src={wave} style={{ minWidth:"1000px", height:"100%",position:"absolute" ,right:"0" ,top:"0",zIndex:1}}/> */}
+           <div style={{ width:"52rem", position:"absolute",right:"0" ,top:"0" ,zIndex:1}}>
 
+          <Wave  />
+           </div>
           
-               <div>
-        <img src={law} style={{position:"absolute",zIndex:2,height:"60%",left:"15rem", top:"3rem"}} />
-            </div> 
-                <div className="banner-right-last" style={{position:"relative",zIndex:3}}>
+               
+        <img src={law} className="banner-lawicon" style={{position:"absolute",zIndex:2,right:"16rem", top:"3rem"}} />
+            
+                <div className="banner-right-last" style={{position:"absolute",zIndex:3}}>
                   <div style={{position:"absolute"}}>
                    <Rectangle />
                    

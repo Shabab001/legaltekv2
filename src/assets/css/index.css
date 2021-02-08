@@ -552,8 +552,7 @@ top:21px;
 }
 .banner-left-upper{
  
-  padding-top: 8rem;
-  padding-left: 6rem;
+  padding: 0px 66px;
 
 }
 .banner-left-headings p:nth-child(1), .banner-left-headings p:nth-child(2){
@@ -658,10 +657,13 @@ font-weight: bold;
   flex-basis: 50%;
 }
 .banner-right-last{
-  padding-top: 37.5rem;
-  padding-left: 18.5rem;
-  padding-right:5rem;
+bottom:4rem;
+right: 3rem;
+
   color: white;
+}
+.banner-lawicon{
+  height:calc(2rem + 20vw)!important;
 }
 .banner-review{
   
@@ -669,6 +671,7 @@ font-weight: bold;
   display: flex;
   padding:1.2rem;
   justify-content: space-between;
+  
 }
 .banner-review-directions div{
   display: flex;
@@ -712,7 +715,7 @@ bottom: 3rem;
   width: 1rem;
   height: 5rem;
   position: relative;
-  animation: down-scroll 1s linear infinite
+  animation: down-scroll 1.5s ease-in-out infinite
   
 }
 .scroll-arrow::before{
@@ -734,12 +737,15 @@ display: flex;
 }
 @keyframes down-scroll{
   0%{
-   opacity: 0;
-   transform: translateY(-1rem);
+  
+   transform: translateY(0);
+  }
+  50%{
+    transform: translateY(-30px);
   }
   100%{
-    opacity: 1;
-    transform: translateY(1rem);
+   
+    transform: translateY(0);
   }
 }
 @media only screen and (max-width: 1024px) {
