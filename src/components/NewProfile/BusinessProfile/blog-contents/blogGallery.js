@@ -38,14 +38,46 @@ const BlogGallery = () => {
                 </div>
             </div>
             <div className="bgallery-body-container">
-             <BlogCard image={Civil}/>
-             <BlogCard image={Criminal}/>
-             <BlogCard image={Civil}/>
-             <BlogCard image={Civil}/>
-             <BlogCard image={Civil}/>
-             <BlogCard image={Civil}/>
-             <BlogCard image={Civil}/>
-             <BlogCard image={Civil}/>
+                <Link to ="/business/:postId">
+              
+                <BlogCard image={Civil}/>
+                
+             </Link>
+             <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
+           <Link to ="/business/:postId">
+              
+              <BlogCard image={Civil}/>
+              
+           </Link>
             </div>
            
         </div>

@@ -172,7 +172,7 @@ function BusinessProfile (props) {
             <Route exact path="/business/blogs" component={Blogs} />
             <Route exact path="/business/portfolio" component={Portfolio} />
            
-            <Route exact path="/business/:postId" component={SingleBlog} />
+            
        
           </Switch>
           {/* {activeMenu == 1 && <Profile {...props} />}
