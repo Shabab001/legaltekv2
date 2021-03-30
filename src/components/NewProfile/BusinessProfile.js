@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy } from "react";
 import "../../assets/css/newProfile.css";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,Switch,Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
@@ -8,6 +8,8 @@ import { message } from "antd";
 import LawyersList from "./BusinessProfile/LawyersList";
 import AddLawyers from "./BusinessProfile/addLawyers";
 import Management from "./BusinessProfile/management";
+import CreateBlog from "./BusinessProfile/blog-contents/createBlog";
+import SingleBlog from "./BusinessProfile/blog-contents/singleBlog";
 // import {message} from 'antd'
 
 
@@ -65,10 +67,11 @@ function BusinessProfile (props) {
       setActiveMenu(7);
     }
 
-    if (props.match.path == "/business/menu") {
+ 
+    if (props.location.pathname == "/business/blogs" || props.location.pathname == "/business/blogs/edit-blog-post/:postId" || props.location.pathname == "/business/blogs/:postId") {
       setActiveMenu(8);
     }
-    if (props.match.path == "/business/blogs") {
+    if (props.match.path == "/business/blogs/:postId") {
       setActiveMenu(9);
     }
     if (props.match.path == "/business/portfolio") {
@@ -136,7 +139,15 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-cog stroke-transparent" /> <span className="link-title">Messaging</span>
           </li></Link>
       
-        
+          <Link to='/business/blogs' data-tooltip="Messaging">
+          <li className={activeMenu === 8 ? "active" : ""} >
+            <span></span> <i className="fa fa-gift stroke-transparent" /> <span className="link-title">Blogs</span>
+          </li></Link>
+
+          <Link to='/business/:postId' data-tooltip="Messaging">
+          <li className={activeMenu === 9 ? "active" : ""} >
+            <span></span> <i className="fa fa-gift stroke-transparent" /> <span className="link-title">Blogs</span>
+          </li></Link>
           <Link to="#" onClick={(e)=>logout(e)} data-tooltip="Logout">
           <li>
             <span></span> <i className="fa fa-sign-out stroke-transparent" /><span  className="link-title">Logout</span> 
@@ -148,16 +159,31 @@ function BusinessProfile (props) {
 
         <div className="main">
 
-          
-          {activeMenu == 1 && <Profile {...props} />}
+        <Switch>
+            <Route exact path="/business/profile" component={Profile} />
+            <Route exact path="/business/documents" component={Orders} />
+            <Route exact path="/business/lawyers" component={AddLawyers} />
+            
+            <Route exact path="/business/favourites" component={Favourites} />
+            <Route exact path="/business/notifications" component={Notifications} />
+            <Route exact path="/business/reviews" component={Reviews} />
+           
+            <Route exact path="/business/management" component={Management} />
+            <Route exact path="/business/blogs" component={Blogs} />
+            <Route exact path="/business/portfolio" component={Portfolio} />
+           
+            <Route exact path="/business/:postId" component={SingleBlog} />
+       
+          </Switch>
+          {/* {activeMenu == 1 && <Profile {...props} />}
           {activeMenu == 2 && <Orders {...props}/>}
           {activeMenu == 3 && <AddLawyers {...props}/>}
           {activeMenu == 4 && <Management {...props}/>}
           {activeMenu == 5 && <Reviews {...props}/>}
          
           {activeMenu == 6 &&<Notifications {...props}/>}
-          {activeMenu == 9 && <Blogs {...props}/>}
-          {activeMenu == 10 && <Portfolio {...props}/>}
+          {activeMenu == 8 && <Blogs {...props}/>}
+          {activeMenu == 10 && <Portfolio {...props}/>} */}
     
           {/* {activeMenu == 5 && <Subscriptions {...props}/>}
           {activeMenu == 6 && <Chats {...props}/>} */}

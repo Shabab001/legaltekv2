@@ -86,14 +86,13 @@ componentDidMount(){
   }
 
   handleChange = address => {
-      console.log(address)
-    this.setState({ address });    
-    
+    console.log(address)
+    this.setState({ address });      
    
   };
  
   handleSelect = address => {
-    console.log(address)
+    console.log('address')
     geocodeByAddress(address)
       .then(results => console.log(results))
       .then(latLng => console.log('Success', latLng))
@@ -108,7 +107,7 @@ componentDidMount(){
     onSelect={chooseAddress}
   >
     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-      <div style={{flex:'auto'}}>
+      <div >
         {icon && icon}
         <input
         id='location'
@@ -119,7 +118,7 @@ componentDidMount(){
           })}
         />
         {suggestions.length > 0 &&
-        <div className="autocomplete-dropdown-container">
+        <div className="autocomplete-dropdown-container" style={{display:'block'}}>
           {loading && <div>Loading...</div>}
           {suggestions.map((suggestion,index) => {
             const className = suggestion.active
@@ -127,7 +126,7 @@ componentDidMount(){
               : 'suggestion-item';
             // inline style for demonstration purpose
             const style = suggestion.active
-              ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+              ? { backgroundColor: '#ffffff', cursor: 'pointer' }
               : { backgroundColor: '#ffffff', cursor: 'pointer' };
             return (
               <div

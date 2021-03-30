@@ -1,5 +1,7 @@
 import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
+import CreateBlog from "./components/NewProfile/BusinessProfile/blog-contents/createBlog";
+
 
 
 const Header = lazy(() => import("./components/IndexShared/Header"));
@@ -145,6 +147,11 @@ function Routes(props) {
               path="/business/blogs/:id"
               component={BusinessSingleBlog}
             />
+               <Route
+              exact
+              path="/business/:postId"
+              component={BusinessProfile}
+            />
 
            {/* 
            
@@ -210,6 +217,7 @@ function Routes(props) {
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/how-it-works" component={HowItWorks} />
             <Route exact path="/business" component={Business} />
+       
 
             {!props.location.pathname.includes("/business/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/")? 
         <Footer {...props} /> : ""

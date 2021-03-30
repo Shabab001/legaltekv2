@@ -1,0 +1,84 @@
+.bcard-container{
+    color:black;
+    background-color: rgb(236, 236, 236);
+    position: relative;
+    
+}
+.bcard-time {
+    line-height: normal;
+    padding: 0;
+    margin:0;
+    background-color: rgb(233, 233, 233);
+    position:absolute;
+    width: 3.5rem;
+    text-align: center;
+    padding: .3rem 0rem;
+}
+.bcard-time p:nth-child(2){
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.bcard-time p:nth-child(1), .bcard-time p:nth-child(3){
+font-size: .8rem;
+
+}
+.bcard-time p:nth-child(3){
+color:red
+}
+.bcard-pic{
+ 
+    max-width:30rem;
+    max-height: 15rem;
+}
+.bcard-pic img{
+ object-fit:cover;
+ 
+}
+.bcard-middle{
+    position: relative;
+    padding:1rem 1rem;
+    padding-bottom:0rem;
+}
+.bcard-middle-first{
+    padding-top: .3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.bcard-image p{
+font-size: 1rem;
+}
+.bcard-lower{
+    padding:.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    color:red;
+}
+.bcard-image{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+}
+.bcard-round{
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color:white;
+    border-radius: 50px 50px;
+}
+.bcard-middle > P{
+    padding-top: .5rem;
+}
+.bcard-options{
+    position:absolute;
+    background-color: rgb(255, 255, 255);
+    right: 2rem;
+    top:3.5rem;
+    transform: scale(0);
+    transition: transform .3s ease-in-out;
+    transform-origin: top right;
+}
+.active{
+    transform: scale(1);
+}

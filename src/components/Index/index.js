@@ -185,15 +185,15 @@ window.addEventListener('scroll',handleScroll)
            </div>
        
          </div>
-         <div className="banner-upper-right"  style={{ width:"100%", position:"relative" , zIndex:1}}>
+         <div className="banner-upper-right"  style={{ width:"100%", position:"relative" }}>
            {/* <img src={wave} style={{ minWidth:"1000px", height:"100%",position:"absolute" ,right:"0" ,top:"0",zIndex:1}}/> */}
-           <div style={{ width:"52rem", position:"absolute",right:"0" ,top:"0" ,zIndex:1}}>
+           <div style={{ width:"52rem", position:"absolute",right:"0" ,top:"0" }}>
 
           <Wave  />
            </div>
           
                
-        <img src={law} className="banner-lawicon" style={{position:"absolute",zIndex:2,right:"16rem", top:"3rem"}} />
+        <img src={law} className="banner-lawicon" style={{position:"absolute",right:"16rem", top:"3rem"}} />
             
                 <div className="banner-right-last" style={{position:"absolute",zIndex:3}}>
                   <div style={{position:"absolute"}}>

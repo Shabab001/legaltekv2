@@ -1,0 +1,64 @@
+.createPost{
+    display:flex;
+    flex-direction: column;
+
+  }
+  .createPost > .input-cont{
+    position: relative;
+    height: fit-content;
+    margin: 5px 0px;
+  }
+  .createPost > .input-cont > .tempCoverImage{
+      width: 400px;
+      max-width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      background-color: #f7f7f7;
+      border: 1px solid #ddd;
+  }
+  .createPost > .input-cont > input:not([type="file"]){
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      padding: 5px 15px;
+      border-radius: 4px;
+      
+  }
+
+  .createPost .chooseCover{
+    background-color: gainsboro;
+    padding: 5px 15px;
+    width: fit-content;
+    color: black;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .createPost .chooseCover input[type="file"]{
+      display:none;
+      
+  }
+
+  .createPost select{
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+  }
+
+  .createPost button.red-btn{
+    width: fit-content;
+    margin-top: 20px !important;
+  }
+  .ck-editor__editable_inline {
+    min-height: 300px;
+}
+@media only screen and (max-width: 450px){
+  .ck.ck-toolbar-dropdown .ck.ck-toolbar div.ck.ck-toolbar__items{
+    flex-wrap: wrap !important;
+  }
+
+  .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_nw, .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_sw{
+    width: 350px !important;
+  }
+ 
+}

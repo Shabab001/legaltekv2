@@ -2,7 +2,7 @@ import React from 'react'
 import "./order.css"
 const Documents = () => {
   return (
-    <div>
+    <div style={{backgroundColor:"white"}}>
       <div className="order-headings">
         <p>Upload Your Supporting Documents</p>
         <p>Please Upload images of documents below. Some more info about required files</p>
