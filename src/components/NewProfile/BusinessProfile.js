@@ -29,6 +29,7 @@ const Menu = lazy( ()=>import("./BusinessProfile/Menu")) ;
 function BusinessProfile (props) {
   const [activeMenu, setActiveMenu] = useState(1);
   const [sidebarCollapse, setSidebarCollapse] = useState(true)
+  console.log(activeMenu)
   useEffect(() => {
     window.scrollTo(0, 0);
     

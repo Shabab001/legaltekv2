@@ -812,12 +812,12 @@ class Profile extends Component {
     
       <div className="user-profile tab">
         <div>
-          <h3>Business Information</h3>
+          <h3>Law Firm Information</h3>
         </div>
         <div className="input-fields">
           <div className="input-row">
             <label className="fullLabel">
-              Business Name:
+             Firm Name:
               <input
                 name="businessName"
                 placeholder="Business Name"
@@ -827,18 +827,19 @@ class Profile extends Component {
             </label>
           </div>
           <div className="input-row">
-          <label>
-              Business Email:
+          <label
+              className={`${!this.state.contactEmail.isValid ? "error" : ""}`}
+            >
+              Firm Email:
               <input
-                autoComplete="off"
-                name="businessEmail"
+                name="contactEmail"
                 placeholder="Email address"
-                value={this.state.businessEmail.value}
+                value={this.state.contactEmail.value}
                 onChange={this.onChange}
               />
             </label>
             <label >
-              Business Location:
+             Firm Location:
               {/*             
                 <Autocomplete
                     id="autocomplete"
@@ -858,7 +859,7 @@ class Profile extends Component {
           </div>
           {/* <div className="input-row">
             <label className="fullLabel">
-              Business Address:
+             Firm Address:
               <input
                 autoComplete="off"
                 placeholder="Business Address"
@@ -870,7 +871,7 @@ class Profile extends Component {
           </div> */}
           <div className="input-row two-part">
             <label className="one-half">
-              Business Address:
+             Firm Address:
               <input
                 autoComplete="off"
                 name="businessAddress"
@@ -880,7 +881,7 @@ class Profile extends Component {
               />
             </label>
             <label className="one-half">
-              Business Country:
+             Firm Country:
               <input
                 autoComplete="off"
                 name="businessCountry"
@@ -1018,22 +1019,45 @@ class Profile extends Component {
                 </p>
               )}
             </label>
-            <label>
-              Business Phone No:
+            <label
+              className={`${!this.state.contactPhone.isValid ? "error" : ""}`}
+            >
+              Phone No:
               <input
                 autoComplete="off"
-                name="businessPhoneNo"
+                name="contactPhone"
                 placeholder="Phone No."
-                value={this.state.businessPhoneNo.value}
+                value={this.state.contactPhone.value}
                 onChange={this.onChange}
               />
             </label>
-            
+            <label
+            className="one-half"
+            >
+              Website Name:
+              <input
+                autoComplete="off"
+                name="contactPhone"
+                placeholder="Website name"
+             
+              />
+            </label>
+            <label
+           className="one-half"
+            >
+              Registration No:
+              <input
+                autoComplete="off"
+                name="contactPhone"
+                placeholder="Registration No."
+              
+              />
+            </label>
           </div>
 
           <div className="input-row ">
             <label className="textareaLabel">
-              Business Profile:
+              Law Firm Profile:
               <textarea
                 value={this.state.businessProfile.value}
                 onChange={this.onChange}
@@ -1049,7 +1073,7 @@ class Profile extends Component {
      
        
         <div className="dividerL"></div>
-        <h1>Social Account Settings</h1>
+        <h1>Law Firm Social Account Settings</h1>
         <div className="input-fields">
           <div className="input-row social">
             <label>
@@ -1343,7 +1367,7 @@ class Profile extends Component {
        
 
 
-        <h1>Account Settings</h1>
+        <h1>Admin Account Settings</h1>
         <div className="input-fields">
           <div className="input-row">
             <label className={`${!this.state.email.isValid ? "error" : ""}`}>
@@ -1486,8 +1510,96 @@ class Profile extends Component {
               />
             </label>
           </div>
-          
-           
+          <div className="input-row">
+          <label>
+              Language:
+              <Select
+                placeholder="Language"
+                value={this.state.language.value}
+                // search
+                showSearch="true"
+                selection="true"
+                onChange={(e, { value }) =>
+                  this.setState({
+                    formDirty: true,
+                    language: { ...this.state.language, value: value },
+                  })
+                }
+                options={languageOptions}
+              />
+            </label>
+
+            <label
+              ref={this.curr}
+              className={`cur-label ${this.state.currencyDrop && "focused"}`}
+              tabIndex={0}
+            >
+              Currency
+              <input
+                className="cur-input"
+                type="text"
+                placeholder="Choose currency"
+                value={this.state.currency.value}
+                onFocus={() => this.setState({ currencyDrop: true })}
+                onChange={(e) => {
+                  filteredCurrencies = Currencies.filter((item, index) => {
+                    const regex = new RegExp(e.target.value, "gi");
+                    return (
+                      item.name.match(regex) || item.currency.code.match(regex)
+                    );
+                  });
+                  this.setState({ filteredCurrencies: filteredCurrencies });
+                  console.log(filteredCurrencies);
+                  this.setState({
+                    currency: { ...this.state.currency, value: e.target.value },
+                  });
+                }}
+              />
+              <i className="dropdown icon"></i>
+              {this.state.currencyDrop && (
+                <div
+                  className="currencyDrop"
+                  onBlur={() => this.setState({ currencyDrop: false })}
+                >
+                  <ul>
+                    {this.state.filteredCurrencies &&
+                      this.state.filteredCurrencies.map((item, index) => (
+                        <li
+                          key={index}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (item && item.currency && item.currency.code) {
+                              console.log(item, e);
+                              this.setState({
+                                currency: {
+                                  ...this.state.currency,
+                                  value: item.currency.code,
+                                },
+                                formDirty: true,
+                                currencyDrop: false,
+                              });
+                            }
+                          }}
+                        >
+                          <img
+                            src={`data:image/jpeg;base64,${item.flag}`}
+                            height="16px"
+                            width="24px"
+                          />
+                          {item.name +
+                            " - " +
+                            item.currency.code +
+                            ` (${
+                              item.currency.symbol !== false &&
+                              item.currency.symbol
+                            })`}{" "}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+            </label>
+          </div>
           <label style={{ flexDirection: "row" }}>
             Deactivate your account? &nbsp;{" "}
             <span style={{ textDecoration: "underline", color: "red" }}>
