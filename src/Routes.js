@@ -85,7 +85,7 @@ function Routes(props) {
             />
             
 
-       
+{/*        
             <Route
               exact
               path="/business/documents"
@@ -142,7 +142,7 @@ function Routes(props) {
               exact
               path="/business/blogs/:id"
               component={BusinessSingleBlog}
-            />
+            /> */}
       
 
            {/* 
@@ -196,7 +196,7 @@ function Routes(props) {
 
 
             <Route exact path="/user/profile" component={UserProfile}/>
-            <Route exact path="/business/profile" component={BusinessProfile}/>
+            
             <Route exact path="/faqs" component={Faqs} />
             <Route exact path="/help-center" component={HelpCenter} />
             <Route exact path="/view-profile/:id" component={ViewProfile} />
