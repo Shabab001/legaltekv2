@@ -11,7 +11,7 @@ import { fromString } from 'uuidv4'
 const BlogGallery = () => {
     const[create,setCreate]=useState(false)
     return (<>
-        {create? <CreateBlog setCreate={setCreate}/>:
+
         
   
         <div className="bgallery-main">
@@ -81,7 +81,7 @@ const BlogGallery = () => {
             </div>
            
         </div>
-        }
+        
         </>
     )
 }

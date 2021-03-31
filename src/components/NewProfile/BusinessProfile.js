@@ -68,12 +68,10 @@ function BusinessProfile (props) {
     }
 
  
-    if (props.location.pathname == "/business/blogs" || props.location.pathname == "/business/blogs/edit-blog-post/:postId" || props.location.pathname == "/business/blogs/:postId") {
+    if (props.location.pathname == "/business/blogs" ) {
       setActiveMenu(8);
     }
-    if (props.match.path == "/business/blogs/:postId") {
-      setActiveMenu(9);
-    }
+  
     if (props.match.path == "/business/portfolio") {
       setActiveMenu(10);
     }
@@ -144,10 +142,7 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-gift stroke-transparent" /> <span className="link-title">Blogs</span>
           </li></Link>
 
-          <Link to='/business/:postId' data-tooltip="Messaging">
-          <li className={activeMenu === 9 ? "active" : ""} >
-            <span></span> <i className="fa fa-gift stroke-transparent" /> <span className="link-title">Blogs</span>
-          </li></Link>
+        
           <Link to="#" onClick={(e)=>logout(e)} data-tooltip="Logout">
           <li>
             <span></span> <i className="fa fa-sign-out stroke-transparent" /><span  className="link-title">Logout</span> 
@@ -171,11 +166,11 @@ function BusinessProfile (props) {
             <Route exact path="/business/management" component={Management} />
             <Route exact path="/business/blogs" component={Blogs} />
             <Route exact path="/business/portfolio" component={Portfolio} />
-           
+            <Route exact path="/business/:postId" component={SingleBlog} />
             
        
           </Switch>
-          {/* {activeMenu == 1 && <Profile {...props} />}
+           {/* {activeMenu == 1 && <Profile {...props} />}
           {activeMenu == 2 && <Orders {...props}/>}
           {activeMenu == 3 && <AddLawyers {...props}/>}
           {activeMenu == 4 && <Management {...props}/>}
@@ -183,10 +178,9 @@ function BusinessProfile (props) {
          
           {activeMenu == 6 &&<Notifications {...props}/>}
           {activeMenu == 8 && <Blogs {...props}/>}
-          {activeMenu == 10 && <Portfolio {...props}/>} */}
+          {activeMenu == 10 && <Portfolio {...props}/>}  */}
     
-          {/* {activeMenu == 5 && <Subscriptions {...props}/>}
-          {activeMenu == 6 && <Chats {...props}/>} */}
+         
         </div>
       </div>
     );
