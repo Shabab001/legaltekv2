@@ -38,6 +38,11 @@ const LawyersList = ({lawyer}) => {
                      <p>{lawyer.category}</p>
                     
                  </div>
+                 <div className="lawyer-password">
+                     <p>{lawyer.password}</p>
+                    
+                   
+                 </div>
                  <div className="lawyer-cat">
                      <p>{lawyer.status}</p>
                     
@@ -138,6 +143,11 @@ const LawyersList = ({lawyer}) => {
                    <p>{lawyer.category}</p>
                   
                </div>
+               <div className="lawyer-password">
+                     <p>{lawyer.password}</p>
+                    
+                   
+                 </div>
                <div className="lawyer-cat">
                    <p>{lawyer.status}</p>
                   

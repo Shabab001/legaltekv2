@@ -11,7 +11,7 @@
     gap:1rem;
 
 }
-.lawyer-name,.lawyer-email,.lawyer-pos,.lawyer-cat,.lawyer-status{
+.lawyer-name,.lawyer-email,.lawyer-pos,.lawyer-cat,.lawyer-status,.lawyer-password{
     flex-basis:18%;
 
  

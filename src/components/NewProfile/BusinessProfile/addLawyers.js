@@ -23,7 +23,8 @@ const AddLawyers = () => {
     mobile:"018130230",
     experience:"2 Years",
     category:"Civil Rights",
-    caseHandled:"20"
+    caseHandled:"20",
+    password:12345678
   },
   {firstname:"Shahriar",
   lastname:"Khan",
@@ -34,7 +35,8 @@ const AddLawyers = () => {
    mobile:"018130230",
    experience:"2 Years",
    category:"Civil Rights",
-   caseHandled:"20"
+   caseHandled:"20",
+   password:12345678
  },
  {firstname:"Shahriar",
  lastname:"Khan",
@@ -45,7 +47,8 @@ const AddLawyers = () => {
   mobile:"018130230",
   experience:"2 Years",
   category:"Civil Rights",
-  caseHandled:"20"
+  caseHandled:"20",
+  password:12345678
 },
 {firstname:"Shahriar",
 lastname:"Khan",
@@ -56,7 +59,8 @@ position:"Head in Civil",
  mobile:"018130230",
  experience:"2 Years",
  category:"Civil Rights",
- caseHandled:"20"
+ caseHandled:"20",
+ password:12345678
 },
 {firstname:"Shahriar",
 lastname:"Khan",
@@ -67,7 +71,8 @@ position:"Head in Civil",
  mobile:"018130230",
  experience:"2 Years",
  category:"Civil Rights",
- caseHandled:"20"
+ caseHandled:"20",
+ password:12345678
 },
 
   ]
@@ -93,13 +98,16 @@ position:"Head in Civil",
                                  <ListSearchLabel label={"Name"}/>
                                  </div>
                         <div className="list-search-pos">
-                                 <ListSearchLabel label={"Position"}/>
+                                 <ListSearchLabel label={"Title"}/>
                                  </div>
                          <div className="list-search-email">
                                  <ListSearchLabel label={"Email"}/>
                                  </div>
                          <div className="list-search-address">
-                                 <ListSearchLabel label={"Address"}/>
+                                 <ListSearchLabel label={"Phone"}/>
+                                 </div>
+                                 <div className="list-search-address">
+                                 <ListSearchLabel label={"Password"}/>
                                  </div>
                           <div className="list-search-status">
                                  <ListSearchLabel label={"Status"}/>
@@ -123,7 +131,7 @@ position:"Head in Civil",
                                   </div>                               
                                </div>
                                <div className="list-search-pos">
-                                 <ListSearchLabel label={"Position"}/>
+                                 <ListSearchLabel label={"Title"}/>
                                  <div className="list-input-container input2">
                                  <ListSearchInput label={"Position"} icon={AiOutlineSearch} type={"dropdown"}/>
                                  </div>
@@ -135,9 +143,15 @@ position:"Head in Civil",
                                  </div>
                                </div>
                                <div className="list-search-address">
-                                 <ListSearchLabel label={"Address"}/>
+                                 <ListSearchLabel label={"Phone"}/>
                                  <div className="list-input-container input4">
-                                 <ListSearchInput label={"Address"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput label={"Phone"} icon={AiOutlineSearch} type={"text"}/>
+                                 </div>
+                               </div>
+                               <div className="list-search-address">
+                                 <ListSearchLabel label={"Password"}/>
+                                 <div className="list-input-container input4">
+                                 <ListSearchInput label={"Password"} icon={AiOutlineSearch} type={"text"}/>
                                  </div>
                                </div>
                                <div className="list-search-status">
