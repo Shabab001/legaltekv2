@@ -1,0 +1,76 @@
+.post-modal-container{
+    position: relative;
+  top:200px;
+   
+     
+    width: 32rem;
+    max-height: 45rem;
+    z-index: 1000;
+margin:0 auto;
+    background-color: white;
+   box-sizing: border-box;
+ animation: modal .3s ease-in-out forwards; 
+ transform-origin: -100px 106px; transition:1s  animation ;
+ border-radius: 10px;
+ padding:.8rem 1rem;
+ 
+}
+.post-modal-main{
+
+    position: fixed;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right:0;
+    background-color: rgba(0, 0,0, .6);
+    z-index: 10000000;
+ 
+}
+.post-modal-headings{
+
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid rgb(240, 240, 240);
+     font-family: opensans-bold;
+     padding-bottom: .5rem;
+}
+.post-modal-first{
+    padding-left: 10.5rem;
+    font-size: 1.3rem;
+}
+.post-modal-cross{
+    background-color: rgb(224, 228, 238);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.3rem;
+    width: 2.3rem;
+    border-radius: 50px 50px;
+}
+.post-modal-cross2{
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.3rem;
+    width: 2.3rem;
+    border-radius: 50px 50px;
+    position: absolute;
+    top:20px;
+    right: 5px;
+    border: 1px solid rgb(153, 153, 153);
+}
+.post-modal-cross3{
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50px 50px;
+    position: absolute;
+    top:10px;
+    right: 5px;
+    border: 1px solid rgb(153, 153, 153);
+}

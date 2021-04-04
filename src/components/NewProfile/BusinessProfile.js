@@ -33,7 +33,7 @@ function BusinessProfile (props) {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    
+    console.log(props.history)
     let profileDate = {
       userId: props.auth.user._id,
       userType: props.auth.user.userType,
@@ -42,29 +42,36 @@ function BusinessProfile (props) {
 
 
     if (props.match.path === "/business/profile" || props.match.path === "/business/") {
+      console.log("hi");
       setActiveMenu(1);
     }
     if (props.match.path === "/business/documents") {
+      console.log("hi");
       setActiveMenu(2);
     }
     if (props.match.path === "/business/lawyers") {
+      console.log("hi");
       setActiveMenu(3);
     }
 
     if (props.match.path === "/business/management") {
+      console.log("hi");
       setActiveMenu(4);
     }
 
     if (props.match.path === "/business/reviews") {
+      console.log("hi");
       setActiveMenu(5);
     }
     if (props.match.path === "/business/notifications") {
+      console.log("hi");
       setActiveMenu(6);
     }
 
    
   
     if (props.match.path === "/business/chats") {
+      console.log("hi");
       setActiveMenu(7);
     }
 

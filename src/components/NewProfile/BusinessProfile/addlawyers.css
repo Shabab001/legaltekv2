@@ -1,9 +1,27 @@
-.list-headings{
-    font-size: 2rem;
+.list-first{
+    font-size: 1.5rem;
 }
 * p{
 margin: 0;
+padding: 0;
 }
+.list-heading-grid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.add-lawyer{
+    display: flex;
+  
+  gap:1rem;
+ align-items: center;
+ color:white;
+    font-size: 1rem;
+   background-color: rgb(148, 0, 0);
+    padding:.5rem
+}
+
 .list-search{
     margin-top: 2rem;
     display: flex;

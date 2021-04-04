@@ -7,10 +7,12 @@ import {VscChromeMinimize} from 'react-icons/vsc';
 import {FiChevronDown} from 'react-icons/fi';
 import {BsPlus} from 'react-icons/bs';
 import LawyerList from "./LawyersList"
-
+import {FiPlus} from "react-icons/fi"
+import LawyerModal from './lawyer modal/lawyerModal';
 
 const AddLawyers = () => {
   const[minimize,setMinimize]=useState(false);
+  const [modal,setModal]=useState(false)
 
 
   const lawyerList=[
@@ -76,16 +78,33 @@ position:"Head in Civil",
 },
 
   ]
-
+const handleModal =()=>{
+  console.log("hi")
+  setModal(true)
+}
   const handleMinimize =()=>{
+    
     setMinimize(!minimize);
   }
 
     return (
         <div className="list-main">
-                  <div className="list-headings">
+          <div className="list-heading-grid">
+
+                  <div className="list-first" >
+                    
+
                      <p>List of Lawyers</p>
+              
+                     </div>
+                     <div className="add-lawyer" onClick={handleModal}><p> 
+                     Add Lawyer
+                       </p>
+                     <FiPlus/>
                   </div>
+          </div>
+
+          <LawyerModal open={modal} set={setModal}/>
                   {minimize ? 
                   
                   <div className="list-search2">

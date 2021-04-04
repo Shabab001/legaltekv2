@@ -1,12 +1,18 @@
 import React,{useState} from 'react'
 import "./management.css"
-
+import {FiPlus} from "react-icons/fi"
 import TabSearch from "./tabSearch"
+import RatesModal from './management Mdolas/ratesModal'
+import TaskModal from './management Mdolas/taskModal'
+import ExplanantionModal from './management Mdolas/explanationModal'
+import LawModal from './management Mdolas/lawModal'
+import ReferalModal from './management Mdolas/referalModal'
 const Management = () => {
     
     const[tab,setTab]=useState(false);
     const[activeTab, setActiveTab]=useState("Rates");
-
+    const [add,setAdd]=useState("Rates")
+    const [Ratemodal,setRmodal]=useState(false)
     const handleActveTab=(tab)=>{
   
         setActiveTab(tab)
@@ -25,10 +31,15 @@ const Management = () => {
      const taskColumns=["Area", "Nick Name", "Task Name", "Category"]
       const referalColumns=["Nick Name", "Name"]
       const typesColumns=["Nick Name", "Type of Law"]
-
+   const handleModal=()=>{
+       setRmodal(true)
+       console.log("here")
+       console.log(add)
+   }
     
     return (
         <div className="management-main">
+            
             <div className="management-heading">
                 <div>
 
@@ -36,10 +47,13 @@ const Management = () => {
                 </div>
               
             </div>
+            <div className="list-heading-grid">
             <div className="management-tabs">
                 {tabList.map((tab,index)=>{
                     return(
-                        <div key={index} className={activeTab===tab?`tab-rates ${tab}`:"tab-rates"} onClick={()=>handleActveTab(tab)}>
+                        <div key={index} className={activeTab===tab?`tab-rates ${tab}`:"tab-rates"} onClick={()=>{
+                        setAdd(tab)
+                        handleActveTab(tab)}}>
                         <p>{tab}</p>
                     </div>
                     )
@@ -47,6 +61,22 @@ const Management = () => {
                 
                 
             </div>
+            {
+
+            }
+            <div className="management-add-btn" onClick={handleModal} ><p> 
+                     Add {add}
+                       </p>
+                     <FiPlus/>
+                  </div>
+                  </div>
+                  {add==="Rates"?<RatesModal open={Ratemodal} set={setRmodal} />:
+                  add=="Task Codes"? <TaskModal open={Ratemodal} set={setRmodal}/>:
+                  add==="Explanation Codes"?<ExplanantionModal open={Ratemodal} set={setRmodal}/>:
+                 add==="Types of Law"?<LawModal open={Ratemodal} set={setRmodal}/>:
+                 add==="Referal Sources"?<ReferalModal open={Ratemodal} set={setRmodal}/>:
+                 null
+                  }
         {activeTab==="Rates"?
         <TabSearch activeTab={activeTab} columns={rateColumns}  data={rateData} />:
         activeTab==="Task Codes"?

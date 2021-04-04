@@ -23,3 +23,15 @@
     
     color:white
 }
+.management-add-btn{
+    position: relative;
+    top:6px;
+    display: flex;
+  
+    gap:1rem;
+   align-items: center;
+   color:white;
+      font-size: 1rem;
+     background-color: rgb(148, 0, 0);
+      padding:.8rem
+}

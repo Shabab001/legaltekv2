@@ -1,0 +1,63 @@
+.vol-modal-headings{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-family: opensans-bold;
+    padding-bottom: .5rem;
+}
+.loc-modal-first{
+    padding-right: 13.5rem;
+    font-size: 1.3rem;
+}
+.vol-modal-places{
+    display: flex;
+    padding: .5rem .5rem;
+    align-items: center;
+    gap:1rem;
+}
+.vol-modal-placeicon{
+    display: flex;
+    align-items: center;
+    background-color: grey;
+    color:white;
+    justify-content: center;
+    font-size: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+}
+.vol-modal-address >p:nth-child(2){
+color:grey;
+font-size: .9rem;
+}
+.vol-modal-places:hover{
+    background-color: rgb(221, 221, 221);
+    border-radius: 8px;
+}
+.otp-inputs{
+    background-color: rgb(233, 233, 233);
+}
+.otp-code-sec{
+background-color: azure;
+display: flex;
+gap:1rem;
+}
+.vol-modal-body-container{
+
+}
+.modal-opt-body{
+   
+    padding: 3rem 2rem;
+
+    display: flex;
+    gap:1rem;
+    width: 100%;
+}
+.modal-otp-inputs input{
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    background-color: rgb(233, 233, 233);
+    width: 100%;
+    height: 3rem;
+}
