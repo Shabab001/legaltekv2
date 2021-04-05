@@ -135,8 +135,8 @@ function SignIn(props) {
           }}
         >
           <div className="brand">
-            <span>X</span>
-            <Link to="/">ukini</Link>
+            <span>L</span>
+            <Link to="/">egalTek</Link>
           </div>
           <a
             onClick={props.closeLogin}

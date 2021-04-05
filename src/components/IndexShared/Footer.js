@@ -7,6 +7,7 @@ import SignInWithPhoneModal from "../modals/SignInWithPhoneModal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
+import ReactDOM from 'react-dom'
 import {Link} from 'react-router-dom'
 import {
   TwitterOutlined,
@@ -21,6 +22,7 @@ function Footer(props) {
   const [phoneSignIn, setPhoneSignIn] = useState(false);
   const [regProp, setRegProp] = useState(false);
  const [userType, setUserType] = useState("CUSTOMER");
+ const modalRoot = document.getElementById("modal-root")
   return (
     <>
     <div className="footerN" >
@@ -71,8 +73,12 @@ function Footer(props) {
               <h4>ACCOUNT</h4>
               <ul>
           
-                <li><Link to="/login">Signin</Link></li>
-                <li><Link to="/register">Signup</Link></li>
+                <li style={{cursor:"pointer"}}     onClick={() => {
+                          setRegProp(false);
+                          setUserType("");
+                          setLogin(true);
+                        }}>Signin</li>
+                <li style={{cursor:"pointer"}}    onClick={() => setRegister(true)}>Signup</li>
               </ul>
             </div>
           </div>
@@ -143,7 +149,8 @@ function Footer(props) {
       </div>
       
       {login && !props.auth.isAuthenticated && (
-            <div className="modal-overlay">
+            ReactDOM.createPortal(
+              <div className="modal-overlay">
               <SignIn
                 signUpModal={() => setRegister(true)}
                 closeLogin={() => setLogin(false)}
@@ -155,10 +162,13 @@ function Footer(props) {
                 setRegProp={(value) => setRegProp(value)}
                 {...props}
               />
-            </div>
+            </div>, modalRoot
+            )
+           
           )}
 
           {register && !props.auth.isAuthenticated && (
+             ReactDOM.createPortal(
             <div className="modal-overlay">
               <Register
                 closeRegister={() => setRegister(false)}
@@ -172,10 +182,11 @@ function Footer(props) {
                 setRegProp={(value) => setRegProp(value)}
                 {...props}
               />
-            </div>
-          )}
+            </div>, modalRoot
+          ))}
 
           {phoneSignIn && !props.auth.isAuthenticated && (
+             ReactDOM.createPortal(
             <div className="modal-overlay">
               <SignInWithPhoneModal
                 closePhoneSignIn={() => setPhoneSignIn(false)}
@@ -188,10 +199,11 @@ function Footer(props) {
                 setRegProp={(value) => setRegProp(value)}
                 {...props}
               />
-            </div>
+            </div> , modalRoot)
           )}
 
           {forgotPass && !props.auth.isAuthenticated && (
+            ReactDOM.createPortal(
             <div className="modal-overlay">
               <ForgotPass
                 closeForgotPass={() => setForgotPass(false)}
@@ -203,7 +215,7 @@ function Footer(props) {
                 setRegProp={(value) => setRegProp(value)}
                 {...props}
               />
-            </div>
+            </div>, modalRoot)
           )}
       </>
   );
