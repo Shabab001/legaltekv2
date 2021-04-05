@@ -7,7 +7,6 @@ import "../../assets/css/auth.css";
 import * as Constants from "./../../Constants";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { Spinner } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { message } from "antd";
@@ -108,9 +107,12 @@ function LoginWithPhone(props) {
     if (response == true) {
       let res2 = await props.actions.loginWithPhone(user, props.history);
       if (res2 == true) {
-        props.history.push("/");
+        // props.history.push("/");
+        props.closePhoneSignIn()
       }
     } else {
+      message.error('Try again')
+      setOtpInputScreen(false)
       setLoading(false);
     }
   };
@@ -149,38 +151,56 @@ function LoginWithPhone(props) {
         >
           <div className="brand">
           <span>L</span>
-              <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
-            </div>
+            <Link to="/">galTek</Link>
+          </div>
           <a
             onClick={props.closePhoneSignIn}
-            style={{ color: "var(--secondary)", fontSize: 20 }}
+            style={{ color: "#f1433f", fontSize: 20 }}
           >
            <i className="fa fa-close"></i>
           </a>
-        </div>
+        </div>:
+        {!props.regProp? 
         <div className="userType">
-              <button
-                value="CUSTOMER"
-                onClick={changeUserType}
-                className={`${userType == "CUSTOMER" && "active"}`}
-              >
-                User
-              </button>
-              <button
-                value="BUSINESS"
-                onClick={changeUserType}
-                className={`${userType == "BUSINESS" && "active"}`}
-              >
-                Law Firms
-              </button>
-              <button
-                value="LAWYER"
-                onClick={changeUserType}
-                className={`${userType == "LAWYER" && "active"}`}
-              >
-                Lawyers
-              </button>
-            </div>
+          <button
+            value="CUSTOMER"
+            onClick={changeUserType}
+            className={`${userType == "CUSTOMER" && "active"}`}
+          >
+            Customer
+          </button>
+          <button
+            value="BUSINESS"
+            onClick={changeUserType}
+            className={`${userType == "BUSINESS" && "active"}`}
+          >
+            Law Firm
+          </button>
+          <button
+            value="LAWYER"
+            onClick={changeUserType}
+            className={`${userType == "LAWYER" && "active"}`}
+          >
+            Lawyer
+          </button>
+        </div>:
+        <div className="userType">
+        <button
+          value="CUSTOMER"
+          onClick={changeUserType}
+          className={`${userType == "CUSTOMER" && "active"}`}
+        >
+          Customer
+        </button>
+        <button
+          value="BUSINESS"
+          onClick={changeUserType}
+          className={`${userType == "BUSINESS" && "active"}`}
+        >
+          Law Firm
+        </button>
+   
+      </div>}
         {!otpInputScreen ? (
           <h3 style={{ textAlign: "left", marginTop: 15 }}>
             {props.regProp? 
@@ -199,9 +219,10 @@ function LoginWithPhone(props) {
 
         <div className="form">
           {!otpInputScreen ? (
-            <>
+            <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+        
               <div className="field">
-                <PhoneInput
+                <PhoneInput inputStyle={{width:"100% !important",  padding:"0px 0px !important"}} style={{width:"6rem"}}
                   // country={"us"}
                   value={countryCode.value}
                   placeholder="Country Code"
@@ -211,8 +232,8 @@ function LoginWithPhone(props) {
                 />
                 {/* 437500050 */}
               </div>
-              <div className="field"></div>
-              <div className="field">
+             
+              <div className="field"  style={{width:"100%"}}>
                 <div className="input-container">
                 <input
                   icon="phone"
@@ -232,7 +253,8 @@ function LoginWithPhone(props) {
                 />
                 <i className="fa fa-phone left" /></div>
               </div>{" "}
-            </>
+              </div>
+           
           ) : (
             <div className="field">
               <OtpInput
@@ -472,15 +494,27 @@ function LoginWithPhone(props) {
               }}>
             Forgot Password?<Link >&nbsp;Reset</Link>
           </p>
-          <p style={{ textAlign: "left", fontSize: 11 }}
-          onClick={()=>{
-            props.setRegProp(false)
-            props.closePhoneSignIn();
-            props.signUpModal()
-          }}
-          >
-            Don't have an account?<Link>&nbsp;Sign Up</Link>
-          </p>
+          {props.regProp? 
+               <p style={{ textAlign: "left", fontSize: 11 }}
+               onClick={()=>{
+                 props.setRegProp(false)
+                //  props.closePhoneSignIn();
+                //  props.signInModal()
+               }}
+               >
+                 Already have an account?<Link>&nbsp;Sign In</Link>
+               </p>:
+            <p style={{ textAlign: "left", fontSize: 11 }}
+            onClick={()=>{
+              props.setRegProp(true)
+              // props.closePhoneSignIn();
+              // props.signUpModal()
+            }}
+            >
+              Don't have an account?<Link>&nbsp;Sign Up</Link>
+            </p>
+        }
+      
         </div>
       </div>
 

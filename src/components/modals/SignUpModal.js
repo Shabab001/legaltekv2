@@ -8,7 +8,6 @@ import * as userActions from "../../actions/userActions";
 // import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { Spinner } from "react-bootstrap";
 import { message } from "antd";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
@@ -159,39 +158,32 @@ function Register(props) {
         >
           <div className="brand">
           <span>L</span>
-              <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
-            </div>
+            <Link to="/">galTek</Link>
+          </div>
           <a
             onClick={props.closeRegister}
-            style={{ color: "var(--secondary)", fontSize: 20 }}
+            style={{ color: "#f1433f", fontSize: 20 }}
           >
             <i className="fa fa-close"></i>
           </a>
         </div>
 
         <div className="userType">
-              <button
-                value="CUSTOMER"
-                onClick={changeUserType}
-                className={`${userType == "CUSTOMER" && "active"}`}
-              >
-                User
-              </button>
-              <button
-                value="BUSINESS"
-                onClick={changeUserType}
-                className={`${userType == "BUSINESS" && "active"}`}
-              >
-                Law Firms
-              </button>
-              <button
-                value="LAWYER"
-                onClick={changeUserType}
-                className={`${userType == "LAWYER" && "active"}`}
-              >
-                Lawyers
-              </button>
-            </div>
+          <button
+            value="CUSTOMER"
+            onClick={changeUserType}
+            className={`${userType == "CUSTOMER" && "active"}`}
+          >
+            Customer
+          </button>
+          <button
+            value="BUSINESS"
+            onClick={changeUserType}
+            className={`${userType == "BUSINESS" && "active"}`}
+          >
+           Law Firm
+          </button>
+        </div>
 
         {/* {showSecondPart && */}
         <div className="second-part-reg">
@@ -328,7 +320,7 @@ function Register(props) {
             </div>
 
             <button className="signInBtn" onClick={submitForm}>
-              {loading ? <Spinner animation="border" /> : "Sign Up"}
+              {loading ? <div className="spinner-border"></div>: "Sign Up"}
             </button>
             <div
               className="btm-links-login"
@@ -398,7 +390,7 @@ function Register(props) {
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={responseFacebook}
-                    redirectUri="https://Xukini.herokuapp.com/"
+                    redirectUri="https://LegalTek.herokuapp.com/"
                     render={(renderProps) => (
                       <div className="social_btn" onClick={renderProps.onClick}>
                         <svg
@@ -515,7 +507,7 @@ function Register(props) {
               <p
                 style={{
                   fontSize: 12,
-                  fontFamily: "'Avenir_light'",
+                  fontFamily: "'Rubik'",
                   textAlign: "left",
                 }}
               >
@@ -526,7 +518,7 @@ function Register(props) {
                     props.closeRegister();
                     props.signInModal();
                   }}
-                  style={{ fontSize: 12, color: "#e50077" }}
+                  style={{ fontSize: 12, color: "#f1433f" }}
                 >
                   &nbsp;Sign In
                 </Link>
@@ -540,7 +532,7 @@ function Register(props) {
                     props.closeRegister();
                     props.otherSignUp();
                   }}
-                  style={{ fontSize: 11, color: "#e50077" }}
+                  style={{ fontSize: 11, color: "#f1433f" }}
                 >
                   Other Sign up options
                 </Link>

@@ -1,14 +1,13 @@
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/css/auth.css";
-import "../../assets/css/authN.css";
 import validator from "validator";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { Spinner } from "react-bootstrap";
+// import { Spinner } from "react-bootstrap";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 function SignIn(props) {
@@ -94,13 +93,12 @@ function SignIn(props) {
         userType: userType,
       };
       let response = await props.actions.login(user, props.history);
-      // if (response == true) {
-      //   message.success(<p> Logged in Successfully!!" &nbsp; &#9749;</p>);
-      // } else if(response == false) {
-      //   message.error(<p> Sign in failed!!" &nbsp; &#9749;</p>);
+      if (response == true) {
+        props.closeLogin()
+      } else if(response == false) {
 
-      //   setLoading(false);
-      // }
+        setLoading(false);
+      }
     } else {
       setLoading(false);
     }
@@ -137,39 +135,39 @@ function SignIn(props) {
           }}
         >
           <div className="brand">
-          <span>L</span>
-              <Link to="/">egal<span style={{color:"var(--secondary)"}}>Tek</span></Link>
-            </div>
+            <span>X</span>
+            <Link to="/">ukini</Link>
+          </div>
           <a
             onClick={props.closeLogin}
-            style={{ color: "var(--secondary)", fontSize: 20 }}
+            style={{ color: "#f1433f", fontSize: 20 }}
           >
             <i className="fa fa-close"></i>
           </a>
         </div>
         <div className="userType">
-              <button
-                value="CUSTOMER"
-                onClick={changeUserType}
-                className={`${userType == "CUSTOMER" && "active"}`}
-              >
-                User
-              </button>
-              <button
-                value="BUSINESS"
-                onClick={changeUserType}
-                className={`${userType == "BUSINESS" && "active"}`}
-              >
-                Law Firms
-              </button>
-              <button
-                value="LAWYER"
-                onClick={changeUserType}
-                className={`${userType == "LAWYER" && "active"}`}
-              >
-                Lawyers
-              </button>
-            </div>
+          <button
+            value="CUSTOMER"
+            onClick={changeUserType}
+            className={`${userType == "CUSTOMER" && "active"}`}
+          >
+            Customer
+          </button>
+          <button
+            value="BUSINESS"
+            onClick={changeUserType}
+            className={`${userType == "BUSINESS" && "active"}`}
+          >
+           Law Firm
+          </button>
+          <button
+            value="LAWYER"
+            onClick={changeUserType}
+            className={`${userType == "LAWYER" && "active"}`}
+          >
+           Lawyer
+          </button>
+        </div>
         <h3 style={{ textAlign: "left" }}>Sign into your account</h3>
         <div className=".form">
           <div className="field">
@@ -411,7 +409,7 @@ function SignIn(props) {
                   </label>
                 </div>
           <button className="signInBtn" onClick={submitForm}>
-            {loading ? <Spinner animation="border" /> : "Sign In"}
+            {loading ? <div class="spinner-border"></div> : "Sign In"}
 
             {/* Sign In */}
           </button>
@@ -423,14 +421,14 @@ function SignIn(props) {
         >
           <p
             style={{
-              fontFamily: "Avenir_light",
+              fontFamily: "Rubik",
               textAlign: "left",
               fontSize: 11,
             }}
           >
             Forgot Password?
             <Link
-              style={{ fontSize: 11, color: "#e50077" }}
+              style={{ fontSize: 11, color: "#f1433f" }}
               to="#"
               onClick={() => {
                 props.closeLogin();
@@ -442,14 +440,14 @@ function SignIn(props) {
           </p>
           <p
             style={{
-              fontFamily: "Avenir_light",
+              fontFamily: "Rubik",
               textAlign: "left",
               fontSize: 11,
             }}
           >
             Don't have an account?
             <Link
-              style={{ fontSize: 11, color: "#e50077" }}
+              style={{ fontSize: 11, color: "#f1433f" }}
               to="#"
               onClick={() => {
                 props.closeLogin();
