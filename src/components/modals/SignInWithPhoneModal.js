@@ -159,7 +159,7 @@ function LoginWithPhone(props) {
           >
            <i className="fa fa-close"></i>
           </a>
-        </div>:
+        </div>
         {!props.regProp? 
         <div className="userType">
           <button

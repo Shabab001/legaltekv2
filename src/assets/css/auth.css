@@ -9,6 +9,9 @@
   padding: 1rem 0rem !important;
   padding-left: 2.8rem !important;
 }
+.flag-dropdown {
+  background-color: #fb1c2e !important;
+}
 .form-modal {
   height: 600px;
   width: 500px;

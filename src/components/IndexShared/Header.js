@@ -375,7 +375,7 @@ function Header(props) {
                         icon={
                           <i
                             className="fe fe-map-pin input-marker"
-                            style={{ fontSize: "20px", color: "#e50077" }}
+                            style={{ fontSize: "20px", color: "#BA181B" }}
                           ></i>
                         }
                         placeholder="Address"
