@@ -4,7 +4,11 @@ import AgencyBox from './AgencyBox'
 const Agencies = () => {
     return (
         <div className="agency-main">
+                    <div className="lawyers-heading" >
+        <h4 >Featured Law Firms</h4>
+      </div>
             <div className="agency-container">
+    
                 <div className="agency-grid">
                   <AgencyBox/>
                   <AgencyBox/>
