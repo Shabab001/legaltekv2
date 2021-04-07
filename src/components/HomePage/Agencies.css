@@ -1,24 +1,14 @@
-.agency-container{
-    width: 100%;
-    max-width: 1950px;
-    margin:auto;
-    padding:5rem 11rem; 
-    padding-top: 2.5rem;
+.agency-container {
+  width: 100%;
+  max-width: 1950px;
+  margin: auto;
+  padding: 5rem 11rem;
+  padding-top: 2.5rem;
 }
-.agency-grid{
-    display: grid;
-    grid-template-columns: repeat(4,minmax(280px,1fr));
-    grid-template-rows: repeat(2,minmax(220px,1fr));
-    gap:2rem;
-    row-gap: 7rem;
-}
-.agency-box-image{
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    position: absolute;
-}
-.agency-building-image{
-    object-fit: contain;
-    height: 100%;
+.agency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
+  grid-template-rows: repeat(2, minmax(220px, 1fr));
+  gap: 2rem;
+  row-gap: 7rem;
 }
