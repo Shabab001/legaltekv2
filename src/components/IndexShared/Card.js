@@ -32,7 +32,7 @@ function Card(props) {
                  <ImMobile2/>
             </div>
             <div className="lawyer-contact-icons4">
-                    <img src={WWW} style={{height:"2rem",width:"2rem"}} placeholder="www"/>
+                    <img src={WWW} style={{height:"1rem",width:"1rem"}} placeholder="www"/>
             </div>
             
       </div>
@@ -48,7 +48,7 @@ function Card(props) {
       </div>
       <div className="messege-btn2">
         <GrMail/>
-        <p>View</p>
+        <p>Message</p>
       </div>
     </div>
     <div className="lawyer-area">

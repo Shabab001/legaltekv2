@@ -51,7 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 2rem;
+  font-size: 1rem;
   background-color: #eeeeee;
 
   border: 2px solid #dddddd;
@@ -125,7 +125,7 @@
   transition: transform 0.5s;
 }
 .lawyer-image:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .lawyer-area {
   display: flex;
