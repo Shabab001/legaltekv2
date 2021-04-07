@@ -12,7 +12,9 @@ const Agencies = () => {
                   <AgencyBox/>
                   <AgencyBox/>
                   <AgencyBox/>
-                
+                  <AgencyBox/>
+                  <AgencyBox/>
+                  <AgencyBox/>
 
                 </div>
 

@@ -1,15 +1,24 @@
+.agency-box:hover {
+  box-shadow: 1px 4px 15px 3px #b3b3b3;
+}
 .agency-box {
+  transition: box-shadow 0.5s ease-in-out;
 }
 .agency-box-image {
   width: 100%;
   max-height: 10rem;
   height: 8rem;
   min-height: 6rem;
+  overflow: hidden;
 }
 .agency-building-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease-in;
+}
+.agency-building-image:hover {
+  transform: scale(1.1);
 }
 .agency-box-body {
   display: flex;
