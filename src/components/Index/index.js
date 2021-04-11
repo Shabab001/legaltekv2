@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import "../../assets/css/index.css";
 import { AiOutlineArrowLeft,AiOutlineArrowRight } from 'react-icons/ai';
 import {FaStar } from 'react-icons/fa';
-
+import Subscribe from "../Subscribe/Subscribe"
 
 import hireChef from "../../assets/img/home_law.webp";
 
@@ -270,6 +270,7 @@ window.addEventListener('scroll',handleScroll)
       <Stats />
   
      <Agencies/>
+     <Subscribe/>
  
     </>
   );

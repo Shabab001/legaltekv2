@@ -1,20 +1,81 @@
 import React,{useState} from 'react'
 import privacy from "../assets/img/privacy.webp";
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "../assets/css/privacy.css";
 import "./term.css"
+import SlideMenuItems from './terms-contains/slideMenuItems';
+
+
+
+const list = [
+  { name: 'item1' },
+  { name: 'item2' },
+  { name: 'item3' },
+  { name: 'item4' },
+  { name: 'item5' },
+  { name: 'item6' },
+  { name: 'item7' },
+  { name: 'item8' },
+  { name: 'item9' },
+  { name: 'item10' },
+  { name: 'item11' },
+  { name: 'item12' },
+  { name: 'item13' },
+  { name: 'item11' },
+  { name: 'item12' },
+  { name: 'item13' }
+];
+
+// One item component
+// selected prop will be passed
+
+
+// All items component
+// Important! add unique key
+export const Menu = (list, selected) =>
+  list.map((el,index) => {
+    const {name} = el;
+
+    return <SlideMenuItems text={name} key={index} selected={selected} />;
+  });
+
+
+const Arrow = ({ text, className }) => {
+  return (
+    <div
+      className={className}
+    >{text}</div>
+  );
+};
+
+
+const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
+const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
+
+
+
 
 const Terms = ({title1,title2}) => {
   const [active, setActive]=useState("Summary");
+  const [selected,setSelected]=useState("0")
+
+
+
+const   onSelect = key => {
+
+    setSelected(key);
+  }
+
    let index =0;
+   
   const handleClick=(item)=>{
     console.log(item)
    setActive(item)
   }
-  const catList=["Summary","Introduction","Intellectual Prperty Rights","Your Content","Privay","Warrenties","Legal Discalaimer","indemnification","More"]
-  if(!active!==""){
-    index=catList.indexOf(active)
-    console.log(index);
-  }
+
+  console.log(selected)
+ let menu=Menu(list,selected)
+ 
   return (
     <div className="terms-container">
                 
@@ -28,15 +89,16 @@ const Terms = ({title1,title2}) => {
             <p>{Date.now( )}</p>
           </div>
           </div>
-          <div className="terms-cat-grid">
-           {catList.map((item,index)=>{
-             return(
-              <div onClick={()=>handleClick(item)} className={active===item ? `terms-cat ${item}`:"terms-cat"} key={index}>
-                <p>{item}</p>
-                </div>
-             )
-           })}
-          </div>
+        
+          <ScrollMenu
+       
+          data={menu}
+          arrowLeft={ArrowLeft}
+          arrowRight={ArrowRight}
+          selected={selected}
+          onSelect={onSelect}
+        />
+        
         </div>
         <div className="terms-content-header">
             <p>Restrictions</p>
@@ -58,7 +120,7 @@ const Terms = ({title1,title2}) => {
             <li><p>
               Please read all sections.
               </p>
-              <p>Read {index+1} of {catList.length
+              <p>Read {index+1} of {list.length
               }</p>
               </li>
               <li>

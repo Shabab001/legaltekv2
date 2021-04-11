@@ -1,5 +1,10 @@
 import React from 'react'
+import Card from '../IndexShared/Card'
+import AgencyBox from './AgencyBox'
+import SingleBlogs from './single blogs/singleBlogs'
+import SingleReview from './single blogs/singleReview'
 import "./stats.css"
+import StatSlider from './statSlider'
 
 function Stats() {
     return (
@@ -26,35 +31,18 @@ function Stats() {
            </div>
         </div>
         <div className="stats-right">
+          <div>
+
+      
              <div className="stats-right-background">
-                 <div className="stats-right-number">
-                     <p>Minimalistic Look</p>
-                     <p>40 Workspace</p>
-                 </div>
+                <SingleBlogs/>
              </div>
+                 <StatSlider/>
+          </div>
              <div className="stats-back2">
 
-             <div className="stats-right-background2">
-                 <div className="stats-right-number">
-                     <p>Minimalistic Look</p>
-                     <p>40 Workspace</p>
-                 </div>
-             </div>
-             <div className="stats-rigth-last-sec">
-               <p>01</p>
-               <div className="stats-right-bars">
-                 <div className="stats-right-bar" style={{backgroundColor:"orangered"}}></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-                 <div className="stats-right-bar"></div>
-
-               </div>
-               <p>08</p>
-             </div>
+           <SingleReview/>
+              <StatSlider/>
              </div>
         </div>
     </div>

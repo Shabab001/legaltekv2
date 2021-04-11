@@ -24,7 +24,8 @@ h4 {
   margin: auto;
   padding: 1rem 9rem;
   display: grid;
-  grid-template-columns: repeat(5, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-template-rows: repeat(2, minmax(200px, 1fr));
   gap: 2rem 1rem;
+  grid-auto-flow: wrap;
 }

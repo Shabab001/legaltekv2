@@ -1,0 +1,72 @@
+.stat-review-main {
+  padding: 1rem;
+  background-color: white;
+  transition: box-shadow 0.5s ease-in-out;
+}
+.stat-review-main:hover {
+  box-shadow: 1px 4px 15px 3px #b3b3b3;
+}
+.stat-review-upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.stat-review-ratings {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.stat-review-lawyer-img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50px 50px;
+
+  overflow: hidden;
+}
+.stat-review-lawyer-img img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in;
+  object-fit: cover;
+}
+.stat-review-lawyer-img img:hover {
+  transform: scale(1.05);
+}
+.stat-review-rateus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.star-review-date {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.stat-review-middle {
+  padding-top: 2rem;
+  color: #1c8bad;
+  font-weight: bold;
+}
+.stat-review-des {
+  height: 10rem;
+  padding-top: 1rem;
+  color: grey;
+}
+.statd-review-lower {
+  display: flex;
+  gap: 1rem;
+}
+.stat-review-like,
+.stat-review-dislike {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.stat-review-like {
+  color: #1c8bad;
+}
+.stat-review-stars {
+  display: flex;
+  color: yellow;
+  gap: 0.2rem;
+}
