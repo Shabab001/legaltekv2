@@ -1,83 +1,84 @@
-.start-section{
-    padding-top: 4rem;
-    height: 30rem;
-    width: 100%;
-    background-color:#f9f9fb;
-}
-.subscribe-box{
-    color:white;
-    gap:1rem;
-    height: 80%;
-    width: 90%;
-    max-width: 1850px;
-    margin: auto;
-    display:flex;
-    justify-content: space-between;
-    background-color: #44318d;
-}
-.subscribe-left-section{
-    padding-left: 3rem;
-    width: 50%;
-    height: 100%;
-    vertical-align: bottom;
-}
-.Subscribe-image-sec{
-    display: flex;
-    width: 100%;
-    height:80%;
-}
-.left-image{
-    width:16rem;
-    height: 100%;
-}
-.subscribe-left-section p{
-   font-size: .6rem;
-    padding-top: 1rem;
-    padding-left:2.5rem;
-}
-.subscribe-right-section{
-   
-    padding-top:2rem ;
-    width:50%;
-}
-.right-first-text{
-   
-    font-size:1.5rem ;
-}
-.right-second-text p{
-    font-family: OpenSans-light;
-   padding-top: .8rem;
-   padding-left: .4rem;
-   line-height: 1.6rem;
-}
-.subscribe-form{
-    display: flex;
-    flex-flow: column;
-    padding-top: 6rem;
+.start-section {
+  padding-top: 4rem;
+  height: 30rem;
   width: 100%;
-  
+  background-color: #f9f9fb;
 }
-.subscribe-form-input{
-    
-    outline:none;
-    border:none;
-    background-color: #44318d;
-    border-bottom:2px solid #E98074;
-    color:#E98074;
-    width:90%;
-    font-size:1.2rem;
+.subscribe-box {
+  color: white;
+  gap: 1rem;
+  height: 83%;
+  width: 90%;
+  max-width: 1850px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #44318d;
 }
-.subscribe-form-input::placeholder{
-    color:#E98074;
-    font-size:1.2rem;
+.subscribe-left-section {
+  padding-left: 3rem;
+  width: 50%;
+  height: 100%;
+  vertical-align: bottom;
 }
-.subscribe-button{
-    position: relative;
-    top:1rem;
-    left:3rem;
-    align-self: flex-end;
-    background-color:#2a1b3d ;
-    border:none;
-    padding:1rem 2rem; 
-    color:#E98074;
+.Subscribe-image-sec {
+  display: flex;
+  width: 100%;
+  height: 80%;
+}
+.left-image {
+  width: 16rem;
+  height: 100%;
+}
+.subscribe-left-section p {
+  font-size: 0.6rem;
+  padding-top: 1rem;
+  padding-left: 2.5rem;
+}
+.subscribe-right-section {
+  padding-top: 2rem;
+  width: 50%;
+}
+.right-first-text {
+  font-size: 1.5rem;
+}
+.right-second-text p {
+  font-family: OpenSans-light;
+  padding-top: 0.8rem;
+  padding-left: 0.4rem;
+  line-height: 1.6rem;
+}
+.subscribe-form {
+  display: flex;
+  flex-flow: column;
+  padding-top: 6rem;
+  width: 100%;
+}
+.subscribe-form-input {
+  outline: none;
+  border: none;
+  background-color: #44318d;
+  border-bottom: 2px solid #e98074;
+  color: #e98074;
+  width: 90%;
+  font-size: 1.2rem;
+}
+.subscribe-form-input::placeholder {
+  color: #e98074;
+  font-size: 1.2rem;
+}
+.subscribe-button {
+  position: relative;
+  top: 1rem;
+  left: 3rem;
+  align-self: flex-end;
+  background-color: #2a1b3d;
+  border: none;
+  padding: 1rem 2rem;
+  color: #e98074;
+}
+.subscribw-form-grid {
+  display: flex;
+  gap: 2rem;
+  padding-right: 1rem;
 }

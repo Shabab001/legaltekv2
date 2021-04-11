@@ -27,8 +27,11 @@ const Subscribe = () => {
                       <p>Subscribe and get the latest insides <br/>delivered right to your box</p>
                       </div> 
                     <form className="subscribe-form">
-                    
+                        <div className="subscribw-form-grid">
+
+                        <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="enter your name" name="name" />
                         <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="enter your email" name="name" />
+                        </div>
                         <button data-aos= "fade-left" type="submit" className="subscribe-button">Subscribe Now</button>
                     </form>
                 
