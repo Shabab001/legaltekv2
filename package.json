@@ -18,6 +18,7 @@
     "body-scroll-lock": "^3.1.5",
     "country-data": "0.0.31",
     "google-map-react": "^2.1.9",
+    "html-react-parser": "^1.2.5",
     "jwt-decode": "^3.0.0-beta.2",
     "moment": "^2.29.1",
     "otp-input-react": "^0.2.4",

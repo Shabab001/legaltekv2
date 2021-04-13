@@ -105,3 +105,141 @@ Agreement:[
 
 
 }
+
+export const privacyParas ={
+    information:[
+        {title:"1. Usage/log information ",
+        line:"We collect usage information when you use the Services. This includes information such as your computer's Internet Protocol (IP) address, operating system and browser type, the address of a referring website or a website to which you exit, the date and time you access or use the Services, items you click on, pages you view and the amount of time you spend on particular pages."
+    },
+    {
+        title:"2. Cookies and online advertising",
+        line:"We also collect certain information (automatically) through the use of \"cookies\" and similar tracking technologies. Cookies are small data files that are stored on a user's computer or device at the request of a website to enable the website to recognize previous visitors and retain information such as user preferences and history. If you wish to block, erase, or be warned of cookies, please refer to your browser instructions or \"help screen\" to learn about these functions. However, if your browser is set to not accept cookies or if you reject a cookie, you will not be able to sign in to your Legaltek account or use certain parts of the Services."
+    },
+    {
+        line:"We may also use third parties to display and target ads, provide certain functionality (such as maps), or to place their own cookies and other tracking technologies to collect, track and analyze usage and statistical information from users. We are not responsible for the information collection practices of any third parties."
+    },
+    {
+        title:"3. Personal information",
+        line:"We collect and store Personal Information that you provide to us when accessing or using the Services. \"Personal Information\" means information relating to a person who is or can be identified directly from that information. This includes your name, address, telephone number, email address, credit card or other account number. Personal Information does not include: (1) aggregated or anonymized information; (2) any publicly available information about lawyers; or (3) information that is posted to publicly accessible areas of the Services. Examples of Personal Information we collect include information that you provide when you (a) create or update your Legaltek account, (b) communicate with us, (c) purchase services from us, (d) contact or recommend a lawyer, (e) submit client ratings or peer endorsements. If you are a lawyer and claim or update your profile (\"Profile\"), or post information using your Profile, we may also collect verification information."
+    },
+    {
+        title:"4. Publicly posted Information",
+        line:"Personal Information that you post to public areas of the Services or via your Profile may become publicly available and is no longer considered Personal Information. For example, information you post in your Profile or in client ratings, peer endorsements, Q&A, or any other interactive areas may be made publicly available and can potentially be viewed by anyone. Your posting to such public areas of the Services constitutes consent to share such information publicly, and you should assume that such information will be widely disseminated, including via search engines and other tools to locate information online (e.g., internet archive)."
+    },
+  
+
+    ],
+    use:[
+        {title:"1. Non-personal information",
+         line:"We use certain information (such as usage information, information collected automatically through cookies and other tracking technologies, and aggregated or anonymized information), for remarketing with Google Analytics, for ad targeting, to analyze trends, administer the Services, improve customer service, diagnose problems with our servers, track user movement, and gather demographic information for aggregate use. Third-party ad platforms may use this information for a similar purpose, but you should follow up with third parties and confirm their information collection and usage practices directly. We may freely publish, disclose and use this information to or with third parties."
+    },
+    {title:"2. Personal information",
+    line:"We use Personal Information to facilitate your use of the Services, to process your requests or transactions, to provide you with information, products and services you request, to administer and assist us with the operation of our business, and for the purpose for which the information was provided. We may use the information we collect to send you news relevant to you or in accordance with your preferences. We may also send you advertisements from third parties. We do not disclose, rent, sell or otherwise make available your Personal Information to third parties for direct marketing purposes."
+},
+{title:"3. Third-party service providers",
+line:"In the event that we engage with third-party service providers in connection with our Services, we may share Personal Information with such service providers who need access to such information to carry out their work for us. For example, we may use credit card processing or verification companies to verify credit card information or to verify your identity. Other than such service providers, we do not share Personal Information with third parties unless (1) you have indicated to us that you wish to receive information from such parties; (2) you otherwise give us your consent to do so; or (3) in response to a request for information or a subpoena."
+},
+{title:"4. Text messaging",
+line:"We do not ordinarily send text messages for marketing purposes, but to the extent you provide us with your mobile telephone number, you consent to the transmission of text messages to such number, and waive any rights you may have under the Telephone Consumer Protection Act. You may, however, contact us and opt-out of receiving such texts."
+},
+{title:"",
+line:""
+},
+{title:"",
+line:""
+},
+{title:"",
+line:""
+},
+    ],
+    managing:[
+        {title:"1. Managing online advertising preferences",
+        line:"We respect all browser instructions for setting or rejecting cookies on generally available browsers. This is one way to manage your preferences regarding the collection of information by Legaltek. Additionally, and because data acquired across the internet is often associated with information about you acquired in other places online, you can manage online advertising preferences via these links:"
+        },
+        {
+        line:"<ul> <li> Google Ad Preferences Manager </li> <li> Google Analytics Opt-out Browser Add-on </li> <li> Facebook Ad Preferences Manager </li> <li> Network Advertising Initiative </li>  <li> Network Advertising Initiative </li>Digital Advertising Alliance</ul>"
+        },
+        {
+        line:"While Legaltek will follow any such preferences, we make no representations regarding whether third parties, including third-party ad platforms, will do so."
+        },
+        {title:"2. Managing your newsletter/communications preferences",
+        line:"You may select whether or not you wish to continue to receive newsletters or other communications from Legaltek by changing your account settings on the email and notifications page of the My Account section of the Services. In addition, you may \"opt-out\" of receiving any category of subscription, marketing or promotional email from Legaltek by following the unsubscribe instructions or using the unsubscribe links within the emails we send. You may \"opt-out\" of receiving of other emails from our affiliates and partners by following the unsubscribe instructions included in each email. Please note, however, that as long as you maintain an account, you may not \"opt-out\" of receiving service or account-related emails from Legaltek."
+        },
+
+    ],
+    request:[
+        {line:"We may disclose Personal Information when we are required to or we believe it is appropriate to comply with the law (e.g., a lawful subpoena, warrant or court order); to enforce or apply this Policy or our other policies or agreements; to initiate, render, bill, and collect for amounts owed to us; to protect our or our users' rights, property or safety; to protect our users from fraudulent, abusive, or unlawful use of the Services; or if we believe that an emergency involving the danger of death or serious physical injury to any person requires or justifies disclosure of Personal Information."},
+
+    ],
+    update:[
+        {line:"You can correct certain information by logging into your account and changing the information, and you may also delete certain information by closing your account. In addition, lawyers may change certain information contained in their Profile by claiming their Profile and editing the information contained therein, or by sending us an email."}
+         ,
+         {
+             line:"Please note that in certain circumstances, we may not, or may not be able to, remove or change certain information, even in the event an account is closed. For example, we may retain and continue to display any information you provided in connection with a question, answer, endorsement or client review. In addition, lawyers cannot \"unclaim\" profiles, and cannot remove their Profiles, ratings, endorsements or reviews by closing their accounts."
+         }
+    
+    ],
+    security:[
+        {line:"Legaltek endeavors to secure your Personal Information from unauthorized access, use or disclosure by putting into place reasonable physical, electronic and managerial procedures to safeguard the information we collect. For example, when we collect credit card information, we use a secure server with Secure Socket Layer (SSL) encryption software and store such credit card information using encryption methods designed to prevent unauthorized access. Additionally, your account information is accessible online only through the use of a password."},
+        {line:"No security measures are perfect or impenetrable. To protect the confidentiality of your Personal Information, you must keep your password confidential and not disclose it to any other person. You are responsible for all use of the Services by any person using your password. Please advise us immediately by emailing us if you believe your password has been misused. You should also note that email is not secure, and you should not send any confidential or sensitive information to us via an unsecured email."},
+        
+    ],
+    party:[
+        {line:"The Services may contain links to other websites or make available third-party services, including ad platforms and technologies. We are not responsible for the privacy practices of such third parties. We encourage you to be aware and to read the privacy policies of any website or service that collects your information. Similarly, if you accessed the Services through another website, we are not responsible for the privacy practices of that website, and you should review the privacy policy of the originating website before providing any information to that website. This Policy applies solely to information collected by us. Any opt-out requests related to a third party's products or services must be submitted directly to the third-party providing the products or services."}
+    ],
+    transfer:[
+        {line:"Information about our customers, including Personal Information, may be disclosed as part of any merger, acquisition, debt financing, sale of company assets, as well as in the event of an insolvency, bankruptcy or receivership in which Personal Information could be transferred to third parties as one of Legaltek 's business assets. In such an event, we will attempt to notify you before your Personal Information is transferred, but you may not have the right to opt-out of any such transfer."},
+
+    ],
+    Children:[
+        {line:"Our Services are not intended for use by children under the age of 13, and such use is prohibited by our Terms of use. We do not knowingly collect Personal Information from children under 13. If you become aware that a child has provided us with Personal Information, please contact us as set forth in this Policy."}
+    ],
+    rights:[
+        {line:"This section is provided pursuant to the California Consumer Privacy Act of 2018 (the “CCPA”). This section applies solely to our users who are California residents as defined under the CCPA."},
+        {title:"1. Information we collect",
+         line:"Within the last twelve (12) months, we have or may have collected the following categories of information from our users and/or consumers: identifiers; personal information listed under Cal. Civ. Code § 1798.80(e); characteristics of protected classifications under California or federal law; commercial information; biometric information; internet or other similar network activity information; geolocation data; professional or employment-related information; and inferences drawn from such information."
+        },
+        {title:"2. Categories of sources from which information is collected",
+         line:"We obtain the categories of personal information listed above from the following categories of sources: directly from you, as described above under “Personal information” and “Publicly posted information”; indirectly from other users of the Services; indirectly from third-parties that interact with us in connection with the services that we perform; and directly and indirectly through cookies and other technologies, as described above under “Use/log information” and “Cookies and online advertising.”"
+        },
+        {title:"3. Sharing of personal information",
+         line:"We disclose your personal information for a business purpose to service providers and third parties to whom you authorize or direct us to disclose your personal information in connection with the Services. We also may share personal information about you for any other purpose(s) disclosed to you at the time we collect your information or with your consent. "
+        },
+        {title:"4. Personal information “sold” to third parties",
+         line:"In the preceding twelve (12) months, we have made available to our third-party marketing partners personal information included in the following categories: identifiers; commercial information; internet or other similar network activity information; and inferences drawn from such information."
+        },
+        {title:"5. Your rights under the CCPA",
+        line:"As of January 1, 2020, California residents, as defined under the CCPA, may take advantage of the following rights:"
+       },
+       {
+       line:"     a) Subject to certain exclusions under the CCPA, you have the right to opt-out of the sale of your personal information. "
+      },
+      {
+      line:"      b) You may request, up to two (2) times each year, that we disclose to you, once we receive and confirm your verifiable consumer request, the: (1) categories and specific pieces of personal information that we have collected about you; (2) categories of sources from which your personal information is collected; (3) business or commercial purpose for collecting your personal information; (4) categories of personal information that we disclosed for a business purpose; (5) categories of personal information that we sold about you; (6) categories of third-parties with whom we have shared your personal information; and (7) business or commercial purpose for selling your personal information."
+     },
+     {
+     line: "      c) Subject to certain exceptions and up to two (2) times each year, you may request that we delete any of your personal information that we collected from you.  Once we receive and confirmed your verifiable consumer request for deletion, we will delete (and direct our service providers to delete) such personal information from our records, unless an exception applies."
+    },
+    {
+    line:"To opt-out of the sale of your personal information, please refer to the “Managing online advertising preferences” section above."
+   },
+   {
+   line:"To exercise the access and deletion rights described above, please submit a request to us by either sending an email to legal@ Legaltek.com with <a> California Privacy Rights </a> in the subject line or by filling out our Privacy Contact Form."
+  },
+  {
+      line:"You will be asked to provide certain identifying information, such as your name, email, and residency. While processing your request, we may ask you to provide further verifying documentation. We will only use personal information provided in a request to verify the requestor's identity or authority to make the request. Only you or a person registered with the California Secretary of State that you authorize to act on your behalf, may make a verifiable consumer request related to your personal information. You may also make a verifiable consumer request on behalf of your minor child. If you are making a request through an authorized agent acting on your behalf, such authorized agent must provide proof of written authorization to do so, and you must verify your identity directly with us, unless such authorized agent provides proof of a power of attorney pursuant to Probate Code sections 4000 to 4465."
+  },{
+      title:"6. Non-discrimination",
+      line:"We will not discriminate against you for exercising any of your rights under the CCPA. Accordingly, and unless permitted by the CCPA, we will not: deny you services; charge you different prices or rates for services; provide you a different level of service; or suggest that you may receive a different price or rate for services or a different level for services. We may charge a different price or rate or provide a different level of service if the difference is reasonably related to the value provided by your personal information."
+  }
+    ],
+    change:[
+        {
+            title:"Changes to the policy",
+            line:"We may change the provisions of this Policy at any time, and we will always post the most up-to-date version on our website. If we determine, in our sole discretion, that a modification to this Policy materially affects your rights, we will notify you (by, for example, sending a message to your account email or posting on the Legaltek Blog)."
+        },
+        {
+            line:"If you have any questions or comments about this Policy or the practices relating to our Services, or you wish to verify, correct or delete any Personal Information we have collected, please contact us via our page here."
+        }
+    ]
+}

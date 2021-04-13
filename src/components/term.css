@@ -127,7 +127,7 @@
   opacity: 0.5;
   cursor: pointer;
 }
-.terms-footer-btn:hover {
+.red {
   opacity: 1;
 }
 .terms-footer-underline {
