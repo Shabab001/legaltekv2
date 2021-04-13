@@ -6,6 +6,7 @@ import "antd/dist/antd.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Spin } from "antd";
 import Routes from "./Routes";
+import 'aos/dist/aos.css'; 
 const Login = lazy(() => import("./components/Login"));
 const LoginWithPhone = lazy(() => import("./components/LoginWithPhone"));
 const SignUp = lazy(() => import("./components/SignUp"));
@@ -15,7 +16,6 @@ const ServiceUnavailable = lazy(() => import("./components/503"));
 const NotFound = lazy(() => import("./components/404"));
 const ServerError = lazy(() => import("./components/500"));
 var countries = require("country-data").countries;
-
 
 function App() {
   return (

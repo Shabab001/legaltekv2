@@ -1,0 +1,70 @@
+.agency-box2-image {
+  position: relative;
+  width: 100%;
+  max-height: 13rem;
+  height: 13rem;
+  min-height: 6rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+.agency-building-image {
+  width: 100%;
+
+  object-fit: cover;
+  transition: transform 0.5s ease-in;
+}
+.agency-box2-image:hover > .agency-building-image {
+  transform: scale(1.1);
+}
+.agency-box2-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.agency-box2-details {
+  padding: 0.5rem 2rem;
+
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  color: white;
+  z-index: 100;
+}
+.agency-box2-details::after {
+  content: "";
+  width: calc(100% + 0rem);
+  height: 100%;
+  background-color: #ee6352;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transform: scaleX(0.075);
+  transform-origin: left;
+  transition: transform 250ms ease-in;
+}
+.agency-box2-image:hover .agency-box2-details::after {
+  transform: scaleX(1);
+}
+.agency-box2-details > p:nth-child(1) {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.agency-box2-details p:nth-child(2),
+.agency-box2-details p:nth-child(3),
+.agency-box2-details p:nth-child(4) {
+  color: white;
+
+  font-size: 0.8rem;
+}
+.agency-box2-address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  font-size: 0.8rem;
+}

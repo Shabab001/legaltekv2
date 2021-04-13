@@ -2,17 +2,19 @@
   background-color: #f4f6f9;
   max-width: 1950px;
   width: 100%;
+  height: 100%;
   height: fit-content;
   margin: 0 auto;
 }
 .terms-heading {
   margin: 0;
   position: relative;
-  z-index: 10;
-  padding-left: 4rem;
-  border-bottom: 4px solid var(--primary);
+  z-index: 1;
+  padding-left: 0rem;
 }
-
+.terms-heading-grid div {
+  padding: 1rem 4rem;
+}
 .terms-heading-grid div p:nth-child(1) {
   margin: 0;
 
@@ -138,26 +140,57 @@
 }
 .menu-item {
   position: relative;
-  z-index: 100000;
-  padding: 0 40px;
-  margin: 5px 10px;
+  z-index: 999;
+  padding: 8px 0px;
+  padding-left: 0px;
+  margin: 10px 0px;
+  margin-right: 40px;
   user-select: none;
   cursor: pointer;
+  top: 0.6rem;
+  font-weight: bold;
 }
 .menu-item-wrapper.me-active {
   position: relative;
-  top: 8px;
+  top: 10px;
   border-bottom: 4px solid #e5383b;
-  z-index: 100000;
+  z-index: 999;
 }
 .menu-item.me-active {
   position: relative;
-  top: 8px;
+
   border-bottom: 4px solid #e5383b;
-  z-index: 100000;
+  z-index: 999;
 }
 
 .scroll-menu-arrow {
+  align-self: flex-start;
+  padding-bottom: 5rem;
   cursor: pointer;
-  padding-bottom: 80px;
+}
+.menu-wrapper {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  margin: 0rem 0rem;
+  padding: 0rem;
+
+  overflow: visible !important;
+  overflow-x: hidden !important;
+}
+
+.terms-scrollbar {
+  position: relative;
+}
+.terms-underline {
+  border-bottom: 4px solid black;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 3.05rem;
+  z-index: 1;
+}
+.hide {
+  opacity: 0;
 }

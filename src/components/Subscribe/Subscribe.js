@@ -3,12 +3,12 @@ import "./Subscribe.css"
 import Leftimage from "./images/Subscribeleft.webp"
 import Rightimage from "./images/Subcriberight.webp"
 import Aos from "aos"
-import 'aos/dist/aos.css'; 
+
 
 const Subscribe = () => {
-    useEffect(()=>{
+
         Aos.init({duration:1500})
-    },[])
+   
     return (
         <div className="start-section">
             <div className="subscribe-box">

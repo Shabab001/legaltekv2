@@ -16,6 +16,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease-in;
+  background: rgba(0, 0, 0, 0.5);
 }
 .agency-building-image:hover {
   transform: scale(1.1);
@@ -34,7 +35,7 @@
   text-align: center;
   border-bottom: 2px solid #dddddd;
 }
-.agency-box-details p:nth-child(1) {
+.agency-box-details > p:nth-child(1) {
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -47,14 +48,16 @@
 }
 .agency-box-icons {
   display: flex;
-  padding: 1rem 0rem;
-  border-bottom: 2px solid #dddddd;
+  padding-top: 1rem;
+
   justify-content: space-between;
-  font-size: 1.8rem;
+  font-size: 1rem;
 }
 .agency-box-btn {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
   padding: 0.4rem 0rem;
   justify-content: space-between;
   font-weight: bold;
@@ -64,10 +67,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.3rem 1rem;
-  width: 50%;
+  margin-top: 0.6rem;
+  padding: 0.7rem 1rem;
+  width: 100%;
   color: white;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
 }
 .agency-box-btn1 {
   background-color: black;
@@ -81,8 +85,8 @@
   width: 50%;
 }
 .agency-right-box {
-  margin: 0rem 1rem;
-  margin-top: 2rem;
+  margin: 1rem 1rem;
+
   border: 2px solid #dddddd;
 }
 .agency-right-para {
@@ -111,7 +115,16 @@
 }
 .agency-right--box-icons {
   display: flex;
-  padding: 0.5rem 1rem;
-  justify-content: flex-end;
+  padding: 1rem 1rem;
+  justify-content: center;
   gap: 0.5rem;
+  font-size: 1rem;
+}
+.agency-box-address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+  font-weight: bold;
+  font-size: 0.7rem;
 }

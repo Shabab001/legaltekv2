@@ -18,15 +18,15 @@ function Stats() {
            <div className="stats-numbers-sec"> 
              <div className="stats-number">
                <p>500</p>
-               <p>Total Workspace</p>
+               <p>Total Users</p>
              </div>
              <div className="stats-number">
                <p>345</p>
-               <p>Team Workspace</p>
+               <p>Total Lawyers</p>
              </div>
              <div className="stats-number">
                <p>155</p>
-               <p>Solo Workspace</p>
+               <p>Total LawFirms</p>
              </div>
            </div>
         </div>

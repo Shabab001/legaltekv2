@@ -41,7 +41,7 @@ const SingleReview = () => {
                </div>
            </div>
            <div className="stat-review-middle">
-               <div>
+               <div style={{fontWeight:"bold"}}>
                    <p>"An awesome activity to experience"</p>
                </div>
                <div className="stat-review-des">

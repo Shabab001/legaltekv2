@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Agencies.css"
 import AgencyBox from './AgencyBox'
+import AgencyBox2 from './AgencyBox2'
 const Agencies = () => {
     return (
         <div className="agency-main">
@@ -10,15 +11,15 @@ const Agencies = () => {
             <div className="agency-container">
     
                 <div className="agency-grid">
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
-                  <AgencyBox/>
+                  <AgencyBox2/>
+                  <AgencyBox2/>
+                  <AgencyBox2/> 
+                  <AgencyBox2/>
+                  <AgencyBox2/>
+                  <AgencyBox2/>
+                  <AgencyBox2/>
+                  <AgencyBox2/>
+                  <AgencyBox2/>
 
                 </div>
 

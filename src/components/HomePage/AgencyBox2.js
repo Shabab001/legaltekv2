@@ -1,5 +1,5 @@
 import React from 'react'
-import "./agencybox.css"
+import "./agencybox2.css"
 import { FaFacebookF,FaTwitter,FaLinkedinIn } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import {IoQrCodeSharp} from "react-icons/io5";
@@ -10,17 +10,17 @@ import {GrMail} from "react-icons/gr"
 import{BsDot} from "react-icons/bs"
 import Building from "./images/buildings.jpg"
 import WWW from "../IndexShared/images/website.svg"
-const AgencyBox = () => {
+const AgencyBox2 = () => {
     return (
         <div className="agency-box">
-            <div className="agency-box-image">
+            <div className="agency-box2-image">
                  <img className="agency-building-image" src={Building} alt="building"/>
-            </div>
-            <div className="agency-box-details">
+                 <div className="agency-box2-overlay"></div>
+            <div className="agency-box2-details">
 
 
                 <p>The Law Firm</p>
-                <div className="agency-box-address">
+                <div className="agency-box2-address">
 
                 <p>Address Line 1</p>
                 <BsDot style={{fontSize:"1rem"}}/>
@@ -28,6 +28,7 @@ const AgencyBox = () => {
                 </div>
                 <p>Toronto,Ontario,1220-M,Canda</p>
  </div>
+            </div>
             <div className="agency-box-body">
            
                 <div className="agency-box-left" >
@@ -36,7 +37,7 @@ const AgencyBox = () => {
                     <IoQrCodeSharp/>
                     <FaUserAlt/>
                     <ImMobile2/>
-                    <img src={WWW} style={{height:"1.8rem",width:"1.8rem"}} placeholder="www"/>
+                    <img src={WWW} style={{height:"1rem",width:"1rem"}} placeholder="www"/>
                     </div>
                     <div className="agency-box-btn">
                         <div className="agency-box-btn1" >
@@ -79,4 +80,5 @@ const AgencyBox = () => {
     )
 }
 
-export default AgencyBox
+export default AgencyBox2
+
