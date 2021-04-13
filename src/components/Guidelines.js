@@ -6,24 +6,19 @@ import "./term.css"
 import {FiChevronLeft,FiChevronRight} from "react-icons/fi"
 import SlideMenuItems from './terms-contains/slideMenuItems';
 import Welcome from './terms-content/Welcome';
-import {paras,privacyParas} from "./terms-content/paras"
+import {guideParas, paras,privacyParas} from "./terms-content/paras"
 import Content from './terms-content/content';
 import Introduction from './terms-content/Introduction';
 
 console.log(paras)
 const list = [
   { name: 'Introduction' },
-  { name: 'What information do we collect?' },
-  { name: 'How we use the information we collect' },
-  { name: 'Managing your preferences' },
-  { name: 'Requests for information' },
-  { name: 'Listing information' },
-  { name: 'Security measures' },
-  { name: 'Third-party websites ' },
-  { name: 'Transfers of information' },
-  { name: 'Children' },
-  { name: 'California privacy rights' },
-  { name: 'Changes to the policy' },
+  { name: 'Play nice' },
+  { name: 'To the public' },
+  { name: 'To professionals' },
+  { name: 'Originality counts' },
+  { name: 'Terms' },
+
 
 
 ];
@@ -61,7 +56,7 @@ export const Menu = (list, selected) =>
 
 
 
-const PrivacyPolicy = ({title1,title2}) => {
+const Guidelines = ({title1,title2}) => {
   const[click,setClick]=useState(true)
   const [active, setActive]=useState("Summary");
   const [selected,setSelected]=useState("0")
@@ -74,12 +69,7 @@ const PrivacyPolicy = ({title1,title2}) => {
   const [page4,setPage4]=useState(false)
   const [page5,setPage5]=useState(false)
   const [page6,setPage6]=useState(false)
-  const [page7,setPage7]=useState(false)
-  const [page8,setPage8]=useState(false)
-  const [page9,setPage9]=useState(false)
-  const [page10,setPage10]=useState(false)
-  const [page11,setPage11]=useState(false)
-  const [page12,setPage12]=useState(false)
+ 
 
   const scrollt=useRef();
   
@@ -131,8 +121,8 @@ if(container){
         <div className="terms-heading">
           <div className="terms-heading-grid">
           <div >
-            <p>{title1==="Privacy"?title1:"Privacy"} <span>
-              {title2==="Policy"?title2:"Policy"}
+            <p>{title1==="Privacy"?title1:"Community"} <span>
+              {title2==="Policy"?title2:"Guidelines"}
               </span>
               </p>
             <p>{Date.now( )}</p>
@@ -156,18 +146,13 @@ if(container){
        </div>
         
         </div>
-          {selected==="0"? <Introduction title={"Privacy Policy"} hasRead={page1} setRead={setPage1} setCount={setHasRead} count={read}/>:
-          selected==="1"? <Content title={"What information do we collect?"} content={privacyParas.information} hasRead={page2} setRead={setPage2} setCount={setHasRead} count={read}/>:
-          selected==="2"? <Content title={"How we use the information we collect"} content={privacyParas.use} hasRead={page3} setRead={setPage3} setCount={setHasRead} count={read}/>:
-          selected==="3"? <Content title={"Managing your preferences"} content={privacyParas.managing} hasRead={page4} setRead={setPage4} setCount={setHasRead} count={read}/>:
-          selected==="4"? <Content title={" Requests for information; disclosure for enforcement purposes"} content={privacyParas.request} hasRead={page5} setRead={setPage5} setCount={setHasRead} count={read}/>:
-          selected==="5"? <Content title={"Updating your listing information and public posts"} content={privacyParas.update} hasRead={page6} setRead={setPage6} setCount={setHasRead} count={read}/>:
-          selected==="6"? <Content title={"Security measures"} content={privacyParas.security} hasRead={page7} setRead={setPage7} setCount={setHasRead} count={read}/>:
-          selected==="7"? <Content title={"Third-party websites and practices"} content={privacyParas.party} hasRead={page8} setRead={setPage8} setCount={setHasRead} count={read}/>:
-          selected==="8"? <Content title={"Transfers of information"} content={privacyParas.transfer} hasRead={page9} setRead={setPage9} setCount={setHasRead} count={read}/>:
-          selected==="9"? <Content title={"Children"} content={privacyParas.Children} hasRead={page10} setRead={setPage10} setCount={setHasRead} count={read}/>:
-          selected==="10"? <Content title={"California privacy rights"} content={privacyParas.rights} hasRead={page11} setRead={setPage11} setCount={setHasRead} count={read}/>:
-          selected==="11"? <Content title={"Changes to the policy"} content={privacyParas.change} hasRead={page12} setRead={setPage12} setCount={setHasRead} count={read}/>:null
+          {selected==="0"? <Introduction title={"Guidelines"} hasRead={page1} setRead={setPage1} setCount={setHasRead} count={read}/>:
+          selected==="1"? <Content title={"Play nice ?"} content={guideParas.play } hasRead={page2} setRead={setPage2} setCount={setHasRead} count={read}/>:
+          selected==="2"? <Content title={"To the public: Safety first"} content={guideParas.public} hasRead={page3} setRead={setPage3} setCount={setHasRead} count={read}/>:
+          selected==="3"? <Content title={"To professionals: Self promotion"} content={guideParas.self} hasRead={page4} setRead={setPage4} setCount={setHasRead} count={read}/>:
+          selected==="4"? <Content title={" Originality counts"} content={guideParas.originality} hasRead={page5} setRead={setPage5} setCount={setHasRead} count={read}/>:
+          selected==="5"? <Content title={"Terms"} content={guideParas.term} hasRead={page6} setRead={setPage6} setCount={setHasRead} count={read}/>:
+      null
         
 
           }
@@ -180,7 +165,7 @@ if(container){
               }</p>
               </li>
               <li>
-                <div className={read===12?"terms-footer-btn red":"terms-footer-btn"}>
+                <div className={read===6?"terms-footer-btn red":"terms-footer-btn"}>
                   <p>I Agree to the Terms of Service</p>
                 </div>
               </li>
@@ -198,4 +183,4 @@ if(container){
   )
 }
 
-export default PrivacyPolicy
+export default Guidelines

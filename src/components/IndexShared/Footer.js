@@ -99,6 +99,10 @@ function Footer(props) {
           <div className="footer-links">
             <Link to="/terms-and-conditions">Terms and conditions</Link>
           </div>
+          <span className="dot-divider">·</span>
+          <div className="footer-links">
+            <Link to="/Community-Guidelines">Community Guidelines</Link>
+          </div>
         
         </div>
         <div className="right">

@@ -243,3 +243,33 @@ line:""
         }
     ]
 }
+
+export const guideParas ={
+    play:[
+        {
+            line:"<li> Inappropriate content:  While Legaltek maintains a relatively open forum, this is a professional site devoted to professional services.  So please, while a certain amount of passion, colorful language and even hyperbole is permissible, do not engage in name-calling, threats, general rudeness or putting down of others, harassment, lewdness, or displays of bigotry.</li>"
+        },
+        {
+            line:"<li> Questions: Please ask questions directly related to your legal concern. The best questions are brief and to the point. Do not post spam or irrelevant content.   </li>"
+        },
+        {
+            line:"<li> Answers: Answering questions is a great way to help people get oriented toward solving their legal problems, and to display your legal acumen. But remember: quality is better than quantity, and those asking questions aren’t looking for a sales pitch. <li> Do not simply post the statement \"I Agree\" in the answers and comments without any other information.  We have an \"I Agree\" button that can be used.</li> <li>Avoid writing \"Hire an Attorney\" as your sole answer to a question. We understand that this may be the right answer for that particular question, but readers benefit from elaboration: explain WHY hiring an attorney is important in this case. </li><li>Similarly, do not invite those asking questions to contact you directly, and do not add contact information or links to your website in answers or answer disclaimers. The content of your answers should always remain non-commercial in tone. While you are free to refer the asker to another reputable attorney, we ask that you do not solicit yourself or other attorneys in your office/firm. </li>  </li>"
+        },
+        {
+            line:"<li>Reviews:  All reviews are moderated by Legaltek prior to being posted.  Reviews are most useful to others when they include specific details of your experience.<li>We are looking for your personal experience with the lawyer you hired or had a consultation with outside of Legaltek.  Reviews relating what you’ve heard from someone else are not helpful.  Again, the most valuable information for other consumers is the specifics of what delighted or frustrated you about your experience.  </li> <li>Be factually accurate. While you are free to express your opinion, it is important to not exaggerate or misrepresent your experience. Legaltek doesn’t verify or investigate reviews, and we don't take sides when it comes to factual disputes – so we expect you to stand behind your review. </li> <li>Reviews that include accusations of criminal activity or unethical behavior must include some specific factual details.  And the more serious the accusation, the more specific you need to be about what was done wrong. </li> <li> We will not post reviews that appear to have been left for attorneys with whom you did not consult with outside of Legaltek for your own representation.  Although it may be tempting to leave a review for the attorney who was on the “other side” of a matter from you, or was representing a spouse or family member, remember: all attorneys have a duty of zealous advocacy to their clients, and you would want that if they were representing you.  Please only review YOUR attorney that was representing YOU.</li> <li>Some situations involve a person paying an attorney's fee without being in a typical attorney-client relationship. Reviews are permitted in such cases where the payor and the client have aligned interests - for example, a parent paying for the representation of a minor child. However, reviews are not permitted where payor and client interests are not aligned, or the attorney is performing the role of a neutral. This most commonly comes up in probate, mediation, arbitration and guardianship matters. </li> </li>"
+        },
+     
+    ],
+    public:[
+        {line:"When posting questions, reviews or comments, don't give out personal information such as home or email addresses, telephone numbers, credit card numbers, social security numbers, passwords, etc. You may contact professionals directly from email links or phone numbers displayed on their profiles and then exchange personal contact information."}
+    ],
+    self:[
+        {line:"We encourage you to share information about your business or practice with the Legaltek community; however, we ask that you do this in your profile or through our Advertising Solutions. Please do not directly solicit clients as part of an answer, disclaimer, guide, or peer endorsement. Examples of direct solicitations are language such as \"call me, contact me, go to my website for further information, etc.\" While you are free to refer the asker to another reputable attorney, we ask that you do not solicit yourself or other attorneys in your office/firm.  Similarly, do not add contact information or links to your website in answers or answer disclaimers. Such information will be removed. A link to your profile is displayed next to each of your postings, so contact information is already available to readers who wish to contact you."}
+    ],
+    originality:[
+        {line:"Think before you post and stay on topic. Answers that don't specifically address their questions will be removed, so think twice about copying and pasting the same answer to multiple questions. Additionally, guides with a substantial amount of content that you did not author will be taken down."}
+    ],
+    term:[
+        {line:"We appreciate your compliance with these guidelines. While we are devoted to free speech, we reserve the right to remove any content that does not respect these guidelines or that detracts significantly from our users' experience. Failure to comply with any of these guidelines may also result in the temporary or permanent loss of posting privileges."}
+    ],
+}

@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
+import Guidelines from "./components/Guidelines";
 import CreateBlog from "./components/NewProfile/BusinessProfile/blog-contents/createBlog";
 
 
@@ -206,6 +207,7 @@ function Routes(props) {
             <Route exact path="/careers" component={Careers} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/terms-and-conditions" component={Terms} />
+            <Route exact path="/Community-Guidelines" component={Guidelines} />
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/how-it-works" component={HowItWorks} />
             <Route exact path="/business" component={Business} />
