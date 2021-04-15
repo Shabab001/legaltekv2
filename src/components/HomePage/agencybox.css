@@ -103,7 +103,9 @@
 }
 .agency-expertise {
   display: flex;
-  white-space: nowrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
   font-size: 0.7rem;
   align-items: center;
 }
@@ -115,7 +117,7 @@
 }
 .agency-right--box-icons {
   display: flex;
-  padding: 1rem 1rem;
+  padding: 1rem 0.5rem;
   justify-content: center;
   gap: 0.5rem;
   font-size: 1rem;
@@ -127,4 +129,20 @@
   color: grey;
   font-weight: bold;
   font-size: 0.7rem;
+}
+.agency-dot {
+  display: none;
+}
+@media screen and (max-width: 1024px) {
+  .agency-expertise {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    align-items: center;
+  }
+  .agency-right--box-icons {
+    padding: 1rem 0.5rem;
+  }
 }

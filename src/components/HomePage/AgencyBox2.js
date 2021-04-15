@@ -63,7 +63,7 @@ const AgencyBox2 = () => {
                             <p>Area Of Practise</p>
                             <div className="agency-expertise">
                             <p>Qatar Stock Exchange</p>
-                            <BsDot style={{fontSize:"1rem"}}/>
+                            <BsDot className="agency-dot" style={{fontSize:"1rem"}}/>
                             <p>Dubai Stock Exchange</p>
                             </div>
                             <div className="agency-last">

@@ -29,3 +29,15 @@ h4 {
   gap: 2rem 1rem;
   grid-auto-flow: wrap;
 }
+@media screen and (max-width: 1300px) {
+  .Featured-lawyers {
+    padding: 1rem 5%;
+  }
+  .lawyers-heading h4 {
+    margin-top: 1rem 1rem;
+    margin-left: 0.3rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-left: 3px solid var(--secondary);
+  }
+}

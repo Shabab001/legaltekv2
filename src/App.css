@@ -1,18 +1,19 @@
 @import "./assets/plugins/bootstrap/css/bootstrap.min.css";
 @import "./assets/css/style.min.css";
 
+.foodCard .react-stars {
+  margin: auto;
+}
+.mr-3,
+.mx-3 {
+  margin-right: 1rem !important;
+}
 
-.foodCard .react-stars{
-  margin:auto;
+.ml-3,
+.mx-3 {
+  margin-left: 1rem !important;
 }
-.mr-3, .mx-3 {
-  margin-right: 1rem!important;
-}
-
-.ml-3, .mx-3{
-  margin-left: 1rem!important;
-}
-html{
+html {
   scroll-behavior: smooth;
 }
 
@@ -29,10 +30,10 @@ html{
 }
 
 ::-webkit-scrollbar {
-  width:8px;
+  width: 8px;
   background: transparent;
 }
-::-webkit-scrollbar:hover{
+::-webkit-scrollbar:hover {
   background-color: gainsboro;
 }
 ::-webkit-scrollbar-track {
@@ -47,11 +48,10 @@ html{
   background-color: #e50077;
 }
 
-
 .fe-x-circle:before {
   content: "\ea01";
 }
-.ant-message-custom-content p{
+.ant-message-custom-content p {
   margin-bottom: 0px;
 }
 .fe {
@@ -79,7 +79,9 @@ html{
 .fa-search:before {
   content: "\f002";
 }
-.fa-remove:before, .fa-close:before, .fa-times:before {
+.fa-remove:before,
+.fa-close:before,
+.fa-times:before {
   content: "\f00d";
 }
 
@@ -147,7 +149,7 @@ html{
   border: none;
   outline: none;
   box-sizing: border-box;
-  overflow-x: none;
+  overflow-x: hidden;
 }
 body {
   overflow-x: hidden;
@@ -169,12 +171,11 @@ html {
 
 html {
   height: 100%;
-  
 }
 :root {
-  --primary: #161A1D;
-  --secondary: #BA181B;
-  --btn1:#49c5b6;
+  --primary: #161a1d;
+  --secondary: #ba181b;
+  --btn1: #49c5b6;
 }
 
 body {
@@ -986,7 +987,6 @@ footer li {
   .inputBoxes .searchBtn {
     margin-left: 0px;
   }
-
 
   .inputBoxes.toggled > div {
     /* width: 100% !important; */
