@@ -16,6 +16,7 @@ function Register(props) {
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState({ value: "", message: "", isValid: true });
+  const [username, setUserName] = useState({ value: ""});
   const [password, setPassword] = useState({
     value: "",
     message: "",
@@ -47,7 +48,8 @@ function Register(props) {
     setUserType(e.target.value);
     props.setUserTypeProp(e.target.value);
   };
-
+ 
+  console.log("email:", email.value, "password:",password.value)
   useEffect(() => {
     disableBodyScroll(document.querySelector("body"));
     return () => {
@@ -71,6 +73,7 @@ function Register(props) {
     let dobValidity = true;
     let firstNameValidity = true;
     let lastNameValidity = true;
+    let role=""
 
     if (!email.value) {
       setEmail({
@@ -106,17 +109,25 @@ function Register(props) {
       passwordValidity = true;
     }
 
-
+        if(userType==="CUSTOMER"){
+                role="authenticated"
+        }
+        else{
+          role="lawfirm"
+        }
 
     if (emailValidity && passwordValidity) {
       let obj = {
+        username:username.value,
         email: email.value,
         password: password.value,
-        userType: userType,
+        role
+   
       };
 
       let response = await props.actions.register(obj);
-      if (response.success) {
+      
+      if (response) {
         console.log(response);
         message.success("Sign Up successful!");
         setLoading(false);
@@ -177,9 +188,9 @@ function Register(props) {
             Customer
           </button>
           <button
-            value="BUSINESS"
+            value="LAW-FIRM"
             onClick={changeUserType}
-            className={`${userType == "BUSINESS" && "active"}`}
+            className={`${userType == "LAW-FIRM" && "active"}`}
           >
            Law Firm
           </button>
@@ -233,6 +244,18 @@ function Register(props) {
               </p>
             </Form.Field> */}
             <div className="field">
+            <div className="input-container" style={{paddingBottom:"1.2rem"}}>
+                <input
+                  placeholder="Username"
+                  value={username.value}
+                  onChange={(e) =>
+                    setUserName({ ...username, value: e.target.value })
+                  }
+                  icon="user"
+                  iconPosition="left"
+                />
+                <i className="fa fa-user left" />
+              </div>
               <div className="input-container">
                 <input
                   placeholder="Email Address"
@@ -246,10 +269,7 @@ function Register(props) {
                 <i className="fa fa-envelope left" />
               </div>
 
-              <p style={{ fontSize: 11, fontWeight: 100, color: "gray" }}>
-                We will email you order confirmations, receipts and marketing
-                messages from LegalTek.
-              </p>
+          
             </div>
 
             <div className="field" style={{ position: "relative" }}>

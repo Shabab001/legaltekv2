@@ -8,13 +8,13 @@ import { reject } from "async";
 export const login = (user, history) => (dispatch) => {
   console.log(history);
   return new Promise((resolve, reject) => {
-    Axios.post("/api/login", user)
+    Axios.post("http://localhost:1337/auth/local", user)
       .then((response) => {
         console.log(response)
-        localStorage.setItem("auth_token", response.data.user.token);
-        localStorage.setItem("refresh_token", response.data.user.refresh_token);
+        localStorage.setItem("auth_token", response.data.jwt);
+        localStorage.setItem("refresh_token", response.data.jwt);
 
-        setAuthToken(response.data.user.token);
+        setAuthToken(response.data.jwt);
 
         dispatch({
           type: Types.SET_USER,
@@ -23,13 +23,17 @@ export const login = (user, history) => (dispatch) => {
           },
         });
         console.log(response.data)
-        if(response.data.user && response.data.user.userType == "CUSTOMER"){
+        if(response.data.user && response.data.user.role.type == "authenticated"){
           history.push('/user/profile')
         }
-        else if(response.data.user && response.data.user.userType == "BUSINESS"){
+        else if(response.data.user && response.data.user.role.type == "lawfirm"){
           console.log('hi')
           history.push('/business/profile')
+        } else if(response.data.user && response.data.user.role.type == "lawyer"){
+          console.log('hi')
+          history.push('/lawyer/profile')
         }
+
         message.success("Signed in successfully!");
         resolve(true);
       })
@@ -134,21 +138,23 @@ export const facebookLogin = (data, history) => (dispatch) => {
 };
 
 export const register = (user, history) => (dispatch) => {
+  console.log(user)
   return new Promise((resolve, reject) => {
-    Axios.post("/api/register", user)
-      .then((user) => {
-        console.log(user);
+    Axios.post("http://localhost:1337/auth/local/register", user)
+      .then((response) => {
+        console.log("database called")
+        console.log(response.data.user);
         dispatch({
           type: Types.CREATE_USER,
           payload: {
-            createdUser: user.data,
+            createdUser: response.data.user,
           },
         });
 
 
         // history.push("/");
         message.success("Signed up successfully!");
-        resolve(user.data)
+        resolve(response.data.user)
       })
       .catch((error) => {
         if (error && error.response) {

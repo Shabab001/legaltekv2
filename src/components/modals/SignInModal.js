@@ -48,6 +48,7 @@ function SignIn(props) {
     e.preventDefault();
     let emailValidity = false;
     let passwordValidity = false;
+    let role=""
     if (!email.value) {
       setLoading(false);
       setEmail({
@@ -85,12 +86,21 @@ function SignIn(props) {
       setPassword({ ...password, message: "", isValid: true });
       passwordValidity = true;
     }
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+    }
+    else if(userType==="LAWFIRM"){
+      role="lawfirm"
+    }
+    else{
+      role="lawyer"
+    }  
 
     if (emailValidity && passwordValidity) {
       let user = {
-        email: email.value,
+        identifier: email.value,
         password: password.value,
-        userType: userType,
+        role
       };
       let response = await props.actions.login(user, props.history);
       if (response == true) {
@@ -154,9 +164,9 @@ function SignIn(props) {
             Customer
           </button>
           <button
-            value="BUSINESS"
+            value="LAWFIRM"
             onClick={changeUserType}
-            className={`${userType == "BUSINESS" && "active"}`}
+            className={`${userType == "LAWFIRM" && "active"}`}
           >
            Law Firm
           </button>

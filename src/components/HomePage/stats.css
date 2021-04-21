@@ -101,25 +101,25 @@
     flex-basis: 100%;
     text-align: center;
     padding-right: 0rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
   .stats-numbers-sec {
     padding-top: 1.5rem;
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
   }
   .stats-title p:nth-child(1) {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: bold;
   }
   .stats-left P:nth-child(2) {
-    padding-top: 1.5rem;
+    padding-top: 2rem;
     font-size: 1.2rem;
   }
   .stats-numbers-sec p:nth-child(1) {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: orangered;
     font-weight: bold;
   }
@@ -131,7 +131,7 @@
     flex-basis: 100%;
   }
   .stats-right-background {
-    width: 10 0%;
+    width: 100%;
     background-color: white;
     display: grid;
     padding-bottom: 1rem;
@@ -142,19 +142,6 @@
 }
 
 @media screen and (max-width: 900px) {
-  .stats-title p:nth-child(1) {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  .stats-left P:nth-child(2) {
-    padding-top: 1.5rem;
-    font-size: 0.8rem;
-  }
-  .stats-numbers-sec p:nth-child(1) {
-    font-size: 1.5rem;
-    color: orangered;
-    font-weight: bold;
-  }
   .stats-right {
     display: flex;
     gap: 2rem;
@@ -170,5 +157,20 @@
   }
   .stats-back2 {
     width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .stats-title p:nth-child(1) {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .stats-left P:nth-child(2) {
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
+  }
+  .stats-numbers-sec p:nth-child(1) {
+    font-size: 1.5rem;
+    color: orangered;
+    font-weight: bold;
   }
 }

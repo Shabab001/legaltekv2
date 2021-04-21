@@ -149,7 +149,6 @@ html {
   border: none;
   outline: none;
   box-sizing: border-box;
-  overflow-x: none;
 }
 body {
   overflow-x: hidden;
