@@ -27,7 +27,7 @@ function LoginWithPhone(props) {
       enableBodyScroll(document.querySelector("body"));
     }
   }, [])
-
+  const [username, setUserName] = useState({ value: ""});
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState({
     value: "",
@@ -46,6 +46,12 @@ function LoginWithPhone(props) {
     message: "",
     isValid: true,
   });
+  const [password, setPassword] = useState({
+    value: "",
+    message: "",
+    isValid: true,
+  });
+  const [showPass, setShowPass] = useState(false);
 
   const [otpInputScreen, setOtpInputScreen] = useState(false);
   const [userType, setUserType] = useState(userTypeProp? userTypeProp : 'CUSTOMER')
@@ -55,6 +61,62 @@ function LoginWithPhone(props) {
     props.setUserTypeProp(e.target.value)
   };
 
+  const handleSignin = async(e)=>{
+    e.preventDefault()
+    let role=null;
+    let phoneNoValidity = phoneNo.isValid;
+    let countryCodeValidity = countryCode.isValid;
+    let passwordValidity=null;
+
+    if (phoneNo.value.length !== 10) {
+      phoneNoValidity = false;
+    }
+    if (!password.value) {
+      setLoading(false);
+      setPassword({
+        ...password,
+        message: "* Please provide your password.",
+        isValid: false,
+      });
+    } else if (password.value && password.value.length < 6) {
+      setLoading(false);
+      setPassword({
+        ...password,
+        message: "* Please provide a strong password.",
+        isValid: false,
+      });
+    } else {
+      setPassword({ ...password, message: "", isValid: true });
+      passwordValidity = true;
+    }
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+    }
+    else if(userType==="LAWFIRM"){
+      role="lawfirm"
+    }
+    else{
+      role="lawyer"
+    }  
+
+    if (phoneNoValidity && countryCodeValidity  && passwordValidity) {
+      let user = {
+        identifier: `${countryCode.value}${phoneNo.value}`,
+        password: password.value,
+        role
+      };
+      let response = await props.actions.login(user, props.history);
+      if (response == true) {
+       
+      } else if(response == false) {
+
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+    }
+
+  }
   const submitForm = async (e) => {
     setLoading(true);
     console.log('hi')
@@ -68,13 +130,13 @@ function LoginWithPhone(props) {
 
     if (phoneNoValidity && countryCodeValidity) {
       let user = {
-        phoneNo: phoneNo.value,
-        countryCode: countryCode.value,
+        phone:`${countryCode.value}${phoneNo.value}`,
+      
         userType: userType,
       };
       let response = await props.actions.sendOtp(user, props.history);
-      console.log('hi2')
-      if (response == true) {
+      console.log(response)
+      if (response) {
         // localStorage.setItem("phoneNo", JSON.stringify(phoneNo.value));
         // localStorage.setItem("countryCode", JSON.stringify(countryCode.value));
         // props.history.push("/OtpInput");
@@ -87,6 +149,8 @@ function LoginWithPhone(props) {
     } else {
       setLoading(false);
     }
+              
+   
   };
 
   const submitOtp = async (e) => {
@@ -94,21 +158,31 @@ function LoginWithPhone(props) {
     e.preventDefault();
     // let ph = JSON.parse(localStorage.getItem("phoneNo"));
     // let cc = JSON.parse(localStorage.getItem("countryCode"));
+    let role=null;
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+}
+else{
+role="lawfirm"
+}
+
 
     let user = {
-      phoneNo: phoneNo.value,
-      countryCode: countryCode.value,
-      otp: otp.value,
-      userType: userType,
-      signup: props.regProp? true: false
+      username:username.value,
+      phone:`${countryCode.value}${phoneNo.value}`,
+      role,
+      password:password.value
     };
     console.log(user);
-    let response = await props.actions.verifyOtp(user, props.history);
-    if (response == true) {
-      let res2 = await props.actions.loginWithPhone(user, props.history);
-      if (res2 == true) {
+    let response = await props.actions.verifyOtp(otp);
+    if (response) {
+      console.log(response)
+      let res2 = await props.actions.register(user, props.history);
+      if (res2) {
         // props.history.push("/");
-        props.closePhoneSignIn()
+        console.log(res2)
+       props.setRegProp(false)
+       setOtpInputScreen(false);
       }
     } else {
       message.error('Try again')
@@ -131,8 +205,9 @@ function LoginWithPhone(props) {
     console.log(otpdata);
     setOtp({ ...otp, value: otpdata });
   };
-
+  console.log(password.value)
   useEffect(() => {
+  
     disableBodyScroll(document.querySelector("body"));
     return () => {
       enableBodyScroll(document.querySelector("body"));
@@ -170,9 +245,9 @@ function LoginWithPhone(props) {
             Customer
           </button>
           <button
-            value="BUSINESS"
+            value="LAWFIRM"
             onClick={changeUserType}
-            className={`${userType == "BUSINESS" && "active"}`}
+            className={`${userType == "LAWFIRM" && "active"}`}
           >
             Law Firm
           </button>
@@ -193,9 +268,9 @@ function LoginWithPhone(props) {
           Customer
         </button>
         <button
-          value="BUSINESS"
+          value="LAWFIRM"
           onClick={changeUserType}
-          className={`${userType == "BUSINESS" && "active"}`}
+          className={`${userType == "LAWFIRM" && "active"}`}
         >
           Law Firm
         </button>
@@ -219,6 +294,82 @@ function LoginWithPhone(props) {
 
         <div className="form">
           {!otpInputScreen ? (
+            !props.regProp?(
+             <>
+                <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+        
+        <div className="field">
+          <PhoneInput inputStyle={{width:"100% !important",  padding:"0px 0px !important"}} style={{width:"6rem"}}
+            // country={"us"}
+            value={countryCode.value}
+            placeholder="Country Code"
+            onChange={(phone) =>
+              setCountryCode({ ...countryCode, value: phone })
+            }
+          />
+          {/* 437500050 */}
+        </div>
+
+  
+       
+        <div className="field"  style={{width:"100%"}}>
+          <div className="input-container">
+          <input
+            icon="phone"
+            iconPosition="left"
+            placeholder="Phone number"
+            value={phoneNo.value}
+            onChange={(e) => {
+              if (
+                (e.target.value.length <= 10 &&
+                  e.target.value.match(/^[0-9]+$/)) ||
+                e.target.value.length == 0
+              ) {
+                console.log("hi");
+                setPhoneNo({ ...phoneNo, value: e.target.value });
+              }
+            }}
+          />
+          <i className="fa fa-phone left" /></div>
+        </div>{" "}
+        </div>
+
+        <div className="field"  >
+        <div className="input-container">
+                <input
+                  name="password"
+                  value={password.value}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      value: e.target.value,
+                      message: "",
+                    })
+                  }
+                  type={showPass ? "text" : "password"}
+                  placeholder="Password"
+                />
+                <i className="fa fa-lock left" />
+              </div>
+              <i
+                onClick={() => setShowPass(!showPass)}
+                className={`${showPass ? "fe-eye" : "fe-eye-off"} fe showPass`}
+              />
+
+              <p
+                className="error-text"
+                style={{
+                  margin: "5px 0px",
+                  color: "firebrick",
+                  textAlign: "left",
+                }}
+              >
+                {password.message}
+              </p>
+            </div>
+             </>
+            ):(
+            <>
             <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
         
               <div className="field">
@@ -232,6 +383,8 @@ function LoginWithPhone(props) {
                 />
                 {/* 437500050 */}
               </div>
+
+        
              
               <div className="field"  style={{width:"100%"}}>
                 <div className="input-container">
@@ -254,8 +407,56 @@ function LoginWithPhone(props) {
                 <i className="fa fa-phone left" /></div>
               </div>{" "}
               </div>
+              <div className="field">
+                          <div className="input-container" style={{paddingBottom:"1.2rem"}}>
+                          <input
+                            placeholder="Username"
+                            value={username.value}
+                            onChange={(e) =>
+                              setUserName({ ...username, value: e.target.value })
+                            }
+                            icon="user"
+                            iconPosition="left"
+                          />
+                          <i className="fa fa-user left" />
+                        </div>
+                        <div className="field" style={{ position: "relative" }}>
+              <div className="input-container">
+                <input
+                  name="password"
+                  value={password.value}
+                  onChange={(e) =>
+                    setPassword({
+                      ...password,
+                      value: e.target.value,
+                      message: "",
+                    })
+                  }
+                  type={showPass ? "text" : "password"}
+                  placeholder="Password"
+                />
+                <i className="fa fa-lock left" />
+              </div>
+              <i
+                onClick={() => setShowPass(!showPass)}
+                className={`${showPass ? "fe-eye" : "fe-eye-off"} fe showPass`}
+              />
+
+              <p
+                className="error-text"
+                style={{
+                  margin: "5px 0px",
+                  color: "firebrick",
+                  textAlign: "left",
+                }}
+              >
+                {password.message}
+              </p>
+            </div>
+            </div>
+                        </>
            
-          ) : (
+          ) ): (
             <div className="field">
               <OtpInput
               className="otp-input"
@@ -269,7 +470,7 @@ function LoginWithPhone(props) {
               />
             </div>
           )}
-
+              
           <h4 style={{ textAlign: "left" }}>{props.regProp? "or Sign up with":"or Sign in with"}</h4>
           <div className="social_btns">
             <div>
@@ -472,14 +673,18 @@ function LoginWithPhone(props) {
                     </p>
                   </label>
                 </div>
-          {!otpInputScreen ? (
+          {!otpInputScreen && props.regProp ? (
             <button className="signInBtn" onClick={submitForm} type="submit">
               Request OTP
             </button>
-          ) : (
+          ) : props.regProp && otpInputScreen ?(
             <button onClick={submitOtp} className="signInBtn" type="submit">
-              Sign In
+              Sign up
             </button>
+          ):(
+            <button onClick={handleSignin} className="signInBtn" type="submit">
+              Sign In
+            </button> 
           )}
         </div>
 

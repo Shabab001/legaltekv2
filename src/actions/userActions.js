@@ -209,10 +209,10 @@ export const forgotPassword = (data, history) => (dispatch) => {
 
 export const sendOtp = (data, history) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("/api/sendOtp", data)
+    Axios.post("http://localhost:1337/auth/send-otp", data)
       .then((res) => {
-        console.log(res.data);
-        if (res.data.type == "success") {
+        console.log(res);
+        if (res) {
           message.success("Otp sent to your phone number.");
           dispatch({
             type: Types.SEND_OTP,
@@ -238,10 +238,10 @@ export const sendOtp = (data, history) => (dispatch) => {
 
 export const verifyOtp = (data, history) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("/api/verifyOtp", data)
+    Axios.post("http://localhost:1337/auth/verify-otp", data)
       .then((res) => {
         console.log('verified',res.data);
-        if (res.data.type == "success") {
+        if (res.data == "success") {
           message.success("OTP verified.");
           dispatch({
             type: Types.VERIFY_OTP,
