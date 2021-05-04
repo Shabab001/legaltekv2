@@ -117,19 +117,42 @@ function SignIn(props) {
   const responseFacebook = (response) => {
     // setEmail({ ...email, value: data.email });
     console.log(response);
-    const data = {
-      accessToken: response.accessToken,
-      userID: response.userID,
-      userType,
-    };
-    props.actions.facebookLogin(data, props.history);
+    let role=""
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+      }
+      else{
+      role="lawfirm"
+      }
+    const user ={
+   
+      identifier:response.email,
+      role,
+      socialLogin:true
+    
+    }
+    props.actions.login(user, props.history);
   };
 
   const responseGoogle = (response) => {
     console.log(response);
     if(!response.error){
       const data = { idToken: response.tokenId, userType };
-      props.actions.googleLogin(data, props.history);
+      let role=""
+      if(userType==="CUSTOMER"){
+        role="authenticated"
+        }
+        else{
+        role="lawfirm"
+        }
+      const user ={
+        
+        identifier:response.profileObj.email,
+        role,
+        socialLogin:true
+      
+      }
+      props.actions.login(user, props.history);
     }
 
     // setEmail({ ...email, value: data.profileObj.email });
@@ -277,7 +300,7 @@ function SignIn(props) {
             <div>
               <FacebookLogin
                 // appId="1453893171475138"
-                appId="645576173040339"
+                appId="472085380686612"
                 autoLoad={false}
                 fields="name,email,picture"
                 callback={responseFacebook}
@@ -312,7 +335,7 @@ function SignIn(props) {
             </div>
             <div>
               <GoogleLogin
-                clientId="769714580677-5jh37eqkl71hjkv9l53if687r0pm5s9s.apps.googleusercontent.com"
+                clientId="8899855246-niaroe38jmfbhvcfetab1piheac2isc9.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 className="googleBtn"

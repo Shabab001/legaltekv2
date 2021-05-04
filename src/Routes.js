@@ -1,5 +1,7 @@
 import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
+import EmailConfirmation from "./components/emailConfirmation/emailConfirmation";
+import VerifyEmail from "./components/emailConfirmation/verifyEmail";
 import Guidelines from "./components/Guidelines";
 import CreateBlog from "./components/NewProfile/BusinessProfile/blog-contents/createBlog";
 
@@ -203,7 +205,8 @@ function Routes(props) {
             <Route exact path="/view-profile/:id" component={ViewProfile} />
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             <Route exact path="/business/:postId" component={BusinessProfile} />
-        
+            <Route exact path="/auth/activation/:token" component={EmailConfirmation} />
+            <Route exact path="/auth/verify-email" component={VerifyEmail} />
             <Route exact path="/careers" component={Careers} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/terms-and-conditions" component={Terms} />

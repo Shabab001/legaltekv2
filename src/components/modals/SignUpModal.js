@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 import "../../assets/css/auth.css";
 import validator from "validator";
 import { connect } from "react-redux";
@@ -117,7 +118,7 @@ function Register(props) {
         }
 
     if (emailValidity && passwordValidity) {
-      let obj = {
+      let user = {
         username:username.value,
         email: email.value,
         password: password.value,
@@ -125,14 +126,14 @@ function Register(props) {
    
       };
 
-      let response = await props.actions.register(obj);
+      let response = Axios.post('http://localhost:1337/auth/send-confirmation-email', user);
       
       if (response) {
         console.log(response);
-        message.success("Sign Up successful!");
+        message.success("verify your email!");
+        props.history.push("/auth/verify-email")
         setLoading(false);
-        props.closeRegister();
-        props.signInModal();
+       
       } else {
         setLoading(false);
         message.error("Could not sign you up!");
@@ -143,17 +144,41 @@ function Register(props) {
   const responseFacebook = (response) => {
     // setEmail({ ...email, value: data.email });
     console.log(response);
-    const data = {
-      accessToken: response.accessToken,
-      userID: response.userID,
-      userType,
-    };
-    props.actions.facebookLogin(data, props.history);
+    let role=""
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+      }
+      else{
+      role="lawfirm"
+      }
+    const user ={
+      username:response.name,
+      email:response.email,
+      role,
+      socialLogin:true
+    
+    }
+     props.actions.register(user, props.history);
   };
   const responseGoogle = (response) => {
     console.log(response);
     const data = { idToken: response.tokenId, userType };
-    props.actions.googleLogin(data, props.history);
+    let role=""
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+      }
+      else{
+      role="lawfirm"
+      }
+    const user ={
+      username:response.profileObj.name,
+      email:response.profileObj.email,
+      role,
+      socialLogin:true
+    
+    }
+    console.log(data)
+    props.actions.register(user, props.history);
     // setEmail({ ...email, value: data.profileObj.email });
   };
 
@@ -406,11 +431,11 @@ function Register(props) {
                 <div>
                   <FacebookLogin
                     // appId="1453893171475138"
-                    appId="645576173040339"
+                    appId="472085380686612"
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={responseFacebook}
-                    redirectUri="https://LegalTek.herokuapp.com/"
+                    redirectUri="https://localhost:3000"
                     render={(renderProps) => (
                       <div className="social_btn" onClick={renderProps.onClick}>
                         <svg
@@ -441,7 +466,7 @@ function Register(props) {
                 </div>
                 <div>
                   <GoogleLogin
-                    clientId="769714580677-5jh37eqkl71hjkv9l53if687r0pm5s9s.apps.googleusercontent.com"
+                    clientId="8899855246-niaroe38jmfbhvcfetab1piheac2isc9.apps.googleusercontent.com"
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                     className="googleBtn"
