@@ -38,7 +38,7 @@ function BusinessProfile (props) {
       userId: props.auth.user._id,
       userType: props.auth.user.userType,
     };
-    props.actions.getProfile(profileDate, props.history);
+    
 
 
     if (props.match.path === "/business/profile" || props.match.path === "/business/") {

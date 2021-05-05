@@ -179,7 +179,7 @@ export class Profile extends Component {
           userId: this.props.auth.user._id,
           userType: this.props.auth.user.userType,
         };
-        this.props.actions.getProfile(profileDate, this.props.history);
+        // this.props.actions.getProfile(profileDate, this.props.history);
     
         window.addEventListener("click", (e) => {
           let curLabel = document.querySelector(".cur-label");

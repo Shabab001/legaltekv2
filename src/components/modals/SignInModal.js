@@ -300,11 +300,11 @@ function SignIn(props) {
             <div>
               <FacebookLogin
                 // appId="1453893171475138"
-                appId="472085380686612"
+                appId="1454499971558219"
                 autoLoad={false}
                 fields="name,email,picture"
                 callback={responseFacebook}
-                redirectUri="https://Xukini.herokuapp.com/"
+                redirectUri="https://legaltekv2.herokuapp.com"
                 render={(renderProps) => (
                   <div className="social_btn" onClick={renderProps.onClick}>
                     <svg
@@ -335,7 +335,7 @@ function SignIn(props) {
             </div>
             <div>
               <GoogleLogin
-                clientId="8899855246-niaroe38jmfbhvcfetab1piheac2isc9.apps.googleusercontent.com"
+                clientId="8899855246-bn8gtk59a7q3omglal2pf6cv5rqqsu52.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 className="googleBtn"

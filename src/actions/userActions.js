@@ -8,7 +8,7 @@ import { reject } from "async";
 export const login = (user, history) => (dispatch) => {
   console.log(history);
   return new Promise((resolve, reject) => {
-    Axios.post("https://48235bb8e248.ngrok.io/auth/local", user)
+    Axios.post("https://legaltek-backend.herokuapp.com/auth/local", user)
       .then((response) => {
         console.log(response)
         localStorage.setItem("auth_token", response.data.jwt);
@@ -140,7 +140,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
 export const register = (user, history) => (dispatch) => {
   console.log(user)
   return new Promise((resolve, reject) => {
-    Axios.post("https://48235bb8e248.ngrok.io/auth/local/register", user,{mode:'cors'})
+    Axios.post("https://legaltek-backend.herokuapp.com/auth/local/register", user,{mode:'cors'})
       .then((response) => {
         console.log("database called")
         console.log(response.data.user);
@@ -178,6 +178,7 @@ export const logout = (history) => {
   setAuthToken();
   console.log("hi", history);
   message.success("Successfully logged out!");
+  history.push("/")
   return {
     type: Types.SET_USER,
     payload: {
@@ -363,36 +364,36 @@ return new Promise((resolve,reject)=>{
 
 })}
 
-export const getProfile = (data, history) => (dispatch) => {
-  return new Promise((resolve, reject) => {
+// export const getProfile = (data, history) => (dispatch) => {
+//   return new Promise((resolve, reject) => {
 
-    Axios.post("/api/getProfile", data)
-    .then((res) => {
-      console.log(res.data);
-      if (res.data.success) {
+//     Axios.post("/api/getProfile", data)
+//     .then((res) => {
+//       console.log(res.data);
+//       if (res.data.success) {
     
 
-      dispatch({
-        type: Types.GET_PROFILE,
-        payload: {
-          retrievedProfile: res.data.user,
-        },
-      });
-      // history.push('/profilePage')
-      return resolve(true); 
-      }
-    })
-    .catch((error) => {
-      // console.log(error);
-      if (error && error.response) {
-        console.log(error.response.data);
-        // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
-        return resolve(false)
-      }
-      // message.success("Logged in successfully!");
-      // return resolve(false)
-    });
-});
+//       dispatch({
+//         type: Types.GET_PROFILE,
+//         payload: {
+//           retrievedProfile: res.data.user,
+//         },
+//       });
+//       // history.push('/profilePage')
+//       return resolve(true); 
+//       }
+//     })
+//     .catch((error) => {
+//       // console.log(error);
+//       if (error && error.response) {
+//         console.log(error.response.data);
+//         // dispatch({ type: Types.USER_ERRORS,error:"" });
+//         message.error(error.response.data.message);
+//         return resolve(false)
+//       }
+//       // message.success("Logged in successfully!");
+//       // return resolve(false)
+//     });
+// });
 
-}
+// }
