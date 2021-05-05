@@ -140,7 +140,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
 export const register = (user, history) => (dispatch) => {
   console.log(user)
   return new Promise((resolve, reject) => {
-    Axios.post("https://legaltek-backend.herokuapp.com/auth/local/register", user,{mode:'cors'})
+    Axios.post("http://localhost:1337/auth/local/register", user,{mode:'cors'})
       .then((response) => {
         console.log("database called")
         console.log(response.data.user);
