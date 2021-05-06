@@ -126,7 +126,7 @@ function Register(props) {
    
       };
 
-      let response = Axios.post('http://localhost:1337/auth/send-confirmation-email', user);
+      let response = Axios.post('https://legaltek-backend.herokuapp.com/auth/send-confirmation-email', user);
       
       if (response) {
         console.log(response);

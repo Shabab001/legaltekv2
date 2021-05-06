@@ -12,7 +12,7 @@ const EmailConfirmation = (props) => {
     useEffect(()=>{
         (async()=>{
 
-            let response = await Axios.get(`http://localhost:1337/auth/verify-confirmation-email/${token}` )
+            let response = await Axios.get(`https://legaltek-backend.herokuapp.com/auth/verify-confirmation-email/${token}` )
             if(response){
     
                 console.log(response);
