@@ -13,9 +13,9 @@ import SignIn from "../modals/SignInModal";
 import Register from "../modals/SignUpModal";
 import ForgotPass from "../modals/ForgotPassModal";
 import SignInWithPhoneModal from "../modals/SignInWithPhoneModal";
-import jwt from 'jwt-decode' 
 
-const EmailConfirmation = (props) => {
+
+const EmailConfirmation2 = (props) => {
     const [regProp, setRegProp] = useState(false);
     const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
@@ -25,26 +25,8 @@ const EmailConfirmation = (props) => {
   const modalRoot = document.getElementById("modal-root")
 
     const{token}= useParams();
-    const name =jwt(token)
-    console.log(name)
 
-    useEffect(()=>{
-        (async()=>{
-
-            let response = await Axios.get(`https://legaltek-backend.herokuapp.com/auth/verify-confirmation-email/${token}` )
-            if(response){
-    
-                console.log(response);
-                console.log(props.actions)
-            let newUser=await props.actions.register(response.data)
-            if(newUser){
-               
-               console.log(newUser)
-            }
-            }
-        })()
-    
-    },[])
+  
 console.log(token)
 
 
@@ -61,7 +43,7 @@ console.log(token)
             <p>Account Activated </p>
           
           <p></p>
-            <p>Hello {name.username},</p>
+            <p>Hello {token},</p>
             <p>Your email has been verifired. Your account is now active</p>
             
         </div>
@@ -169,5 +151,5 @@ function mapStateToProps(state, ownProps) {
       actions: bindActionCreators(userActions, dispatch),
     };
   }
-  export default connect(mapStateToProps, mapDispatchToProps)(EmailConfirmation);
+  export default connect(mapStateToProps, mapDispatchToProps)(EmailConfirmation2);
        

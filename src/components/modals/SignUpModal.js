@@ -15,6 +15,10 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 function Register(props) {
   const { userTypeProp } = props;
   const [loading, setLoading] = useState(false);
+  const[hideMsg,setHideMsg]=useState(true)
+
+  const [checkMessage,setCheckMessage]=useState(false)
+  const[checkBox,setCheckbox]=useState(false)
 
   const [email, setEmail] = useState({ value: "", message: "", isValid: true });
   const [username, setUserName] = useState({ value: ""});
@@ -44,6 +48,12 @@ function Register(props) {
     userTypeProp ? userTypeProp : "CUSTOMER"
   );
 
+
+  const handleCheckbox=(e)=>{
+    setCheckbox(e.target.checked)
+    setCheckMessage(false)
+  }
+
   const changeUserType = (e) => {
     console.log(e.target.value);
     setUserType(e.target.value);
@@ -60,6 +70,7 @@ function Register(props) {
 
   const submitForm = async (e) => {
     e.preventDefault();
+    if(checkBox){
     setLoading(true);
     console.log(
       email.value,
@@ -131,18 +142,25 @@ function Register(props) {
       if (response) {
         console.log(response);
         message.success("verify your email!");
-        props.history.push("/auth/verify-email")
+        props.history.push(`/auth/verify-email/${email.value}`)
         setLoading(false);
+        props.closeRegister();
        
       } else {
         setLoading(false);
         message.error("Could not sign you up!");
       }
     }
+  }
+  else{
+    setCheckMessage(true)
+    setHideMsg(false)
+  }
   };
 
-  const responseFacebook = (response) => {
+  const responseFacebook = async (response) => {
     // setEmail({ ...email, value: data.email });
+    if(checkBox){
     console.log(response);
     let role=""
     if(userType==="CUSTOMER"){
@@ -158,9 +176,17 @@ function Register(props) {
       socialLogin:true
     
     }
-     props.actions.register(user, props.history);
+    let newUser=await props.actions.register(user)
+    if(newUser){
+      props.history.push(`/auth/activated/${newUser.username}`)
+    }
+  }
+  else{
+    setCheckMessage(true)
+  }
   };
-  const responseGoogle = (response) => {
+  const responseGoogle = async (response) => {
+    if(checkBox){
     console.log(response);
     const data = { idToken: response.tokenId, userType };
     let role=""
@@ -178,8 +204,15 @@ function Register(props) {
     
     }
     console.log(data)
-    props.actions.register(user, props.history);
+    let newUser=await props.actions.register(user)
+    if(newUser){
+      props.history.push(`/auth/activated/${newUser.username}`)
+    }
     // setEmail({ ...email, value: data.profileObj.email });
+  }
+  else{
+    setCheckMessage(true)
+  }
   };
 
   return (
@@ -343,7 +376,7 @@ function Register(props) {
                   marginBottom: 0,
                 }}
               >
-                <input type="checkbox" id="agree" />
+                <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox} />
                 <span className="checkBox">
                   <i className="fa fa-check" />
                 </span>
@@ -367,6 +400,10 @@ function Register(props) {
             <button className="signInBtn" onClick={submitForm}>
               {loading ? <div className="spinner-border"></div>: "Sign Up"}
             </button>
+            {checkMessage && !hideMsg?<div style={{color:"red",fontSize:"6.rem",textAlign:"center",paddingTop:"1rem"}}>
+              Click the agrrement for authentication
+            </div>:null
+            }
             <div
               className="btm-links-login"
               style={{ flexDirection: "column" }}
@@ -568,6 +605,7 @@ function Register(props) {
                   &nbsp;Sign In
                 </Link>
               </p>
+            
               {/* <p
                 style={{ fontSize: 11, fontFamily: "lato", textAlign: "left" }}
               >

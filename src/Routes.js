@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { Route, Switch } from "react-router-dom";
 import EmailConfirmation from "./components/emailConfirmation/emailConfirmation";
+import EmailConfirmation2 from "./components/emailConfirmation/emailConfirmation2";
 import VerifyEmail from "./components/emailConfirmation/verifyEmail";
 import Guidelines from "./components/Guidelines";
 import CreateBlog from "./components/NewProfile/BusinessProfile/blog-contents/createBlog";
@@ -49,9 +50,15 @@ function Routes(props) {
       <Switch>
         <>
           <div className="index">
+          <Route exact path="/auth/activation/:token" component={EmailConfirmation} />
+          <Route exact path="/auth/activated/:token" component={EmailConfirmation2} />
+            <Route exact path="/auth/verify-email/:token" component={VerifyEmail} />
+          {!props.location.pathname.includes("/auth/")?
+          <>
             <BottomNav {...props} />
             <Header {...props} />
             <Route exact path="/" component={Index} />
+            </>:null}
             {/* <Route exact path="/newProfile" component={UserProfile} /> */}
             <CustomerPrivateRoute exact path="/user/" component={UserProfile} />
 
@@ -205,8 +212,7 @@ function Routes(props) {
             <Route exact path="/view-profile/:id" component={ViewProfile} />
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             <Route exact path="/business/:postId" component={BusinessProfile} />
-            <Route exact path="/auth/activation/:token" component={EmailConfirmation} />
-            <Route exact path="/auth/verify-email" component={VerifyEmail} />
+          
             <Route exact path="/careers" component={Careers} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/terms-and-conditions" component={Terms} />
@@ -214,9 +220,9 @@ function Routes(props) {
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/how-it-works" component={HowItWorks} />
             <Route exact path="/business" component={Business} />
-       
+          
 
-            {!props.location.pathname.includes("/business/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/")? 
+            {!props.location.pathname.includes("/business/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/")&& !props.location.pathname.includes("/auth/")? 
         <Footer {...props} /> : ""
       }
           </div>

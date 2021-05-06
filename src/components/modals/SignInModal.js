@@ -15,6 +15,9 @@ function SignIn(props) {
   const [showPass, setShowPass] = useState(false);
   console.log(props);
 
+  const [checkMessage,setCheckMessage]=useState(false)
+  const[hideMsg,setHideMsg]=useState(true)
+  const[checkBox,setCheckbox]=useState(false)
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState({
     value: "",
@@ -37,6 +40,12 @@ function SignIn(props) {
     }
   }, [])
 
+  const handleCheckbox=(e)=>{
+    setCheckbox(e.target.checked)
+    setCheckMessage(false)
+  }
+
+
   const changeUserType = (e) => {
     console.log(e.target.value);
     setUserType(e.target.value);
@@ -44,6 +53,7 @@ function SignIn(props) {
   };
 
   const submitForm = async (e) => {
+    if(checkBox){
     setLoading(true);
     e.preventDefault();
     let emailValidity = false;
@@ -112,9 +122,15 @@ function SignIn(props) {
     } else {
       setLoading(false);
     }
+  }
+  else{
+    setCheckMessage(true)
+    setHideMsg(false)
+  }
   };
 
   const responseFacebook = (response) => {
+    if(checkBox){
     // setEmail({ ...email, value: data.email });
     console.log(response);
     let role=""
@@ -132,9 +148,16 @@ function SignIn(props) {
     
     }
     props.actions.login(user, props.history);
+  }
+
+else{
+  setCheckMessage(true)
+  setHideMsg(false)
+}
   };
 
   const responseGoogle = (response) => {
+    if(checkBox){
     console.log(response);
     if(!response.error){
       const data = { idToken: response.tokenId, userType };
@@ -154,6 +177,11 @@ function SignIn(props) {
       }
       props.actions.login(user, props.history);
     }
+  }
+  else{
+    setCheckMessage(true)
+    setHideMsg(false)
+  }
 
     // setEmail({ ...email, value: data.profileObj.email });
   };
@@ -431,7 +459,7 @@ function SignIn(props) {
                       marginBottom: 0,
                     }}
                   >
-                    <input type="checkbox" id="agree" />
+                    <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox} />
                     <span className="checkBox">
                       <i className="fa fa-check" />
                     </span>
@@ -446,6 +474,10 @@ function SignIn(props) {
 
             {/* Sign In */}
           </button>
+          {checkMessage && !hideMsg?<div style={{color:"red",fontSize:"6.rem",textAlign:"center",paddingTop:"1rem"}}>
+              Click the agrrement for authentication
+            </div>:null
+            }
         </div>
 
         <div

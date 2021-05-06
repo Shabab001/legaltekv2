@@ -13,7 +13,7 @@
   background-color: #fb1c2e !important;
 }
 .form-modal {
-  height: 600px;
+  height: auto;
   width: 500px;
   /* max-width: fit-content !important; */
   display: flex;

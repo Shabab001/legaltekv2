@@ -29,6 +29,9 @@ function LoginWithPhone(props) {
   }, [])
   const [username, setUserName] = useState({ value: ""});
   const [loading, setLoading] = useState(false);
+
+  const [checkMessage,setCheckMessage]=useState(false)
+  const[checkBox,setCheckbox]=useState(false)
   const [otp, setOtp] = useState({
     value: "",
     message: "",
@@ -40,7 +43,7 @@ function LoginWithPhone(props) {
     message: "",
     isValid: true,
   });
-
+  const[hideMsg,setHideMsg]=useState(true)
   const [countryCode, setCountryCode] = useState({
     value: localStorage.getItem('calling_code')?localStorage.getItem('calling_code'): "",
     message: "",
@@ -62,6 +65,9 @@ function LoginWithPhone(props) {
   };
 
   const handleSignin = async(e)=>{
+    if(checkBox){
+
+    
     e.preventDefault()
     let role=null;
     let phoneNoValidity = phoneNo.isValid;
@@ -115,7 +121,11 @@ function LoginWithPhone(props) {
     } else {
       setLoading(false);
     }
-
+  }
+  else{
+  setCheckMessage(true);
+  setHideMsg(false)
+  }
   }
   const submitForm = async (e) => {
     setLoading(true);
@@ -147,13 +157,15 @@ function LoginWithPhone(props) {
         setLoading(false);
       }
     } else {
-      setLoading(false);
+      setCheckMessage(true);
+      setHideMsg(false)
     }
               
    
   };
 
   const submitOtp = async (e) => {
+    if(checkBox){
     setLoading(true);
     e.preventDefault();
     // let ph = JSON.parse(localStorage.getItem("phoneNo"));
@@ -189,8 +201,18 @@ role="lawfirm"
       setOtpInputScreen(false)
       setLoading(false);
     }
+  
+} else {
+  setCheckMessage(true);
+  setHideMsg(false)
+}
   };
 
+  const handleCheckbox=(e)=>{
+    setCheckbox(e.target.checked)
+    setCheckMessage(false)
+  }
+  console.log("checked", checkBox)
   const responseFacebook = (data) => {
     // setEmail({ ...email, value: data.email });
     console.log(data);
@@ -202,8 +224,13 @@ role="lawfirm"
   };
 
   const handleOtpChange = (otpdata) => {
+    if(checkBox){
     console.log(otpdata);
     setOtp({ ...otp, value: otpdata });
+  }
+ else {
+  setLoading(false);
+}
   };
   console.log(password.value)
   useEffect(() => {
@@ -650,7 +677,8 @@ role="lawfirm"
               </div>
             </div>
           </div>
-          <div
+       
+          {!props.regProp ?          <div
                   className="field checkBoxRow"
                   style={{ textAlign: "left", display: "flex" }}
                 >
@@ -663,7 +691,7 @@ role="lawfirm"
                       marginBottom: 0,
                     }}
                   >
-                    <input type="checkbox" id="agree" />
+                    <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox} />
                     <span className="checkBox">
                       <i className="fa fa-check" />
                     </span>
@@ -673,6 +701,41 @@ role="lawfirm"
                     </p>
                   </label>
                 </div>
+                  :
+                  <div
+                  className="field checkBoxRow"
+                  style={{ textAlign: "left", display: "flex" }}
+                  >
+                  <label
+                    htmlFor="agree"
+                    style={{
+                      fontSize: 11,
+                      color: "gray",
+                      fontFamily: "lato",
+                      marginBottom: 0,
+                    }}
+                  >
+                    <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox}/>
+                    <span className="checkBox">
+                      <i className="fa fa-check" />
+                    </span>
+                    <p>
+                      By selecting Sign up and continue below, i agree to{" "}
+                      <span
+                        style={{
+                          color: "black",
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        LegalTek's{" "}
+                      </span>
+                      Terms of Services, Payment Terms of Services, Privacy Policy
+                      and Nondiscrimination Policy.
+                    </p>
+                  </label>
+                  </div>
+                  }
           {!otpInputScreen && props.regProp ? (
             <button className="signInBtn" onClick={submitForm} type="submit">
               Request OTP
@@ -687,7 +750,10 @@ role="lawfirm"
             </button> 
           )}
         </div>
-
+        {checkMessage && !hideMsg?<div style={{color:"red",fontSize:"6.rem",textAlign:"center",paddingTop:"1rem"}}>
+              Click the agrrement for authentication
+            </div>:null
+            }
         <div
           className="btm-links-login"
           style={{ display: "flex", flexDirection: "column" }}
