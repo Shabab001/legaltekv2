@@ -5,10 +5,13 @@ import setAuthToken from "../utils/setAuthToken";
 import { message } from "antd";
 import { reject } from "async";
 
+const {REACT_APP_API}= process.env
+
+
 export const login = (user, history) => (dispatch) => {
   console.log(history);
   return new Promise((resolve, reject) => {
-    Axios.post("https://legaltek-backend.herokuapp.com/auth/local", user)
+    Axios.post(`${REACT_APP_API}/auth/local`, user)
       .then((response) => {
         console.log(response)
         localStorage.setItem("auth_token", response.data.jwt);
@@ -48,7 +51,8 @@ export const login = (user, history) => (dispatch) => {
             },
           });
         }
-        message.error("Could not sign you in!");
+       
+         message.error(error.response.data.data[0].messages[0].message);
         resolve(false);
       });
   });
@@ -140,7 +144,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
 export const register = (user, history) => (dispatch) => {
   console.log(user)
   return new Promise((resolve, reject) => {
-    Axios.post("https://legaltek-backend.herokuapp.com/auth/local/register", user,{mode:'cors'})
+    Axios.post(`${REACT_APP_API}/auth/local/register`, user,{mode:'cors'})
       .then((response) => {
         console.log("database called")
         console.log(response.data.user);
@@ -166,7 +170,7 @@ export const register = (user, history) => (dispatch) => {
             },
           });
         }
-        message.error("Sign up failed!");
+        message.error(error.response.data.data[0].messages[0].message);
         resolve(false)
       });
   });
@@ -210,7 +214,7 @@ export const forgotPassword = (data, history) => (dispatch) => {
 
 export const sendOtp = (data, history) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("https://legaltek-backend.herokuapp.com/auth/send-otp", data)
+    Axios.post(`${REACT_APP_API}/auth/send-otp`, data)
       .then((res) => {
         console.log(res);
         if (res) {
@@ -226,20 +230,24 @@ export const sendOtp = (data, history) => (dispatch) => {
         }
       })
       .catch((error) => {
-        console.log(error);
-        message.success("Otp could not be sent to your phone number.");
         if (error && error.response) {
-          console.log(error.response.data);
-          dispatch({ type: Types.USER_ERRORS });
-          return resolve(false);
+          console.log(error.response);
+          dispatch({
+            type: Types.USER_ERRORS,
+            payload: {
+              error: error.response.data,
+            },
+          });
         }
+        message.error(error.response.data.data[0].messages[0].message);
+        resolve(false)
       });
   });
 };
 
 export const verifyOtp = (data, history) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("https://legaltek-backend.herokuapp.com/auth/verify-otp", data)
+    Axios.post(`${REACT_APP_API}/auth/verify-otp`, data)
       .then((res) => {
         console.log('verified',res.data);
         if (res.data == "success") {

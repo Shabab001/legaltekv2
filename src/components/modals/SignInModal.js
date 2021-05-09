@@ -53,7 +53,7 @@ function SignIn(props) {
   };
 
   const submitForm = async (e) => {
-    if(checkBox){
+    
     setLoading(true);
     e.preventDefault();
     let emailValidity = false;
@@ -122,15 +122,11 @@ function SignIn(props) {
     } else {
       setLoading(false);
     }
-  }
-  else{
-    setCheckMessage(true)
-    setHideMsg(false)
-  }
+
   };
 
   const responseFacebook = (response) => {
-    if(checkBox){
+   
     // setEmail({ ...email, value: data.email });
     console.log(response);
     let role=""
@@ -148,16 +144,11 @@ function SignIn(props) {
     
     }
     props.actions.login(user, props.history);
-  }
 
-else{
-  setCheckMessage(true)
-  setHideMsg(false)
-}
   };
 
   const responseGoogle = (response) => {
-    if(checkBox){
+   
     console.log(response);
     if(!response.error){
       const data = { idToken: response.tokenId, userType };
@@ -177,11 +168,7 @@ else{
       }
       props.actions.login(user, props.history);
     }
-  }
-  else{
-    setCheckMessage(true)
-    setHideMsg(false)
-  }
+
 
     // setEmail({ ...email, value: data.profileObj.email });
   };

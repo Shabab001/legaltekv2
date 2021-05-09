@@ -24,6 +24,9 @@ const EmailConfirmation = (props) => {
   const [userType, setUserType] = useState("CUSTOMER");
   const modalRoot = document.getElementById("modal-root")
 
+
+const {REACT_APP_API}= process.env
+
     const{token}= useParams();
     const name =jwt(token)
     console.log(name)
@@ -31,7 +34,7 @@ const EmailConfirmation = (props) => {
     useEffect(()=>{
         (async()=>{
 
-            let response = await Axios.get(`https://legaltek-backend.herokuapp.com/auth/verify-confirmation-email/${token}` )
+            let response = await Axios.get(`${REACT_APP_API}/auth/verify-confirmation-email/${token}` )
             if(response){
     
                 console.log(response);

@@ -12,6 +12,9 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { message } from "antd";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
+const {REACT_APP_API}= process.env
+
+
 function Register(props) {
   const { userTypeProp } = props;
   const [loading, setLoading] = useState(false);
@@ -136,25 +139,31 @@ function Register(props) {
         role
    
       };
+  try{
 
-      let response = Axios.post('https://legaltek-backend.herokuapp.com/auth/send-confirmation-email', user);
+    let response = await Axios.post(`${REACT_APP_API}/auth/send-confirmation-email`, user);
+    if (response) {
+      console.log(response);
+      message.success("verify your email!");
+      props.history.push(`/auth/verify-email/${email.value}`)
+      setLoading(false);
+      props.closeRegister();
+     
+    }
+  }
+  catch(err){
+    console.log(err.response.data)
+    setLoading(false);
+    message.error(err.response.data.data[0].messages[0].message);
+  }
       
-      if (response) {
-        console.log(response);
-        message.success("verify your email!");
-        props.history.push(`/auth/verify-email/${email.value}`)
-        setLoading(false);
-        props.closeRegister();
-       
-      } else {
-        setLoading(false);
-        message.error("Could not sign you up!");
-      }
+   
     }
   }
   else{
     setCheckMessage(true)
     setHideMsg(false)
+    console.log("here 3")
   }
   };
 
@@ -183,8 +192,13 @@ function Register(props) {
   }
   else{
     setCheckMessage(true)
+    setHideMsg(false)
+    console.log("here 2")
   }
   };
+  const responseGoogleFailure=(response)=>{
+    console.log(response)
+  }
   const responseGoogle = async (response) => {
     if(checkBox){
     console.log(response);
@@ -212,9 +226,12 @@ function Register(props) {
   }
   else{
     setCheckMessage(true)
+    setHideMsg(false)
+    console.log("here 1")
+
   }
   };
-
+console.log(hideMsg);
   return (
     <div className="form-modal">
       <div className="form">
@@ -246,9 +263,9 @@ function Register(props) {
             Customer
           </button>
           <button
-            value="LAW-FIRM"
+            value="LAWFIRM"
             onClick={changeUserType}
-            className={`${userType == "LAW-FIRM" && "active"}`}
+            className={`${userType == "LAWFIRM" && "active"}`}
           >
            Law Firm
           </button>
@@ -504,10 +521,12 @@ function Register(props) {
                 <div>
                   <GoogleLogin
                     clientId="8899855246-bn8gtk59a7q3omglal2pf6cv5rqqsu52.apps.googleusercontent.com"
+                  
+                    autoLoad={false}
                     onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
+                    onFailure={responseGoogleFailure}
                     className="googleBtn"
-                    isSignedIn={false}
+                    
                     render={(renderProps) => (
                       <div className="social_btn" onClick={renderProps.onClick}>
                         <svg

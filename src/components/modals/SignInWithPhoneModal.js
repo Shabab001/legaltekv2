@@ -65,7 +65,7 @@ function LoginWithPhone(props) {
   };
 
   const handleSignin = async(e)=>{
-    if(checkBox){
+  
 
     
     e.preventDefault()
@@ -121,13 +121,10 @@ function LoginWithPhone(props) {
     } else {
       setLoading(false);
     }
-  }
-  else{
-  setCheckMessage(true);
-  setHideMsg(false)
-  }
+
   }
   const submitForm = async (e) => {
+    if(checkBox){
     setLoading(true);
     console.log('hi')
     e.preventDefault();
@@ -152,10 +149,11 @@ function LoginWithPhone(props) {
         // props.history.push("/OtpInput");
         setOtpInputScreen(true);
       } else {
-        message.error(<p> Could not request OTP!!" &nbsp; &#9749;</p>);
+       
 
         setLoading(false);
       }
+    }
     } else {
       setCheckMessage(true);
       setHideMsg(false)
@@ -165,9 +163,10 @@ function LoginWithPhone(props) {
   };
 
   const submitOtp = async (e) => {
+    e.preventDefault();
     if(checkBox){
     setLoading(true);
-    e.preventDefault();
+   
     // let ph = JSON.parse(localStorage.getItem("phoneNo"));
     // let cc = JSON.parse(localStorage.getItem("countryCode"));
     let role=null;
@@ -213,14 +212,76 @@ role="lawfirm"
     setCheckMessage(false)
   }
   console.log("checked", checkBox)
-  const responseFacebook = (data) => {
+  const responseFacebook = async (response) => {
     // setEmail({ ...email, value: data.email });
-    console.log(data);
+    if(checkBox){
+    console.log(response);
+    let role=""
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+      }
+      else{
+      role="lawfirm"
+      }
+    const user ={
+      username:response.name,
+      email:response.email,
+      role,
+      socialLogin:true
+    
+    }
+    console.log(user)
+    let newUser=await props.actions.register(user)
+    if(newUser){
+      props.setRegProp(false)
+      setOtpInputScreen(false);
+      props.closePhoneSignIn();
+      props.history.push(`/auth/activated/${newUser.username}`)
+    }
+  }
+  else{
+    setCheckMessage(true)
+    setHideMsg(false)
+    console.log("here 2")
+  }
   };
-
-  const responseGoogle = (data) => {
-    console.log(data);
+  const responseGoogleFailure=(response)=>{
+    console.log(response)
+  }
+  const responseGoogle = async (response) => {
+    if(checkBox){
+    console.log(response);
+    const data = { idToken: response.tokenId, userType };
+    let role=""
+    if(userType==="CUSTOMER"){
+      role="authenticated"
+      }
+      else{
+      role="lawfirm"
+      }
+    const user ={
+      username:response.profileObj.name,
+      email:response.profileObj.email,
+      role,
+      socialLogin:true
+    
+    }
+    console.log(data)
+    let newUser=await props.actions.register(user)
+    if(newUser){
+      props.setRegProp(false)
+      setOtpInputScreen(false);
+      props.closePhoneSignIn();
+      props.history.push(`/auth/activated/${newUser.username}`)
+    }
     // setEmail({ ...email, value: data.profileObj.email });
+  }
+  else{
+    setCheckMessage(true)
+    setHideMsg(false)
+    console.log("here 1")
+
+  }
   };
 
   const handleOtpChange = (otpdata) => {
@@ -596,7 +657,7 @@ role="lawfirm"
               <GoogleLogin
                 clientId="769714580677-5jh37eqkl71hjkv9l53if687r0pm5s9s.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onFailure={responseGoogleFailure}
                 className="googleBtn"
                 isSignedIn={false}
                 render={(renderProps) => (
