@@ -24,13 +24,13 @@ const Subscribe = () => {
                       <p>GET INSIDE</p>
                     </div> 
                     <div data-aos= "fade-down"className="right-second-text">
-                      <p>Subscribe and get the latest insides <br/>delivered right to your box</p>
+                      <p>Subscribe and get the latest insides delivered right to your box</p>
                       </div> 
                     <form className="subscribe-form">
                         <div className="subscribw-form-grid">
 
-                        <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="enter your name" name="name" />
-                        <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="enter your email" name="name" />
+                        <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="Enter your name" name="name" />
+                        <input data-aos= "fade-right" type="text" className="subscribe-form-input" placeholder="Enter your email" name="name" />
                         </div>
                         <button data-aos= "fade-left" type="submit" className="subscribe-button">Subscribe Now</button>
                     </form>

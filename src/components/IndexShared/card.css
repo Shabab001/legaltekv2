@@ -38,13 +38,15 @@
   margin: 0;
   padding: 0;
   font-size: 1.2rem;
+  color: var(--primary);
 }
 .card-description p:nth-child(2) {
   font-weight: bold;
   font-size: 0.7rem;
+  color: var(--primary);
 }
 .card-description p:nth-child(3) {
-  color: #504f4f;
+  color: var(--primary);
 }
 .lawyer-contact-grid {
   margin-top: 0.5rem;
@@ -62,6 +64,7 @@
   border-right: 2px solid #dddddd;
   padding: 1rem 0rem;
   justify-content: center;
+  color: var(--primary);
 }
 .lawyer-contact-icons4 {
   display: flex;
@@ -72,7 +75,7 @@
 }
 .lawyer-card-des {
   font-size: 0.8rem;
-
+  color: var(--primary);
   padding: 0.5rem 1rem;
 }
 .card-icons {
@@ -97,7 +100,7 @@
   padding: 1rem 0.5rem;
   gap: 0.3rem;
   font-weight: bold;
-  color: #1c8bad;
+  color: var(--primary);
 }
 .messege-btn {
   border-right: 2px solid #dddddd;
@@ -136,6 +139,7 @@
 }
 .lawyer-area > p:nth-child(1) {
   font-weight: bold;
+  color: var(--primary);
 }
 .lawyer-area > p:nth-child(3) {
   font-size: 0.8rem;

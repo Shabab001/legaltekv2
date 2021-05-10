@@ -13,7 +13,7 @@ import GoogleMapReact from "google-map-react";
 import Geolocate from "../MiniComponents/Geolocate";
 import { Radio } from "antd";
 import Axios from "axios";
-import Logo from "./images/legaltek.jpeg"
+import Logo from "./images/legaltek.webp"
 import {
   IdcardFilled,
   CreditCardFilled,
@@ -323,7 +323,7 @@ function Header(props) {
                 display: "flex",
                 alignItems: "center",
                 position: "relative",
-                color: "#e50077",
+                color: "var(--primary)",
               }}
               ref={mapDrop}
               tabIndex={0}
@@ -358,7 +358,7 @@ function Header(props) {
                     : locality + "," + localityCountry}
                 </span>
               ) : (
-                <span style={{color:"#BA181B"}}>Enter your location</span>
+                <span style={{color:"var(--primary)"}}>Enter your location</span>
               )}
               {mapDropdown && (
                 <div
@@ -373,11 +373,12 @@ function Header(props) {
                       <Geolocate
                         ref={geo}
                         Autocomplete={false}
+                        style={{color:"var(--primary)"}}
                         chooseAddress={(address) => chooseAddress(address)}
                         icon={
                           <i
                             className="fe fe-map-pin input-marker"
-                            style={{ fontSize: "20px", color: "#BA181B" }}
+                            style={{ fontSize: "20px", color: "var(--primary)" }}
                           ></i>
                         }
                         placeholder="Address"
@@ -529,7 +530,7 @@ function Header(props) {
           <div className="menu-items">
             <ul>
               <li className="nav-links" id="language">
-                <button className="nav-side-btn">
+                <button className="nav-side-btn" style={{backgroundColor:"var(--primary)"}}>
                   {/* <i
                     className="fa fa-home"
                     style={{ color: "#e50077", fontSize: 28 }}

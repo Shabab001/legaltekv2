@@ -10,7 +10,7 @@ import * as userActions from "../../actions/userActions";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { message } from "antd";
-import Logo from "./images/legaltek.jpeg"
+import Logo from "./images/legaltek.webp"
 
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
@@ -250,7 +250,7 @@ console.log(hideMsg);
           </div>
           <a
             onClick={props.closeRegister}
-            style={{ color: "#f1433f", fontSize: 20 }}
+            style={{ color: "var(--primary)", fontSize: 20 }}
           >
             <i className="fa fa-close"></i>
           </a>
@@ -624,7 +624,7 @@ console.log(hideMsg);
                     props.closeRegister();
                     props.signInModal();
                   }}
-                  style={{ fontSize: 12, color: "#f1433f" }}
+                  style={{ fontSize: 12, color: "var(--primary)" }}
                 >
                   &nbsp;Sign In
                 </Link>

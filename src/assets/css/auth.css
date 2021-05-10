@@ -1,7 +1,7 @@
 #login {
   padding-top: 150px;
   /* background-color: #00100f !important; */
-  background-color: #f1433f !important;
+  background-color: var(--primary) !important;
   min-height: 100vh;
 }
 .react-tel-input .form-control {
@@ -10,7 +10,7 @@
   padding-left: 2.8rem !important;
 }
 .flag-dropdown {
-  background-color: #fb1c2e !important;
+  background-color: rgba(10, 16, 100, 0.534) !important;
 }
 .form-modal {
   height: auto;
@@ -40,7 +40,7 @@
 }
 
 .form-modal > .form .field input {
-  background-color: rgba(229, 0, 119, 0.05) !important;
+  background-color: rgba(3, 0, 2, 0.05) !important;
 }
 .form .field {
   position: relative;
@@ -224,7 +224,7 @@
 }
 
 .btm-links-login a {
-  color: #f1433f;
+  color: var(--primary);
 }
 
 .efgi button,
@@ -253,14 +253,14 @@
   padding-left: 45px !important;
 }
 .ui.left.icon.input i.icon {
-  background-color: #f1433f !important;
+  background-color: var(--primary) !important;
   color: #fff;
   height: 37px;
   /* top: 1px; */
 }
 
 .calendar.link.icon {
-  background-color: #f1433f !important;
+  background-color: var(--primary) !important;
 }
 .calendar.link.icon::before {
   color: white;
@@ -274,8 +274,8 @@
   cursor: pointer;
   justify-content: center;
   color: #fff;
-  background-color: #f1433f;
-  /* border: 1px solid#f1433f; */
+  background-color: var(--primary);
+  /* border: 1px solidvar(--primary); */
   align-items: center;
   height: 38px;
   text-align: center;
@@ -295,7 +295,7 @@
 }
 
 .signInBtn:hover {
-  box-shadow: 1px 2px 6px 1px rgb(229, 0, 119, 0.6);
+  box-shadow: 1px 2px 6px 1px var(--primary);
 }
 .signInBtn::selection {
   outline: none;
@@ -329,7 +329,7 @@
   transition: all 0.6s ease-in-out !important;
 }
 .ui input:focus {
-  border: 1px solid #f1433f !important;
+  border: 1px solid var(--primary) !important;
 }
 
 /* Rotate */
@@ -426,7 +426,7 @@
 }
 
 .efgi2 i.icon.mail {
-  color: #f1433f;
+  color: var(--primary);
   font-size: 18px;
 }
 
@@ -451,8 +451,8 @@
 }
 
 .userType button.active {
-  border-bottom: 2px solid #f1433f;
-  color: #f1433f;
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 .social_btns {
@@ -533,7 +533,7 @@
 }
 
 .auth-modal .brand span {
-  color: #f1433f;
+  color: var(--primary);
 }
 
 .auth-modal h2 {
@@ -562,19 +562,19 @@
   left: 0px !important;
 }
 /* .auth-box  input:focus{
-  box-shadow: 0px 0px 6px #f1433f !important;
+  box-shadow: 0px 0px 6px var(--primary) !important;
 }
 .auth-box .react-tel-input .selected-flag:hover{
   opacity: 1;
-  background-color: #f1433f;
+  background-color: var(--primary);
 }
 .auth-box .react-tel-input .flag-dropdown.open .selected-flag{
-  background-color: #f1433f;
+  background-color: var(--primary);
   opacity: 1;
 }
 
 .auth-box.react-tel-input .form-control.open{
-  box-shadow: 0px 0px 6px #f1433f !important;
+  box-shadow: 0px 0px 6px var(--primary) !important;
 }
 
 .react-tel-input .flag-dropdown{
@@ -601,11 +601,11 @@
 } */
 
 .react-tel-input .flag-dropdown.open .selected-flag {
-  background: #f1433f !important;
+  background: var(--primary) !important;
 }
 
 .react-tel-input .selected-flag:hover {
-  background: #f1433f !important;
+  background: var(--primary) !important;
 }
 
 .form-modal .slick-slider {
@@ -626,7 +626,7 @@
   position: absolute;
   top: 0px;
   /* transform: translateY(-50%); */
-  background-color: rgba(241, 67, 63, 0.3);
+  background-color: rgba(10, 16, 100, 0.534);
   color: #eee;
   padding: 8px;
   border-radius: 4px;
@@ -686,11 +686,11 @@ input.hidden {
 }
 
 .field input:focus {
-  border: 1px solid #f1433f;
+  border: 1px solid var(--primary);
 }
 
 .field input:focus + i.left {
-  background-color: #f1433f;
+  background-color: var(--primary);
   color: white;
 }
 .field.checkBoxRow {
@@ -706,7 +706,7 @@ input.hidden {
   display: none;
 }
 .field input[type="checkbox"]:checked + span {
-  background-color: #f1433f;
+  background-color: var(--primary);
   animation: scaleUpDown 0.4s ease-in-out;
 }
 .field input[type="checkbox"] + span {
@@ -720,7 +720,7 @@ input.hidden {
   color: white;
   justify-content: center;
   background-color: transparent;
-  border: 2px solid #f1433f;
+  border: 2px solid var(--primary);
   font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   border-radius: 4px;
@@ -829,14 +829,14 @@ input.hidden {
 
   50% {
     transform: scale(1.2, 1.2);
-    background-color: #f1433f;
+    background-color: var(--primary);
     /* opacity: 0.5; */
   }
 
   100% {
     transform: scale(1, 1);
     opacity: 1;
-    background-color: #f1433f;
+    background-color: var(--primary);
   }
 }
 

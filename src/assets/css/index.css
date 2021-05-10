@@ -113,7 +113,7 @@
   /* margin: 0px 10px; */
 }
 .nav-side-btn {
-  background-color: #161a1d;
+  background-color: var(--primary);
   height: 20px;
 }
 
@@ -122,7 +122,7 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: #161a1d;
+  color: var(--primary);
 }
 
 .banner .nav-tabs .nav-link.active {
@@ -151,7 +151,7 @@
   font-family: Antapani-extrabold !important;
   font-size: 22px;
   line-height: 22px;
-  color: #ba181b;
+  color: var(--primary);
   /* transition: transform 0.2s ease-in-out;
   transform: rotate(-45deg) !important; */
   cursor: pointer;
@@ -202,7 +202,7 @@
 .indexHeader .userDropdown a,
 .indexHeader .languageDropdown a:hover,
 .indexHeader .userDropdown a:hover {
-  color: lightslategray;
+  color: var(--primary);
   font-size: 14px;
   display: flex;
   font-weight: 100;
@@ -221,7 +221,7 @@
   margin-right: 20px;
   animation: none;
   transition: none;
-  color: lightslategray;
+  color: var(--primary);
 }
 .indexHeader .userDropdown a .fa-home {
   font-size: 22px !important;
@@ -232,7 +232,7 @@
 .indexHeader .userDropdown a:hover {
   /* fill: var(--secondary) !important;
   color: var(--secondary); */
-  background-color: var(--secondary);
+  background-color: var(--primary);
   color: white;
   fill: #fff !important;
 }
@@ -268,7 +268,7 @@
   transition: 0.3s box-shadow ease-in-out;
 }
 .indexHeader #userBtn:hover {
-  box-shadow: 0px 2px 6px #ba181b;
+  box-shadow: 0px 2px 6px var(--primary);
 }
 .indexHeader .languageDropdown:hover {
   background-color: aliceblue;
@@ -294,9 +294,9 @@
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 #language button:hover {
-  box-shadow: 0px 2px 6px #ba181b;
+  box-shadow: 0px 2px 6px var(--primary);
   transition: all 0.3s ease-in;
-  color: #ba181b;
+  color: var(--primary);
 }
 /* #language button:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -353,7 +353,7 @@
 
 .indexHeader .bus_btn {
   padding: 10px 20px;
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--primary);
   background-color: transparent;
   transition: 0.3s box-shadow ease-in-out;
 }
@@ -555,6 +555,7 @@
 .banner-left-headings p:nth-child(1),
 .banner-left-headings p:nth-child(2) {
   font-size: 3rem;
+  color: var(--primary);
 }
 .banner-left-headings p:nth-child(2) {
   font-weight: bold;
@@ -572,6 +573,7 @@
   font-size: 2rem;
   position: relative;
   top: -6px;
+  color: var(--primary);
 }
 .banner-upper-btn .banner-price p:nth-child(1) {
   text-decoration: line-through;
@@ -580,7 +582,7 @@
   margin: 0 !important;
 }
 .banner-round-btn {
-  background-color: black;
+  background-color: var(--primary);
   color: white;
   display: flex;
   justify-content: center;
@@ -620,15 +622,17 @@
   position: relative;
   left: -10rem;
   font-size: 1.2rem;
+  color: var(--primary);
 }
 .banner-lower-image {
   width: 5rem;
   height: 5rem;
-  background-color: var(--secondary);
+  background-color: white;
   border-radius: 50%;
   overflow: hidden;
   padding: 0 0.5rem;
   margin-right: 1rem;
+  color: var(--primary);
 }
 .banner-lower-left svg {
   position: relative;
@@ -638,14 +642,17 @@
   position: relative;
   object-position: bottom;
   object-fit: fill;
+  color: var(--primary);
 }
 .banner-lower-last {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  color: var(--primary);
 }
 .banner-lower-last p {
   font-weight: bold;
+  color: var(--primary);
 }
 .banner-upper-right {
   position: relative;
@@ -709,6 +716,7 @@
   height: 5rem;
   position: relative;
   animation: down-scroll 1.5s ease-in-out infinite;
+  color: var(--primary);
 }
 .scroll-arrow::before {
   content: "Scroll";

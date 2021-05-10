@@ -9,7 +9,7 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 // import { Spinner } from "react-bootstrap";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import Logo from "./images/legaltek.jpeg"
+import Logo from "./images/legaltek.webp"
 
 function SignIn(props) {
   const { userTypeProp } = props;
@@ -115,14 +115,12 @@ console.log(userTypeProp);
         role
       };
       let response = await props.actions.login(user, props.history);
-      if (response == true) {
+      if (response) {
         props.closeLogin()
-      } else if(response == false) {
-
-        setLoading(false);
-      }
+        setLoading(false)
+      } 
     } else {
-      setLoading(false);
+      setLoading(true);
     }
 
   };
@@ -190,7 +188,7 @@ console.log(userTypeProp);
           </div>
           <a
             onClick={props.closeLogin}
-            style={{ color: "#f1433f", fontSize: 20 }}
+            style={{ color: "var(--primary)", fontSize: 20 }}
           >
             <i className="fa fa-close"></i>
           </a>
@@ -206,6 +204,7 @@ console.log(userTypeProp);
           <button
             value="LAWFIRM"
             onClick={changeUserType}
+            
             className={`${userType == "LAWFIRM" && "active"}`}
           >
            Law Firm
@@ -236,7 +235,7 @@ console.log(userTypeProp);
               className="error-text"
               style={{
                 margin: "5px 0px",
-                color: "firebrick",
+                color: "var(--primary)",
                 textAlign: "left",
               }}
             >
@@ -267,7 +266,7 @@ console.log(userTypeProp);
               className="error-text"
               style={{
                 margin: "5px 0px",
-                color: "firebrick",
+                color: "var(--primary)",
                 textAlign: "left",
               }}
             >
@@ -482,7 +481,7 @@ console.log(userTypeProp);
           >
             Forgot Password?
             <Link
-              style={{ fontSize: 11, color: "#f1433f" }}
+              style={{ fontSize: 11, color: "var(--primary)" }}
               to="#"
               onClick={() => {
                 props.closeLogin();
@@ -501,7 +500,7 @@ console.log(userTypeProp);
           >
             Don't have an account?
             <Link
-              style={{ fontSize: 11, color: "#f1433f" }}
+              style={{ fontSize: 11, color: "var(--primary)" }}
               to="#"
               onClick={() => {
                 props.closeLogin();

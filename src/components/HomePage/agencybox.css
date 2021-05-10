@@ -74,10 +74,10 @@
   font-size: 0.8rem;
 }
 .agency-box-btn1 {
-  background-color: black;
+  background-color: var(--primary);
 }
 .agency-box-btn2 {
-  background-color: #1c8bad;
+  background-color: var(--third);
 }
 .agency-box-right {
   flex-basis: 70%;

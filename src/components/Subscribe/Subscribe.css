@@ -13,7 +13,7 @@
   margin: auto;
   display: flex;
   justify-content: space-between;
-  background-color: #44318d;
+  background-color: var(--primary);
 }
 .subscribe-left-section {
   padding-left: 3rem;
@@ -31,7 +31,7 @@
   height: 100%;
 }
 .subscribe-left-section p {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   padding-top: 1rem;
   padding-left: 2.5rem;
 }
@@ -45,37 +45,37 @@
 .right-second-text p {
   font-family: OpenSans-light;
   padding-top: 0.8rem;
-  padding-left: 0.4rem;
+
   line-height: 1.6rem;
 }
 .subscribe-form {
   display: flex;
   flex-flow: column;
-  padding-top: 3rem;
+  padding-top: 4rem;
   width: 100%;
 }
 .subscribe-form-input {
   outline: none;
   border: none;
-  background-color: #44318d;
-  border-bottom: 2px solid #e98074;
-  color: #e98074;
+  background-color: var(--primary);
+  border-bottom: 2px solid var(--secondary);
+  color: var(--secondary);
   width: 90%;
   font-size: 1.2rem;
 }
 .subscribe-form-input::placeholder {
-  color: #e98074;
+  color: var(--secondary);
   font-size: 1.2rem;
 }
 .subscribe-button {
   position: relative;
-  top: 1rem;
+  top: 1.5rem;
   left: 3rem;
   align-self: flex-end;
-  background-color: #2a1b3d;
+  background-color: var(--secondary);
   border: none;
   padding: 1rem 2rem;
-  color: #e98074;
+  color: white;
 }
 .subscribw-form-grid {
   display: flex;
@@ -99,14 +99,14 @@
   .subscribe-form-input {
     outline: none;
     border: none;
-    background-color: #44318d;
-    border-bottom: 2px solid #e98074;
-    color: #e98074;
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--secondary);
+    color: var(--secondary);
     width: 90%;
     font-size: 0.8rem;
   }
   .subscribe-form-input::placeholder {
-    color: #e98074;
+    color: var(--secondary);
     font-size: 0.8rem;
   }
   .subscribe-button {
@@ -114,11 +114,11 @@
     top: 1rem;
     left: 3rem;
     align-self: flex-end;
-    background-color: #2a1b3d;
+    background-color: var(--secondary);
     border: none;
     font-size: 0.8rem;
     padding: 0.5rem 1rem;
-    color: #e98074;
+    color: white;
   }
   .subscribe-box {
     height: auto;

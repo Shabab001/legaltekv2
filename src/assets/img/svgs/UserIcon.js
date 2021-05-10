@@ -12,7 +12,7 @@ function UserIcon() {
         height="24px"
         style={{
           display: "block",
-          fill: "#BA181B",
+          fill: "var(--primary)",
           color: "#000",
           height:"24px !important",
           width:"24px !important"

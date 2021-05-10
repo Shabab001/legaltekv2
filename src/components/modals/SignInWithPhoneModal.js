@@ -12,7 +12,7 @@ import "react-phone-input-2/lib/style.css";
 import { message } from "antd";
 import OtpInput from "react-otp-input";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import Logo from "./images/legaltek.jpeg"
+import Logo from "./images/legaltek.webp"
 
 
 
@@ -325,7 +325,7 @@ role="lawfirm"
           </div>
           <a
             onClick={props.closePhoneSignIn}
-            style={{ color: "#f1433f", fontSize: 20 }}
+            style={{ color: "var(--primary)", fontSize: 20 }}
           >
            <i className="fa fa-close"></i>
           </a>

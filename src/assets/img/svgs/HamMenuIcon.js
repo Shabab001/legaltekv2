@@ -10,7 +10,7 @@ function HamMenuIcon() {
         focusable="false"
         style={{
           display: "block",
-          fill: "none",
+          fill: "var(--primary)",
           height: 16,
           width: 16,
           stroke: "darkslategray",
