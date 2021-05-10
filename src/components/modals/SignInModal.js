@@ -9,6 +9,7 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 // import { Spinner } from "react-bootstrap";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import Logo from "./images/legaltek.jpeg"
 
 function SignIn(props) {
   const { userTypeProp } = props;
@@ -32,7 +33,8 @@ function SignIn(props) {
   const [userType, setUserType] = useState(
     userTypeProp ? userTypeProp : "CUSTOMER"
   );
-
+  props.setUserTypeProp(userType);
+console.log(userTypeProp);
   useEffect(() => {
     disableBodyScroll(document.querySelector("body"));
     return () => {
@@ -183,8 +185,8 @@ function SignIn(props) {
           }}
         >
           <div className="brand">
-            <span>L</span>
-            <Link to="/">egalTek</Link>
+          
+            <Link to="/"><img src={Logo} alt="logo" style={{height:"2rem", width:"12rem"}}/></Link>
           </div>
           <a
             onClick={props.closeLogin}

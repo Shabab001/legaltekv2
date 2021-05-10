@@ -13,6 +13,7 @@ import GoogleMapReact from "google-map-react";
 import Geolocate from "../MiniComponents/Geolocate";
 import { Radio } from "antd";
 import Axios from "axios";
+import Logo from "./images/legaltek.jpeg"
 import {
   IdcardFilled,
   CreditCardFilled,
@@ -191,8 +192,9 @@ function Header(props) {
     e.preventDefault();
     setRegProp(false);
     setUserType("");
-    props.actions.logout(props.history);
     setLogin(false);
+
+    props.actions.logout(props.history);
     message.success(<p> Logged out Successfully!!" &nbsp; &#9749;</p>);
   };
   const fixedHeader = (e) => {
@@ -314,7 +316,7 @@ function Header(props) {
           <div style={{ display: "flex" }}>
             <div className="brand">
           
-              <Link to="/">Legal<span className="logo-half">Tek</span></Link>
+            <Link to="/"><img src={Logo} alt="logo" style={{height:"2rem", width:"12rem"}}/></Link>
             </div>
             <div
               style={{

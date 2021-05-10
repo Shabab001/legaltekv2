@@ -12,6 +12,8 @@ import "react-phone-input-2/lib/style.css";
 import { message } from "antd";
 import OtpInput from "react-otp-input";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import Logo from "./images/legaltek.jpeg"
+
 
 
 
@@ -57,7 +59,8 @@ function LoginWithPhone(props) {
   const [showPass, setShowPass] = useState(false);
 
   const [otpInputScreen, setOtpInputScreen] = useState(false);
-  const [userType, setUserType] = useState(userTypeProp? userTypeProp : 'CUSTOMER')
+  console.log(userTypeProp)
+  const [userType, setUserType] = useState( userTypeProp ? userTypeProp : "CUSTOMER")
 
   const changeUserType = (e) => {
     setUserType(e.target.value);
@@ -112,11 +115,12 @@ function LoginWithPhone(props) {
         role
       };
       let response = await props.actions.login(user, props.history);
-      if (response == true) {
-       
-      } else if(response == false) {
+      if (response) {
+        props.closePhoneSignIn();
+        setLoading(false)
+      } else  {
 
-        setLoading(false);
+        setLoading(true);
       }
     } else {
       setLoading(false);
@@ -161,6 +165,12 @@ function LoginWithPhone(props) {
               
    
   };
+  useEffect(()=>{
+    if(props.regProp){
+
+      setUserType(userTypeProp ? userTypeProp === "LAWYER"?  "LAWFIRM": userTypeProp: "CUSTOMER")
+    }
+  },[props.regProp])
 
   const submitOtp = async (e) => {
     e.preventDefault();
@@ -285,13 +295,10 @@ role="lawfirm"
   };
 
   const handleOtpChange = (otpdata) => {
-    if(checkBox){
+   
     console.log(otpdata);
     setOtp({ ...otp, value: otpdata });
-  }
- else {
-  setLoading(false);
-}
+
   };
   console.log(password.value)
   useEffect(() => {
@@ -313,8 +320,8 @@ role="lawfirm"
           }}
         >
           <div className="brand">
-          <span>L</span>
-            <Link to="/">galTek</Link>
+       
+          <Link to="/"><img src={Logo} alt="logo" style={{height:"2rem", width:"12rem"}}/></Link>
           </div>
           <a
             onClick={props.closePhoneSignIn}
@@ -554,6 +561,7 @@ role="lawfirm"
                 separator={false}
                 style={{ color: "#000" }}
                 containerStyle={{ justifyContent: "center" }}
+                shouldAutoFocus={true}
             
               />
             </div>
@@ -818,14 +826,17 @@ role="lawfirm"
         <div
           className="btm-links-login"
           style={{ display: "flex", flexDirection: "column" }}
+
         >
+          {!props.regProp ?
           <p style={{ textAlign: "left", fontSize: 11 }}    onClick={()=>{
              props.setRegProp(false)
                 props.closePhoneSignIn();
                 props.forgotPassModal()
               }}>
             Forgot Password?<Link >&nbsp;Reset</Link>
-          </p>
+          </p>:null
+            }
           {props.regProp? 
                <p style={{ textAlign: "left", fontSize: 11 }}
                onClick={()=>{

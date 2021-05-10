@@ -10,6 +10,8 @@ import * as userActions from "../../actions/userActions";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { message } from "antd";
+import Logo from "./images/legaltek.jpeg"
+
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 const {REACT_APP_API}= process.env
@@ -48,8 +50,8 @@ function Register(props) {
     isValid: true,
   });
   const [userType, setUserType] = useState(
-    userTypeProp ? userTypeProp : "CUSTOMER"
-  );
+    userTypeProp ? userTypeProp === "LAWYER"?  "LAWFIRM": userTypeProp: "CUSTOMER")
+    props.setUserTypeProp(userType);
 
 
   const handleCheckbox=(e)=>{
@@ -243,8 +245,8 @@ console.log(hideMsg);
           }}
         >
           <div className="brand">
-          <span>L</span>
-            <Link to="/">galTek</Link>
+         
+          <Link to="/"><img src={Logo} alt="logo" style={{height:"2rem", width:"12rem"}}/></Link>
           </div>
           <a
             onClick={props.closeRegister}
@@ -380,47 +382,7 @@ console.log(hideMsg);
                 {password.message}
               </p>
             </div>
-            <div
-              className="field checkBoxRow"
-              style={{ textAlign: "left", display: "flex" }}
-            >
-              <label
-                htmlFor="agree"
-                style={{
-                  fontSize: 11,
-                  color: "gray",
-                  fontFamily: "lato",
-                  marginBottom: 0,
-                }}
-              >
-                <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox} />
-                <span className="checkBox">
-                  <i className="fa fa-check" />
-                </span>
-                <p>
-                  By selecting Sign up and continue below, i agree to{" "}
-                  <span
-                    style={{
-                      color: "black",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                    }}
-                  >
-                    LegalTek's{" "}
-                  </span>
-                  Terms of Services, Payment Terms of Services, Privacy Policy
-                  and Nondiscrimination Policy.
-                </p>
-              </label>
-            </div>
-
-            <button className="signInBtn" onClick={submitForm}>
-              {loading ? <div className="spinner-border"></div>: "Sign Up"}
-            </button>
-            {checkMessage && !hideMsg?<div style={{color:"red",fontSize:"6.rem",textAlign:"center",paddingTop:"1rem"}}>
-              Click the agrrement for authentication
-            </div>:null
-            }
+         
             <div
               className="btm-links-login"
               style={{ flexDirection: "column" }}
@@ -428,7 +390,7 @@ console.log(hideMsg);
               <h4
                 style={{
                   textAlign: "left",
-                  marginTop: 15,
+                  marginTop: 4,
                   marginBottom: "0px !important",
                 }}
               >
@@ -605,11 +567,54 @@ console.log(hideMsg);
                   </div>
                 </div>
               </div>
+              <div
+              className="field checkBoxRow"
+              style={{ textAlign: "left", display: "flex" }}
+            >
+              <label
+                htmlFor="agree"
+                style={{
+                  fontSize: 11,
+                  color: "gray",
+                  fontFamily: "lato",
+                  marginBottom: 0,
+                }}
+              >
+                <input type="checkbox" id="agree" checked={checkBox} onChange={handleCheckbox} />
+                <span className="checkBox">
+                  <i className="fa fa-check" />
+                </span>
+                <p>
+                  By selecting Sign up and continue below, i agree to{" "}
+                  <span
+                    style={{
+                      color: "black",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                  >
+                    LegalTek's{" "}
+                  </span>
+                  Terms of Services, Payment Terms of Services, Privacy Policy
+                  and Nondiscrimination Policy.
+                </p>
+              </label>
+            </div>
+
+            <button className="signInBtn" onClick={submitForm}>
+              {loading ? <div className="spinner-border"></div>: "Sign Up"}
+            </button>
+            {checkMessage && !hideMsg?<div style={{color:"red",fontSize:"6.rem",textAlign:"center",paddingTop:"1rem"}}>
+              Click the agrrement for authentication
+            </div>:null
+            }
+
               <p
                 style={{
                   fontSize: 12,
                   fontFamily: "'Rubik'",
                   textAlign: "left",
+                  paddingTop:"1rem"
                 }}
               >
                 Already have an account?
