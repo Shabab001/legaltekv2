@@ -22,13 +22,17 @@ message.config({
 
 
 const token = localStorage.getItem('auth_token')
-if(token){
+const user = localStorage.getItem('user_session')
+
+if(token && user){
+  console.log(JSON.parse(user))
     let decode = jwtDecode(token)
+    
     setAuthToken(token)
     store.dispatch({
         type: Types.SET_USER,
         payload: {
-            user: decode
+            user: JSON.parse(user)
         }
     })
 }

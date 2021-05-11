@@ -16,8 +16,10 @@ export const login = (user, history) => (dispatch) => {
         console.log(response)
         localStorage.setItem("auth_token", response.data.jwt);
         localStorage.setItem("refresh_token", response.data.jwt);
+        localStorage.setItem("user_session", JSON.stringify(response.data.user));
 
         setAuthToken(response.data.jwt);
+        console.log(response.data.user)
 
         dispatch({
           type: Types.SET_USER,
@@ -179,6 +181,7 @@ export const register = (user, history) => (dispatch) => {
 export const logout = (history) => {
   localStorage.removeItem("auth_token");
   localStorage.removeItem("refresh_token");
+  localStorage.removeItem("user_session");
   setAuthToken();
   console.log("hi", history);
   message.success("Successfully logged out!");
@@ -372,36 +375,47 @@ return new Promise((resolve,reject)=>{
 
 })}
 
-// export const getProfile = (data, history) => (dispatch) => {
-//   return new Promise((resolve, reject) => {
+export const getProfile = (data, history) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
 
-//     Axios.post("/api/getProfile", data)
-//     .then((res) => {
-//       console.log(res.data);
-//       if (res.data.success) {
     
 
-//       dispatch({
-//         type: Types.GET_PROFILE,
-//         payload: {
-//           retrievedProfile: res.data.user,
-//         },
-//       });
-//       // history.push('/profilePage')
-//       return resolve(true); 
-//       }
-//     })
-//     .catch((error) => {
-//       // console.log(error);
-//       if (error && error.response) {
-//         console.log(error.response.data);
-//         // dispatch({ type: Types.USER_ERRORS,error:"" });
-//         message.error(error.response.data.message);
-//         return resolve(false)
-//       }
-//       // message.success("Logged in successfully!");
-//       // return resolve(false)
-//     });
-// });
+    Axios.get(`${REACT_APP_API}/users/me`,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      },)
+    .then((res) => {
+      console.log(res.data);
+      if (res) {
+    
 
-// }
+      dispatch({
+        type: Types.GET_PROFILE,
+        payload: {
+          retrievedProfile: res.data,
+        },
+      });
+      // history.push('/profilePage')
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
+}

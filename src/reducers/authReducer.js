@@ -3,7 +3,8 @@ const init = {
     user: {},
     isAuthenticated: false,
     errors: {},
-    countryInfo: {}
+    countryInfo: {},
+    userProfile:{}
 }
 
 
@@ -63,6 +64,7 @@ const authReducer = (state=init,action) =>{
         }
 
         case Types.GET_PROFILE: {
+            console.log(action.payload.retrievedProfile)
             return {
                 ...state,
                 user: {...state.user,...action.payload.retrievedProfile},

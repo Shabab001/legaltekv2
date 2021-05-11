@@ -9,6 +9,7 @@ import { DatePicker } from "antd";
 import { Select } from "antd";
 import validator from "validator";
 import moment from "moment";
+import SignUpWIzard from "./SignUpWIzard";
 import NavigationPrompt from "react-router-navigation-prompt";
 import {
   Dialog,
@@ -20,6 +21,20 @@ import {
 import Geolocate from "./../../MiniComponents/Geolocate";
 import { geocodeByAddress } from "react-places-autocomplete";
 import girl2 from "../../../assets/img/girl2.jpg";
+import {
+  CardElement,
+  useStripe,
+  useElements,
+  Elements,
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+let stripePK =
+  "pk_test_51IeumWK6tNvAlffQIRqsnl5UILjlp5C165rxioyfQ2jHvLWjp0vOpFfckBAjIKp75EB3hFTgWTBwCArz030JbWlX00wmWR9yXW";
+let stripeSecret =
+  "sk_test_51IeumWK6tNvAlffQexGN0F9EqUdj2fiyxJgNrDmhV6pTtZAVzodo0LluVxDHxl0bqW2xdgQrcAtrjvbhBmCXIklb00jdHgAwj9";
+
+const stripePromise = loadStripe(stripePK);
 const gender = [
   { key: "male", text: "Male", value: "Male" },
   { key: "female", text: "Female", value: "Female" },
@@ -62,6 +77,8 @@ class Profile extends Component {
       formContactDirty: false,
       formProfileDirty: false,
       formAccountDirty: false,
+      wizard: false,
+      isSignUpWizardCompleted: true,
       address: { value: "", isValid: true, message: "" },
       addressLineOne: { value: "", isValid: true, message: "" },
       billingAddress: { value: "", isValid: true, message: "" },
@@ -93,18 +110,41 @@ class Profile extends Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.updateAddress = this.updateAddress.bind(this);
     this.updateBillingAddress = this.updateBillingAddress.bind(this);
+    this.setWizard = this.setWizard.bind(this);
+    
   }
+   
+  setWizard = async (data) => {
+    console.log("automatic");
+    this.setState({
+      wizard: data,
+    });
+  };
+  
 
+ 
+
+ 
   static getDerivedStateFromProps(props, state) {
     // if (props.profile && props.profile.token) {
-    //   localStorage.setItem("auth_token", props.profile.token);
-    // }
-
+      //   localStorage.setItem("auth_token", props.profile.token);
+      // }
+     
+    console.log(props.auth)
+    console.log(props.profile)
     const { profile } = props;
     if (state.formDirty == false) {
       if (props.auth.isAuthenticated && profile) {
         if (profile.firstName) {
           state.firstName.value = profile.firstName;
+        }
+        if (profile.isSignUpWizardCompleted) {
+          state.isSignUpWizardCompleted = profile.isSignUpWizardCompleted;
+          state.wizard = false;
+        } else {
+          console.log("wizard turn true");
+          state.isSignUpWizardCompleted = false;
+          state.wizard = true;
         }
         if (profile.lastName) {
           state.lastName.value = profile.lastName;
@@ -149,7 +189,7 @@ class Profile extends Component {
         if (profile.profileSummary) {
           state.profileSummary.value = profile.profileSummary;
         }
-
+      
         if (profile.contact) {
           if (profile.contact.email) {
             state.contactEmail.value = profile.contact.email;
@@ -1731,6 +1771,18 @@ class Profile extends Component {
             </React.Fragment>
           )}
         </NavigationPrompt>
+        {this.state.wizard && this.state.isSignUpWizardCompleted == false && (
+      
+      <Elements stripe={stripePromise}>
+      <SignUpWIzard
+        {...this.props}
+        wizard={this.state.wizard}
+        setWizard={this.setWizard}
+        businessTypes={this.state.businessTypes}
+      />
+    </Elements>
+       
+        )}
       </div>
     );
   }
