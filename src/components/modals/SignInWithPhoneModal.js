@@ -132,7 +132,7 @@ function LoginWithPhone(props) {
   const submitForm = async (e) => {
     if(checkBox){
     setLoading(true);
-    console.log('hi')
+    console.log('herer submit')
     e.preventDefault();
     let phoneNoValidity = phoneNo.isValid;
     let countryCodeValidity = countryCode.isValid;
