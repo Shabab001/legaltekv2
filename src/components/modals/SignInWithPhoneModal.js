@@ -68,17 +68,18 @@ function LoginWithPhone(props) {
   };
 
   const handleSignin = async(e)=>{
-  
-
+    
     
     e.preventDefault()
+    console.log("here")
     let role=null;
     let phoneNoValidity = phoneNo.isValid;
     let countryCodeValidity = countryCode.isValid;
     let passwordValidity=null;
 
-    if (phoneNo.value.length !== 10) {
+    if (phoneNo.value.length <= 5) {
       phoneNoValidity = false;
+      console.log(phoneNoValidity)
     }
     if (!password.value) {
       setLoading(false);
@@ -114,6 +115,7 @@ function LoginWithPhone(props) {
         password: password.value,
         role
       };
+      console.log(user)
       let response = await props.actions.login(user, props.history);
       if (response) {
         props.closePhoneSignIn();
@@ -145,6 +147,7 @@ function LoginWithPhone(props) {
       
         userType: userType,
       };
+      console.log(user)
       let response = await props.actions.sendOtp(user, props.history);
       console.log(response)
       if (response) {
@@ -216,6 +219,7 @@ role="lawfirm"
   setHideMsg(false)
 }
   };
+  console.log(countryCode)
 
   const handleCheckbox=(e)=>{
     setCheckbox(e.target.checked)
@@ -399,7 +403,7 @@ role="lawfirm"
             value={countryCode.value}
             placeholder="Country Code"
             onChange={(phone) =>
-              setCountryCode({ ...countryCode, value: phone })
+              setCountryCode({ ...countryCode, value:`+${phone}`})
             }
           />
           {/* 437500050 */}
@@ -473,7 +477,7 @@ role="lawfirm"
                   value={countryCode.value}
                   placeholder="Country Code"
                   onChange={(phone) =>
-                    setCountryCode({ ...countryCode, value: phone })
+                    setCountryCode({ ...countryCode, value:`+${phone}` })
                   }
                 />
                 {/* 437500050 */}

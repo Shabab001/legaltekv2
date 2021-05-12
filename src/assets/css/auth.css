@@ -727,7 +727,15 @@ input.hidden {
   position: relative;
   transition: 0.4s background-color ease-in-out;
 }
-
+.react-tel-input input:focus ~ .flag-dropdown {
+  background-color: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+}
+.flag-dropdown,
+.react-tel-input .flag-dropdown.open {
+  transition: 0.4s all ease-in-out;
+  background-color: rgba(10, 16, 100, 0.534) !important;
+}
 @media only screen and (max-width: 450px) {
   .field .otp-input input {
     color: #000;
