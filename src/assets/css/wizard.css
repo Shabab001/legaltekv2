@@ -15,16 +15,43 @@
   padding: 0px 20px;
 }
 .wizardModal .ant-modal-header {
-  background-color: aliceblue;
+  background-color: white;
 }
 .wizardModal .pageIndicator {
   position: absolute;
-  top: 55px;
+  top: 11px;
   left: 0px;
   text-align: center;
   width: 100%;
   display: flex;
-  column-gap: 30px;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.incdicator-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.indicator1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.indicator-number {
+  font-weight: bold;
+  color: white;
+}
+.hide {
+  display: none;
+}
+
+.indicator1 .indicator-arrow {
+  font-size: 1.5rem;
+  color: rgb(155, 155, 155);
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 .wizardModal .pageIndicator .iconContainer {
@@ -36,7 +63,6 @@
   justify-content: center;
   background-color: lavender;
   color: gray;
-  position: relative;
 }
 .wizardModal .pageIndicator .iconContainer:not(:nth-last-child(1)):after {
   display: block;
@@ -47,30 +73,14 @@
   width: 15px;
   left: 130%;
 }
-.wizardModal
-  .pageIndicator
-  .iconContainer:not(.active)
-  i.fa:nth-of-type(2), .wizardModal
-  .pageIndicator
-  .iconContainer:not(.completed)
-  i.fa:nth-of-type(2) {
-  display: none;
-}
-.wizardModal .pageIndicator .iconContainer.active,.wizardModal .pageIndicator .iconContainer.completed {
+
+.wizardModal .pageIndicator .iconContainer.active,
+.wizardModal .pageIndicator .iconContainer.completed {
   background-color: #fc612b;
   color: white;
 }
-.wizardModal
-  .pageIndicator
-  .iconContainer.completed
-  i.fa:nth-of-type(1) {
-  display: none;
-}
-.wizardModal
-  .pageIndicator
-  .iconContainer.completed
-  i.fa:nth-of-type(2) {
-  display: block;
+.orange {
+  background-color: #fc612b;
 }
 .wizardModal .pageIndicator .iconContainer.active.completed i {
   color: white;
@@ -81,21 +91,22 @@
 .wizardModal label > input:hover {
   border: 1px solid #49c5b6;
 }
-.wizardModal label.error input, .wizardModal label.error input:focus {
+.wizardModal label.error input,
+.wizardModal label.error input:focus {
   border: 2px solid #f14c48;
 }
 .wizardModal label.error,
 .wizardModal label.error p {
   color: #f14c48;
 }
-.wizardModal .fullLabel.cp > i.fa-map-marker{
+.wizardModal .fullLabel.cp > i.fa-map-marker {
   position: absolute;
   top: 66%;
   left: 12px;
   z-index: 2;
   transform: translate3d(0px, -50%, 0px);
 }
-.wizardModal .fullLabel div[class*="control"]{
+.wizardModal .fullLabel div[class*="control"] {
   padding-left: 20px;
 }
 .wizardModal .ant-modal-content {
@@ -108,7 +119,7 @@
   padding-top: 40px;
   height: auto;
   min-height: fit-content;
-  background-color: aliceblue;
+  background-color: rgb(250, 250, 250);
 }
 .wizardModal .slick-slider {
   height: auto;
@@ -246,10 +257,9 @@
   border-color: #49c5b6;
   max-width: 100%;
 }
-.wizardModal label.error
-  .ant-select-selector {
+.wizardModal label.error .ant-select-selector {
   /* border-color: #fc612b; */
-  border: 2px solid #fc612b
+  border: 2px solid #fc612b;
 }
 .wizardModal
   .ant-select-show-search.ant-select:not(.ant-select-customize-input)
@@ -284,6 +294,27 @@
   position: absolute;
   right: 10px;
 }
+.redBtn2 {
+  padding: 5px 15px;
+  width: 150px;
+  color: darkslategray;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.4s all ease-in-out;
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  z-index: 1000;
+}
+.redBtn2:hover {
+  background-color: #fc612b;
+  color: white;
+}
+
 .wizardModal .pageTwo {
   height: 100%;
 }
@@ -382,7 +413,7 @@
 } */
 .wizardModal .page .side.rightSide {
   align-items: center;
-  justify-content: center;
+  padding-top: 3rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -425,19 +456,24 @@
 }
 .wizardModal .pageOne .innerDiv,
 .wizardModal .pageThree .innerDiv {
+  background-color: white;
+  margin-top: 1rem;
   max-width: 100%;
   padding: 20px;
 }
 .wizardModal .pageTwo h3,
 .wizardModal .pageOne h3,
 .wizardModal .pageThree h3 {
-  margin-bottom: 0px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 .wizardModal .pageTwo h4,
 .wizardModal .pageOne h4,
 .wizardModal .pageThree h4 {
   margin-bottom: 20px;
   text-align: center;
+  font-size: 1.2rem;
+  color: grey;
   /* margin-top: auto; */
 }
 .wizardModal .cardRow .card span {
@@ -556,7 +592,7 @@
   display: flex;
   align-items: center;
 }
-.wizardModal label.error .stripeCont .StripeElement{
+.wizardModal label.error .stripeCont .StripeElement {
   border: 2px solid #f14c48;
 }
 

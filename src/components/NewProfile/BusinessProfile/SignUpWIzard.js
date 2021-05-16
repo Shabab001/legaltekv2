@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,6 +15,7 @@ import Search from "../../MiniComponents/CanadaPost/Search";
 import Wizard1 from "../../../assets/img/wizard1.png";
 import Wizard2 from "../../../assets/img/wizard2.png";
 import Wizard3 from "../../../assets/img/wizard3.png";
+import {CgArrowLongRight} from "react-icons/cg"
 import {
   CardElement,
   useStripe,
@@ -53,7 +54,8 @@ function SignUpWIzard(props) {
   const [monthlyBill, setMonthlyBill] = useState(0);
   const [yearlyBill, setYearlyBill] = useState(0);
   const [cardElementError, setCardElementError] = useState("");
-  const [cardElementValid, setCardElementValid] = useState(true);
+  const [cardElementValid, setCardElementValid] = useState(false);
+  const[activeBtn,setActiveBtn]=useState(false)
   const [billingCity, setBillingCity] = useState({
     value: "",
     message: "",
@@ -166,20 +168,9 @@ function SignUpWIzard(props) {
       firstName.value &&
       lastName.value &&
       businessName.value &&
-      businessType.value.length
+      businessType.value
     ) {
-      let businessProduct = businessTypes.filter((item) =>
-        businessType.value.includes(item._id)
-      );
-      setBProducts(businessProduct);
-      let monthlyBill;
-      var sum = 0;
-      for (let i = 0; i < businessProduct.length; i++) {
-        sum = sum + parseFloat(businessProduct[i].productPrice);
-      }
-      console.log("sum", sum);
-      setMonthlyBill(sum);
-      setYearlyBill(sum * 12);
+      
 
       setSlide(2);
       sliderRef.current.slickNext();
@@ -379,6 +370,28 @@ function SignUpWIzard(props) {
     // ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
   };
 
+   useEffect(()=>{
+    if (
+      !billingAddress.isValid ||
+      !billingAddress.value ||
+      !billingCity.isValid ||
+      !billingCity.value ||
+      !billingCountry.isValid ||
+      !billingCountry.value ||
+      !billingState.isValid ||
+      !billingState.value ||
+      !billingZip.isValid ||
+      !billingZip.value ||
+      !cardElementValid
+    ){
+              setActiveBtn(false)
+    }
+    else{
+          setActiveBtn(true)    
+    }
+
+   },[billingAddress.value,billingAddress.isValid,billingCity.value,billingCity.isValid,billingCountry.isValid,billingCountry.value,billingState.isValid,billingState.value,billingZip.isValid,billingZip.value,cardElementValid])
+
   const submitForm = async () => {
     const cardElement = elements.getElement("card");
     const paymentMethodReq = await stripe.createPaymentMethod({
@@ -496,7 +509,7 @@ function SignUpWIzard(props) {
   return (
     <Modal
       className="wizardModal"
-      title="Xukini Sign Up Wizard"
+      title="Legaltek Sign Up Wizard"
       width={1500}
       visible={wizard}
       onOk={() => setWizard(false)}
@@ -505,27 +518,98 @@ function SignUpWIzard(props) {
     >
       <div className="pageIndicator">
         {/* <h1>Page {slide}</h1> */}
-        <span
+        <div className="indicator1">
+        <div className="incdicator-icons">
+
+        <div
           className={`iconContainer ${slide == 1 ? "active" : ""} ${
             slide > 1 ? "completed" : ""
           }`}
         >
-          <i className="fa fa-user" />
-          <i className="fa fa-check" />
-        </span>
-        <span
+          {
+            slide > 1? 
+       
+                <i className= "fa fa-check"  />:
+                <div className="indicator-number"> 
+                <p>1</p>
+      
+                </div>
+          }
+        
+        </div>
+        <div>
+          <p>Info</p>
+        </div>
+          </div>
+          <div className="indicator-arrow">
+               <CgArrowLongRight/>
+          </div>
+          </div>
+
+          <div className="indicator1">
+        <div className="incdicator-icons">
+
+        <div
           className={`iconContainer ${slide == 2 ? "active" : ""} ${
             slide > 2 ? "completed" : ""
           }`}
         >
-          <i className="fa fa-user" />
-          <i className="fa fa-check" />
-        </span>
-        <span className={`iconContainer ${slide == 3 ? "active" : ""}`}>
-          <i className="fa fa-user" />
-          <i className="fa fa-check" />
-        </span>
+          {
+            slide > 2? 
+       
+                <i className= "fa fa-check"  />:
+                <div className="indicator-number"> 
+                <p>2</p>
+      
+                </div>
+          }
+          
+        </div>
+        <div>
+          <p>Plan</p>
+        </div>
+          </div>
+          <div className="indicator-arrow">
+               <CgArrowLongRight/>
+          </div>
+          </div>
+
+          <div className="indicator1">
+        <div className="incdicator-icons">
+
+        <div
+          className={`iconContainer ${slide == 3 ? "active" : ""} ${
+            slide > 3 ? "completed" : ""
+          }`}
+        >
+    {
+            slide > 3? 
+       
+                <i className= "fa fa-check"  />:
+                <div className="indicator-number"> 
+                <p>3</p>
+      
+                </div>
+          }
+          
+        </div>
+        <div>
+          <p>Billings</p>
+        </div>
+          </div>
+          
+          </div>
+        
+
       </div>
+      <button
+                  className={activeBtn? "redBtn2 orange" :"redBtn2"}
+                  onClick={(e) => {
+                    submitForm();
+                  }}
+                >
+                  Finish Setup
+                </button>
       <Slider {...settings} ref={sliderRef}>
         {console.log("bProducts", bProducts)}
         <div className="page pageOne">
@@ -537,7 +621,7 @@ function SignUpWIzard(props) {
               <h3>Just a few more steps to complete Registration</h3>
               <h4>
                 Please complete all required fields to finish setting up your
-                account and get full access to Xukini!
+                account and get full access to Legaltek!
               </h4>
               <div className="innerDiv">
                 <div className="inputRow">
@@ -626,7 +710,7 @@ function SignUpWIzard(props) {
                     } fullLabel`}
                     style={{ display: "flex", flexDirection: "column" }}
                   >
-                    Business name *
+                    Lawfirm name *
                     <input
                       name="businessName"
                       placeholder="Business name"
@@ -659,55 +743,50 @@ function SignUpWIzard(props) {
                         ? businessName.message
                         : "Business name is required"}
                     </p>
-                    {/* )} */}
-                  </label>
-                  <label
+                    </label>
+                    <label
                     className={`${
                       !businessType.isValid ? "error" : ""
                     } fullLabel`}
                     style={{ display: "flex", flexDirection: "column" }}
                   >
-                    Business Type
-                    <Select
-                      mode="multiple"
-                      name="gender"
-                      placeholder="Business Types"
-                      // value={this.state.businessType.value}
-                      onChange={(e, item) => {
-                        console.log(item);
-                        console.log(businessType.value);
-
-                        setBusinessType({
-                          ...businessType,
-                          message: "",
-                          isValid: item.length > 0 ? true : false,
-                          value: item.map((item) => item.value),
-                        });
-                        // this.setState({
-                        //   formDirty: true,
-                        //   businessType: {
-                        //     ...this.state.businessType,
-                        //     value: item.map((it, ind) => it.value),
-                        //   },
-                        // });
+                    Lawfirm registration number*
+                    <input
+                      name="registrationNumber"
+                      placeholder="Lawfirm registration number"
+                      autocomplete="new-password"
+                      autoCorrect="off"
+                      value={businessType.value}
+                      onChange={(e) => {
+                        if (e.target.value != "") {
+                          setBusinessType({
+                            ...businessType,
+                            value: e.target.value,
+                            message: "",
+                            isValid: true,
+                          });
+                        } else {
+                          setBusinessType({
+                            ...businessType,
+                            value: e.target.value,
+                            message: "Lawfirm registration number is required",
+                            isValid: false,
+                          });
+                        }
                       }}
-                    >
-                      {businessTypes &&
-                        businessTypes.map((item, index) => (
-                          <Select.Option key={index} value={item._id}>
-                            {item.productName}
-                          </Select.Option>
-                        ))}
-                    </Select>
+                    />
+                    {/* {this.state.contactPhone.message && ( */}
                     <p>
                       {" "}
                       <i className="fe fe-alert-triangle" />{" "}
-                      {/* {this.state.contactPhone.message} */}
-                      Business type is required
+                      {businessType.message
+                        ? businessType.message
+                        : "Lawfirm registration number is required"}
                     </p>
+                    {/* )} */}
                   </label>
+                  
                 </div>
-
                 <button
                   className="redBtn"
                   onClick={(e) => {
@@ -716,6 +795,7 @@ function SignUpWIzard(props) {
                 >
                   Continue <i className="fe fe-chevron-right" />
                 </button>
+              
               </div>
             </div>
           </div>
@@ -783,7 +863,7 @@ function SignUpWIzard(props) {
                     </li>
                     <li>
                       <i className="fe fe-check" />
-                      Your listing on Xukini
+                      Your listing on legaltek
                     </li>
                     <li>
                       <i className="fe fe-check" />
@@ -812,7 +892,7 @@ function SignUpWIzard(props) {
                     </li>
                     <li>
                       <i className="fe fe-check" />
-                      Your listing on Xukini
+                      Your listing on legaltek
                     </li>
                     <li>
                       <i className="fe fe-check" />
@@ -938,7 +1018,7 @@ function SignUpWIzard(props) {
               <h3>Just a few more steps to complete Registration</h3>
               <h4>
                 Please complete all required fields to finish setting up your
-                account and get full access to Xukini!
+                account and get full access to legaltek!
               </h4>
               <div className="innerDiv">
                 <div className="inputRow">
@@ -1173,15 +1253,7 @@ function SignUpWIzard(props) {
                   >
                     Go Back <i className="fe fe-chevron-left" />
                   </button>
-                  <button
-                    className="redBtn"
-                    onClick={(e) => {
-                      submitForm();
-                      // setWizard(false);
-                    }}
-                  >
-                    Finish <i className="fe fe-check" />
-                  </button>
+       
                 </div>
                 {/* <button
                   className="redBtn"
