@@ -16,6 +16,7 @@ import Wizard1 from "../../../assets/img/wizard1.png";
 import Wizard2 from "../../../assets/img/wizard2.png";
 import Wizard3 from "../../../assets/img/wizard3.png";
 import {CgArrowLongRight} from "react-icons/cg"
+import {BiPlus,BiMinus} from "react-icons/bi"
 import {
   CardElement,
   useStripe,
@@ -61,6 +62,8 @@ function SignUpWIzard(props) {
     message: "",
     isValid: true,
   });
+  const[count,setCount]=useState(0);
+
   const [billingCountry, setBillingCountry] = useState({
     value: "",
     message: "",
@@ -107,6 +110,17 @@ function SignUpWIzard(props) {
     message: "",
   });
 
+  const handleCount=(from)=>{
+            if(from ==="minus"){
+              if(! count <= 0 ){
+                setCount(count-1)
+              }
+            
+            }
+            if(from === "plus"){
+              setCount(count+1)
+            }
+  }
   const proceed = async () => {
     if (!firstName.value) {
       setFirstName({
@@ -369,7 +383,7 @@ function SignUpWIzard(props) {
 
     // ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
   };
-
+console.log(activeBtn)
    useEffect(()=>{
     if (
       !billingAddress.isValid ||
@@ -387,6 +401,7 @@ function SignUpWIzard(props) {
               setActiveBtn(false)
     }
     else{
+      console.log("here")
           setActiveBtn(true)    
     }
 
@@ -605,7 +620,13 @@ function SignUpWIzard(props) {
       <button
                   className={activeBtn? "redBtn2 orange" :"redBtn2"}
                   onClick={(e) => {
-                    submitForm();
+                    if(slide==3){
+
+                      submitForm();
+                    }
+                    else{
+                      setActiveBtn(false)
+                    }
                   }}
                 >
                   Finish Setup
@@ -800,7 +821,7 @@ function SignUpWIzard(props) {
             </div>
           </div>
 
-          <hr />
+         <span className="hrline"><hr /></span> 
           <div className="infoDiv">
             <div>
               <div>
@@ -937,12 +958,38 @@ function SignUpWIzard(props) {
                   </div>
                 </>
               )}
+                 <div className="numbersOfLawyers">
+                    <div className="wizard-add-title">
+
+                      <p>Add number of lawyers</p>
+                    </div>
+                    <div className="wizard-addl">
+                      <div className="wizard-addl-text">
+                        <p>Add amount</p>
+                      </div>
+                      <div className="wizard-add-input">
+                        <div onClick={()=>handleCount("minus")}>
+
+                          <BiMinus/>
+                        </div>
+                          <div>
+
+                           <p>{count}</p>
+                          </div>
+                          <div  onClick={()=>handleCount("plus")}>
+
+                           <BiPlus/>
+                          </div>
+                      </div>
+                    </div>
+              </div>
               <p>
                 Chosen Package:{" "}
                 <strong>
                   {chosenPackage == "Connect" ? "Connect" : "Grow"}
                 </strong>{" "}
               </p>
+           
               <div className="buttonGrp">
                 <button
                   className="redBtn"
@@ -968,7 +1015,7 @@ function SignUpWIzard(props) {
               <img src={person} />
             </div>
           </div>
-          <hr />
+          <span className="hrline"><hr /></span> 
           <div className="infoDiv">
             <div>
               <div>
@@ -1268,7 +1315,7 @@ function SignUpWIzard(props) {
           </div>
 
           <hr />
-          <div className="infoDiv">
+          <div className="infoDiv3">
             <div>
               <div>
                 <i className="fe fe-user" />

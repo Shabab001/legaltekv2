@@ -4,7 +4,8 @@ const init = {
     isAuthenticated: false,
     errors: {},
     countryInfo: {},
-    userProfile:{}
+    userProfile:{},
+    packages:[]
 }
 
 
@@ -60,6 +61,12 @@ const authReducer = (state=init,action) =>{
             return {
                 ...state,
                 savedProfle: action.payload.savedProfile
+            }
+        }
+        case Types.GET_PACKAGES: {
+            return {
+                ...state,
+                savedProfle: action.payload.packages
             }
         }
 

@@ -19,39 +19,12 @@
 }
 .wizardModal .pageIndicator {
   position: absolute;
-  top: 11px;
+  top: 12px;
   left: 0px;
   text-align: center;
   width: 100%;
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-}
-.incdicator-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-.indicator1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-.indicator-number {
-  font-weight: bold;
-  color: white;
-}
-.hide {
-  display: none;
-}
-
-.indicator1 .indicator-arrow {
-  font-size: 1.5rem;
-  color: rgb(155, 155, 155);
-  display: flex;
-  align-items: center;
+  column-gap: 16px;
   justify-content: center;
 }
 .wizardModal .pageIndicator .iconContainer {
@@ -63,25 +36,24 @@
   justify-content: center;
   background-color: lavender;
   color: gray;
+  position: relative;
 }
-.wizardModal .pageIndicator .iconContainer:not(:nth-last-child(1)):after {
-  display: block;
-  height: 2px;
-  position: absolute;
-  content: "";
-  background-color: gray;
-  width: 15px;
-  left: 130%;
+.indicator1,
+.incdicator-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-
+.indicator1 {
+  gap: 1rem;
+}
 .wizardModal .pageIndicator .iconContainer.active,
 .wizardModal .pageIndicator .iconContainer.completed {
-  background-color: #fc612b;
+  background-color: var(--primary);
   color: white;
 }
-.orange {
-  background-color: #fc612b;
-}
+
 .wizardModal .pageIndicator .iconContainer.active.completed i {
   color: white;
 }
@@ -89,15 +61,15 @@
   font-size: 16px;
 }
 .wizardModal label > input:hover {
-  border: 1px solid #49c5b6;
+  border: 1px solid var(--primary);
 }
 .wizardModal label.error input,
 .wizardModal label.error input:focus {
-  border: 2px solid #f14c48;
+  border: 2px solid var(--primary);
 }
 .wizardModal label.error,
 .wizardModal label.error p {
-  color: #f14c48;
+  color: var(--primary);
 }
 .wizardModal .fullLabel.cp > i.fa-map-marker {
   position: absolute;
@@ -119,7 +91,7 @@
   padding-top: 40px;
   height: auto;
   min-height: fit-content;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(243, 243, 243);
 }
 .wizardModal .slick-slider {
   height: auto;
@@ -190,7 +162,7 @@
 }
 
 .wizardModal label input:focus {
-  border: 2px solid #49c5b6;
+  border: 2px solid var(--primary);
 }
 
 .wizardModal .inputRow {
@@ -213,7 +185,7 @@
 }
 
 .wizardModal label.error span {
-  color: red;
+  color: var(--primary);
 }
 
 .wizardModal .fullLabel {
@@ -234,7 +206,7 @@
 }
 
 .wizardModal .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: #49c5b6;
+  border-color: var(--primary);
   border-radius: 4px;
   max-width: 100%;
   box-shadow: none;
@@ -243,23 +215,23 @@
 .wizardModal
   .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
   .ant-select-selector {
-  border-color: #49c5b6;
+  border-color: var(--primary);
   border-radius: 4px;
   max-width: 100%;
   box-shadow: none;
-  border: 2px solid #49c5b6;
+  border: 2px solid var(--primary);
 }
 
 .wizardModal
   .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
   .ant-select-selector {
   box-shadow: none !important;
-  border-color: #49c5b6;
+  border-color: var(--primary);
   max-width: 100%;
 }
 .wizardModal label.error .ant-select-selector {
-  /* border-color: #fc612b; */
-  border: 2px solid #fc612b;
+  /* border-color: var(--primary); */
+  border: 2px solid var(--primary);
 }
 .wizardModal
   .ant-select-show-search.ant-select:not(.ant-select-customize-input)
@@ -269,8 +241,28 @@
 }
 .wizardModal
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background-color: #fc612b;
+  background-color: var(--primary);
   color: white;
+}
+.orange {
+  background-color: var(--primary);
+  color: white !important;
+}
+.redBtn2 {
+  padding: 5px 15px;
+  width: 150px;
+  color: darkslategray;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.4s all ease-in-out;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 10000;
 }
 .wizardModal button.redBtn {
   padding: 5px 15px;
@@ -286,7 +278,7 @@
   position: relative;
 }
 .wizardModal button.redBtn:hover {
-  background-color: #fc612b;
+  background-color: var(--primary);
   color: white;
 }
 
@@ -294,27 +286,6 @@
   position: absolute;
   right: 10px;
 }
-.redBtn2 {
-  padding: 5px 15px;
-  width: 150px;
-  color: darkslategray;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: 0.4s all ease-in-out;
-  position: absolute;
-  top: 11px;
-  right: 14px;
-  z-index: 1000;
-}
-.redBtn2:hover {
-  background-color: #fc612b;
-  color: white;
-}
-
 .wizardModal .pageTwo {
   height: 100%;
 }
@@ -328,7 +299,7 @@
   height: 80px;
 }
 .wizardModal .cardRow .card {
-  height: 230px;
+  height: 200px;
   width: 220px;
   aspect-ratio: 3/2;
   padding: 10px;
@@ -342,7 +313,7 @@
 }
 
 .wizardModal .cardRow .card small {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .wizardModal .cardRow .card ul {
   margin-top: 10px;
@@ -374,6 +345,25 @@
   margin-top: 10px;
   margin-bottom: 0px;
 }
+.wizard-addl {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  gap: 3rem;
+}
+.wizard-add-title {
+  padding-bottom: 1rem;
+}
+.wizard-add-input {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.numbersOfLawyers {
+  padding-bottom: 2rem;
+}
+
 .wizardModal .page {
   left: 0;
   right: 0;
@@ -413,7 +403,7 @@
 } */
 .wizardModal .page .side.rightSide {
   align-items: center;
-  padding-top: 3rem;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -456,24 +446,23 @@
 }
 .wizardModal .pageOne .innerDiv,
 .wizardModal .pageThree .innerDiv {
-  background-color: white;
-  margin-top: 1rem;
   max-width: 100%;
   padding: 20px;
+  background-color: white;
 }
 .wizardModal .pageTwo h3,
 .wizardModal .pageOne h3,
 .wizardModal .pageThree h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 0px;
+  font-size: 1.2rem;
+  padding-bottom: 0.5rem;
 }
 .wizardModal .pageTwo h4,
 .wizardModal .pageOne h4,
 .wizardModal .pageThree h4 {
   margin-bottom: 20px;
   text-align: center;
-  font-size: 1.2rem;
-  color: grey;
+  font-size: 0.8rem;
   /* margin-top: auto; */
 }
 .wizardModal .cardRow .card span {
@@ -493,8 +482,8 @@
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  border: 2px solid red;
-  box-shadow: 0px 0px 6px red;
+  border: 2px solid var(--primary);
+  box-shadow: 0px 0px 6px var(--primary);
 }
 .wizardModal .cardRow .card h3 {
   display: flex;
@@ -505,7 +494,7 @@
   color: gray;
 }
 .wizardModal .cardRow .card.active {
-  border: 1px solid #e35d5b; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid var(--primary); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 /* .wizardModal .cardRow  .card:nth-of-type(2){
   border: 1px solid #0072ff;
@@ -534,23 +523,33 @@
   margin: 0px;
 }
 
-.wizardModal .infoDiv {
+.wizardModal .infoDiv,
+.wizardModal .infoDiv3 {
   display: flex;
   justify-content: center;
   column-gap: 40px;
 }
-.wizardModal .infoDiv > div {
+.wizardModal .infoDiv {
+}
+.hrline {
+  margin-top: 18px;
+}
+.wizardModal .infoDiv > div,
+.wizardModal .infoDiv3 > div {
   display: flex;
   column-gap: 10px;
   text-align: left;
 }
-.wizardModal .infoDiv .textContent {
+.wizardModal .infoDiv .textContent,
+.wizardModal .infoDiv3 .textContent {
   text-align: left !important;
 }
-.wizardModal .infoDiv .textContent p {
+.wizardModal .infoDiv .textContent p,
+.wizardModal .infoDiv3 .textContent p {
   text-align: left !important;
 }
-.wizardModal .infoDiv > div > div:nth-of-type(1) {
+.wizardModal .infoDiv > div > div:nth-of-type(1),
+.wizardModal .infoDiv3 > div > div:nth-of-type(1) {
   width: 30%;
   display: flex;
   align-items: flex-start;
@@ -558,15 +557,18 @@
   color: white;
 }
 
-.wizardModal .infoDiv > div > div:nth-of-type(1) i {
+.wizardModal .infoDiv > div > div:nth-of-type(1) i,
+.wizardModal .infoDiv3 > div > div:nth-of-type(1) i {
   padding: 20px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #49c5b6;
+  background-color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.textContent {
 }
 .ant-modal-wrap {
   display: flex;
@@ -593,7 +595,7 @@
   align-items: center;
 }
 .wizardModal label.error .stripeCont .StripeElement {
-  border: 2px solid #f14c48;
+  border: 2px solid var(--primary);
 }
 
 .wizardModal .stripeCont .StripeElement .__PrivateStripeElement {
@@ -602,7 +604,12 @@
   align-items: center;
   width: 100%;
 }
-
+.ElementsApp .InputElement.is-invalid {
+  color: var(--primary) !important;
+}
+.ElementsApp .InputElement.is-invalid {
+  color: var(--primary) !important;
+}
 @media only screen and (max-width: 1024px) {
   .wizardModal .sides {
     flex-wrap: wrap;

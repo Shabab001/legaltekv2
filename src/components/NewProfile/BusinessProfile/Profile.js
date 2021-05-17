@@ -30,7 +30,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 
 let stripePK =
-  "pk_test_51IeumWK6tNvAlffQIRqsnl5UILjlp5C165rxioyfQ2jHvLWjp0vOpFfckBAjIKp75EB3hFTgWTBwCArz030JbWlX00wmWR9yXW";
+  "pk_test_51Is6EeC4OeYiOOOcteEEbNdaXD8s9VSrf9DDyeEb4MaOXH4lTou9AqziwpVCb9I8fMOkgjFCOG5XLpP4AISd0Riv00nOsSXCJF";
 let stripeSecret =
   "sk_test_51IeumWK6tNvAlffQexGN0F9EqUdj2fiyxJgNrDmhV6pTtZAVzodo0LluVxDHxl0bqW2xdgQrcAtrjvbhBmCXIklb00jdHgAwj9";
 

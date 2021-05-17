@@ -419,3 +419,38 @@ export const getProfile = (data, history) => (dispatch) => {
 });
   
 }
+export const getPackages = (props,history) => dispatch =>{
+  return new Promise((resolve, reject) => {
+
+    Axios.get(`${REACT_APP_API}/packages` ,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    }).then(res=>{
+      console.log(res.data);
+      if (res.data.success) {
+        dispatch({
+          type: Types.GET_PACKAGES,
+          payload: {
+            packages: res.data.businessTypes
+          }
+        })
+       
+        message.success(res.data.message);
+        return resolve(true);
+      }
+    })
+    .catch((error) => {
+      if (error && error.response) {
+        console.log(error.response.data);
+        if (error.response.data.message) {
+          message.error(error.response.data.message);
+        }
+        return resolve(false);
+      }
+    });
+
+
+  })
+}

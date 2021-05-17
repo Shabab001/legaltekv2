@@ -14,3 +14,4 @@ export const GET_PROFILE = "GET_PROFILE"
 //Admin Types
 export const SET_ADMIN = "SET_ADMIN"
 export const ADMINS_ERROR = "ADMINS_ERROR"
+export const GET_PACKAGES="GET_PACKAGES"
