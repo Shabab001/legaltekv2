@@ -36,7 +36,7 @@ let settings = {
   //slickGoTo: 4,
 };
 
-// const businessTypes = [
+// const packages = [
 //   { key: "1", text: "Food Service", value: 1 },
 //   { key: "2", text: "Chef for hire", value: 2 },
 //   { key: "3", text: "Cooking Lesson", value: 3 },
@@ -45,7 +45,8 @@ let settings = {
 // ];
 
 function SignUpWIzard(props) {
-  let { wizard, setWizard, businessTypes } = props;
+  let { wizard, setWizard, packages } = props;
+
   const [slide, setSlide] = useState(1);
   const [chosenPackage, setChosenPackage] = useState("Connect");
   const [billingCycle, setBillingCycle] = useState("month");
@@ -57,12 +58,13 @@ function SignUpWIzard(props) {
   const [cardElementError, setCardElementError] = useState("");
   const [cardElementValid, setCardElementValid] = useState(false);
   const[activeBtn,setActiveBtn]=useState(false)
+  const [lpackage, setLpackage]=useState({})
   const [billingCity, setBillingCity] = useState({
     value: "",
     message: "",
     isValid: true,
   });
-  const[count,setCount]=useState(0);
+  const[count,setCount]=useState(1);
 
   const [billingCountry, setBillingCountry] = useState({
     value: "",
@@ -109,16 +111,34 @@ function SignUpWIzard(props) {
     isValid: true,
     message: "",
   });
-
+useEffect(()=>{
+  console.log("seting billing packages")
+  if(packages){
+    
+    packages.map((item,index)=>{
+      console.log(item)
+      if(item.name==="Connect"){
+        console.log(item.name)
+      setMonthlyBill(Number(item.price))
+      setYearlyBill(Number(item.price)*12-5)
+      setLpackage(item);
+      }
+    })
+  }
+},[packages])
   const handleCount=(from)=>{
             if(from ==="minus"){
-              if(! count <= 0 ){
+              if( count > 1 ){
                 setCount(count-1)
+                setMonthlyBill(monthlyBill-5);
+                setYearlyBill(yearlyBill-5)
               }
             
             }
             if(from === "plus"){
               setCount(count+1)
+              setMonthlyBill(monthlyBill+5);
+              setYearlyBill(yearlyBill+5)
             }
   }
   const proceed = async () => {
@@ -396,7 +416,7 @@ console.log(activeBtn)
       !billingState.value ||
       !billingZip.isValid ||
       !billingZip.value ||
-      !cardElementValid
+      !cardElementValid 
     ){
               setActiveBtn(false)
     }
@@ -406,7 +426,7 @@ console.log(activeBtn)
     }
 
    },[billingAddress.value,billingAddress.isValid,billingCity.value,billingCity.isValid,billingCountry.isValid,billingCountry.value,billingState.isValid,billingState.value,billingZip.isValid,billingZip.value,cardElementValid])
-
+  
   const submitForm = async () => {
     const cardElement = elements.getElement("card");
     const paymentMethodReq = await stripe.createPaymentMethod({
@@ -417,7 +437,8 @@ console.log(activeBtn)
         email:
           props.auth && props.auth.user && props.auth.user.email
             ? props.auth.user.email
-            : "",
+            :"",
+          
       },
     });
 
@@ -432,7 +453,7 @@ console.log(activeBtn)
       !billingState.isValid ||
       !billingState.value ||
       !billingZip.isValid ||
-      !billingZip.value
+      !billingZip.value 
     ) {
       billingAddressFlag = false;
 
@@ -480,19 +501,20 @@ console.log(activeBtn)
     ) {
       console.log(paymentMethodReq);
       let obj = {
+        userid:props.auth.user.id,
         firstName: firstName.value,
         lastName: lastName.value,
         businessName: businessName.value,
-        businessType: businessType.value,
+        firmRegistrationNumber: businessType.value,
         stripeToken: paymentMethodReq.paymentMethod.id,
         stripePaymentMethod: paymentMethodReq.paymentMethod,
-        subscribedPackage: chosenPackage,
+        subscribedPackage: lpackage,
+        chosenPackage,
         billingCycle: billingCycle,
-        chosenProducts: businessTypes.filter((item) =>
-          bProducts
-            .map((item, index) => item.productStripeId)
-            .includes(item.productStripeId)
-        ),
+        price:billingCycle==="month"?monthlyBill:yearlyBill,
+        numbersOfLawyers:count,
+
+       
         billing: {
           billingState: billingState.value,
           billingAddress: billingAddress.value,
@@ -867,65 +889,45 @@ console.log(activeBtn)
               <h3>Get packed for new experiences!</h3>
               <h4>Choose Subscription Package</h4>
               <div className="cardRow">
-                <div
-                  className={`${
-                    chosenPackage == "Connect" ? "active" : ""
-                  }   card`}
-                  onClick={(e) => setChosenPackage("Connect")}
-                >
-                  <h3>
-                    Connect <span className="checkBox"></span>
-                  </h3>
-                  <small>Flat monthly fee</small>
-                  <ul>
-                    <li>
-                      <i className="fe fe-check" />
-                      No commision
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      Your listing on legaltek
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      Lowest industry plan
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      Access to one or more services
-                    </li>
-                  </ul>
-                </div>
-                <div
-                  className={`${
-                    chosenPackage == "Grow" ? "active" : ""
-                  }   card`}
-                  onClick={(e) => setChosenPackage("Grow")}
-                >
-                  <h3>
-                    Grow <span className="checkBox"></span>
-                  </h3>
-                  <small>Free(no monthly fee).</small>
-                  <ul>
-                    <li>
-                      <i className="fe fe-check" />
-                      Grow your business
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      Your listing on legaltek
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      5% lowest industry commision
-                    </li>
-                    <li>
-                      <i className="fe fe-check" />
-                      Access to all services
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                {packages.map((item)=>{
+                             
+                     return( <div
+                            
+                      className={`${
+                        chosenPackage == item.name ? "active" : ""
+                      }   card`}
+                      onClick={(e) => {
+                        
+                          setLpackage(item);
+                        setChosenPackage(item.name)}}
+                    >
+                      <h3>
+                        {item.name} <span className="checkBox"></span>
+                      </h3>
+                      <small>Flat monthly fee</small>
+                      <ul>
+                        <li>
+                          <i className="fe fe-check" />
+                          No commision
+                        </li>
+                        <li>
+                          <i className="fe fe-check" />
+                          Your listing on legaltek
+                        </li>
+                        <li>
+                          <i className="fe fe-check" />
+                          Lowest industry plan
+                        </li>
+                        <li>
+                          <i className="fe fe-check" />
+                          Access to one or more services
+                        </li>
+                      </ul>
+                    </div>
+                     )
+                })}
+                
+              </div> 
               {chosenPackage == "Connect" && (
                 <>
                   <h4>Choose Billing cycle</h4>
@@ -1362,6 +1364,7 @@ console.log(activeBtn)
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.auth.userProfile,
+  packages:state.auth.packages
 });
 
 const mapDispatchToProps = (dispatch) => ({

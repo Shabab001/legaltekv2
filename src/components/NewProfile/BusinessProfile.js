@@ -29,18 +29,25 @@ const Menu = lazy( ()=>import("./BusinessProfile/Menu")) ;
 function BusinessProfile (props) {
   const [activeMenu, setActiveMenu] = useState(1);
   const [sidebarCollapse, setSidebarCollapse] = useState(true)
+  let hold=null
   console.log(activeMenu)
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    
+  useEffect(()=>{
     console.log(props.history)
     let profileDate = {
       userId: props.auth.user._id,
       userType: props.auth.user.userType,
     };
-    
+     props.actions.getLawfirmUserProfile(props.auth.user.lawfirm_user.id,props.history)
     props.actions.getProfile(profileDate, props.history);
+    props.actions.getPackages(props.history)
+    console.log(props.auth.user.lawfirm_user.id)
+  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    
+   
 
+   
     if (props.match.path === "/business/profile" || props.match.path === "/business/") {
       console.log("hi");
       setActiveMenu(1);
@@ -162,7 +169,9 @@ function BusinessProfile (props) {
 
         <div className="main">
 
+          
         <Switch>
+
             <Route exact path="/business/profile" component={Profile} />
             <Route exact path="/business/documents" component={Orders} />
             <Route exact path="/business/lawyers" component={AddLawyers} />
@@ -178,6 +187,7 @@ function BusinessProfile (props) {
             
        
           </Switch>
+          
            {/* {activeMenu == 1 && <Profile {...props} />}
           {activeMenu == 2 && <Orders {...props}/>}
           {activeMenu == 3 && <AddLawyers {...props}/>}

@@ -419,8 +419,54 @@ export const getProfile = (data, history) => (dispatch) => {
 });
   
 }
-export const getPackages = (props,history) => dispatch =>{
+export const getLawfirmUserProfile = (data, history) => (dispatch) => {
   return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    
+
+    Axios.get(`${REACT_APP_API}/lawfirm-users/${data}`,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      },)
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+      dispatch({
+        type: Types.GET_LAWFIRMUSER_PROFILE,
+        payload: {
+          lawfirmUserProfile: res.data,
+        },
+      });
+      console.log("after lawfirm user")
+      // history.push('/profilePage')
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
+}
+export const getPackages = (history) => dispatch =>{
+  return new Promise((resolve, reject) => {
+    console.log("packages")
 
     Axios.get(`${REACT_APP_API}/packages` ,{
       headers: {
@@ -429,13 +475,44 @@ export const getPackages = (props,history) => dispatch =>{
       },
     }).then(res=>{
       console.log(res.data);
-      if (res.data.success) {
+      if (res) {
+        console.log("packages")
         dispatch({
           type: Types.GET_PACKAGES,
           payload: {
-            packages: res.data.businessTypes
+            packages: res.data
           }
         })
+        console.log("here after dispatch")
+       
+        
+        return resolve(true);
+      }
+    })
+    .catch((error) => {
+      if (error && error.response) {
+        console.log(error.response.data);
+        if (error.response.data.message) {
+          message.error(error.response.data.message);
+        }
+        return resolve(false);
+      }
+    });
+
+
+  })
+}
+export const saveBusinessUserWizard = (props, history) => dispatch => {
+  return new Promise((resolve, reject) => {
+     console.log(localStorage.auth_token)
+    Axios.post(`${REACT_APP_API}/auth/save-wizard-lawfirm-user`,props.obj ,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    }).then(res=>{
+      console.log(res.data);
+      if (res) {
        
         message.success(res.data.message);
         return resolve(true);

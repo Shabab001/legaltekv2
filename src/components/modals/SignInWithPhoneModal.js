@@ -227,6 +227,7 @@ role="lawfirm"
   }
   console.log("checked", checkBox)
   const responseFacebook = async (response) => {
+    if(props.regProp){
     // setEmail({ ...email, value: data.email });
     if(checkBox){
     console.log(response);
@@ -252,17 +253,62 @@ role="lawfirm"
       props.closePhoneSignIn();
       props.history.push(`/auth/activated/${newUser.username}`)
     }
+    
   }
   else{
     setCheckMessage(true)
     setHideMsg(false)
     console.log("here 2")
   }
+}
+else{
+  console.log(response);
+  let role=""
+  if(userType==="CUSTOMER"){
+    role="authenticated"
+    }
+    else{
+    role="lawfirm"
+    }
+  const user ={
+ 
+    identifier:response.email,
+    role,
+    socialLogin:true
+  
+  }
+  props.actions.login(user, props.history);
+}
   };
   const responseGoogleFailure=(response)=>{
     console.log(response)
   }
   const responseGoogle = async (response) => {
+    if(!props.regProp){
+      console.log(response);
+      if(!response.error){
+        const data = { idToken: response.tokenId, userType };
+        let role=""
+        if(userType==="CUSTOMER"){
+          role="authenticated"
+          }
+          else{
+          role="lawfirm"
+          }
+        const user ={
+          
+          identifier:response.profileObj.email,
+          role,
+          socialLogin:true
+        
+        }
+        props.actions.login(user, props.history);
+      }
+  
+    }
+    else{
+
+    
     if(checkBox){
     console.log(response);
     const data = { idToken: response.tokenId, userType };
@@ -296,6 +342,7 @@ role="lawfirm"
     console.log("here 1")
 
   }
+}
   };
 
   const handleOtpChange = (otpdata) => {

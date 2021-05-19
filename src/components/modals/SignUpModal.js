@@ -172,6 +172,7 @@ function Register(props) {
   const responseFacebook = async (response) => {
     // setEmail({ ...email, value: data.email });
     if(checkBox){
+      setLoading(true);
     console.log(response);
     let role=""
     if(userType==="CUSTOMER"){
@@ -189,12 +190,18 @@ function Register(props) {
     }
     let newUser=await props.actions.register(user)
     if(newUser){
+      setLoading(false);
       props.history.push(`/auth/activated/${newUser.username}`)
+
+      props.closeRegister();
+    }else{
+      setLoading(false);
     }
   }
   else{
     setCheckMessage(true)
     setHideMsg(false)
+    setLoading(false);
     console.log("here 2")
   }
   };
@@ -203,6 +210,7 @@ function Register(props) {
   }
   const responseGoogle = async (response) => {
     if(checkBox){
+      setLoading(true);
     console.log(response);
     const data = { idToken: response.tokenId, userType };
     let role=""
@@ -222,13 +230,19 @@ function Register(props) {
     console.log(data)
     let newUser=await props.actions.register(user)
     if(newUser){
+      setLoading(false);
       props.history.push(`/auth/activated/${newUser.username}`)
+      props.closeRegister();
+    
+    }else{
+      setLoading(false);
     }
     // setEmail({ ...email, value: data.profileObj.email });
   }
   else{
     setCheckMessage(true)
     setHideMsg(false)
+    setLoading(false);
     console.log("here 1")
 
   }

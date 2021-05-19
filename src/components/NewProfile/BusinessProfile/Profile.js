@@ -134,32 +134,34 @@ class Profile extends Component {
     console.log(props.profile)
     const { profile } = props;
     if (state.formDirty == false) {
-      if (props.auth.isAuthenticated && profile) {
-        if (profile.firstName) {
-          state.firstName.value = profile.firstName;
+      if (props.auth.isAuthenticated && profile.user &&props.auth.user) {
+        if (profile.user.firstname) {
+          console.log(profile.user.firstname)
+          state.firstName.value = profile.user.firstname;
         }
-        if (profile.isSignUpWizardCompleted) {
-          state.isSignUpWizardCompleted = profile.isSignUpWizardCompleted;
+        if (props.auth.user.wizardComplete) {
+          console.log(props.auth.user.wizardComplete, "wizrd")
+          state.isSignUpWizardCompleted = props.auth.user.wizardComplete;
           state.wizard = false;
         } else {
           console.log("wizard turn true");
           state.isSignUpWizardCompleted = false;
           state.wizard = true;
         }
-        if (profile.lastName) {
-          state.lastName.value = profile.lastName;
+        if (profile.user.lastname) {
+          state.lastName.value = profile.user.lastnzame;
         }
         if (profile.dob) {
           state.dob.value = profile.dob;
         }
-        if (profile.phoneNo) {
-          state.phoneNo.value = profile.phoneNo;
+        if (profile.user.phone) {
+          state.phoneNo.value = profile.user.phone;
         }
         if (profile.countryCode) {
           state.countryCode.value = profile.countryCode;
         }
-        if (profile.email) {
-          state.email.value = profile.email;
+        if (profile.user.email) {
+          state.email.value = profile.user.email;
         }
         if (localStorage.getItem("currency")) {
           state.currency.value = localStorage.getItem("currency");
@@ -200,67 +202,70 @@ class Profile extends Component {
           if (profile.contact.countryCode) {
             state.contactCountryCode.value = profile.contact.countryCode;
           }
-          if (profile.contact.billing) {
-            if (profile.contact.billing.billingAddress) {
-              state.billingAddress.value =
-                profile.contact.billing.billingAddress;
-            }
-            if (profile.contact.billing.billingCity) {
-              state.billingCity.value = profile.contact.billing.billingCity;
-            }
-            if (profile.contact.billing.billingState) {
-              state.billingState.value = profile.contact.billing.billingState;
-            }
-            if (profile.contact.billing.billingZip) {
-              state.billingZip.value = profile.contact.billing.billingZip;
-            }
-            if (profile.contact.billing.billingCountry) {
-              state.billingCountry.value =
-                profile.contact.billing.billingCountry;
-            }
-          }
         }
+          if (profile.billing) {
+            let billing=JSON.parse(profile.billing)
+            console.log(billing)
+            if (billing.billingAddress) {
+              state.billingAddress.value =
+              billing.billingAddress;
+            }
+            if (billing.billingCity) {
+              state.billingCity.value = billing.billingCity;
+            }
+            if (billing.billingState) {
+              state.billingState.value = billing.billingState;
+            }
+            if (billing.billingZip) {
+              state.billingZip.value = billing.billingZip;
+            }
+            if (billing.billingCountry) {
+              state.billingCountry.value =
+                billing.billingCountry;
+            }
+          }
+        
 
-        if (profile.business) {
-          if (profile.business.name) {
-            state.businessName.value = profile.business.name;
+        if (profile.user.lawfirm_user) {
+          if (profile.lawfirmName) {
+            state.businessName.value = profile.lawfirmName;
           }
-          if (profile.business.email) {
-            state.businessEmail.value = profile.business.email;
+          if (profile.user.email) {
+            state.businessEmail.value = profile.user.email;
           }
-          if (profile.business.phoneNo) {
-            state.businessPhoneNo.value = profile.business.phoneNo;
+          if (profile.user.phone) {
+            state.businessPhoneNo.value = profile.user.phone;
           }
-          if (profile.business.countryCode) {
-            state.businessCountryCode.value = profile.business.countryCode;
-          }
-          if (profile.business.businessProfile) {
-            state.businessProfile.value = profile.business.businessProfile;
-          }
-          if (profile.business.location) {
-            if (profile.business.location.businessAddress) {
-              state.businessAddress.value =
-                profile.business.location.businessAddress;
-            }
-            if (profile.business.location.businessCity) {
-              state.businessCity.value = profile.business.location.businessCity;
-            }
-            if (profile.business.location.businessState) {
-              state.businessState.value =
-                profile.business.location.businessState;
-            }
-            if (profile.business.location.businessZip) {
-              state.businessZip.value = profile.business.location.businessZip;
-            }
-            if (profile.business.location.businessCountry) {
-              state.businessCountry.value =
-                profile.business.location.businessCountry;
-            }
+          // if (profile.business.countryCode) {
+          //   state.businessCountryCode.value = profile.business.countryCode;
+          // }
+          // if (profile.business.businessProfile) {
+          //   state.businessProfile.value = profile.business.businessProfile;
+          // }
+          // if (profile.business.location) {
+          //   if (profile.business.location.businessAddress) {
+          //     state.businessAddress.value =
+          //       profile.business.location.businessAddress;
+          //   }
+          //   if (profile.business.location.businessCity) {
+          //     state.businessCity.value = profile.business.location.businessCity;
+          //   }
+          //   if (profile.business.location.businessState) {
+          //     state.businessState.value =
+          //       profile.business.location.businessState;
+          //   }
+          //   if (profile.business.location.businessZip) {
+          //     state.businessZip.value = profile.business.location.businessZip;
+          //   }
+          //   if (profile.business.location.businessCountry) {
+          //     state.businessCountry.value =
+          //       profile.business.location.businessCountry;
+          //   }
 
-            if (profile.profileCompletion) {
-              state.profileCompletion = profile.profileCompletion;
-            }
-          }
+          //   if (profile.profileCompletion) {
+          //     state.profileCompletion = profile.profileCompletion;
+          //   }
+          // }
         }
       }
     }
@@ -608,6 +613,8 @@ class Profile extends Component {
       userType: this.props.auth.user.userType,
     };
     await this.props.actions.getProfile(profileDate, this.props.history);
+    console.log("callling")
+    
     state.formDirty = false;
     this.setState(state);
   };
@@ -1790,7 +1797,7 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.auth.userProfile
+  profile: state.auth.lawfirmUserProfile
 });
 
 const mapDispatchToProps = (dispatch) => ({

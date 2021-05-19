@@ -5,7 +5,8 @@ const init = {
     errors: {},
     countryInfo: {},
     userProfile:{},
-    packages:[]
+    packages:[],
+    lawfirmUserProfile:{}
 }
 
 
@@ -66,7 +67,7 @@ const authReducer = (state=init,action) =>{
         case Types.GET_PACKAGES: {
             return {
                 ...state,
-                savedProfle: action.payload.packages
+                packages: action.payload.packages
             }
         }
 
@@ -76,6 +77,14 @@ const authReducer = (state=init,action) =>{
                 ...state,
                 user: {...state.user,...action.payload.retrievedProfile},
                 userProfile: action.payload.retrievedProfile
+            }
+        }
+        case Types.GET_LAWFIRMUSER_PROFILE: {
+            console.log(action.payload.lawfirmUserProfile)
+            return {
+                ...state,
+                
+                lawfirmUserProfile: action.payload.lawfirmUserProfile
             }
         }
     
