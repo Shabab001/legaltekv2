@@ -434,14 +434,12 @@ console.log(activeBtn)
       card: cardElement,
       billing_details: {
         name: firstName + " " + lastName,
-        email:
-          props.auth && props.auth.user && props.auth.user.email
-            ? props.auth.user.email
-            :"",
-          
+      
       },
     });
-
+if(paymentMethodReq){
+  console.log(paymentMethodReq)
+}
     let billingAddressFlag = true;
     if (
       !billingAddress.isValid ||
@@ -531,13 +529,14 @@ console.log(activeBtn)
       );
       console.log(saveWizard);
       if (saveWizard) {
-        setWizard(false);
         let profileShort = {
           userId: props.auth.user._id,
           userType: props.auth.user.userType,
         };
-        await props.actions.getProfile(profileShort, props);
-        // setWizard(false);
+        setWizard(false);
+        console.log(props.lawfirmUser)
+        await props.actions.getLawfirmUserProfile(props.lawfirmUser._id,props.history);
+        await props.actions.getProfile(profileShort, props.history);
       }
     } else {
       message.error("Not a valid card number");
@@ -1364,7 +1363,8 @@ console.log(activeBtn)
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.auth.userProfile,
-  packages:state.auth.packages
+  packages:state.auth.packages,
+  lawfirmUser:state.auth.lawfirmUserProfile
 });
 
 const mapDispatchToProps = (dispatch) => ({

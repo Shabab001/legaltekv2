@@ -69,7 +69,7 @@ function LoginWithPhone(props) {
 
   const handleSignin = async(e)=>{
     
-    
+    setLoading(true);
     e.preventDefault()
     console.log("here")
     let role=null;
