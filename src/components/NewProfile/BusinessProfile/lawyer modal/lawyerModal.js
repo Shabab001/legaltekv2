@@ -1,258 +1,205 @@
 import React,{useState,useRef,useEffect} from 'react'
 import ReactDom from "react-dom"
 import "./LawyerModal.css"
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as userActions from "../../../../actions/userActions";
 import {VscChromeClose} from "react-icons/vsc"
 import OtpCard from './otpCard'
-const LawyerModal = ({open,set}) => {
+import { message } from "antd";
+import validator from "validator";
+import PhoneInput from "react-phone-input-2";
+const LawyerModal = (props) => {
   const [otp,setOtp]=useState(false)
-  const [place,setPlace]=useState("")
-  const[newPage,setnewPage]=useState(false)
-    const [selectedOption,sets]=useState({value: "", label: "Item Category"})
-    const [delivery,setDelivery]=useState({value: "", label: "Delivery Options"})
-    const [startDate, setStartDate] = useState(new Date());
-    const [image, setImage]=useState("");
-    const[top,setTop]=useState(200)
-    const[isUpload,setIsUpload]=useState(false)
-    const [scroll,setScroll]=useState(50)
-    const [location,setLocation]=useState(false);
-    const textareaRef=useRef()
-    const textContainerRef=useRef()
-    const uploadContentRef=useRef()
-    const mainContainer =useRef() 
-    let reader =new FileReader()
-    const removeImage =()=>{
-      setImage("")
-      setIsUpload(false);
-   
+  const[valid, setValid]=useState(false);
+  const[nameMessage,setNameMessage]=useState(null)
+  const[titleMessage,setTitleMessage]=useState(null)
+  const[emailMessage,setEmailMessage]=useState(null)
+  const[passwordMessage,setPassMessage]=useState(null)
+  const[confPassMessage,setConfPassMessage]=useState(null)
+  const[phoneMessage,setPhoneMessage]=useState(null)
+  const[numOflawyers, setNumOfLawyers]=useState(props.profile?props.profile.numOflawyers:0)
+  const[identifier,setIdentifier]=useState("Email")
+    const [countryCode, setCountryCode] = useState({
+    value: localStorage.getItem('calling_code')?localStorage.getItem('calling_code'): "",
+    message: "",
+    isValid: true,
+  });
+  
+const[lawyerInputs,setLawyerInput]=useState({
+  username:"",
+  title:"",
+  email:"",
+  phone:"",
+  password:"",
+  confirmPass:"",
+  role:"lawyer",
+  lawfirmId:""
+
+})
+
+
+useEffect(()=>{
+  if(props.profile){
+    setLawyerInput({...lawyerInputs,lawfirmId:props.profile.id})
+    setNumOfLawyers(props.profile.numbersOfLawyers)
+  }
+},[props.profile])
+const handleInputChange=(e)=>{  
+  if(e.target.name ==="phone"){
+    if (
+      (e.target.value.length <= 10 &&
+        e.target.value.match(/^[0-9]+$/)) ||
+      e.target.value.length == 0
+    ) {
+    if(countryCode.value){
+      setLawyerInput({   ...lawyerInputs,
+        phone:`${countryCode.value}${e.target.value}` });
     
+      }  }
+  }
+  else{
+  console.log(e.target.name);
+  setLawyerInput({
+    ...lawyerInputs,
+    [e.target.name]:e.target.value
+  })
+}
+}
+console.log(lawyerInputs)
+
+const onSumbitInputs =async()=>{
+  if(props.profile && props.profile.numbersOfLawyers &&  props.profile.numOflawyers!==0 ){
+
+  if(!lawyerInputs.username){
+    setNameMessage("name field empty")
+  }
+  else{
+    setNameMessage(null)
+  }
+  if(!lawyerInputs.title){
+    setTitleMessage("title field empty")
+  }
+  else{
+    setTitleMessage(null)
+  }
+  if(!lawyerInputs.password){
+    setPassMessage("passwod field empty")
+  }
+  else{
+    setPassMessage(null)
+  }
+  if(!lawyerInputs.confirmPass){
+    setConfPassMessage("confirm Password field empty")
+  }
+  else{
+    setConfPassMessage(null)
+  }
+  if(!lawyerInputs.email){
+    if(!lawyerInputs.phone){
+    setEmailMessage("email field empty")
     }
-   const resizeTextarea=()=>{
-    //  mainContainer.current.style.top="150px"
-    console.log(textContainerRef.current.scrollHeight)
-     textareaRef.current.style.height="50px"
-      textareaRef.current.style.height=(textareaRef.current.scrollHeight)+"px"
+  }
+  else if(lawyerInputs.email && !validator.isEmail(lawyerInputs.email)){
+    setEmailMessage("email is not valid")
+  }
+  else{
+    setEmailMessage(null)
+    setPhoneMessage(null)
+  }
+  if(!lawyerInputs.phone){
+    if(!lawyerInputs.email){
+    setPhoneMessage("phone field empty")
+    }
+  }
+  else{
+    setEmailMessage(null)
+    setPhoneMessage(null)
+  }
+
+
+
+  if(lawyerInputs.password !== lawyerInputs.confirmPass){ 
+    message.error("password and confirm password did not match")
+    return;
+  }
+
+if(  
+  lawyerInputs.username &&
+  lawyerInputs.confirmPass &&
+  lawyerInputs.password && 
+  (lawyerInputs.phone || lawyerInputs.email) &&
+  lawyerInputs.title
+){
+  if(!lawyerInputs.email){
+    if (lawyerInputs.phone.length !== 14) {
     
-      if(!isUpload){
-        textContainerRef.current.style.height=(textareaRef.current.scrollHeight)+"px"
-        if(textContainerRef.current.scrollHeight!==scroll ){
-          setScroll(textareaRef.current.scrollHeight)
-        }
-   
-      }
-      else{
-        textContainerRef.current.style.height=(textContainerRef.current.scrollHeight)+"px"
-        if(textContainerRef.current.scrollHeight!==scroll ){
-          setScroll(textContainerRef.current.scrollHeight)
-        }
-      }
-     
-   }
+      setPhoneMessage("not a valid phone number")
+      return;
+    }
+    else{
+      setPhoneMessage(null)
+    }
 
-   const handleNewPage=(e)=>{
-     e.preventDefault();
-     setnewPage(true)
-   }
-   useEffect(() => {
-    if(isUpload){
-
-      if(uploadContentRef.current){
-        uploadContentRef.current.style.height=(uploadContentRef.current.scrollHeight)+"px"
-        textContainerRef.current.style.height=(textContainerRef.current.scrollHeight)+"px"
-        if(textContainerRef.current.scrollHeight!==scroll ){
-          setScroll(textContainerRef.current.scrollHeight)
-        }
-      }
-       }
-       else{
-         if(textContainerRef.current){
-          
-
-             textContainerRef.current.style.height=(textareaRef.current.scrollHeight)+"px"
-             if(textContainerRef.current.scrollHeight!==scroll ){
-              setScroll(textareaRef.current.scrollHeight)
-            }
-          
-
-         }
-       }
-      
-    
-   }, [isUpload])
-   useEffect(() => {
-     
-     if(scroll<=308 && scroll > 88){
-       if(mainContainer.current){
-         if(scroll> 88 && scroll <=110){
-
-           mainContainer.current.style.top=(191)+"px"
-         }
-         if(scroll> 110 && scroll <=132){
-
-          mainContainer.current.style.top=(182)+"px"
-        }
-        if(scroll> 132 && scroll <=154){
-
-          mainContainer.current.style.top=(173)+"px"
-        }
-        if(scroll> 154 && scroll <=176){
-
-          mainContainer.current.style.top=(164)+"px"
-        }
-        if(scroll> 176 && scroll <=198){
-
-          mainContainer.current.style.top=(155)+"px"
-        }
-        if(scroll> 198 && scroll <=220){
-
-          mainContainer.current.style.top=(145)+"px"
-        }
-        if(scroll> 220 && scroll <=242){
-
-          mainContainer.current.style.top=(135)+"px"
-        }
-        if(scroll> 242 && scroll <=264){
-
-          mainContainer.current.style.top=(125)+"px"
-        }
-        if(scroll> 264 && scroll <=286){
-
-          mainContainer.current.style.top=(113)+"px"
-        }
-        if(scroll> 286 && scroll <=308){
-
-          mainContainer.current.style.top=(102)+"px"
-        }
-       
-       }
-       
-      
-
-     }
-     else if(scroll>308){
-      if(mainContainer.current){
-        console.log("here")
-      mainContainer.current.style.top=(100)+"px"  
-      }
-     }  
-     else if(scroll <= 88){
-      if(mainContainer.current){
-       console.log("HI")
-      mainContainer.current.style.top=(200)+"px"  
-      }
-     }
-   
-   }, [scroll])
-   console.log("top:",top  ) 
-   console.log("scroll", scroll)
-
-const handleUpload =(e)=>{
-  console.log("uploading")
-if(e.target.files && e.target.files[0]){
- 
-  reader.onload =function (e){
-    setImage(e.target.result)
-    setIsUpload(true)
+  let inputs ={
+    username:lawyerInputs.username,
+    password:lawyerInputs.password,
+    titile:lawyerInputs.title,
+    phone:lawyerInputs.phone,
+    role:lawyerInputs.role,
+    lawfirmId:lawyerInputs.lawfirmId
     
   }
-  reader.readAsDataURL(e.target.files[0])
-}
-}
-    const options = [
-        { value: 'chocolate', label: 'Book' },
-        { value: 'strawberry', label: 'Computer' },
-        { value: 'vanilla', label: 'Furniture' },
-        { value: 'vanilla', label: 'Money' },
-      ]; 
-      const DeliveryOptions = [
-        { value: 'Delivery', label: 'Delivery' },
-        { value: 'Pickup', label: 'Pickup on Location' },
-     
-      ]; 
-    const customStyles = {
-        option: (provided, state) => ({
-          
-
-         
-            
-       
-          color: state.isSelected ? 'var(--prvd-third)' : 'black',
-          padding: 10,
-          backgroundColor: state.isDisabled
-          ? null
-          : state.isSelected
-          ? "var(--prvd-primary)"
-          : state.isFocused
-          ? "var(--prvd-third)"
-          : null,
-         
-          
-        }),
-        control: () => ({
-          // none of react-select's styles are passed to <Control />
-        
-          width: 220,
-          height:22,
-          display:"flex",
-          border:"none",
-          outline:"none",
-          alignItems:"center",
-          justifyContent:"space-between"
-        }),
-        singleValue: (provided, state) => {
-          const opacity = state.isDisabled ? 0.5 : 1;
-          const transition = 'opacity 300ms';
-      
-          return { ...provided, opacity, transition };
-        }
-      }
+  let newUser=await props.actions.register(inputs)
+  if(newUser){
+    message.success("lawyer added")
+    props.set(false)
+    console.log(newUser);
+    let lawfirmUser =await props.actions.updateLawfirmUserProfile(lawyerInputs.lawfirmId,{lawyer_user:newUser.lawyer_user.id})
+    if(lawfirmUser){
+      console.log(lawfirmUser)
+      props.actions.getLawfirmUserProfile(lawyerInputs.lawfirmId)
+    }
+  }
   
-        
-    
-    const  handleChange = selectedOption => {
-        sets( selectedOption );
-        console.log(`Option selected:`, selectedOption);
-      };
-      const  handleDelivery = selectedOption => {
-        setDelivery( selectedOption );
-        if(selectedOption.value==="Delivery"){
-          setLocation(true)
-        }
-        else{
-          console.log("hi")
-          setLocation(false)
-        }
-        console.log(`Option selected:`, selectedOption);
-      };
-      
-      const pageTransitions={
-        in:{
-          opacity:1,
-          x:0
-        },
-        initial:{
-          opacity:0,
-          
-        },
-        out:{
-          
-          transition:{delay:1}
-        }
-      }
-      const trans ={
-        type:"tween",
-        ease:"ease"
-      }
-      
-      if(!open)return null
-   
-    return ReactDom.createPortal
-    
-   
+  }
+  else{
+ 
 
+    let inputs ={
+      username:lawyerInputs.username,
+      password:lawyerInputs.password,
+      title:lawyerInputs.title,
+      email:lawyerInputs.email,
+      role:lawyerInputs.role,
+      lawfirmId:lawyerInputs.lawfirmId
+    }
     
+    let newUser=await props.actions.register(inputs)
+    if(newUser){
+      message.success("lawyer added")
+      props.set(false)
+      console.log(newUser);
+      let lawfirmUser =await props.actions.updateLawfirmUserProfile(lawyerInputs.lawfirmId,{lawyer_user:newUser.lawyer_user.id,numbersOfLawyers:numOflawyers-1})
+      if(lawfirmUser){
+        console.log(lawfirmUser)
+      }
+    }
+  }
+
+}
+  }else{
+    message.error("you have reached the limit of adding lawyers")
+  }
+
+}
+      
+      if(!props.open)return null
+   
+    return ReactDom.createPortal    
     (
       <div className="post-modal-main">
-            <div   className="post-modal-container" ref={mainContainer}> 
+            <div   className="post-modal-container" > 
             {otp? <OtpCard setOtp={setOtp}/>:
             <>
             <div className="post-modal-headings">
@@ -262,44 +209,96 @@ if(e.target.files && e.target.files[0]){
             </div>
             <div className="post-modal-cross">
 
-              <VscChromeClose style={{fontSize:"1.4rem"}} onClick={()=>{set(false) 
-               
-                setScroll(50)
+              <VscChromeClose style={{fontSize:"1.4rem"}} onClick={()=>{props.set(false) 
+        
                 }}/>
             </div>
           </div>
   
            <div className="post-modal-options-grid2">
+             <div className="inputHolder">
+           <p>Name:</p>
      
      <div className="pmodal-name-cat-time">
-       <input placeholder="Name" />
+       
+      
+       <input placeholder="Name"  name="username" onChange={handleInputChange} />
      </div>
-
+     {nameMessage? <p style={{marginTop:".5rem",color:"red"}}>{nameMessage}</p>:null}
+     </div>
+     <div className="inputHolder">
+       
+     <p>Title:</p>
      <div className="pmodal-name-cat-time">
-       <input placeholder="Title" />
+       
+       <input placeholder="Title" name="title" onChange={handleInputChange} />
+     </div>
+     {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
      </div>
 </div>
 <div className="post-modal-options-grid2">
-     
-     <div className="pmodal-name-cat-time">
-       <input placeholder="Email" />
-     </div>
+  {identifier==="Email"?
+     <div className="inputHolder">
 
-     <div className="pmodal-name-cat-time">
-       <input placeholder="Phone" />
+<p>Email:</p>
+       <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"1rem"}}>
+     <div className="pmodal-name-cat-time2">
+  
+       <input placeholder="Email" name="email" onChange={handleInputChange} style={{width:"100%",backgroundColor:"white"}}/>
      </div>
+     <div className="identifier-btn" onClick={()=>{setIdentifier("Phone")
+    setLawyerInput({...lawyerInputs,email:""})
+    }}>
+       <p>Phone</p>
+       </div>
+     </div>
+     {emailMessage? <p style={{marginTop:".5rem",color:"red"}}>{emailMessage}</p>:null}
+     </div>
+     :
+     <div className="inputHolder">
+     <p>Phone:</p>
+     <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"1rem"}}>
+     <div className="pmodal-name-cat-time3">
+    
+     <PhoneInput inputStyle={{width:"100% !important",  padding:"0px 0px !important"}} style={{width:"6rem"}}
+            // country={"us"}
+            value={countryCode.value}
+            placeholder="Country Code"
+            onChange={(phone) =>
+              setCountryCode({ ...countryCode, value:`+${phone}`})
+            }
+          />
+          <input className="lawyer-phone-input" placeholder="Phone" name="phone" onChange={handleInputChange} />
+     </div>
+     <div className="identifier-btn" onClick={()=>{setIdentifier("Email")
+     setLawyerInput({...lawyerInputs,phone:""})
+    }}>
+       <p>Email</p>
+       </div>
+       </div>
+     {phoneMessage? <p style={{marginTop:".5rem",color:"red"}}>{phoneMessage}</p>:null}
+     </div>
+  }
 </div>
 <div className="post-modal-options-grid2">
-     
+     <div className="inputHolder">
+<p>Password:</p>
      <div className="pmodal-name-cat-time">
-       <input placeholder="Password" />
+      
+       <input placeholder="Password" name="password" onChange={handleInputChange} />
      </div>
-
+     {passwordMessage? <p style={{marginTop:".5rem",color:"red"}}>{passwordMessage}</p>:null}
+     </div>
+     <div className="inputHolder">
+     <p>Confirm Password:</p>
      <div className="pmodal-name-cat-time">
-       <input placeholder="Confirm password" />
+      
+       <input placeholder="Confirm password" name="confirmPass"  onChange={handleInputChange}/>
+     </div>
+     {confPassMessage? <p style={{marginTop:".5rem",color:"red"}}>{confPassMessage}</p>:null}
      </div>
 </div>
-<div className="postmodal-btn" onClick={()=>setOtp(true)}>
+<div className="postmodal-btn" onClick={onSumbitInputs}>
              <p>Add</p>
            </div>
            </>
@@ -310,5 +309,16 @@ if(e.target.files && e.target.files[0]){
         document.getElementById("portal")
     )
 }
+function mapStateToProps(state, ownProps) {
+  return {
+    auth: state.auth,
+    profile: state.auth.lawfirmUserProfile,
+  };
+}
 
-export default LawyerModal
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LawyerModal);

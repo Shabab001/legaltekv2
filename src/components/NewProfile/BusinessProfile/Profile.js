@@ -204,7 +204,7 @@ class Profile extends Component {
           }
         }
           if (profile.billing) {
-            let billing=JSON.parse(profile.billing)
+            let billing=profile.billing
             console.log(billing)
             if (billing.billingAddress) {
               state.billingAddress.value =

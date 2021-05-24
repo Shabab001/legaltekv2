@@ -18,7 +18,7 @@ export const login = (user, history) => (dispatch) => {
         localStorage.setItem("refresh_token", response.data.jwt);
         localStorage.setItem("user_session", JSON.stringify(response.data.user));
 
-        setAuthToken(response.data.jwt);
+       
         console.log(response.data.user)
 
         dispatch({
@@ -67,7 +67,7 @@ export const googleLogin = (data, history) => (dispatch) => {
         console.log(response);
         localStorage.setItem("auth_token", response.data.token);
         localStorage.setItem("refresh_token", response.data.refresh_token);
-        setAuthToken(response.data.token);
+   
 
         dispatch({
           type: Types.SET_USER,
@@ -110,7 +110,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
         console.log(response);
         localStorage.setItem("auth_token", response.data.token);
         localStorage.setItem("refresh_token", response.data.refresh_token);
-        setAuthToken(response.data.token);
+       
 
         dispatch({
           type: Types.SET_USER,
@@ -146,7 +146,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
 export const register = (user, history) => (dispatch) => {
   console.log(user)
   return new Promise((resolve, reject) => {
-    Axios.post(`${REACT_APP_API}/auth/local/register`, user,{mode:'cors'})
+    Axios.post(`${REACT_APP_API}/auth/local/register`, user)
       .then((response) => {
         console.log("database called")
         console.log(response.data.user);
@@ -182,7 +182,7 @@ export const logout = (history) => {
   localStorage.removeItem("auth_token");
   localStorage.removeItem("refresh_token");
   localStorage.removeItem("user_session");
-  setAuthToken();
+
   console.log("hi", history);
   message.success("Successfully logged out!");
   history.push("/")
@@ -288,7 +288,7 @@ export const loginWithPhone = (data, history) => (dispatch) => {
         if (res.data.token) {
           localStorage.setItem("auth_token", res.data.token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
-        setAuthToken(res.data.token);
+       
 
         dispatch({
           type: Types.SET_USER,
@@ -530,4 +530,90 @@ export const saveBusinessUserWizard = (props, history) => dispatch => {
 
 
   })
+}
+export const updateLawfirmUserProfile = (id, data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    console.log(token)
+
+    Axios.put(`${REACT_APP_API}/lawfirm-users/${id}`,data,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      })
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+      dispatch({
+        type: Types.GET_LAWFIRMUSER_PROFILE,
+        payload: {
+          lawfirmUserProfile: res.data,
+        },
+      });
+      console.log("after lawfirm user")
+      // history.push('/profilePage')
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
+}
+export const getLawyerUserProfile = (data, history) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    
+
+    Axios.get(`${REACT_APP_API}/users/${data}`,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      },)
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+ 
+      console.log("after lawfirm user")
+      // history.push('/profilePage')
+      resolve(true); 
+      return res.data
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
 }

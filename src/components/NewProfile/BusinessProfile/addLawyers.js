@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import "./addlawyers.css"
 import ListSearchInput from './listSearchInput'
 import ListSearchLabel from './listSearchLabel'
@@ -9,12 +9,25 @@ import {BsPlus} from 'react-icons/bs';
 import LawyerList from "./LawyersList"
 import {FiPlus} from "react-icons/fi"
 import LawyerModal from './lawyer modal/lawyerModal';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as userActions from "../../../actions/userActions";
 
-const AddLawyers = () => {
+const AddLawyers = (props) => {
   const[minimize,setMinimize]=useState(false);
-  const [modal,setModal]=useState(false)
+  const [modal,setModal]=useState(false);
+  const[addLawyersLimit,setAddLawyersLimit]=useState(0)
 
 
+  const{profile}=props;
+  useEffect(()=>{
+    if(profile.numbersOfLawyers && profile){
+      console.log(profile.numbersOfLawyers)
+      setAddLawyersLimit(profile.numbersOfLawyers)
+    }
+  },[addLawyersLimit,profile])
+  console.log(profile.id)
+  let id =profile? profile.id:""
   const lawyerList=[
    {firstname:"Shahriar",
    lastname:"Khan",
@@ -78,10 +91,11 @@ position:"Head in Civil",
 },
 
   ]
-const handleModal =()=>{
-  console.log("hi")
-  setModal(true)
-}
+  const handleModal =()=>{
+    console.log("hi")
+    setModal(true)
+  }
+
   const handleMinimize =()=>{
     
     setMinimize(!minimize);
@@ -97,6 +111,9 @@ const handleModal =()=>{
                      <p>List of Lawyers</p>
               
                      </div>
+                     <div>
+                       <p>Add Lawyers Limit:{addLawyersLimit}</p>
+                     </div>
                      <div className="add-lawyer" onClick={handleModal}><p> 
                      Add Lawyer
                        </p>
@@ -104,7 +121,7 @@ const handleModal =()=>{
                   </div>
           </div>
 
-          <LawyerModal open={modal} set={setModal}/>
+          <LawyerModal open={modal} set={setModal} id={id}/>
                   {minimize ? 
                   
                   <div className="list-search2">
@@ -186,7 +203,7 @@ const handleModal =()=>{
                        
                        } 
           
-                        {lawyerList.map((lawyer,index)=>{
+                        {profile.lawyer_users&&profile.lawyer_users.map((lawyer,index)=>{
                           return(
 
                             <LawyerList key={index} lawyer={lawyer} />
@@ -199,4 +216,14 @@ const handleModal =()=>{
     )
 }
 
-export default AddLawyers
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.auth.lawfirmUserProfile,
+  
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(userActions, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AddLawyers);

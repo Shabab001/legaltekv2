@@ -48,36 +48,36 @@ function BusinessProfile (props) {
    
 
    
-    if (props.match.path === "/business/profile" || props.match.path === "/business/") {
+    if (props.location.pathname === "/business/profile" || props.location.pathname === "/business/") {
       console.log("hi");
       setActiveMenu(1);
     }
-    if (props.match.path === "/business/documents") {
+    if (props.location.pathname === "/business/documents") {
       console.log("hi");
       setActiveMenu(2);
     }
-    if (props.match.path === "/business/lawyers") {
+    if (props.location.pathname === "/business/lawyers") {
       console.log("hi");
       setActiveMenu(3);
     }
 
-    if (props.match.path === "/business/management") {
+    if (props.location.pathname === "/business/management") {
       console.log("hi");
       setActiveMenu(4);
     }
 
-    if (props.match.path === "/business/reviews") {
+    if (props.location.pathname === "/business/reviews") {
       console.log("hi");
       setActiveMenu(5);
     }
-    if (props.match.path === "/business/notifications") {
+    if (props.location.pathname === "/business/notifications") {
       console.log("hi");
       setActiveMenu(6);
     }
 
    
   
-    if (props.match.path === "/business/chats") {
+    if (props.location.pathname === "/business/chats") {
       console.log("hi");
       setActiveMenu(7);
     }
@@ -87,13 +87,13 @@ function BusinessProfile (props) {
       setActiveMenu(8);
     }
   
-    if (props.match.path == "/business/portfolio") {
+    if (props.location.pathname == "/business/portfolio") {
       setActiveMenu(10);
     }
-    if (props.match.path == "/business/payment-history") {
+    if (props.location.pathname == "/business/payment-history") {
       setActiveMenu(11);
     }
-  }, [props.match.path]);
+  }, [props.location.pathname]);
 
 
   const logout = (e) => {
