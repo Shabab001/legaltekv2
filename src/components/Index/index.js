@@ -16,6 +16,7 @@ import law from "./images/law.png"
 import Wave from "./wave"
 import Arrow from "./images/Arrow.png"
 import Agencies from "../HomePage/Agencies";
+import SearchBar from "../IndexShared/SearchBar";
 
 const PopularLawyers = lazy(()=>import("../HomePage/PopularLawyers"))
 // const hireChef = lazy(()=>import("../../assets/img/hirechef1.jpg"))
@@ -147,24 +148,12 @@ window.addEventListener('scroll',handleScroll)
          <div className="banner-right-main">
            <div className="banner-left-upper">
                 <div className="banner-left-headings">
-                  <p>Italian Pasta</p>
-                   <p>With Special Sauce</p>
+                  <p>Online legal appointments</p>
+                   <p>With a verified specialist.</p>
                    <p>Best Lawyer with Professional Experiences <br/>you can only find in LegalTek</p>
                 </div>
-                <div className="banner-upper-btn">
-                  <div className="banner-price">
-                    <p>$250</p>
-                    <p>$200</p>
-                  </div>
-                    <div className="banner-round-btn">
-                        <p>Buy Now</p>
-                    </div>
-                </div>
-                <div className="banner-underlines"> 
-                     <div className="banner-underline1"></div>
-                     <div className="banner-underline2"></div>
-                     <div className="banner-underline3"></div>
-                </div>
+              <SearchBar/>
+           
                 <div className="banner-lower-left">
                  <Elipse/>
                   <div  className="banner-lower-image">

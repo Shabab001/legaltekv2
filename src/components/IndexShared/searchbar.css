@@ -1,7 +1,7 @@
 .search-main{
     position: absolute;
     z-index: 1000;
-    top:40vh;
+    top:45vh;
     width: 100%;
     height: fit-content;
 
@@ -23,7 +23,7 @@ border-radius: 8px;
 .search-from-container{
 
     padding-left: 1rem;
-    flex-basis:90%;
+    flex-basis:80%;
     display: flex;
     align-items: center;
     height: 4rem;
@@ -42,12 +42,30 @@ border-radius: 8px;
     border: none;
     outline: none;
 }
+.search-options{
+    flex-basis: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid rgb(212, 212, 212);
+    margin:  1rem 0;
+}
+.search-options-icon{
+    background-color: rgb(212, 212, 212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px 50px;
+    
+}
 .search-btn{
     margin:.2rem;
     padding: .5rem;
     flex-basis: 15%;
     border: none;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color:white;
     font-weight: bold;
     border-radius: 8px;
@@ -56,6 +74,7 @@ border-radius: 8px;
     width: 20rem;
 position: fixed;
 top:15px;
+z-index: 99999999;
 left: 40%;
 border:1px solid black;
 height: 3rem;
@@ -66,7 +85,7 @@ border-radius: 8px  ;
     margin: 0;
     display: flex   ;
     align-items: center;
-    
+
     gap:1rem;
     justify-content: center;
 
@@ -90,6 +109,7 @@ font-size: 1.2rem;
         width: 100%;
         position: fixed;
         top:8rem;
+        right:2.2rem;
         display: grid;
        
         

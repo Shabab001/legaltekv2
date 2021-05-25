@@ -6,9 +6,12 @@ import { bindActionCreators } from "redux";
 import * as userActions from "../../../../actions/userActions";
 import {VscChromeClose} from "react-icons/vsc"
 import OtpCard from './otpCard'
-import { message } from "antd";
+import { message , Select} from "antd";
 import validator from "validator";
 import PhoneInput from "react-phone-input-2";
+import { Multiselect } from 'multiselect-react-dropdown';
+
+
 const LawyerModal = (props) => {
   const [otp,setOtp]=useState(false)
   const[valid, setValid]=useState(false);
@@ -19,7 +22,8 @@ const LawyerModal = (props) => {
   const[confPassMessage,setConfPassMessage]=useState(null)
   const[phoneMessage,setPhoneMessage]=useState(null)
   const[numOflawyers, setNumOfLawyers]=useState(props.profile?props.profile.numOflawyers:0)
-  const[identifier,setIdentifier]=useState("Email")
+  
+  
     const [countryCode, setCountryCode] = useState({
     value: localStorage.getItem('calling_code')?localStorage.getItem('calling_code'): "",
     message: "",
@@ -28,16 +32,38 @@ const LawyerModal = (props) => {
   
 const[lawyerInputs,setLawyerInput]=useState({
   username:"",
+  firstname:"",
+  lastname:"",
   title:"",
   email:"",
   phone:"",
   password:"",
   confirmPass:"",
   role:"lawyer",
-  lawfirmId:""
+  lawfirmId:"",
+  specializedRole:[],
+  category:[]
 
 })
+const options= [{value: 'Senior-Partner', id: 1},{value: 'Partner', id: 2},{value: 'Assosiate', id: 3},{value: 'Legal-Assistant', id: 4},{value: 'Law-Clerk', id: 5}]
+const categories =[{value:"criminology" ,id:1},{value:"civil", id:3} ]
+const onSelect=(selectedList, selectedItem) =>{
+  console.log(selectedItem.value)
+  let arr =lawyerInputs.specializedRole;
+  setLawyerInput({...lawyerInputs, specializedRole:[...arr,selectedItem.value]})
+ 
+}
 
+const onRemove =(selectedList, removedItem)=> {
+  console.log(removedItem);
+}
+const onCategoryChange=(selectedItem)=>{
+  console.log(typeof(selectedItem))
+  console.log(selectedItem)
+}
+const onCategoryRemove =(selectedItem)=>{
+console.log(selectedItem);
+}
 
 useEffect(()=>{
   if(props.profile){
@@ -228,16 +254,62 @@ if(
      </div>
      <div className="inputHolder">
        
-     <p>Title:</p>
+     <p>Specialized Role:</p>
      <div className="pmodal-name-cat-time">
        
-       <input placeholder="Title" name="title" onChange={handleInputChange} />
+     <Multiselect
+        options={options} // Options to display in the dropdown
+       
+        onSelect={onSelect} // Function will trigger on select event
+        onRemove={onRemove} // Function will trigger on remove event
+        displayValue="value" // Property name to display in the dropdown options
+        placeholder="Specialized Role"
+      />
      </div>
      {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
      </div>
 </div>
 <div className="post-modal-options-grid2">
-  {identifier==="Email"?
+<div className="inputHolder">
+       
+       <p>Area of Expertise:</p>
+       <div className="pmodal-name-cat-time2">
+         
+       <Multiselect
+          options={categories} // Options to display in the dropdown
+
+          onSelect={onCategoryChange} // Function will trigger on select event
+          onRemove={onCategoryRemove} // Function will trigger on remove event
+          displayValue="value" // Property name to display in the dropdown options
+          placeholder="Expertise Category"
+        />
+       </div>
+       {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
+       </div>
+       </div>     
+<div className="post-modal-options-grid2">
+             <div className="inputHolder">
+           <p>First Name:</p>
+     
+     <div className="pmodal-name-cat-time">
+       
+      
+       <input placeholder="Firstname"  name="firstname" onChange={handleInputChange} />
+     </div>
+     {nameMessage? <p style={{marginTop:".5rem",color:"red"}}>{nameMessage}</p>:null}
+     </div>
+     <div className="inputHolder">
+       
+     <p>Last Name:</p>
+     <div className="pmodal-name-cat-time">
+       
+       <input placeholder="Lastname" name="lastname" onChange={handleInputChange} />
+     </div>
+     {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
+     </div>
+</div>
+<div className="post-modal-options-grid2">
+  
      <div className="inputHolder">
 
 <p>Email:</p>
@@ -246,15 +318,12 @@ if(
   
        <input placeholder="Email" name="email" onChange={handleInputChange} style={{width:"100%",backgroundColor:"white"}}/>
      </div>
-     <div className="identifier-btn" onClick={()=>{setIdentifier("Phone")
-    setLawyerInput({...lawyerInputs,email:""})
-    }}>
-       <p>Phone</p>
-       </div>
+  
      </div>
      {emailMessage? <p style={{marginTop:".5rem",color:"red"}}>{emailMessage}</p>:null}
      </div>
-     :
+       </div>
+       <div className="post-modal-options-grid2">
      <div className="inputHolder">
      <p>Phone:</p>
      <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"1rem"}}>
@@ -270,16 +339,11 @@ if(
           />
           <input className="lawyer-phone-input" placeholder="Phone" name="phone" onChange={handleInputChange} />
      </div>
-     <div className="identifier-btn" onClick={()=>{setIdentifier("Email")
-     setLawyerInput({...lawyerInputs,phone:""})
-    }}>
-       <p>Email</p>
-       </div>
+     
        </div>
      {phoneMessage? <p style={{marginTop:".5rem",color:"red"}}>{phoneMessage}</p>:null}
      </div>
-  }
-</div>
+  </div>
 <div className="post-modal-options-grid2">
      <div className="inputHolder">
 <p>Password:</p>

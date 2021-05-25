@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { GrSearch } from 'react-icons/gr';
 import { MdKeyboardVoice } from 'react-icons/md';
 import { AiFillPauseCircle } from 'react-icons/ai';
+import {IoOptionsSharp} from "react-icons/io5"
 import "./searchbar.css"
 import SearchSuggestions from "./searchSuggestions"
 const SearchBar = () => {
@@ -127,9 +128,14 @@ const handleDropdown=()=>{
 
       <GrSearch className="search-icon"/>
       <input type="text" onChange={(e)=>handlesug(e)} className="search-input"  placeholder="search here" value={recording?voiceInput: textInput}/>
-      {!isFirefox && recording? <AiFillPauseCircle className="voice-icon" style={{color: "var(--secondary)"}} onClick={handleRecording}/>
-      :<MdKeyboardVoice className="voice-icon"  onClick={handleRecording}/>}
+     
+      
 
+      </div>
+      <div className="search-options">
+      <div className="search-options-icon">
+      <IoOptionsSharp/>
+      </div>
       </div>
       <button className="search-btn">Find it now</button>
     </form>
@@ -153,10 +159,14 @@ const handleDropdown=()=>{
   
         <GrSearch className="search-icon"/>
         <input type="text" onChange={(e)=>handlesug(e)} className="search-input"  placeholder="search here" value={recording?voiceInput: textInput}/>
-        {!isFirefox && recording? <AiFillPauseCircle className="voice-icon" style={{color: "var(--secondary)"}} onClick={handleRecording}/>
-        :<MdKeyboardVoice className="voice-icon"  onClick={handleRecording}/>}
+        
   
         </div>
+        <div className="search-options">
+      <div className="search-options-icon">
+      <IoOptionsSharp/>
+      </div>
+      </div>
         <button className="search-btn">Find it now</button>
       </form>
       </div>

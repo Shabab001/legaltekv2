@@ -28,69 +28,8 @@ const AddLawyers = (props) => {
   },[addLawyersLimit,profile])
   console.log(profile.id)
   let id =profile? profile.id:""
-  const lawyerList=[
-   {firstname:"Shahriar",
-   lastname:"Khan",
-   position:"Head in Civil",
-    email:"shahriar@gmail.com",
-    address:"63,Kalabagan,Dhaka",
-    status:"Full-Time",
-    mobile:"018130230",
-    experience:"2 Years",
-    category:"Civil Rights",
-    caseHandled:"20",
-    password:12345678
-  },
-  {firstname:"Shahriar",
-  lastname:"Khan",
-  position:"Head in Civil",
-   email:"shahriar@gmail.com",
-   address:"63,Kalabagan,Dhaka",
-   status:"Full-Time",
-   mobile:"018130230",
-   experience:"2 Years",
-   category:"Civil Rights",
-   caseHandled:"20",
-   password:12345678
- },
- {firstname:"Shahriar",
- lastname:"Khan",
- position:"Head in Civil",
-  email:"shahriar@gmail.com",
-  address:"63,Kalabagan,Dhaka",
-  status:"Full-Time",
-  mobile:"018130230",
-  experience:"2 Years",
-  category:"Civil Rights",
-  caseHandled:"20",
-  password:12345678
-},
-{firstname:"Shahriar",
-lastname:"Khan",
-position:"Head in Civil",
- email:"shahriar@gmail.com",
- address:"63,Kalabagan,Dhaka",
- status:"Full-Time",
- mobile:"018130230",
- experience:"2 Years",
- category:"Civil Rights",
- caseHandled:"20",
- password:12345678
-},
-{firstname:"Shahriar",
-lastname:"Khan",
-position:"Head in Civil",
- email:"shahriar@gmail.com",
- address:"63,Kalabagan,Dhaka",
- status:"Full-Time",
- mobile:"018130230",
- experience:"2 Years",
- category:"Civil Rights",
- caseHandled:"20",
- password:12345678
-},
-
-  ]
+ 
+  
   const handleModal =()=>{
     console.log("hi")
     setModal(true)
