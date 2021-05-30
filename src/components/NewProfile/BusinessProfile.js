@@ -4,6 +4,7 @@ import { Link, Redirect,Switch,Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
+import * as blogActions from "../../actions/blogActions";
 import { message } from "antd";
 import LawyersList from "./BusinessProfile/LawyersList";
 import AddLawyers from "./BusinessProfile/addLawyers";
@@ -49,6 +50,26 @@ function BusinessProfile (props) {
       console.log(props.auth.user.lawfirm_user.id)
     }
   },[])
+  useEffect(()=>{
+    const getMyBlogs=async()=>{
+      
+        console.log(props.auth)
+          let myBlogs= await props.blogActions.getUserPosts(props.auth.user.lawfirm_user.id?props.auth.user.lawfirm_user.id:props.auth.user.lawfirm_user,props.history)
+          if(myBlogs){
+             console.log(myBlogs);
+          }    
+       
+    }
+    if(props.auth.user&& props.history &&props.blogs.posts){
+       console.log(props.auth.user)
+    getMyBlogs()
+    }
+ },[props.auth,props.blogs.deletedPost])
+ useEffect(()=>{
+       if(props.blogs){
+          console.log(props.blogs)
+       }
+ },[props.blogs])
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -222,9 +243,11 @@ function BusinessProfile (props) {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.auth.userProfile,
+  blogs: state.blog,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
+  blogActions:bindActionCreators(blogActions,dispatch)
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessProfile);

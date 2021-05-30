@@ -1,9 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./blogs.css";
 import {BsPlusSquareFill} from "react-icons/bs"
 import BlogGallery from "./blog-contents/blogGallery";
+import * as blogActions from "../../../actions/blogActions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 function Blogs(props) {
   console.log(props.history)
+
+
   return (
     <>
      <div className="blog-main">
@@ -27,4 +32,13 @@ function Blogs(props) {
   );
 }
 
-export default Blogs;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.auth.lawfirmUserProfile,
+  blogs: state.blog,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  blogActions: bindActionCreators(blogActions, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Blogs);

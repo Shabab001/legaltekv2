@@ -211,7 +211,7 @@ export const deletePost = (props, history) => (dispatch) => {
 
 export const getComments = (props) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("/api/blogs/getComments/", props.obj, {
+    Axios.get(`${REACT_APP_API}/comments`, props.obj, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
@@ -239,18 +239,18 @@ export const getComments = (props) => (dispatch) => {
 
 export const postComment = (props) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.post("/api/blogs/postComment/", props.obj, {
+    Axios.post(`${REACT_APP_API}/comments`, props.obj, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
       },
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
 
         message.success("Comment posted successfully");
         // props.history.push('/business/blogs')
-        resolve(true);
+        resolve(response.data);
       })
       .catch((error) => {
         message.error("Comment posting failed");
@@ -286,7 +286,11 @@ export const deleteComment = (props) => (dispatch) => {
 
 export const likePost = (props) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.put(`/api/blogs/likePost/${props.postId}`,{}, {
+    console.log(props)
+    let obj={
+      likes:props.likes
+    }
+    Axios.put(`${REACT_APP_API}/blogs/${props.blogId}`, obj, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
@@ -308,8 +312,12 @@ export const likePost = (props) => (dispatch) => {
 };
 
 export const unlikePost = (props) => (dispatch) => {
+  console.log(props)
+  let obj={
+    likes:props.likes
+  }
   return new Promise((resolve, reject) => {
-    Axios.put(`/api/blogs/unlikePost/${props.postId}`,{}, {
+    Axios.put(`${REACT_APP_API}/blogs/${props.blogId}`, obj, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,

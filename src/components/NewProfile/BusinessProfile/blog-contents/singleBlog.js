@@ -9,6 +9,7 @@ import * as blogActions from "../../../../actions/blogActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import parse from 'html-react-parser';
+import{message} from "antd"
 
 import Item from 'antd/lib/list/Item';
 
@@ -17,32 +18,101 @@ import Item from 'antd/lib/list/Item';
 const SingleBlog = (props) => {
   const [singleBlog,setSingleBlog]=useState(null)
   const[date,setDate]=useState(null)
+  const [liked, setLiked] = useState(false);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [commentToBeDeleted, setCommentToBeDeleted] = useState("");
+  const [facebookShareCount, setFacebookShareCount] = useState();
   const{id}=useParams()
   console.log(id)
 
-useEffect(()=>{
-  if(props.blogs.posts){
+
+  const likePost = async (blog) => {
+    let likePost = await props.blogActions.likePost({
+      blogId:blog.id,
+      likes:blog.likes+1,
+      ...props,
+    });
+    if (likePost) {
     
-    console.log(props.blogs.posts)
- props.blogs.posts.map((item)=>{
-      if(item.id===id){
-        console.log(item)
-        setSingleBlog(item)
-        
+      props.blogActions.getSinglePost({ id, ...props });
+    }
+  };
+
+  const unlikePost = async (blog) => {
+    let unlikePost = await props.blogActions.unlikePost({
+      blogId:blog.id,
+      likes:blog.likes,
+      ...props,
+    });
+    if (unlikePost) {
+
+      props.blogActions.getSinglePost({ id, ...props });
+    }
+  };
+
+  const postComment = async () => {
+    if (comment && singleBlog._id) {
+      console.log(props.auth.user)
+      let obj = {
+        author: props.auth.user?props.auth.user.id:"",
+        blog: singleBlog.id,
+        comment: comment,
+      };
+      console.log("sdffffffffffffffffffffposting")
+      let postComment = await props.blogActions.postComment({ obj, ...props });
+      if (postComment) {
+        console.log(postComment);
+        setComment("");
+        let obj = {
+          postId: singleBlog._id,
+        };
+        await props.blogActions.getSinglePost({ id, ...props });
       }
-      return
-    })
-    console.log(singleBlog)
+    } else {
+      message.error("write your comment!");
+    }
+  };
+
+
+useEffect(()=>{
+  async function sblog(){
+
+    if(!props.blogs.singlePost){
+      console.log("singleBlog")
+      await props.blogActions.getSinglePost({ id, ...props });
+    }
+  }
+  sblog()
+},[props.blogs.singlePost])
+
+useEffect(()=>{
+  if(props.blogs.singlePost){
+    
+    console.log(props.blogs.singlePost)
+
+      if(props.blogs.singlePost.id===id){
+        console.log(props.blogs.singlePost)
+        setSingleBlog(props.blogs.singlePost)
+
+      if(props.blogs.singlePost.comments.length!==0){
+        setComments(props.blogs.singlePost.comments)
+      }
+      }
+
   }
 
-},[])
-
+},[props.blogs.singlePost])
+console.log(comments)
 useEffect(()=>{
   if(singleBlog){
     setDate(moment(singleBlog.createdAt).format("MMMM D YYYY").split(','))
  }
 },[singleBlog])
     return (
+      <>
+      {singleBlog&&(
         <div className="singleBlog">
         <div className="blog-main-content">
           <div className="singleBlog-tags">
@@ -93,10 +163,26 @@ useEffect(()=>{
               </div>
 
               <div className="blogComments">
-                <div className="commentTabs">
-                  <p className="commentTab">Comments</p>
-            
-                </div>
+              <div className="commentTabs">
+                    <p className="commentTab">Comments</p>
+                    {props.auth.isAuthenticated && (
+                        <p>
+                          <i
+                            className={`fa fa-thumbs-up  ${
+                              liked ? "" : "stroke-transparent"
+                            } `}
+                            onClick={() =>{
+                              liked? unlikePost(singleBlog):
+                              likePost(singleBlog)
+                              setLiked(!liked)
+                            } }
+                          />
+
+                          <span>{singleBlog && singleBlog.likes? liked?singleBlog.likes+1:singleBlog.likes:0}</span>
+                        </p>
+                        
+                      )}
+                  </div>
 
                 <div className="shareAndFilter">
                   <div className="commentSecShare">
@@ -132,18 +218,41 @@ useEffect(()=>{
                 </div>
 
                 <ul className="commentsList">
+                {comments &&
+                      comments.map((item, index) => (
+                        <li key={index}>
+                          <div className="avatar"></div>{" "}
+                          <div className="commenterInfo">
+                            <p>{item.author.firstName}</p>{" "}
+                            <span>{item.comment}</span>
+                          </div>
+                          {item.author._id == props.auth.user._id && (
+                            <div
+                              className="deleteComment"
+                              onClick={() => {
+                                setModalOpen(true);
+                                setCommentToBeDeleted(item._id);
+                              }}
+                            >
+                              <i className="fa fa-close" />
+                            </div>
+                          )}
+                        </li>
+                      ))}
           
                 </ul>
                 <div className="inputContainer">
                   <img src={Civil} alt="user_image" />
                   <input
-                    
-                   
-                    placeholder="Join the discussion"
-                   
-                  />
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      placeholder="Join the discussion"
+                      onKeyPress={(e) => {
+                        e.which == 13 && postComment();
+                      }}
+                    />
                 </div>
-                <button className="postComment" >
+                <button className="postComment" onClick={postComment}>
                   Submit
                 </button>
               </div>
@@ -173,8 +282,9 @@ useEffect(()=>{
           </div>
         </div>
        
-      </div> 
-     
+      </div>
+      )} 
+     </>
     )
 }
 
