@@ -39,6 +39,7 @@ const LawyersList = ({lawyer,actions}) => {
               if(lawyerUser){
                   console.log(lawyerUser.data);
                   setLawyerProfile(lawyerUser.data);
+                  
               }
             }
             } 
@@ -168,11 +169,15 @@ console.log(lawyerProfile)
                </div>
                <div className="lawyer-email">
                    <p>{lawyerProfile?lawyerProfile.email:""}</p>
-                    <p>{lawyer.mobile}</p>
+                    <p>{lawyerProfile?lawyerProfile.phone:""}</p>
                </div>
                <div className="lawyer-status">
                    <p>{lawyer.address}</p>
-                   <p>{lawyer.category}</p>
+                   {lawyerProfile&&JSON.parse(lawyerProfile.lawyer_user.expertiseCategory).map((item)=>
+                       
+                          <p>{item}</p>
+                       )}
+                  
                   
                </div>
                <div className="lawyer-password">

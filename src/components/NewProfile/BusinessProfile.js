@@ -10,6 +10,10 @@ import AddLawyers from "./BusinessProfile/addLawyers";
 import Management from "./BusinessProfile/management";
 import CreateBlog from "./BusinessProfile/blog-contents/createBlog";
 import SingleBlog from "./BusinessProfile/blog-contents/singleBlog";
+import PopularLawyers from "../HomePage/PopularLawyers";
+import EditBlog from "./BusinessProfile/blog-contents/editBlog";
+
+
 // import {message} from 'antd'
 
 
@@ -32,15 +36,18 @@ function BusinessProfile (props) {
   let hold=null
   console.log(activeMenu)
   useEffect(()=>{
-    console.log(props.history)
-    let profileDate = {
-      userId: props.auth.user._id,
-      userType: props.auth.user.userType,
-    };
-     props.actions.getLawfirmUserProfile(props.auth.user.lawfirm_user.id,props.history)
-    props.actions.getProfile(profileDate, props.history);
-    props.actions.getPackages(props.history)
-    console.log(props.auth.user.lawfirm_user.id)
+    if(props.auth && props.auth.user && props.auth.user.lawfirm_user){
+
+      console.log(props.auth.user.lawfirm_user)
+      let profileDate = {
+        userId: props.auth.user._id,
+        userType: props.auth.user.userType,
+      };
+      props.actions.getLawfirmUserProfile(props.auth.user.lawfirm_user.id?props.auth.user.lawfirm_user.id:props.auth.user.lawfirm_user ,props.history)
+      props.actions.getProfile(profileDate, props.history);
+      props.actions.getPackages(props.history)
+      console.log(props.auth.user.lawfirm_user.id)
+    }
   },[])
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -48,49 +55,49 @@ function BusinessProfile (props) {
    
 
    
-    if (props.location.pathname === "/business/profile" || props.location.pathname === "/business/") {
+    if (props.location.pathname === "/lawfirm/profile" || props.location.pathname === "/lawfirm/") {
       console.log("hi");
       setActiveMenu(1);
     }
-    if (props.location.pathname === "/business/documents") {
+    if (props.location.pathname === "/lawfirm/documents") {
       console.log("hi");
       setActiveMenu(2);
     }
-    if (props.location.pathname === "/business/lawyers") {
+    if (props.location.pathname === "/lawfirm/lawyers") {
       console.log("hi");
       setActiveMenu(3);
     }
 
-    if (props.location.pathname === "/business/management") {
+    if (props.location.pathname === "/lawfirm/management") {
       console.log("hi");
       setActiveMenu(4);
     }
 
-    if (props.location.pathname === "/business/reviews") {
+    if (props.location.pathname === "/lawfirm/reviews") {
       console.log("hi");
       setActiveMenu(5);
     }
-    if (props.location.pathname === "/business/notifications") {
+    if (props.location.pathname === "/lawfirm/notifications") {
       console.log("hi");
       setActiveMenu(6);
     }
 
    
   
-    if (props.location.pathname === "/business/chats") {
+    if (props.location.pathname === "/lawfirm/chats") {
       console.log("hi");
       setActiveMenu(7);
     }
 
  
-    if (props.location.pathname == "/business/blogs" ) {
+    if (props.location.pathname == "/lawfirm/blogs" ||  props.location.pathname.includes("/lawfirm/blogs/")) {
       setActiveMenu(8);
     }
   
-    if (props.location.pathname == "/business/portfolio") {
+    if (props.location.pathname == "/lawfirm/portfolio") {
       setActiveMenu(10);
     }
-    if (props.location.pathname == "/business/payment-history") {
+    if (props.location.pathname == "/lawfirm/payment-history") {
       setActiveMenu(11);
     }
   }, [props.location.pathname]);
@@ -113,46 +120,46 @@ function BusinessProfile (props) {
      
          
           <ul>
-            <Link to="/business/profile" data-tooltip="My Account">
+            <Link to="/lawfirm/profile" data-tooltip="My Account">
               <li className={activeMenu === 1 ? "active" : ""}>
                 <span></span> <i className="fa fa-user-o" />
                 <span className="link-title">Account</span> 
               </li>
             </Link>
          
-          <Link to="/business/documents" data-tooltip="Order History">
+          <Link to="/lawfirm/documents" data-tooltip="Order History">
             <li  className={activeMenu === 2 ? "active" : ""}>
               <span></span> <i className="fa fa-gift stroke-transparent" /><span className="link-title">Documents</span> 
             </li>
           </Link>
-          <Link to="/business/lawyers" data-tooltip="Payment History">
+          <Link to="/lawfirm/lawyers" data-tooltip="Payment History">
           <li  className={activeMenu === 3 ? "active" : ""}>
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Lawyers</span> 
           </li>
           </Link>
-          <Link to="/business/management" data-tooltip="Favourites">
+          <Link to="/lawfirm/management" data-tooltip="Favourites">
             <li  className={activeMenu === 4 ? "active" : ""}>
               <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
             </li>
           </Link>
         
       
-          <Link to="/business/reviews" data-tooltip="Reviews">
+          <Link to="/lawfirm/reviews" data-tooltip="Reviews">
           <li  className={activeMenu === 5 ? "active" : ""}>
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
           </li>
           </Link>
-          <Link to='/business/notifications' data-tooltip="Notifications">
+          <Link to='/lawfirm/notifications' data-tooltip="Notifications">
           <li  className={activeMenu === 6 ? "active" : ""}>
             <span></span>
             <i className="fa fa-bell-o" /><span className="link-title">Notifications</span> 
           </li></Link>
-          <Link to='/business/chats' data-tooltip="Messaging">
+          <Link to='/lawfirm/chats' data-tooltip="Messaging">
           <li className={activeMenu === 7 ? "active" : ""} >
             <span></span> <i className="fa fa-cog stroke-transparent" /> <span className="link-title">Messaging</span>
           </li></Link>
       
-          <Link to='/business/blogs' data-tooltip="Messaging">
+          <Link to='/lawfirm/blogs' data-tooltip="Messaging">
           <li className={activeMenu === 8 ? "active" : ""} >
             <span></span> <i className="fa fa-gift stroke-transparent" /> <span className="link-title">Blogs</span>
           </li></Link>
@@ -172,21 +179,28 @@ function BusinessProfile (props) {
           
         <Switch>
 
-            <Route exact path="/business/profile" component={Profile} />
-            <Route exact path="/business/documents" component={Orders} />
-            <Route exact path="/business/lawyers" component={AddLawyers} />
+            <Route exact path="/lawfirm/profile" component={Profile} />
+            <Route exact path="/lawfirm/documents" component={Orders} />
+            <Route exact path="/lawfirm/lawyers" component={AddLawyers} />
             
-            <Route exact path="/business/favourites" component={Favourites} />
-            <Route exact path="/business/notifications" component={Notifications} />
-            <Route exact path="/business/reviews" component={Reviews} />
+            <Route exact path="/lawfirm/favourites" component={Favourites} />
+            <Route exact path="/lawfirm/notifications" component={Notifications} />
+            <Route exact path="/lawfirm/reviews" component={Reviews} />
            
-            <Route exact path="/business/management" component={Management} />
-            <Route exact path="/business/blogs" component={Blogs} />
-            <Route exact path="/business/portfolio" component={Portfolio} />
-            <Route exact path="/business/:postId" component={SingleBlog} />
+            <Route exact path="/lawfirm/management" component={Management} />
+            <Route exact path="/lawfirm/blogs" component={Blogs} />
+            <Route exact path="/lawfirm/portfolio" component={Portfolio} />
+            
+            <Route
+              exact
+              path="/lawfirm/blogs/createblog"
+              component={CreateBlog}
+            />
+              <Route  path="/lawfirm/blogs/editblog/:id" component={EditBlog} />
+            <Route  path="/lawfirm/blogs/:id" component={SingleBlog} />
             
        
-          </Switch>
+          </Switch> 
           
            {/* {activeMenu == 1 && <Profile {...props} />}
           {activeMenu == 2 && <Orders {...props}/>}

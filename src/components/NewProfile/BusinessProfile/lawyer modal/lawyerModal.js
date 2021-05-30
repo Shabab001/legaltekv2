@@ -22,6 +22,10 @@ const LawyerModal = (props) => {
   const[confPassMessage,setConfPassMessage]=useState(null)
   const[phoneMessage,setPhoneMessage]=useState(null)
   const[numOflawyers, setNumOfLawyers]=useState(props.profile?props.profile.numOflawyers:0)
+  const[catMessage,setCatMessage]=useState(null);
+  const[roleMessage,setRoleMessage]=useState(null);
+  const[fnameMessage,setfnameMessage]=useState(null);
+  const[lnameMessage,setlnameMessage]=useState(null);
   
   
     const [countryCode, setCountryCode] = useState({
@@ -55,14 +59,20 @@ const onSelect=(selectedList, selectedItem) =>{
 }
 
 const onRemove =(selectedList, removedItem)=> {
-  console.log(removedItem);
+  var newArray = lawyerInputs.specializedRole.filter(e => e !==removedItem.value);
+  console.log(newArray);
+  setLawyerInput({...lawyerInputs,specializedRole:[...newArray]})
 }
-const onCategoryChange=(selectedItem)=>{
-  console.log(typeof(selectedItem))
-  console.log(selectedItem)
+const onCategoryChange=(selectedList,selectedItem)=>{
+  let arr =lawyerInputs.category;
+  setLawyerInput({...lawyerInputs, category:[...arr,selectedItem.value]})
+ 
+
 }
-const onCategoryRemove =(selectedItem)=>{
-console.log(selectedItem);
+const onCategoryRemove =(selectedList,selectedItem)=>{
+  var newArray = lawyerInputs.category.filter(e => e !== selectedItem.value);
+console.log(newArray);
+setLawyerInput({...lawyerInputs,category:[...newArray]})
 }
 
 useEffect(()=>{
@@ -103,12 +113,31 @@ const onSumbitInputs =async()=>{
   else{
     setNameMessage(null)
   }
-  if(!lawyerInputs.title){
-    setTitleMessage("title field empty")
+  if(!lawyerInputs.firstname){
+    setfnameMessage("First Nmae is empty")
   }
   else{
-    setTitleMessage(null)
+    setfnameMessage(null)
   }
+  if(!lawyerInputs.lastname){
+    setlnameMessage("Last Name is empty")
+  }
+  else{
+    setlnameMessage(null);
+  }
+  if(lawyerInputs.category.length ===0){
+    setCatMessage("Area of Expertise is empty")
+  }
+  else{
+    setCatMessage(null)
+  }
+  if(lawyerInputs.specializedRole.length ===0){
+    setRoleMessage("Specialized role is empty")
+  }
+  else{
+    setRoleMessage(null)
+  }
+
   if(!lawyerInputs.password){
     setPassMessage("passwod field empty")
   }
@@ -154,10 +183,13 @@ if(
   lawyerInputs.username &&
   lawyerInputs.confirmPass &&
   lawyerInputs.password && 
+  lawyerInputs.category.length!==0 &&
+  lawyerInputs.specializedRole.length!==0 &&
   (lawyerInputs.phone || lawyerInputs.email) &&
-  lawyerInputs.title
+  lawyerInputs.firstname && 
+  lawyerInputs.lastname
 ){
-  if(!lawyerInputs.email){
+  
     if (lawyerInputs.phone.length !== 14) {
     
       setPhoneMessage("not a valid phone number")
@@ -170,18 +202,22 @@ if(
   let inputs ={
     username:lawyerInputs.username,
     password:lawyerInputs.password,
-    titile:lawyerInputs.title,
+     email:lawyerInputs.email,
     phone:lawyerInputs.phone,
     role:lawyerInputs.role,
-    lawfirmId:lawyerInputs.lawfirmId
+    lawfirmId:lawyerInputs.lawfirmId,
+    firstname:lawyerInputs.firstname,
+    lastname:lawyerInputs.lastname,
+    specializedRole:lawyerInputs.specializedRole,
+    expertiseCategory:lawyerInputs.category
     
   }
   let newUser=await props.actions.register(inputs)
   if(newUser){
     message.success("lawyer added")
     props.set(false)
-    console.log(newUser);
-    let lawfirmUser =await props.actions.updateLawfirmUserProfile(lawyerInputs.lawfirmId,{lawyer_user:newUser.lawyer_user.id})
+    console.log(newUser.lawyer_user.id);
+    let lawfirmUser =await props.actions.updateLawfirmUserProfile(lawyerInputs.lawfirmId,{numbersOfLawyers:numOflawyers-1})
     if(lawfirmUser){
       console.log(lawfirmUser)
       props.actions.getLawfirmUserProfile(lawyerInputs.lawfirmId)
@@ -189,31 +225,8 @@ if(
   }
   
   }
-  else{
- 
 
-    let inputs ={
-      username:lawyerInputs.username,
-      password:lawyerInputs.password,
-      title:lawyerInputs.title,
-      email:lawyerInputs.email,
-      role:lawyerInputs.role,
-      lawfirmId:lawyerInputs.lawfirmId
-    }
-    
-    let newUser=await props.actions.register(inputs)
-    if(newUser){
-      message.success("lawyer added")
-      props.set(false)
-      console.log(newUser);
-      let lawfirmUser =await props.actions.updateLawfirmUserProfile(lawyerInputs.lawfirmId,{lawyer_user:newUser.lawyer_user.id,numbersOfLawyers:numOflawyers-1})
-      if(lawfirmUser){
-        console.log(lawfirmUser)
-      }
-    }
-  }
 
-}
   }else{
     message.error("you have reached the limit of adding lawyers")
   }
@@ -225,7 +238,7 @@ if(
     return ReactDom.createPortal    
     (
       <div className="post-modal-main">
-            <div   className="post-modal-container" > 
+            <div   className="post-modal-container2" > 
             {otp? <OtpCard setOtp={setOtp}/>:
             <>
             <div className="post-modal-headings">
@@ -236,7 +249,16 @@ if(
             <div className="post-modal-cross">
 
               <VscChromeClose style={{fontSize:"1.4rem"}} onClick={()=>{props.set(false) 
-        
+                      setEmailMessage(null)
+                      setPhoneMessage(null)
+                      setNameMessage(null)
+                      setCatMessage(null)
+                      setfnameMessage(null)
+                      setlnameMessage(null)
+                      setPassMessage(null)
+                      setRoleMessage(null)
+                      setConfPassMessage(null)
+                      
                 }}/>
             </div>
           </div>
@@ -266,7 +288,7 @@ if(
         placeholder="Specialized Role"
       />
      </div>
-     {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
+     {roleMessage? <p style={{marginTop:".5rem",color:"red"}}>{roleMessage}</p>:null}
      </div>
 </div>
 <div className="post-modal-options-grid2">
@@ -284,7 +306,7 @@ if(
           placeholder="Expertise Category"
         />
        </div>
-       {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
+       {catMessage? <p style={{marginTop:".5rem",color:"red"}}>{catMessage}</p>:null}
        </div>
        </div>     
 <div className="post-modal-options-grid2">
@@ -296,7 +318,7 @@ if(
       
        <input placeholder="Firstname"  name="firstname" onChange={handleInputChange} />
      </div>
-     {nameMessage? <p style={{marginTop:".5rem",color:"red"}}>{nameMessage}</p>:null}
+     {fnameMessage? <p style={{marginTop:".5rem",color:"red"}}>{fnameMessage}</p>:null}
      </div>
      <div className="inputHolder">
        
@@ -305,7 +327,7 @@ if(
        
        <input placeholder="Lastname" name="lastname" onChange={handleInputChange} />
      </div>
-     {titleMessage? <p style={{marginTop:".5rem",color:"red"}}>{titleMessage}</p>:null}
+     {lnameMessage? <p style={{marginTop:".5rem",color:"red"}}>{lnameMessage}</p>:null}
      </div>
 </div>
 <div className="post-modal-options-grid2">

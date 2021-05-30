@@ -2,7 +2,8 @@ import React from "react";
 import "./blogs.css";
 import {BsPlusSquareFill} from "react-icons/bs"
 import BlogGallery from "./blog-contents/blogGallery";
-function Blogs() {
+function Blogs(props) {
+  console.log(props.history)
   return (
     <>
      <div className="blog-main">
@@ -17,7 +18,7 @@ function Blogs() {
              
             </div>
           </div> */}
-          <BlogGallery/>
+          <BlogGallery history={props.history}/>
 
        </div>
 

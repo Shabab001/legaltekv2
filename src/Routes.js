@@ -4,7 +4,8 @@ import EmailConfirmation from "./components/emailConfirmation/emailConfirmation"
 import EmailConfirmation2 from "./components/emailConfirmation/emailConfirmation2";
 import VerifyEmail from "./components/emailConfirmation/verifyEmail";
 import Guidelines from "./components/Guidelines";
-import CreateBlog from "./components/NewProfile/BusinessProfile/blog-contents/createBlog";
+
+
 
 
 
@@ -197,9 +198,8 @@ function Routes(props) {
               path="/lawyer/favourites"
               component={LawyerProfile}
             />
-
-
-
+          
+       
 
 
             <Route exact path="/user/profile" component={UserProfile}/>
@@ -208,7 +208,7 @@ function Routes(props) {
             <Route exact path="/help-center" component={HelpCenter} />
             <Route exact path="/view-profile/:id" component={ViewProfile} />
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-            <Route exact path="/business/:postId" component={BusinessProfile} />
+            <Route exact path="/lawfirm/:postId" component={BusinessProfile} />
             <Route exact path="/auth/activation/:token" component={EmailConfirmation} />
           <Route exact path="/auth/activated/:token" component={EmailConfirmation2} />
             <Route exact path="/auth/verify-email/:token" component={VerifyEmail} />
@@ -218,10 +218,12 @@ function Routes(props) {
             <Route exact path="/Community-Guidelines" component={Guidelines} />
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/how-it-works" component={HowItWorks} />
-            <Route exact path="/business" component={Business} />
+            <Route exact path="/lawfirm/" component={BusinessProfile} />
+            <Route exact path="/lawfirm/blogs/:id" component={BusinessProfile} />
+            <Route exact path="/lawfirm/blogs/editblog/:id" component={BusinessProfile} />
           
 
-            {!props.location.pathname.includes("/business/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/")?
+            {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/")?
         <Footer {...props} /> : ""
       }
           </div>

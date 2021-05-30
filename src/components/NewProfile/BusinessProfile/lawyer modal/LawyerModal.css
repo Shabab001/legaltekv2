@@ -1,9 +1,9 @@
-.post-modal-container {
+.post-modal-container2 {
   position: relative;
-  top: 200px;
+  top: 30px !important;
 
   width: 32rem;
-  max-height: 45rem;
+  max-height: auto;
   z-index: 1000;
   margin: 0 auto;
   background-color: white;
@@ -318,12 +318,12 @@
   background-color: var(--primary);
   padding: 0.3rem;
 }
-.highlight{
-  margin:0 !important;
+.highlight {
+  margin: 0 !important;
 }
 ._2iA8p44d0WZ-WqRBGcAuEV {
-padding: 0 !important;
-border:none !important;
+  padding: 0 !important;
+  border: none !important;
 }
 @keyframes modal {
   0% {

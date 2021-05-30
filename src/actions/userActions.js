@@ -33,7 +33,7 @@ export const login = (user, history) => (dispatch) => {
         }
         else if(response.data.user && response.data.user.role.type == "lawfirm"){
           console.log('hi')
-          history.push('/business/profile')
+          history.push('/lawfirm/profile')
         } else if(response.data.user && response.data.user.role.type == "lawyer"){
           console.log('hi')
           history.push('/lawyer/profile')

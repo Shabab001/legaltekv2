@@ -1,17 +1,56 @@
-import React from 'react'
+import React ,{useEffect,useState}from 'react'
 import "./singleBlog.css"
 import Civil from "./images/civil.jpeg"
 import Criminal from "./images/criminal.jpeg"
 import moment from "moment";
+import{useParams}from "react-router-dom"
 import { FacebookButton } from "react-social";
-const SingleBlog = () => {
+import * as blogActions from "../../../../actions/blogActions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import parse from 'html-react-parser';
+
+import Item from 'antd/lib/list/Item';
+
+
+
+const SingleBlog = (props) => {
+  const [singleBlog,setSingleBlog]=useState(null)
+  const[date,setDate]=useState(null)
+  const{id}=useParams()
+  console.log(id)
+
+useEffect(()=>{
+  if(props.blogs.posts){
+    
+    console.log(props.blogs.posts)
+ props.blogs.posts.map((item)=>{
+      if(item.id===id){
+        console.log(item)
+        setSingleBlog(item)
+        
+      }
+      return
+    })
+    console.log(singleBlog)
+  }
+
+},[])
+
+useEffect(()=>{
+  if(singleBlog){
+    setDate(moment(singleBlog.createdAt).format("MMMM D YYYY").split(','))
+ }
+},[singleBlog])
     return (
         <div className="singleBlog">
         <div className="blog-main-content">
           <div className="singleBlog-tags">
-             Criminal
+            {singleBlog? singleBlog.blogCategory.map((item,index)=>{
+              return <p key={index}>{item}</p>
+            }):""}
           </div>
-          <h2>On The Shore</h2>
+          <h2>{singleBlog?singleBlog.title:""}</h2>
 
           <div className="shareSocial">
             <span>Share post on </span>
@@ -26,24 +65,23 @@ const SingleBlog = () => {
                 Shabab{" "}
                 Hossain
               </p>
-              <span>{moment(Date.now()).format("DD MMMM, YYYY")}</span>
+              <span>   {singleBlog?date:""}</span>
             </div>
             <div className="profilePicture">
               <img src={Civil} alt="pretty_girl" />
             </div>
             <img
              
-              src={Criminal}
+              src={singleBlog?singleBlog.coverImage.url:Criminal}
               alt="building.jpg"
             />
           </div>
        
           <div className="blog-and-categories">
             <div className="blog-body-and-comments">
-              <div
-                className="blog-body ck-content"
-                
-              />
+              <div className="blog-body ck-content">
+                {singleBlog?parse(singleBlog.body):""}
+                </div>
 
               <hr />
 
@@ -140,4 +178,13 @@ const SingleBlog = () => {
     )
 }
 
-export default SingleBlog
+const mapStateToProps = (state) => ({
+   auth: state.auth,
+   profile: state.auth.lawfirmUserProfile,
+   blogs: state.blog,
+ });
+ 
+ const mapDispatchToProps = (dispatch) => ({
+   blogActions: bindActionCreators(blogActions, dispatch),
+ });
+ export default connect(mapStateToProps, mapDispatchToProps)(SingleBlog);
