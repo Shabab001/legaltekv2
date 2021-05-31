@@ -10,8 +10,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import parse from 'html-react-parser';
 import{message} from "antd"
+import ConfirmModal from "../../../modals/ConfirmModal"
 
-import Item from 'antd/lib/list/Item';
 
 
 
@@ -52,11 +52,31 @@ const SingleBlog = (props) => {
     }
   };
 
+  const deleteComment = async (commentId) => {
+    let deleteComment = await props.blogActions.deleteComment({
+      commentId,
+      ...props,
+    });
+    if (deleteComment) {
+      setModalOpen(false);
+      setCommentToBeDeleted("");
+      let obj = {
+        postId: singleBlog.id,
+      };
+      props.blogActions.getSinglePost({ id, ...props });
+    }
+  };
+
+  const modalClose = () => {
+    setModalOpen(false);
+    setCommentToBeDeleted("");
+  };
+
   const postComment = async () => {
     if (comment && singleBlog._id) {
       console.log(props.auth.user)
       let obj = {
-        author: props.auth.user?props.auth.user.id:"",
+        author: props.auth.user.lawfirm_user.id?props.auth.user.lawfirm_user.id:props.auth.user.lawfirm_user,
         blog: singleBlog.id,
         comment: comment,
       };
@@ -68,7 +88,7 @@ const SingleBlog = (props) => {
         let obj = {
           postId: singleBlog._id,
         };
-        await props.blogActions.getSinglePost({ id, ...props });
+      props.blogActions.getSinglePost({ id, ...props });
       }
     } else {
       message.error("write your comment!");
@@ -77,15 +97,10 @@ const SingleBlog = (props) => {
 
 
 useEffect(()=>{
-  async function sblog(){
 
-    if(!props.blogs.singlePost){
-      console.log("singleBlog")
-      await props.blogActions.getSinglePost({ id, ...props });
-    }
-  }
-  sblog()
-},[props.blogs.singlePost])
+  props.blogActions.getSinglePost({ id, ...props });
+
+},[])
 
 useEffect(()=>{
   if(props.blogs.singlePost){
@@ -105,6 +120,7 @@ useEffect(()=>{
 
 },[props.blogs.singlePost])
 console.log(comments)
+console.log(singleBlog)
 useEffect(()=>{
   if(singleBlog){
     setDate(moment(singleBlog.createdAt).format("MMMM D YYYY").split(','))
@@ -226,12 +242,13 @@ useEffect(()=>{
                             <p>{item.author.firstName}</p>{" "}
                             <span>{item.comment}</span>
                           </div>
-                          {item.author._id == props.auth.user._id && (
+                          <div><p>{moment(item.createdAt).format("H")}hours ago</p></div>
+                          {item.author === singleBlog.author && (
                             <div
                               className="deleteComment"
                               onClick={() => {
                                 setModalOpen(true);
-                                setCommentToBeDeleted(item._id);
+                                setCommentToBeDeleted(item.id);
                               }}
                             >
                               <i className="fa fa-close" />
@@ -281,7 +298,15 @@ useEffect(()=>{
             </div>
           </div>
         </div>
-       
+        {modalOpen && (
+            <ConfirmModal
+              {...props}
+              acceptMethod={() => deleteComment(commentToBeDeleted)}
+              onClose={modalClose}
+              headerText="Delete Comment"
+              bodyText="Are you sure you want to delete this Comment?"
+            />
+          )}
       </div>
       )} 
      </>

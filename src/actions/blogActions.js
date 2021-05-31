@@ -262,7 +262,7 @@ export const postComment = (props) => (dispatch) => {
 
 export const deleteComment = (props) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    Axios.delete(`/api/blogs/deleteComment/${props.commentId}`, {
+    Axios.delete(`${REACT_APP_API}/comments/${props.commentId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
