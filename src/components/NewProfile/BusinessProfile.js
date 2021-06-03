@@ -13,6 +13,7 @@ import CreateBlog from "./BusinessProfile/blog-contents/createBlog";
 import SingleBlog from "./BusinessProfile/blog-contents/singleBlog";
 import PopularLawyers from "../HomePage/PopularLawyers";
 import EditBlog from "./BusinessProfile/blog-contents/editBlog";
+import  Location  from "./BusinessProfile/location";
 
 
 // import {message} from 'antd'
@@ -115,8 +116,8 @@ function BusinessProfile (props) {
       setActiveMenu(8);
     }
   
-    if (props.location.pathname == "/lawfirm/portfolio") {
-      setActiveMenu(10);
+    if (props.location.pathname == "/lawfirm/branches") {
+      setActiveMenu(9);
     }
     if (props.location.pathname == "/lawfirm/payment-history") {
       setActiveMenu(11);
@@ -147,6 +148,11 @@ function BusinessProfile (props) {
                 <span className="link-title">Account</span> 
               </li>
             </Link>
+            <Link to='/lawfirm/branches' data-tooltip="branches">
+          <li className={activeMenu === 9 ? "active" : ""} >
+            <span></span> <i className="fa fa-star-o" /> <span className="link-title">Location</span>
+          </li></Link>
+
          
           <Link to="/lawfirm/documents" data-tooltip="Order History">
             <li  className={activeMenu === 2 ? "active" : ""}>
@@ -210,6 +216,7 @@ function BusinessProfile (props) {
            
             <Route exact path="/lawfirm/management" component={Management} />
             <Route exact path="/lawfirm/blogs" component={Blogs} />
+            <Route exact path="/lawfirm/branches" component={Location} />
             <Route exact path="/lawfirm/portfolio" component={Portfolio} />
             
             <Route

@@ -623,3 +623,61 @@ export const getLawyerUserProfile = (data, history) => (dispatch) => {
 });
   
 }
+export const saveBranches = (props, history) => dispatch => {
+  return new Promise((resolve, reject) => {
+     console.log(localStorage.auth_token)
+    Axios.post(`${REACT_APP_API}/branches/`,props ,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    }).then(res=>{
+      console.log(res.data);
+      if (res) {
+       
+        message.success("branch creaated");
+        return resolve(res.data);
+      }
+    })
+    .catch((error) => {
+      if (error && error.response) {
+        console.log(error.response.data);
+        if (error.response.data.message) {
+          message.error(error.response.data.message);
+        }
+        return resolve(false);
+      }
+    });
+
+
+  })
+}
+export const updateBranches = (props, id) => dispatch => {
+  return new Promise((resolve, reject) => {
+     console.log(localStorage.auth_token)
+    Axios.put(`${REACT_APP_API}/branches/${id}`,props ,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    }).then(res=>{
+      console.log(res.data);
+      if (res) {
+       
+        message.success("branch updated");
+        return resolve(res.data);
+      }
+    })
+    .catch((error) => {
+      if (error && error.response) {
+        console.log(error.response.data);
+        if (error.response.data.message) {
+          message.error(error.response.data.message);
+        }
+        return resolve(false);
+      }
+    });
+
+
+  })
+}

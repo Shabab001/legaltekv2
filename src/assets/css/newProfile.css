@@ -2,23 +2,17 @@
   -webkit-text-stroke: 1px #000;
   -webkit-text-fill-color: transparent;
 }
-.profile-pic{
-  background-color: grey;
-  width: 70%;
-  height: 8rem;
-  margin: auto;
-  border-radius: 8px;
-}
-.profile-pic + p{
-  font-size: 1.5rem;
-  padding-top: .5rem;
-  text-align: center;
-  padding-bottom: .5rem;
-}
-.newProfile .main .user-profile h1{
-  font-family: Rubik,'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
-  font-size: 24px;
-  font-weight: 500;
+.newProfile .main .user-profile h1 {
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  margin-bottom: 0px;
+  background: #f7f7f7;
 }
 .newProfile {
   /* min-height: 100vh; */
@@ -30,48 +24,48 @@
   max-width: 100%;
   /* margin:auto; */
 }
-.newProfile .sidebar .sidebar-head{
+.newProfile .sidebar .sidebar-head {
   position: relative;
 }
-.newProfile.sidebar-collapse .main{
-  margin-left:60px;
+.newProfile.sidebar-collapse .main {
+  margin-left: 60px;
 }
 
-.newProfile.sidebar-collapse .sidebar{
-  width:60px;
+.newProfile.sidebar-collapse .sidebar {
+  width: 60px;
 }
 
-.newProfile.sidebar-collapse .sidebar h3{
-  display:none;
+.newProfile.sidebar-collapse .sidebar h3 {
+  display: none;
 }
-.newProfile.sidebar-collapse .sidebar li > .link-title{
-  display:none;
+.newProfile.sidebar-collapse .sidebar li > .link-title {
+  display: none;
   white-space: nowrap;
 }
 
-.newProfile.sidebar-collapse .sidebar li{
+.newProfile.sidebar-collapse .sidebar li {
   padding: 15px 20px;
 }
-.newProfile.sidebar-collapse .sidebar ul{
+.newProfile.sidebar-collapse .sidebar ul {
   /* margin-top: 60px; */
 }
 
-
-.newProfile .sidebar button{
+.newProfile .sidebar button {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0px;
-  width:60px;
-  height:100%;
+  width: 60px;
+  height: 100%;
   align-items: center;
   display: flex;
   justify-content: center;
-  background-color: lavenderblush;
+  background-color: #f7f7f7;
   outline: none;
+  cursor: pointer;
 }
 
-.newProfile .sidebar button i{
+.newProfile .sidebar button i {
   font-size: 16px;
 }
 
@@ -79,28 +73,27 @@
   overflow: visible;
 }
 
-.newProfile.sidebar-collapse .sidebar li i{
-  margin-right:0px;
+.newProfile.sidebar-collapse .sidebar li i {
+  margin-right: 0px;
 }
-
 
 .newProfile.sidebar-collapse .sidebar li {
-display:flex;
-align-items: center;
-justify-content: center;
-height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.newProfile .sidebar li .link-title{
+.newProfile .sidebar li .link-title {
   white-space: nowrap;
   font-size: 14px;
 }
 
-.newProfile.sidebar-collapse .sidebar a{
+.newProfile.sidebar-collapse .sidebar a {
   position: relative;
-  height:50px;
+  height: 45px;
 }
-.newProfile.sidebar-collapse .sidebar a:hover::after{
+.newProfile.sidebar-collapse .sidebar a:hover::after {
   content: attr(data-tooltip);
   background-color: rgba(0, 0, 0, 1);
   color: white;
@@ -112,35 +105,41 @@ height:100%;
   z-index: 2;
   white-space: nowrap;
 }
+.newProfile.sidebar-collapse .sidebar .rightPull {
+  top: 1px;
+  right: 5px;
+}
 
 .newProfile .sidebar {
   transition: width 0.8s ease-in-out;
   position: fixed;
   left: 0;
+  z-index: 2;
   top: 60px;
   bottom: 0;
   width: 280px;
   border-right: 1px solid #ddd;
   padding-top: 50px;
-  background-color: lavenderblush;
+  background-color: #f7f7f7;
   min-height: calc(100vh - 80px);
 }
- 
-.newProfile .sidebar .sidebar-head{
-  display:flex;
+
+.newProfile .sidebar .sidebar-head {
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 0px;
-  height:40px;
+  height: 40px;
   margin-bottom: 20px;
-} 
+}
 .newProfile .sidebar h3 {
   text-align: center;
   font-size: 18px;
   white-space: nowrap;
   margin-bottom: 0px;
-  height:100%;
-  display:flex;
+  height: 100%;
+  display: flex;
   align-items: center;
   font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -165,7 +164,7 @@ height:100%;
   font-size: 16px;
   font-weight: 400;
   overflow: hidden;
-  height:100%;
+  height: 100%;
   white-space: nowrap;
   align-items: center;
   display: flex;
@@ -173,16 +172,21 @@ height:100%;
 .newProfile .sidebar li i {
   margin-right: 15px;
 }
+.newProfile .sidebar li i.rightPull {
+  right: 0;
+  position: absolute;
+  font-size: 22px;
+}
 
 .newProfile .sidebar ul a {
   color: #000;
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 45px;
 }
 .newProfile .sidebar li.active {
-  color: var(--secondary);
-  font-weight: 500;
+  color: #f1433f;
+  font-weight: 400;
   flex-wrap: nowrap;
   white-space: nowrap;
 }
@@ -192,7 +196,7 @@ height:100%;
   top: 0;
   width: 6px;
   position: absolute;
-  border-right: 4px solid black;
+  border-right: 4px solid #f1433f;
 }
 
 .newProfile .main {
@@ -205,9 +209,10 @@ height:100%;
   transition: all ease-in-out 0.8s;
 }
 
-.newProfile .ant-picker-input > input{
+.newProfile .ant-picker-input > input {
   font-weight: 400;
-  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .newProfile .main .profilePic {
@@ -215,7 +220,7 @@ height:100%;
   height: 120px;
   width: 120px;
   position: relative;
-  color: black;
+  color: #fc612b;
   box-shadow: 0px 15px 54px 20px rgba(252, 97, 43, 0.15);
 }
 .newProfile .main .profileHead {
@@ -223,16 +228,38 @@ height:100%;
   align-items: center;
   margin-bottom: 50px;
   margin-top: 115px;
+  position: relative;
+  width: fit-content;
+}
+.newProfile .main .profileHead button {
+  /* position: absolute;
+  top:105%;
+  background-color: transparent;
+  color:#000;
+  cursor: pointer; */
+
+  position: absolute;
+  /* top: 105%; */
+  bottom: -8px;
+  left: -25px;
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+.newProfile .main .profileHead button:hover {
+  color: #f1433f;
 }
 .newProfile .main .profileHead .profileName {
   margin-left: 40px;
   position: relative;
-
 }
 .newProfile .main .profileHead .profileName p {
   color: #f7f7f7;
   margin-bottom: 5px;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -247,13 +274,17 @@ height:100%;
 }
 .newProfile .main .profilePic i {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   right: -12px;
   font-size: 14px;
   color: white;
   padding: 5px;
   border-radius: 50%;
-  background-color: black;
+  background-color: #fc612b;
+}
+.newProfile .main .profilePic i.fe-chevron-down {
+  left: 12px;
+  bottom: 0px;
 }
 .newProfile .main .profilePic img {
   width: 100%;
@@ -267,9 +298,7 @@ height:100%;
 }
 
 .newProfile .main > div {
-padding-left: 3rem;
- padding-top: 3rem;
- padding-right: 3rem;
+  padding: 40px;
 }
 
 .newProfile .user-profile {
@@ -292,9 +321,10 @@ padding-left: 3rem;
 .newProfile .user-profile label {
   display: flex;
   flex-direction: column;
-  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin-top: 10px;
-  font-weight: 500;
+  font-weight: 400;
   width: fit-content;
   position: relative;
 }
@@ -311,14 +341,16 @@ padding-left: 3rem;
   padding-left: 10px;
   border-radius: 4px;
   transition: 0.1s border ease-in-out;
-  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 .newProfile .user-profile label .ui.dropdown {
   width: 340px;
   height: 40px;
   font-size: 14px;
   margin-top: 10px;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   max-width: 100%;
   min-width: 100%;
 }
@@ -326,25 +358,25 @@ padding-left: 3rem;
 .newProfile .user-profile label input:focus,
 .newProfile .user-profile label select:focus,
 .newProfile .user-profile label textarea:focus {
-  border: 2px solid black;
-  
+  border: 2px solid #49c5b6;
 }
 
 .newProfile .user-profile label p {
   bottom: -20px;
-  font-family: "Avenir_heavy";
-  font-size: 12px;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 11px;
   position: absolute;
   color: gray;
   margin-bottom: 0px;
 }
 
 .newProfile .user-profile label.error input {
-  border: 2px solid red;
+  border: 2px solid #f14c48;
 }
 .newProfile .user-profile label.error,
 .newProfile .user-profile label.error p {
-  color: red;
+  color: #f14c48;
 }
 
 .newProfile .user-profile label.textareaLabel {
@@ -360,11 +392,12 @@ padding-left: 3rem;
 
 .newProfile label .ant-picker:hover,
 .newProfile label .ant-picker-focused {
-  border-color: black;
+  border-color: #49c5b6;
 }
 
 .newProfile label .ant-picker-focused {
   box-shadow: none;
+  border: 2px solid #49c5b6;
 }
 .newProfile
   label
@@ -378,8 +411,8 @@ padding-left: 3rem;
 }
 
 .newProfile label .ant-picker-panel-container,
-.newProfile .ant-picker-panel,
-.newProfile .ant-picker-date-panel {
+/* .newProfile .ant-picker-panel, */
+.newProfile  .ant-picker-date-panel {
   width: 340px;
   max-width: 100%;
 }
@@ -388,7 +421,7 @@ padding-left: 3rem;
   label
   .ant-picker-cell-in-view.ant-picker-cell-today
   .ant-picker-cell-inner::before {
-  border: 1px solidblack;
+  border: 1px solid#fc612b;
 }
 .newProfile
   .ant-picker-cell-in-view.ant-picker-cell-selected
@@ -399,7 +432,20 @@ padding-left: 3rem;
 .newProfile
   .ant-picker-cell-in-view.ant-picker-cell-range-end
   .ant-picker-cell-inner {
-  background: black !important;
+  background: #fc612b !important;
+  color: white;
+}
+.newProfile
+  .ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner
+  .ant-picker-calendar-date-value,
+.newProfile
+  .ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner
+  span {
+  color: white;
 }
 
 .newProfile label .ant-select-arrow {
@@ -414,34 +460,48 @@ padding-left: 3rem;
   align-items: center !important;
   margin-top: 10px !important;
   font-weight: 400;
-  font-family: "Rubik", 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif !important;
+  font-family: "Rubik", "Open Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 }
 
 .newProfile .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: black;
+  border-color: #49c5b6;
   border-radius: 4px;
   max-width: 100%;
+  box-shadow: none;
+}
+
+.newProfile
+  .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-color: #49c5b6;
+  border-radius: 4px;
+  max-width: 100%;
+  box-shadow: none;
+  border: 2px solid #49c5b6;
 }
 
 .newProfile
   .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
   .ant-select-selector {
   box-shadow: none !important;
-  border-color: black;
+  border-color: #49c5b6;
   max-width: 100%;
 }
 .newProfile
-.ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector{
+  .ant-select-show-search.ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
   max-width: 100%;
+  border-radius: 4px;
 }
 .newProfile
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background-color: black;
+  background-color: #fc612b;
   color: white;
 }
 
 .newProfile .user-profile label.textareaLabel textarea:hover {
-  border: 1px solid black;
+  border: 1px solid #49c5b6;
 }
 .newProfile .user-profile .input-fields {
   display: flex;
@@ -449,8 +509,60 @@ padding-left: 3rem;
   /* min-height: 250px; */
   flex-wrap: wrap;
   height: fit-content;
+  border: 1px solid #ddd;
+  padding: 15px 15px;
+  border-top: 0px;
 }
 
+.newProfile .user-profile .input-fields-container {
+  width: 100%;
+
+  border: 1px solid #ddd;
+}
+.newProfile .user-profile .input-fields-container.accordion {
+  max-height: 0 !important;
+  overflow: hidden;
+  padding: 0px;
+  border: none;
+  /* border:none; */
+}
+
+.newProfile .user-profile .input-fields-container.accordion.open {
+  max-height: 3500px !important;
+  overflow: hidden;
+  margin: 0;
+  /* padding: 0px; */
+  padding: 15px 15px;
+  /* border: none; */
+  border: 1px solid #ddd;
+}
+
+.newProfile .user-profile .input-fields-container.accordion.open .input-fields {
+  padding: 0px;
+  border: none;
+  margin: 0px;
+}
+
+.newProfile
+  .user-profile
+  .input-fields-container.accordion.open
+  .input-fields.innerBox {
+  padding: 0px;
+  border: none;
+  margin: 0px;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+}
+
+.newProfile
+  .user-profile
+  .input-fields-container.accordion.open
+  .input-fields.innerBox
+  p.error {
+  color: #f1433f;
+  margin-bottom: 0px;
+  font-size: 11px;
+}
 .newProfile .user-profile .input-fields .input-row {
   display: flex;
   justify-content: flex-start;
@@ -478,7 +590,8 @@ padding-left: 3rem;
   max-width: 280px !important;
   justify-content: flex-start !important;
   text-transform: capitalize;
-  font-family: Rubik, 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   align-items: flex-start;
   color: darkslategray;
   font-size: 12px;
@@ -501,7 +614,8 @@ padding-left: 3rem;
   .input-row.checkboxRows
   .fullLabel
   span {
-  font-family: Avenir_Light;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   display: flex;
   width: 100%;
   text-transform: none;
@@ -595,17 +709,19 @@ padding-left: 3rem;
 .newProfile .user-profile .input-fields .input-row .one-third input {
   width: 100%;
   font-weight: 400;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .newProfile .user-profile .input-fields .input-row .fullLabel i {
-  position: absolute;
-  top: 0px;
+  position: relative;
+  /* top: 0px;
   right: 0px;
+  left: 0px; */
   margin-left: 5px;
   font-size: 12px;
-  color: black;
-  font-weight: 700;
+  color: #f1433f;
+  font-weight: 400;
 }
 .newProfile .user-profile .input-fields .input-row .fullLabel i.fe-info {
   right: -20px;
@@ -613,7 +729,8 @@ padding-left: 3rem;
 .newProfile .user-profile .input-fields .input-row .fullLabel input {
   width: 100%;
   font-weight: 400;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .newProfile .user-profile .input-fields .input-row label {
@@ -634,20 +751,22 @@ padding-left: 3rem;
 }
 .newProfile .user-profile .input-fields .input-row-btns button:nth-child(2) {
   background-color: transparent;
-  border: 1px solid black;
-  color: black;
+  border: 1px solid#f1433f;
+  color: #f1433f;
 }
 .newProfile .input-row input:hover {
-  border-color: black;
+  border-color: #49c5b6;
 }
 .newProfile .user-profile .save-btn {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  background-color: black;
+  background-color: #f1433f;
   color: #fff;
-  font-family: Avenir_heavy;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   width: fit-content;
   padding: 10px 30px;
   margin-top: 20px;
@@ -664,6 +783,12 @@ padding-left: 3rem;
   background-color: #dddddd;
 }
 
+.newProfile .user-profile .button-group {
+  display: flex;
+  column-gap: 15px;
+  row-gap: 15px;
+}
+
 .newProfile label .ant-select-selection-search {
   display: flex;
   align-items: center;
@@ -678,10 +803,43 @@ padding-left: 3rem;
 }
 .newProfile label .ant-picker:hover,
 .newProfile label .ant-picker-focused {
-  border-color: black;
+  border-color: #49c5b6;
 }
 .newProfile label .ant-picker-focused {
   box-shadow: none;
+  border: 2px solid #49c5b6;
+}
+
+.newProfile .ant-select-item-option-content {
+  font-weight: 400;
+}
+.newProfile
+  .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input):hover
+  .ant-select-selector,
+.newProfile
+  .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border: 2px solid #49c5b6;
+  border-radius: 4px;
+  border-right-width: 2px !important;
+}
+
+.newProfile .ant-picker-focused:not(.ant-picker-disabled):hover,
+.newProfile .ant-picker-focused:not(.ant-picker-disabled) {
+  border: 2px solid #49c5b6;
+  border-radius: 4px;
+  border-right-width: 2px !important;
+}
+
+.newProfile .ant-select.ant-select-focused .ant-select-seletor {
+  border-width: 2px !important;
+}
+.newProfile .ant-select-seletor {
+  border-radius: 4px !important;
+}
+
+.newProfile .ant-picker.ant-picker-focused .ant-picker-input {
+  border-width: 2px !important;
 }
 .newProfile
   label
@@ -705,7 +863,7 @@ padding-left: 3rem;
   label
   .ant-picker-cell-in-view.ant-picker-cell-today
   .ant-picker-cell-inner::before {
-  border: 1px solid black;
+  border: 1px solid #fc612b;
 }
 .newProfile
   .ant-picker-cell-in-view.ant-picker-cell-selected
@@ -716,7 +874,7 @@ padding-left: 3rem;
 .newProfile
   .ant-picker-cell-in-view.ant-picker-cell-range-end
   .ant-picker-cell-inner {
-  background: black !important;
+  background: #fc612b !important;
 }
 
 .newProfile label .ant-select-arrow {
@@ -731,11 +889,12 @@ padding-left: 3rem;
   align-items: center !important;
   margin-top: 10px !important;
   font-weight: 400;
-  font-family: "Rubik", 'Open Sans',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif !important;
+  font-family: "Rubik", "Open Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
 }
 
 .newProfile .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: black;
+  border-color: #49c5b6;
   border-radius: 4px;
 }
 
@@ -743,12 +902,12 @@ padding-left: 3rem;
   .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
   .ant-select-selector {
   box-shadow: none !important;
-  border-color: black;
+  border-color: #49c5b6;
 }
 
 .newProfile
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background-color: black;
+  background-color: #fc612b;
   color: white;
 }
 
@@ -762,6 +921,7 @@ padding-left: 3rem;
 
 .newProfile .input-row.social label input {
   padding-left: 40px;
+  padding-right: 10px;
 }
 .newProfile .input-row.social label i {
   position: absolute;
@@ -775,11 +935,21 @@ padding-left: 3rem;
 }
 
 .newProfile #location:hover {
-  border: 1px solid black;
+  border: 1px solid#49c5b6;
 }
 .newProfile #location {
   font-weight: 400 !important;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.newProfile .fullLabel .fa.fa-map-marker,
+.newProfile .fa.fa-map-marker {
+  position: absolute !important;
+  bottom: 13px !important;
+  left: 15px !important;
+  color: #000 !important;
+  margin-left: 0px !important;
+  font-size: 14px !important;
 }
 .newProfile #location {
   border: 1px solid #dddddd;
@@ -787,12 +957,12 @@ padding-left: 3rem;
   font-size: 14px;
   height: 40px;
   margin-top: 10px;
-  padding-left: 10px;
+  padding-left: 35px;
   border-radius: 4px;
   transition: 0.1s border ease-in-out;
 }
 .newProfile #location:focus {
-  border: 2px solid black;
+  border: 2px solid #49c5b6;
 }
 .newProfile .autocomplete-dropdown-container {
   margin-top: 10px;
@@ -801,19 +971,22 @@ padding-left: 3rem;
   top: 100%;
   z-index: 10;
   width: 100%;
-  box-shadow: 0px 4px 24px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.2);
   padding: 5px 0px;
   border-radius: 4px;
 }
-.newProfile .autocomplete-dropdown-container .suggestion-item, .newProfile .autocomplete-dropdown-container .suggestion-item--active{
+.newProfile .autocomplete-dropdown-container .suggestion-item,
+.newProfile .autocomplete-dropdown-container .suggestion-item--active {
   padding: 10px;
 }
 .newProfile .autocomplete-dropdown-container .suggestion-item span {
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 .newProfile .autocomplete-dropdown-container .suggestion-item--active {
   border-radius: 0px;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .newProfile .cur-label .dropdown.icon,
@@ -832,14 +1005,15 @@ padding-left: 3rem;
   transition: 0s ease-in-out;
   min-width: 100%;
 }
-.newProfile .cc-input.padded {
-  padding-left: 20px !important;
-}
+/* .newProfile .cc-input:not([value=""]){
+  padding-left: 25px !important;
+} */
 
 .newProfile .cc-label .plus-icon {
   color: black;
-  font-weight: 500;
-  font-family: Avenir_light;
+  font-weight: 400;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-style: normal !important;
   display: flex;
   align-items: center;
@@ -853,8 +1027,8 @@ padding-left: 3rem;
 }
 .newProfile .cur-input:focus,
 .cc-input:focus {
-  border: 1px solid black !important;
-  border-bottom: none !important;
+  border: 2px solid #49c5b6 !important;
+  /* border-bottom: none !important; */
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
@@ -872,8 +1046,8 @@ padding-left: 3rem;
 }
 
 .newProfile .cur-label.focused input,
-.cc-label.focused input {
-  border: 1px solidblack !important;
+.newProfile .cc-label.focused input {
+  border: 1px solid #49c5b6 !important;
   border-radius: 4px;
   /* border-bottom: none !important; */
   /* border-bottom-left-radius: 0px !important;
@@ -886,11 +1060,13 @@ padding-left: 3rem;
   width: 100%;
   max-height: 200px;
   /* height: 200px; */
+  background-color: white;
   position: absolute;
   z-index: 2;
   border-radius: 4px;
   border: none;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.20);
+  overflow: hidden;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
   transition: max-height 2.4s ease-in-out;
 }
 
@@ -905,6 +1081,7 @@ padding-left: 3rem;
   /* height: auto; */
   padding-bottom: 0px;
   margin-bottom: 0px;
+  background: white;
   transition: max-height 2.4s ease-in-out;
   /* border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -919,7 +1096,8 @@ padding-left: 3rem;
   display: flex;
   font-size: 12px;
   color: darkslategray;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   align-items: center;
   background-color: white;
 }
@@ -954,12 +1132,13 @@ padding-left: 3rem;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
-.newProfile input[type="checkbox"] {
+.newProfile .user-profile input[type="checkbox"] {
   display: none;
 }
-.newProfile input[type="checkbox"] + span {
+.newProfile .user-profile input[type="checkbox"] + span {
   height: 18px;
   width: 18px !important;
   margin-right: 20px;
@@ -967,24 +1146,28 @@ padding-left: 3rem;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  border: 2px solid black;
-  font-family: Avenir_Heavy;
+  border: 2px solid #f1433f;
+  /* font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif; */
   border-radius: 4px;
   position: relative;
 }
 
-.newProfile input[type="checkbox"] + span i {
+.newProfile .user-profile input[type="checkbox"] + span i {
   margin: auto !important;
   position: absolute;
   color: white !important;
   transform: translateY(10%);
-  font-family: Avenir_Heavy;
+  /* font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif; */
   display: flex;
   align-self: center;
 }
 
-.newProfile input[type="checkbox"]:checked + span {
-  background-color: black;
+.newProfile .user-profile input[type="checkbox"] + span i.fe-check:before {
+  margin: auto;
+}
+
+.newProfile .user-profile input[type="checkbox"]:checked + span {
+  background-color: #f1433f;
   animation: scaleUpDown 0.5s ease-in-out;
 }
 
@@ -996,8 +1179,9 @@ padding-left: 3rem;
   max-width: 280px !important;
   justify-content: flex-start !important;
   text-transform: capitalize;
-  font-weight: 500;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   align-items: flex-start;
   color: darkslategray;
   font-size: 12px;
@@ -1020,7 +1204,8 @@ padding-left: 3rem;
   .input-row.checkboxRows
   .fullLabel
   span {
-  font-family: Avenir_Light;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   display: flex;
   width: 100%;
   text-transform: none;
@@ -1077,178 +1262,189 @@ padding-left: 3rem;
   height: fit-content !important;
 }
 
-.user-profile .coverImage{
+.user-profile .coverImage {
   width: 100%;
   position: absolute;
   left: 0;
-  right:0;
+  right: 0;
   top: 0;
   height: 250px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background-color: darkgray;
   z-index: 0;
 }
-.user-profile .coverImage .img-container{
+.user-profile .coverImage .img-container {
   position: relative;
-  height:250px;
-  width:100%;
+  height: 250px;
+  width: 100%;
   overflow: hidden;
 }
-.user-profile .coverImage img{
+.user-profile .coverImage img {
   object-fit: cover;
   position: absolute;
-  left:0;
-  top:0;
-  right:0;
-  bottom:0;
-  height:100%;
-  width:100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
   transition: all 0.5s ease-in-out;
 }
 
-.user-profile .coverImage .overlay{
-  height:100%;
+.user-profile .coverImage .overlay {
+  height: 100%;
   width: 100%;
   background-color: transparent;
   position: absolute;
   z-index: 1;
   opacity: 0;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-in-out;
 }
 
-.user-profile .coverImage .overlay .addCoverImage{
+.user-profile .coverImage .addCoverImage {
   width: fit-content;
+  z-index: 2;
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
 }
 
-.user-profile .coverImage:hover .overlay{
-  background-color: rgba(0,0,0,0.5);
+.user-profile .coverImage:hover .addCoverImage {
   opacity: 1;
-  
 }
-.user-profile .coverImage:hover img{
+
+.user-profile .coverImage:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+/* .user-profile .coverImage:hover img {
   filter: blur(5px);
-}
+} */
 
-
-
-.newProfile .ant-picker-input input:focus{
-  border:none !important;
+.newProfile .ant-picker-input input:focus {
+  border: none !important;
   outline: none !important;
 }
-.nav-prompt{
-  display:flex;
+.nav-prompt {
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
 }
-.nav-prompt .form-modal{
+.nav-prompt .form-modal {
   border-radius: 4px;
-  height:220px;
+  height: 180px;
   min-height: fit-content;
   background-color: #fff;
   width: 450px;
   max-width: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,  'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
-.nav-prompt .form-modal > div{
-  border:none;
-}
-.nav-prompt .form-modal .modal-title{
-  width: 100%;
-  height:50px;
-  padding: 10px 15px;
-  
+.nav-prompt .form-modal > div {
   border: none;
-  outline:none;
-  display:flex;
+}
+.nav-prompt .form-modal .modal-title {
+  width: 100%;
+  height: 50px;
+  padding: 10px 15px;
+
+  border: none;
+  outline: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
 
-.nav-prompt .form-modal .modal-title p{
+.nav-prompt .form-modal .modal-title p {
   margin-bottom: 0px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
-.nav-prompt .form-modal .modal-content{
-  width:100%;
+.nav-prompt .form-modal .modal-content {
+  width: 100%;
   flex: 1 0 auto;
   height: auto;
   padding: 10px 15px;
-  font-weight: 500;
+  font-weight: 400;
 }
-.nav-prompt .form-modal .modal-content p{
+.nav-prompt .form-modal .modal-content p {
   width: 80%;
-  margin:auto;
+  margin: auto;
 }
 
-.nav-prompt .form-modal .modal-actions{
+.nav-prompt .form-modal .modal-actions {
   width: 100%;
-  height:80px;
-  display:flex;
+  height: 80px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.nav-prompt .form-modal .modal-actions button:nth-child(1){
-  border: 1px solid #e50077;
+.nav-prompt .form-modal .modal-actions button:nth-child(1) {
+  border: 1px solid #f1433f;
   background-color: transparent;
-  color: #e50077;
+  color: #f1433f;
 }
-.nav-prompt .form-modal .modal-actions button:nth-child(2){
-  background-color: #e50077;
+.nav-prompt .form-modal .modal-actions button:nth-child(2) {
+  background-color: #f1433f;
   color: white;
-  
 }
 
-.nav-prompt .form-modal .modal-actions button{
+.nav-prompt .form-modal .modal-actions button {
   border-radius: 4px !important;
-  height:35px;
-  width:80px;
+  height: 35px;
+  width: 80px;
   margin: 0px 20px;
-  font-family: Rubik, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   outline: none;
 }
 
-.nav-prompt .MuiDialog-paperWidthSm{
-  width:450px;
+.nav-prompt .MuiDialog-paperWidthSm {
+  width: 450px;
   max-width: 100% !important;
   padding: 10px;
-  font-family: Avenir_light;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-.nav-prompt .MuiDialogActions-root button{
+.nav-prompt .MuiDialogActions-root button {
   border-radius: 4px !important;
-  height:35px;
-  width:80px;
-  font-family: Avenir_heavy;
+  height: 35px;
+  width: 80px;
+  font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   outline: none;
 }
 
-
-
-sup{
+sup {
   position: relative;
   overflow: visible;
 }
-sup .infoToolTip{
+sup .infoToolTip {
   position: absolute;
   left: 100%;
 }
 
-.newProfile
-  .user-profile
-  sup
-  .infoToolTip {
+.newProfile .user-profile sup .infoToolTip {
   position: absolute;
   top: 0px;
   left: 140%;
@@ -1257,25 +1453,76 @@ sup .infoToolTip{
   border-radius: 4px;
   z-index: 1;
 }
-.newProfile
-  .user-profile
-.infoHidden{
-  display:none;
+.newProfile .user-profile .infoHidden {
+  display: none;
 }
 
+.newProfile .user-profile label > .cc-input:not([value=""]) {
+  padding-left: 20px;
+}
+
+.viewPublicProfile {
+  position: relative;
+}
+.viewPublicProfile button {
+  position: absolute;
+  top: -30px;
+  right: 0px;
+  background-color: transparent;
+  cursor: pointer;
+}
+.viewPublicProfile button:hover {
+  color: #49c5b6;
+}
+
+.newProfile .coverButtons {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  column-gap: 20px;
+  display: flex;
+  z-index: 3;
+}
+
+.newProfile .coverButtons button {
+  padding: 5px 15px;
+  border-radius: 4px;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1224px) {
+  .newProfile .main > div {
+    padding: 30px;
+  }
+}
 @media only screen and (max-width: 1024px) {
+  .newProfile .main > div {
+    padding: 30px;
+  }
+  .newProfile .sidebar {
+    top: 0px;
+    z-index: 2;
+  }
   .newProfile {
-    margin-top: 60px;
+    /* margin-top: 60px; */
+    padding-top: 0px;
+  }
+  .newProfile .main {
+    margin-left: 60px;
   }
 }
 @media only screen and (max-width: 450px) {
-  .newProfile.sidebar-collapse .main{
+  .newProfile .coverButtons {
+    right: 15px;
+  }
+  .newProfile.sidebar-collapse .main {
     margin-left: 0px;
   }
-  .nav-prompt .form-modal .modal-content p{
+  .nav-prompt .form-modal .modal-content p {
     width: 100%;
   }
-  .newProfile .main > div{
+  .newProfile .main > div {
     padding: 15px;
   }
   .newProfile .sidebar {
@@ -1289,6 +1536,7 @@ sup .infoToolTip{
     margin-top: 170px;
     position: relative;
     z-index: 1;
+    width: fit-content;
   }
   .newProfile .main .profileHead .profileName {
     margin-left: 0;
@@ -1300,7 +1548,7 @@ sup .infoToolTip{
   .newProfile .main .profileHead .profileName p,
   .newProfile .main .profileHead .profileName span {
     text-align: center;
-    color:black;
+    color: black;
   }
   .newProfile .main {
     margin-left: 0;
@@ -1328,7 +1576,9 @@ sup .infoToolTip{
   .newProfile .user-profile .input-fields .input-row label input,
   .newProfile .cur-label {
     width: 100%;
-    font-family: Rubik,'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue",
+      sans-serif;
     font-weight: 400;
   }
   .newProfile .user-profile .input-fields .input-row label:nth-child(2) {
@@ -1338,23 +1588,16 @@ sup .infoToolTip{
   .newProfile .user-profile .input-fields .input-row.three-part .one-third {
     max-width: 100%;
   }
-  .newProfile
-  .user-profile h1
-  sup{
-    display:none;
+  .newProfile .user-profile h1 sup {
+    display: none;
   }
-  .newProfile
-  .user-profile
-  sup
-  .infoToolTip {
-  display:none;
-}
-.newProfile
-  .user-profile
-.infoHidden{
-  display:block;
-  font-size: 12px;
-}
+  .newProfile .user-profile sup .infoToolTip {
+    display: none;
+  }
+  .newProfile .user-profile .infoHidden {
+    display: block;
+    font-size: 12px;
+  }
 }
 
 @keyframes scaleUp {
@@ -1374,13 +1617,13 @@ sup .infoToolTip{
 
   50% {
     transform: scale(1.2, 1.2);
-    background-color: black;
+    background-color: #fc612b;
     /* opacity: 0.5; */
   }
 
   100% {
     transform: scale(1, 1);
     opacity: 1;
-    background-color: black;
+    background-color: #fc612b;
   }
 }
