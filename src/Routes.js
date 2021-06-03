@@ -158,44 +158,10 @@ function Routes(props) {
            Lawyer Routes
            */}
 
-            <Route
-              exact
-              path="/lawyer/documents"
-              component={LawyerProfile}
-            />
-              <Route
-              exact
-              path="/lawyer/profile"
-              component={LawyerProfile}
-            />
+            
              <Route
-              exact
-              path="/lawyer/management"
-              component={LawyerProfile}
-            />
-             <Route
-              exact
-              path="/lawyer/reviews"
-              component={LawyerProfile}
-            />
-             <Route
-              exact
-              path="/lawyer/notifications"
-              component={LawyerProfile}
-            />
-             <Route
-              exact
-              path="/lawyer/messaging"
-              component={LawyerProfile}
-            />
-              <Route
-              exact
-              path="/lawyer/appointments"
-              component={LawyerProfile}
-            />
-             <Route
-              exact
-              path="/lawyer/favourites"
+              
+              path="/lawyer/"
               component={LawyerProfile}
             />
           

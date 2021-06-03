@@ -61,7 +61,7 @@ const authReducer = (state=init,action) =>{
         case Types.SAVE_PROFILE: {
             return {
                 ...state,
-                savedProfle: action.payload.savedProfile
+                lawfirmUserProfile: action.payload.savedProfile
             }
         }
         case Types.GET_PACKAGES: {

@@ -9,6 +9,7 @@ export const SEND_OTP = "SEND_OTP"
 export const VERIFY_OTP = "VERIFY_OTP"
 export const ERRORS = "ERRORS"
 export const SET_COUNTRY_INFO = "SET_COUNTRY_INFO"
+export const LOGOUT = "LOGOUT"
 export const SAVE_PROFILE = "SAVE_PROFILE"
 export const GET_PROFILE = "GET_PROFILE"
 //Admin Types
@@ -34,3 +35,9 @@ export const GET_BUSINESSES = "GET_BUSINESSES";
 export const GET_BUSINESS_DETAIL = "GET_BUSINESS_DETAIL";
 export const CLEAR_BUSINESSES_ITEMS = "CLEAR_BUSINESSES_ITEMS";
 export const GET_BUSINESS_TYPES = "GET_BUSINESS_TYPES"
+
+//Messaging Types
+export const GET_CHATLIST = "GET_CHATLIST"
+export const CREATE_CONVERSATION = "CREATE_CONVERSATION"
+export const SEND_MESSAGE = "SEND_MESSAGE"
+export const GET_MESSAGES = "GET_MESSAGES"

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, lazy } from "react";
 import "../../assets/css/newProfile.css";
-
+import { Link, Redirect,Switch,Route } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
 import Currencies from "../../assets/json/Currencies.json";
 import Countries from "../../assets/json/Countries.json";
-import { Link } from "react-router-dom";
+
 import Favourites from "./LawyerProfile/favourites";
 import Review from "./LawyerProfile/review";
 import Subscriptions from "./UserProfile/Subscriptions";
@@ -13,6 +13,7 @@ import Documents from "./LawyerProfile/documents"
 import Chats from "./UserProfile/Chats";
 import PaymentHistory from "./UserProfile/PaymentHistory";
 import { message } from "antd";
+import Message from "./LawyerProfile/message"
 import Notifications from "./LawyerProfile/Notifications";
 import Appointments from "./LawyerProfile/Appointments";
 import LawyerAccount from "./LawyerProfile/lawyerAccount";
@@ -38,33 +39,33 @@ function LawtyerProfile(props) {
   const [sidebarCollapse, setSidebarCollapse] = useState(true)
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (props.match.path === "/lawyer/profile" || props.match.path === "/lawyer/") {
+    if (props.location.pathname === "/lawyer/profile" || props.location.pathname === "/lawyer/") {
       setActiveMenu(1);
     }
-    if (props.match.path === "/lawyer/appointments") {
+    if (props.location.pathname === "/lawyer/appointments") {
       setActiveMenu(2);
     }
-    if (props.match.path === "/lawyer/documents") {
+    if (props.location.pathname === "/lawyer/documents") {
       setActiveMenu(3);
     }
-    if (props.match.path === "/lawyer/favourites") {
+    if (props.location.pathname === "/lawyer/favourites") {
       setActiveMenu(4);
     }
-    if (props.match.path === "/lawyer/reviews") {
+    if (props.location.pathname === "/lawyer/reviews") {
       setActiveMenu(5);
     }
   
 
-    if (props.match.path === "/lawyer/management") {
+    if (props.location.pathname === "/lawyer/management") {
       setActiveMenu(6);
     }
-    if (props.match.path === "/lawyer/notifications") {
+    if (props.location.pathname === "/lawyer/notifications") {
       setActiveMenu(7);
     }
-    if (props.match.path === "/lawyer/payment-history") {
+    if (props.location.pathname === "/lawyer/messaging") {
       setActiveMenu(8);
     }
-  }, [props.match.path]);
+  }, [props.location.pathname]);
 
   const logout = (e) => {
     e.preventDefault();
@@ -133,6 +134,13 @@ function LawtyerProfile(props) {
                <span className="link-title">Managements</span>
             </li>
           </Link>
+          <Link to="/lawyer/messaging" data-tooltip="Subscriptions">
+            <li className={activeMenu === 8 ? "active" : ""}>
+            <span></span>
+               <i className="fa fa-envelope" />{" "}
+               <span className="link-title">Messages</span>
+            </li>
+          </Link>
           <Link to="#" data-tooltip="Logout" onClick={(e)=>logout(e)}>
             <li >
             <span></span>
@@ -145,7 +153,7 @@ function LawtyerProfile(props) {
       </div>
 
       <div className="main">
-        {activeMenu == 1 && <LawyerAccount {...props} />}
+        {/* {activeMenu == 1 && <LawyerAccount {...props} />}
 
         {activeMenu == 2 && <Appointments {...props} />}
         {activeMenu == 3 && <Documents {...props} />}
@@ -153,7 +161,53 @@ function LawtyerProfile(props) {
         {activeMenu == 5 && <Review {...props} />}
         {activeMenu == 6 && <Management {...props} />}
         {activeMenu == 7 && <Notifications {...props} />}
-        {activeMenu == 8 && <PaymentHistory {...props} />}
+        {activeMenu == 8 && <PaymentHistory {...props} />} */}
+      
+        <Route
+              exact
+              path="/lawyer/documents"
+              component={Documents}
+            />
+              <Route
+              exact
+              path="/lawyer/profile"
+              component={LawyerAccount}
+            />
+             <Route
+              exact
+              path="/lawyer/management"
+              component={Management}
+            />
+             <Route
+              exact
+              path="/lawyer/reviews"
+              component={Review}
+            />
+             <Route
+              exact
+              path="/lawyer/notifications"
+              component={Notifications}
+            />
+             <Route
+              exact
+              path="/lawyer/messaging"
+              component={Message}
+            />
+              <Route
+              exact
+              path="/lawyer/appointments"
+              component={Appointments}
+            />
+             <Route
+              exact
+              path="/lawyer/favourites"
+              component={Favourites}
+            />
+      
+      
+      
+      
+      
       </div>
     </div>
   );

@@ -57,7 +57,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
-    "socket.io-client": "^2.3.0",
+    "socket.io-client": "^2.4.0",
     "uuidv4": "^6.2.6",
     "validator": "^13.1.1"
   },

@@ -249,7 +249,7 @@ const createBlog = async () => {
   };
   return (
     <div className="createPost" style={{ width: "100%" }}>
-      <h2><i className="fa fa-chevron-left" style={{marginRight: 15,cursor:'pointer'}} onClick={()=>props.history.goBack()}  />Create Blog Post</h2>
+      <h2><i className="fa fa-chevron-left" style={{marginRight: 15,cursor:'pointer'}} onClick={()=>props.history.goBack()}  />update Blog Post</h2>
       <div className="input-cont">
       <img
         className="tempCoverImage"
@@ -350,7 +350,7 @@ const createBlog = async () => {
      
 
       <button className="blog-red-btn" onClick={() => createBlog()}>
-      {loading ? <div className="spinner-border"></div> : "Post Blog"}
+      {loading ? <div className="spinner-border"></div> : "Update Blog"}
       </button>
     </div>
   );

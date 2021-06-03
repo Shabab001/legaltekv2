@@ -10,6 +10,7 @@ import { Select } from "antd";
 import validator from "validator";
 import moment from "moment";
 import SignUpWIzard from "./SignUpWIzard";
+import {message} from "antd";
 import NavigationPrompt from "react-router-navigation-prompt";
 import {
   Dialog,
@@ -65,7 +66,7 @@ class Profile extends Component {
       dob: { value: "", message: "", isValid: true },
       kitchenTypes: [],
       deliveryOpts: [],
-      social: "",
+      social: {},
       currencyDrop: false,
       countryDrop: false,
       countryDrop1: false,
@@ -101,6 +102,8 @@ class Profile extends Component {
       businessProfile: { value: "", isValid: true, message: "" },
       profileSummary: { value: "", isValid: true, message: "" },
       profileCompletion: {},
+      lawfirmRegNo:{value:"",isValid:true,message:""},
+      websiteName:{value:'',isValid:true,message:""}
     };
     this.curr = React.createRef();
     this.deleteAddressInfo = this.deleteAddressInfo.bind(this);
@@ -130,8 +133,7 @@ class Profile extends Component {
       //   localStorage.setItem("auth_token", props.profile.token);
       // }
      
-    console.log(props.auth)
-    console.log(props.profile)
+      console.log(state.formDirty);
     const { profile } = props;
     if (state.formDirty == false) {
       if (props.auth.isAuthenticated && profile.user &&props.auth.user) {
@@ -149,7 +151,7 @@ class Profile extends Component {
           state.wizard = true;
         }
         if (profile.user.lastname) {
-          state.lastName.value = profile.user.lastnzame;
+          state.lastName.value = profile.user.lastname;
         }
         if (profile.dob) {
           state.dob.value = profile.dob;
@@ -163,11 +165,26 @@ class Profile extends Component {
         if (profile.user.email) {
           state.email.value = profile.user.email;
         }
+        if(profile.websiteName){
+          state.websiteName.value=profile.websiteName;
+        }
+        if(profile.firmProfile){
+          state.businessProfile.value=profile.firmProfile
+        }
         if (localStorage.getItem("currency")) {
           state.currency.value = localStorage.getItem("currency");
         }
-        if (profile.social) {
-          state.social = profile.social;
+        if (profile.facebook) {
+          state.social.facebook = profile.facebook;
+        }
+        if (profile.twitter) {
+          state.social.twitter = profile.twitter;
+        }
+        if (profile.instagram) {
+          state.social.instagram = profile.instagram;
+        }
+        if (profile.linkedin) {
+          state.social.linkedin = profile.linkedin;
         }
         if (profile.gender) {
           state.gender.value = profile.gender;
@@ -236,6 +253,10 @@ class Profile extends Component {
           if (profile.user.phone) {
             state.businessPhoneNo.value = profile.user.phone;
           }
+          if(profile.lawFirmRegistrationNumber){
+            console.log(profile.lawFirmRegistrationNumber)
+            state.lawfirmRegNo.value=profile.lawFirmRegistrationNumber
+          }
           // if (profile.business.countryCode) {
           //   state.businessCountryCode.value = profile.business.countryCode;
           // }
@@ -281,7 +302,7 @@ class Profile extends Component {
 
     window.addEventListener("click", (e) => {
       let curLabel = document.querySelector(".cur-label");
-      let ccLabel = document.querySelector(".cc-label");
+      let ccLabel = document.getElementById("countryCode");
       let ccLabel1 = document.getElementById("countryCode1")
       let ccLabel2 = document.getElementById("countryCode2")
       if (curLabel && !curLabel.contains(e.target)) {
@@ -314,7 +335,6 @@ class Profile extends Component {
       state[e.target.name].value = e.target.value;
     }
     state.formDirty = true;
-
     if (e.target.name == "firstName") {
       if (e.target.value == "") {
         state["firstName"].isValid = false;
@@ -335,34 +355,7 @@ class Profile extends Component {
       }
     }
 
-    if (e.target.name == "email") {
-      if (e.target.value == "") {
-        state["email"].isValid = false;
-        state["email"].message = "Email cannot be left empty";
-      } else if (!validator.isEmail(e.target.value)) {
-        state["email"].isValid = false;
-        state["email"].message = "Not a valid email address";
-      } else {
-        state["email"].isValid = true;
-        state["email"].message = "";
-      }
-    }
-
-    if (e.target.name == "phoneNo") {
-      if (e.target.value == "") {
-        state["phoneNo"].isValid = false;
-        state["phoneNo"].message = "Phone number cannot be left empty";
-      } else if (e.target.value.length !== 10) {
-        state["phoneNo"].isValid = false;
-        state["phoneNo"].message = "Phone number must be 10 digits";
-      } else if (!e.target.value.match(/^\d+$/)) {
-        state["phoneNo"].isValid = false;
-        state["phoneNo"].message = "Phone number must only contain numbers";
-      } else {
-        state["phoneNo"].isValid = true;
-        state["phoneNo"].message = "";
-      }
-    }
+   
 
     if (e.target.name == "contactPhone") {
       if (e.target.value == "") {
@@ -391,6 +384,15 @@ class Profile extends Component {
       } else {
         state["contactEmail"].isValid = true;
         state["contactEmail"].message = "";
+      }
+    }
+    if (e.target.name == "websiteName") {
+      if (e.target.value == "") {
+        state["websiteName"].isValid = false;
+        state["websiteName"].message = "Website cannot be left empty";
+      }  else {
+        state["websiteName"].isValid = true;
+        state["websiteName"].message = "";
       }
     }
 
@@ -514,28 +516,50 @@ class Profile extends Component {
     let state = this.state;
     let data = null;
     let section = null;
-    if (e.target.name == "profileBtn") {
-      section = "profile";
+    if (e.target.name == "firmBtn") {
+    console.log()
+    if (!this.state.firstName.value || !this.state.lastName.value) {
+      message.error("Fill up required fields");
       if (state.firstName.value == "") {
         state.firstName.isValid = false;
-      } else {
-        state.firstName.isValid = true;
+        state.firstName.message = "First name is required";
+        return;
       }
       if (state.lastName.value == "") {
         state.lastName.isValid = false;
-      } else {
-        state.lastName.isValid = true;
+        state.lastName.message = "Last name is required";
+        return;
       }
-
       this.setState(state);
-
+    }
+  console.log(state.websiteName.value)
+  console.log(state.businessProfile.value)
+ 
       data = {
-        firstName: state.firstName.value,
-        lastName: state.lastName.value,
-        gender: state.gender.value,
-        dob: state.dob.value,
-        profileSummary: state.profileSummary.value,
+        firstname: state.firstName.value,
+        lastname: state.lastName.value,
+        websiteName:state.websiteName.value,
+        firmProfile:state.businessProfile.value,
+       
       };
+      const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
+    if(firmSave){
+           console.log(firmSave);
+
+      const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
+      if(
+        firmuser
+      ){
+        console.log(firmuser)
+      }
+    }
+   
+ 
+      this.setState({
+        formDirty: false,
+       
+      });
+      return;
     }
 
     if (e.target.name == "accountBtn") {
@@ -551,11 +575,22 @@ class Profile extends Component {
     }
 
     if (e.target.name == "contactBtn") {
+      if (this.state.contactPhone.value) {
+        if(this.state.contactCountryCode.value===""){
+          state.contactCountryCode.message="country code is required"
+          state.contactCountryCode.isValid=false
+          return;
+        }
+       
+      }
       section = "contact";
       data = {
-        email: state.contactEmail.value,
-        phoneNo: state.contactPhone.value,
-        countryCode: state.contactCountryCode.value.replace("+", ""),
+        contact:{
+
+          email: state.contactEmail.value,
+          phoneNo: state.contactPhone.value,
+          countryCode: state.contactCountryCode.value.replace("+", ""),
+        },
         billing: {
           billingAddress: state.billingAddress.value,
           billingCity: state.billingCity.value,
@@ -564,6 +599,24 @@ class Profile extends Component {
           billingCountry: state.billingCountry.value,
         },
       };
+      const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
+      if(firmSave){
+        console.log(firmSave);
+
+   const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
+   if(
+     firmuser
+   ){
+     console.log(firmuser)
+   }
+ }
+
+
+   this.setState({
+     formDirty: false,
+    
+   });
+   return;
     }
 
     if (e.target.name == "businessBtn") {
@@ -587,6 +640,24 @@ class Profile extends Component {
     if (e.target.name == "socialBtn") {
       section = "social";
       data = { ...state.social };
+      const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
+      if(firmSave){
+             console.log(firmSave);
+  
+        const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
+        if(
+          firmuser
+        ){
+          console.log(firmuser)
+        }
+      }
+     
+   
+        this.setState({
+          formDirty: false,
+         
+        });
+        return;
     }
 
     if (e.target.name == "kitchenTypesBtn") {
@@ -740,7 +811,7 @@ class Profile extends Component {
 
     this.setState(state);
   }
-
+ 
   async updateBillingAddress(addr) {
     console.log(addr);
     this.setState({ formDirty: true });
@@ -769,6 +840,7 @@ class Profile extends Component {
       }
     }
     console.log(componentForm);
+
     let state = this.state;
     // debugger
     // if (componentForm.postal_code !== "") {
@@ -874,219 +946,57 @@ class Profile extends Component {
             </label>
           </div>
           <div className="input-row">
-          <label
-              className={`${!this.state.contactEmail.isValid ? "error" : ""}`}
+            <label
+              className={`${!this.state.firstName.isValid ? "error" : ""}`}
             >
-              Firm Email:
+              First name*:
               <input
-                name="contactEmail"
-                placeholder="Email address"
-                value={this.state.contactEmail.value}
-                onChange={this.onChange}
+                autocomplete="new-password"
+                name="firstName"
+                placeholder="Firstname"
+                value={this.state.firstName.value}
+                onChange={(e) => this.onChange(e)}
               />
+              {this.state.firstName.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.firstName.message}
+                </p>
+              )}
             </label>
-            <label >
-             Firm Location:
-              {/*             
-                <Autocomplete
-                    id="autocomplete"
-                    data-toggle="tooltip"
-                    data-placement="right"
-                    title="Country, State and City will be automatically filled"
-                    id="inputAddress2"
-                    placeholder="Search Address"
-                    name="Address"
-                    onPlaceSelected={this.updateAddress}
-                    types={["(regions)"]}
-                  /> */}
-              <Geolocate
-                chooseAddress={(address) => this.updateAddress(address)}
-              />
-            </label>
-          </div>
-          {/* <div className="input-row">
-            <label className="fullLabel">
-             Firm Address:
-              <input
-                autoComplete="off"
-                placeholder="Business Address"
-                name="businessAddress"
-                value={this.state.businessAddress.value}
-                onChange={this.onChange}
-              />
-            </label>
-          </div> */}
-          <div className="input-row two-part">
-            <label className="one-half">
-             Firm Address:
-              <input
-                autoComplete="off"
-                name="businessAddress"
-                value={this.state.businessAddress.value}
-                placeholder="Business Address"
-                onChange={this.onChange}
-              />
-            </label>
-            <label className="one-half">
-             Firm Country:
-              <input
-                autoComplete="off"
-                name="businessCountry"
-                value={this.state.businessCountry.value}
-                placeholder="Business Country"
-                onChange={this.onChange}
-              />
-            </label>
-          </div>
 
-          <div className="input-row three-part">
-            <label className="one-third">
-              City:
+            <label className={`${!this.state.lastName.isValid ? "error" : ""}`}>
+              Last name*:
               <input
-                autoComplete="off"
-                placeholder="City"
-                name="businessCity"
-                value={this.state.businessCity.value}
-                onChange={this.onChange}
+                autocomplete="new-password"
+                name="lastName"
+                placeholder="Firstname"
+                value={this.state.lastName.value}
+                onChange={(e) => this.onChange(e)}
               />
-            </label>
-            <label className="one-third">
-              Province/State:
-              <input
-                autoComplete="off"
-                placeholder="Province/State"
-                name="businessState"
-                value={this.state.businessState.value}
-                onChange={this.onChange}
-              />
-            </label>
-            <label className="one-third">
-              Postal/Zip Code:
-              <input
-                autoComplete="off"
-                placeholder="Postal/Zip Code"
-                name="businessZip"
-                value={this.state.businessZip.value}
-                onChange={this.onChange}
-              />
+              {this.state.lastName.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.lastName.message}
+                </p>
+              )}
             </label>
           </div>
 
           <div className="input-row">
-          <label
-          id="countryCode2"
-              className={`${
-                !this.state.businessCountryCode.isValid ? "error" : ""
-              } cc-label ${this.state.countryDrop2 && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.businessCountryCode.value}
-                autoComplete="off"
-                style={
-                  this.state.businessCountryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop2: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    businessCountryCode: {
-                      ...this.state.businessCountryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.businessCountryCode.value.length &&
-              this.state.businessCountryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop2 && (
-                <div
-                  className="countryDrop"
-                  onBlur={() => this.setState({ countryDrop2: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                businessCountryCode: {
-                                  ...this.state.businessCountryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop2: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.businessCountryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.businessCountryCode.message}
-                </p>
-              )}
-            </label>
-            <label
-              className={`${!this.state.contactPhone.isValid ? "error" : ""}`}
-            >
-              Phone No:
-              <input
-                autoComplete="off"
-                name="contactPhone"
-                placeholder="Phone No."
-                value={this.state.contactPhone.value}
-                onChange={this.onChange}
-              />
-            </label>
+         
             <label
             className="one-half"
             >
               Website Name:
               <input
                 autoComplete="off"
-                name="contactPhone"
+                name="websiteName"
                 placeholder="Website name"
-             
+                onChange={this.onChange}
+                value={this.state.websiteName.value}
               />
             </label>
             <label
@@ -1095,8 +1005,9 @@ class Profile extends Component {
               Registration No:
               <input
                 autoComplete="off"
-                name="contactPhone"
+                name="regNo"
                 placeholder="Registration No."
+                value={this.state.lawfirmRegNo.value}
               
               />
             </label>
@@ -1115,7 +1026,13 @@ class Profile extends Component {
             </label>
           </div>
 
-         
+          <button
+            name="firmBtn"
+            className="save-btn"
+            onClick={this.saveProfile}
+          >
+            Save
+          </button>
         </div>
      
        
@@ -1187,7 +1104,13 @@ class Profile extends Component {
               />
             </label>
           </div>
-
+          <button
+            name="socialBtn"
+            className="save-btn"
+            onClick={this.saveProfile}
+          >
+            Save
+          </button>
         
         </div>
         <div className="dividerL"></div>
@@ -1198,6 +1121,7 @@ class Profile extends Component {
 
 
             <label
+                 id="countryCode"
               className={`${
                 !this.state.contactCountryCode.isValid ? "error" : ""
               } cc-label ${this.state.countryDrop && "focused"}`}
@@ -1209,7 +1133,7 @@ class Profile extends Component {
                 name="countryCode"
                 placeholder="Country code"
                 value={this.state.contactCountryCode.value}
-                autoComplete="off"
+                autoComplete="new-password"
                 style={
                   this.state.countryCode.value.match(/^\d+$/) && {
                     paddingLeft: 20,
@@ -1219,6 +1143,8 @@ class Profile extends Component {
                 onFocus={() => this.setState({ countryDrop: true })}
                 onChange={(e) => {
                   if (e.target.value !== "") {
+                    this.state.contactCountryCode.isValid=true;
+                    this.state.contactCountryCode.message=""
                     filteredCountryCode = Countries.filter((item, index) => {
                       const regex = new RegExp(e.target.value, "gi");
                       return (
@@ -1396,7 +1322,13 @@ class Profile extends Component {
             </label>
           </div>
 
-         
+          <button
+            name="contactBtn"
+            className="save-btn"
+            onClick={this.saveProfile}
+          >
+            Save
+          </button>
         </div>
         <div className="dividerL"></div>
 
@@ -1417,42 +1349,7 @@ class Profile extends Component {
         <h1>Admin Account Settings</h1>
         <div className="input-fields">
           <div className="input-row">
-            <label className={`${!this.state.email.isValid ? "error" : ""}`}>
-              Email:
-              <input
-                name="email"
-                placeholder="Email"
-                value={this.state.email.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.email.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.email.message}
-                </p>
-              )}
-            </label>
-
-            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
-              Phone No:
-              <input
-                name="phoneNo"
-                placeholder="Phone No."
-                value={this.state.phoneNo.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.phoneNo.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.phoneNo.message}
-                </p>
-              )}
-            </label>
-          </div>
-          <div className="input-row">
-            <label
+          <label
             id="countryCode1"
               className={`${
                 !this.state.countryCode.isValid ? "error" : ""
@@ -1466,7 +1363,7 @@ class Profile extends Component {
                 name="countryCode"
                 placeholder="Country code"
                 value={this.state.countryCode.value}
-                autoComplete="off"
+                autoComplete="new-password"
                 style={
                   this.state.countryCode.value.match(/^\d+$/) && {
                     paddingLeft: 20,
@@ -1546,6 +1443,43 @@ class Profile extends Component {
                 </p>
               )}
             </label>
+           
+
+            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
+              Phone No:
+              <input
+                name="phoneNo"
+                placeholder="Phone No."
+                value={this.state.phoneNo.value}
+                onChange={(e) => this.onChange(e)}
+              />
+              {this.state.phoneNo.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.phoneNo.message}
+                </p>
+              )}
+            </label>
+          </div>
+          <div className="input-row">
+          <label className={`${!this.state.email.isValid ? "error" : ""}`}>
+              Email:
+              <input
+                name="email"
+                placeholder="Email"
+                value={this.state.email.value}
+                onChange={(e) => this.onChange(e)}
+              />
+              {this.state.email.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.email.message}
+                </p>
+              )}
+            </label>
+            
             <label className={`${!this.state.password.isValid ? "error" : ""}`}>
               Password:
               <input

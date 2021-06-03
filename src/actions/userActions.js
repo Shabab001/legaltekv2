@@ -315,21 +315,27 @@ export const loginWithPhone = (data, history) => (dispatch) => {
   });
 };
 
-export const saveProfile = (data, history) => (dispatch) => {
+export const saveProfile = (data,url,id) => (dispatch) => {
   return new Promise((resolve, reject) => {
 
-    Axios.post("/api/saveProfile", data)
+    Axios.put(`${REACT_APP_API}/${url}/${id}`, data,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    })
     .then((res) => {
       console.log(res.data);
-      if (res.data.success) {
+      if (res.data) {
     
 
       dispatch({
         type: Types.SAVE_PROFILE,
         payload: {
-          savedProfile: res.data.user,
+          savedProfile: res.data,
         },
       });
+      console.log('saved')
       message.success("Changes Saved!");
       // history.push('/profilePage')
       return resolve(true); 
@@ -594,7 +600,7 @@ export const getLawyerUserProfile = (data, history) => (dispatch) => {
         console.log(res.data);
     
 
- 
+       
       console.log("after lawfirm user")
       // history.push('/profilePage')
       resolve(true); 
