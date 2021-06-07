@@ -12,7 +12,8 @@
   border: 1px solid #ddd;
   padding: 5px 15px;
   margin-bottom: 0px;
-  background: #f7f7f7;
+  background: var(--secondary);
+  color: white;
 }
 .newProfile {
   /* min-height: 100vh; */
@@ -331,7 +332,8 @@
 
 .newProfile .user-profile label > input,
 .newProfile .user-profile label select,
-.newProfile .user-profile label textarea {
+.newProfile .user-profile label textarea,
+.newProfile .user-profile label div > input {
   border: 1px solid #dddddd;
   width: 340px;
   max-width: 100%;
@@ -565,7 +567,7 @@
 }
 .newProfile .user-profile .input-fields .input-row {
   display: flex;
-  justify-content: flex-start;
+
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
@@ -763,7 +765,7 @@
   justify-content: center;
   align-items: center;
   height: 40px;
-  background-color: #f1433f;
+  background-color: var(--primary);
   color: #fff;
   font-family: Rubik, "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;

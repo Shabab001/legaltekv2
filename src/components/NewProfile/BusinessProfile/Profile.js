@@ -7,6 +7,7 @@ import languageOptions from "../../../assets/json/Languages.json";
 import Countries from "../../../assets/json/Countries.json";
 import { DatePicker } from "antd";
 import { Select } from "antd";
+import {FiEdit2} from "react-icons/fi"
 import validator from "validator";
 import moment from "moment";
 import SignUpWIzard from "./SignUpWIzard";
@@ -29,6 +30,7 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ChangeForm from "../../modals/changeForm";
 
 let stripePK =
   "pk_test_51Is6EeC4OeYiOOOcteEEbNdaXD8s9VSrf9DDyeEb4MaOXH4lTou9AqziwpVCb9I8fMOkgjFCOG5XLpP4AISd0Riv00nOsSXCJF";
@@ -64,9 +66,11 @@ class Profile extends Component {
       language: { value: "", message: "", isValid: true },
       currency: { value: "", message: "", isValid: true },
       dob: { value: "", message: "", isValid: true },
+
+      
       kitchenTypes: [],
       deliveryOpts: [],
-      social: {},
+      social: {facebook:"",instagram:"",twitter:"",linkedin:""},
       currencyDrop: false,
       countryDrop: false,
       countryDrop1: false,
@@ -103,7 +107,12 @@ class Profile extends Component {
       profileSummary: { value: "", isValid: true, message: "" },
       profileCompletion: {},
       lawfirmRegNo:{value:"",isValid:true,message:""},
-      websiteName:{value:'',isValid:true,message:""}
+      websiteName:{value:'',isValid:true,message:""},
+      disbaleLawfirmName:true,
+      disableRegNo:true,
+      disablePhone:true,
+      disableEmail:true,
+      disablePass:true,
     };
     this.curr = React.createRef();
     this.deleteAddressInfo = this.deleteAddressInfo.bind(this);
@@ -114,7 +123,7 @@ class Profile extends Component {
     this.updateAddress = this.updateAddress.bind(this);
     this.updateBillingAddress = this.updateBillingAddress.bind(this);
     this.setWizard = this.setWizard.bind(this);
-    
+    this.handleDisable= this.handleDisable.bind(this)
   }
    
   setWizard = async (data) => {
@@ -137,9 +146,9 @@ class Profile extends Component {
     const { profile } = props;
     if (state.formDirty == false) {
       if (props.auth.isAuthenticated && profile.user &&props.auth.user) {
-        if (profile.user.firstname) {
-          console.log(profile.user.firstname)
-          state.firstName.value = profile.user.firstname;
+        if (profile.firstname) {
+          console.log(profile.firstname)
+          state.firstName.value = profile.firstname;
         }
         if (props.auth.user.wizardComplete) {
           console.log(props.auth.user.wizardComplete, "wizrd")
@@ -150,20 +159,23 @@ class Profile extends Component {
           state.isSignUpWizardCompleted = false;
           state.wizard = true;
         }
-        if (profile.user.lastname) {
-          state.lastName.value = profile.user.lastname;
+        if (profile.lastname) {
+          state.lastName.value = profile.lastname;
         }
         if (profile.dob) {
           state.dob.value = profile.dob;
         }
-        if (profile.user.phone) {
-          state.phoneNo.value = profile.user.phone;
+        if (props.auth.user.phone) {
+          state.phoneNo.value = props.auth.user.phone;
+        }
+        if(props.auth.user.password){
+          state.password.value=props.auth.user.password;
         }
         if (profile.countryCode) {
           state.countryCode.value = profile.countryCode;
         }
-        if (profile.user.email) {
-          state.email.value = profile.user.email;
+        if (props.auth.user.email) {
+          state.email.value = props.auth.user.email;
         }
         if(profile.websiteName){
           state.websiteName.value=profile.websiteName;
@@ -194,6 +206,7 @@ class Profile extends Component {
           state.dob.value = profile.dob;
         }
         if (profile.language) {
+          console.log(profile.language)
           state.language.value = profile.language;
         }
 
@@ -204,21 +217,41 @@ class Profile extends Component {
         if (profile.kitchenTypes) {
           state.kitchenTypes = profile.kitchenTypes;
         }
-
+       if(profile.currency){
+         console.log(profile.currency)
+         state.currency.value=profile.currency
+       }
         if (profile.profileSummary) {
           state.profileSummary.value = profile.profileSummary;
         }
       
-        if (profile.contact) {
+        if (profile.contact || profile.user) {
+          if(profile.contact ==null){
+            if(profile.user.email){
+              state.contactEmail.value = profile.user.email;
+            }
+            if(profile.user.phone){
+              state.contactPhone.value = profile.user.phone;
+            }
+          }
+          else{
+          console.log(profile.user)
           if (profile.contact.email) {
             state.contactEmail.value = profile.contact.email;
           }
-          if (profile.contact.phoneNo) {
+          else if(profile.user.email){
+            state.contactEmail.value = profile.user.email;
+          }
+          if (profile.contact.phoneNo ) {
             state.contactPhone.value = profile.contact.phoneNo;
+          }
+          else if(profile.user.phone){
+            state.contactPhone.value = profile.user.phone;
           }
           if (profile.contact.countryCode) {
             state.contactCountryCode.value = profile.contact.countryCode;
           }
+        }
         }
           if (profile.billing) {
             let billing=profile.billing
@@ -328,7 +361,30 @@ class Profile extends Component {
       }
     });
   }
+  handleDisable (e){
+    console.log(e)
+    if(e==="firmName"){
 
+      this.state.disbaleLawfirmName=!this.state.disbaleLawfirmName
+    }
+    if(e==="lawfirmRegNo"){
+      console.log(this.state.disableRegNo)
+      this.state.disableRegNo=!this.state.disableRegNo
+    }
+    if(e==="phoneNo"){
+      console.log(this.state.disableRegNo)
+      this.state.disablePhone=!this.state.disablePhone
+    }
+    if(e==="email"){
+      console.log(this.state.disableRegNo)
+      this.state.disableEmail=!this.state.disableEmail
+    }
+    if(e==="password"){
+      console.log(this.state.disableRegNo)
+      this.state.disablePass=!this.state.disablePass
+        }
+
+  }
   onChange(e) {
     var state = this.state;
     if (e.target.name !== "kitchenTypes" && e.target.name !== "deliveryOpts") {
@@ -344,7 +400,30 @@ class Profile extends Component {
         state["firstName"].message = "";
       }
     }
+  if(e.target.name=="businessName"){
+  if(e.target.value==""){
+    state["businessName"].isValid=false;
+    state["businessName"].message="Firm name cannot be empty";
+  }
+  else{
+    state["businessName"].isValid=true;
+    state["businessName"].message="";
+  
+  }
 
+  }
+  if(e.target.name=="lawfirmRegNo"){
+    if(e.target.value==""){
+      state["lawfirmRegNo"].isValid=false;
+      state["lawfirmRegNo"].message="Firm name cannot be empty";
+    }
+    else{
+      state["lawfirmRegNo"].isValid=true;
+      state["lawfirmRegNo"].message="";
+
+    }
+  
+    }
     if (e.target.name == "lastName") {
       if (e.target.value == "") {
         state["lastName"].isValid = false;
@@ -513,33 +592,34 @@ class Profile extends Component {
   }
 
   saveProfile = async (e) => {
+    e.preventDefault()
     let state = this.state;
     let data = null;
     let section = null;
     if (e.target.name == "firmBtn") {
-    console.log()
-    if (!this.state.firstName.value || !this.state.lastName.value) {
+    console.log("here")
+    if (!this.state.businessName.value  || !this.state.lawfirmRegNo.value) {
       message.error("Fill up required fields");
-      if (state.firstName.value == "") {
-        state.firstName.isValid = false;
-        state.firstName.message = "First name is required";
-        return;
+  
+      if(state.businessName.value==""){
+        console.log("here")
+        return
       }
-      if (state.lastName.value == "") {
-        state.lastName.isValid = false;
-        state.lastName.message = "Last name is required";
-        return;
+      if(state.lawfirmRegNo.value == ""){
+        return; 
       }
       this.setState(state);
     }
-  console.log(state.websiteName.value)
-  console.log(state.businessProfile.value)
+  console.log(state.language.value)
+  console.log(state.currency.value)
  
       data = {
-        firstname: state.firstName.value,
-        lastname: state.lastName.value,
+        lawfirmName:state.businessName.value,
+        language: state.language.value,
+        currency: state.currency.value,
         websiteName:state.websiteName.value,
         firmProfile:state.businessProfile.value,
+        lawFirmRegistrationNumber:state.lawfirmRegNo.value
        
       };
       const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
@@ -576,15 +656,13 @@ class Profile extends Component {
 
     if (e.target.name == "contactBtn") {
       if (this.state.contactPhone.value) {
-        if(this.state.contactCountryCode.value===""){
-          state.contactCountryCode.message="country code is required"
-          state.contactCountryCode.isValid=false
-          return;
-        }
+       
        
       }
       section = "contact";
       data = {
+        firstname: state.firstName.value,
+        lastname: state.lastName.value,
         contact:{
 
           email: state.contactEmail.value,
@@ -922,7 +1000,7 @@ class Profile extends Component {
 
     this.setState(state);
   }
-
+  
   render() {
     const dateFormat = "YYYY/MM/DD";
     let filteredCurrencies = Currencies;
@@ -930,56 +1008,73 @@ class Profile extends Component {
     return (
     
       <div className="user-profile tab">
-        <div>
-          <h3>Law Firm Information</h3>
-        </div>
+     
+        <h1>Law Firm Information</h1>
         <div className="input-fields">
-          <div className="input-row">
+          <div className="input-row" style={{alignItems:"center"}}>
+
+           
             <label className="fullLabel">
              Firm Name:
+             <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
+              disabled={this.state.disbaleLawfirmName}
                 name="businessName"
                 placeholder="Business Name"
                 value={this.state.businessName.value}
                 onChange={this.onChange}
-              />
-            </label>
-          </div>
-          <div className="input-row">
-            <label
-              className={`${!this.state.firstName.isValid ? "error" : ""}`}
-            >
-              First name*:
-              <input
-                autocomplete="new-password"
-                name="firstName"
-                placeholder="Firstname"
-                value={this.state.firstName.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.firstName.message && (
+                />
+                
+                  <div  onClick={()=>this.handleDisable("firmName")}>
+
+               <FiEdit2/>
+               </div>
+               </div>
+               {this.state.businessName.message && (
                 <p>
                   {" "}
                   <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.firstName.message}
+                  {this.state.businessName.message}
+                </p>
+              )}
+                </label>
+             
+               
+          </div>
+          <div className="input-row">
+   
+                     <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
+              Phone No:
+              <input
+                name="phoneNo"
+                disabled={true}
+                placeholder="Phone No."
+                value={this.state.phoneNo.value}
+                onChange={(e) => this.onChange(e)}
+              />
+              {this.state.phoneNo.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.phoneNo.message}
                 </p>
               )}
             </label>
-
-            <label className={`${!this.state.lastName.isValid ? "error" : ""}`}>
-              Last name*:
+      
+          <label className={`${!this.state.email.isValid ? "error" : ""}`}>
+              Email:
               <input
-                autocomplete="new-password"
-                name="lastName"
-                placeholder="Firstname"
-                value={this.state.lastName.value}
+                name="email"
+                disabled={true}
+                placeholder="Email"
+                value={this.state.email.value}
                 onChange={(e) => this.onChange(e)}
               />
-              {this.state.lastName.message && (
+              {this.state.email.message && (
                 <p>
                   {" "}
                   <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.lastName.message}
+                  {this.state.email.message}
                 </p>
               )}
             </label>
@@ -1003,13 +1098,27 @@ class Profile extends Component {
            className="one-half"
             >
               Registration No:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 autoComplete="off"
-                name="regNo"
+                name="lawfirmRegNo"
                 placeholder="Registration No."
                 value={this.state.lawfirmRegNo.value}
-              
+                disabled={this.state.disableRegNo}
+                onChange={this.onChange}
               />
+                   <div  onClick={()=>this.handleDisable("lawfirmRegNo")}>
+
+                        <FiEdit2/>
+                        </div>
+                        </div>
+                        {this.state.lawfirmRegNo.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.lawfirmRegNo.message}
+                </p>
+              )}
             </label>
           </div>
 
@@ -1025,7 +1134,96 @@ class Profile extends Component {
               />
             </label>
           </div>
+          <div className="input-row">
+          <label>
+              Language:
+              <Select
+                placeholder="Language"
+                value={this.state.language.value}
+                // search
+                showSearch="true"
+                selection="true"
+                onChange={(e, { value }) =>
+                  this.setState({
+                    formDirty: true,
+                    language: { ...this.state.language, value: value },
+                  })
+                }
+                options={languageOptions}
+              />
+            </label>
 
+            <label
+              ref={this.curr}
+              className={`cur-label ${this.state.currencyDrop && "focused"}`}
+              tabIndex={0}
+            >
+              Currency
+              <input
+                className="cur-input"
+                type="text"
+                placeholder="Choose currency"
+                value={this.state.currency.value}
+                onFocus={() => this.setState({ currencyDrop: true })}
+                onChange={(e) => {
+                  filteredCurrencies = Currencies.filter((item, index) => {
+                    const regex = new RegExp(e.target.value, "gi");
+                    return (
+                      item.name.match(regex) || item.currency.code.match(regex)
+                    );
+                  });
+                  this.setState({ filteredCurrencies: filteredCurrencies });
+                  console.log(filteredCurrencies);
+                  this.setState({
+                    currency: { ...this.state.currency, value: e.target.value },
+                  });
+                }}
+              />
+              <i className="dropdown icon"></i>
+              {this.state.currencyDrop && (
+                <div
+                  className="currencyDrop"
+                  onBlur={() => this.setState({ currencyDrop: false })}
+                >
+                  <ul>
+                    {this.state.filteredCurrencies &&
+                      this.state.filteredCurrencies.map((item, index) => (
+                        <li
+                          key={index}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (item && item.currency && item.currency.code) {
+                              console.log(item, e);
+                              this.setState({
+                                currency: {
+                                  ...this.state.currency,
+                                  value: item.currency.code,
+                                },
+                                formDirty: true,
+                                currencyDrop: false,
+                              });
+                            }
+                          }}
+                        >
+                          <img
+                            src={`data:image/jpeg;base64,${item.flag}`}
+                            height="16px"
+                            width="24px"
+                          />
+                          {item.name +
+                            " - " +
+                            item.currency.code +
+                            ` (${
+                              item.currency.symbol !== false &&
+                              item.currency.symbol
+                            })`}{" "}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+            </label>
+          </div>             
           <button
             name="firmBtn"
             className="save-btn"
@@ -1052,7 +1250,7 @@ class Profile extends Component {
                     social: { ...this.state.social, facebook: e.target.value },
                   })
                 }
-                value={this.state.social && this.state.social.facebook}
+                value={this.state.social?this.state.social.facebook:""}
               />
             </label>
 
@@ -1116,105 +1314,50 @@ class Profile extends Component {
         <div className="dividerL"></div>
         <h1>Billing Contact</h1>
         <div className="input-fields">
+        <div className="input-row">
+                   <label
+              className={`${!this.state.firstName.isValid ? "error" : ""}`}
+            >
+              First name*:
+              <input
+                autoComplete="new-password"
+                name="firstName"
+                placeholder="Firstname"
+                value={this.state.firstName.value}
+                onChange={(e) => this.onChange(e)}
+              />
+              {this.state.firstName.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.firstName.message}
+                </p>
+              )}
+            </label>
+
+            <label className={`${!this.state.lastName.isValid ? "error" : ""}`}>
+              Last name*:
+              <input
+                autoComplete="new-password"
+                name="lastName"
+                placeholder="Firstname"
+                value={this.state.lastName.value}
+                onChange={(e) => this.onChange(e)}
+              />
+              {this.state.lastName.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.lastName.message}
+                </p>
+              )}
+            </label>
+            </div>
           <div className="input-row">
          
 
 
-            <label
-                 id="countryCode"
-              className={`${
-                !this.state.contactCountryCode.isValid ? "error" : ""
-              } cc-label ${this.state.countryDrop && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.contactCountryCode.value}
-                autoComplete="new-password"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    this.state.contactCountryCode.isValid=true;
-                    this.state.contactCountryCode.message=""
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    contactCountryCode: {
-                      ...this.state.contactCountryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.contactCountryCode.value.length &&
-              this.state.contactCountryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop && (
-                <div
-                  className="countryDrop"
-                  onBlur={() => this.setState({ countryDrop: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                contactCountryCode: {
-                                  ...this.state.contactCountryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.contactCountryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactCountryCode.message}
-                </p>
-              )}
-            </label>
+           
             <label
               className={`${!this.state.contactPhone.isValid ? "error" : ""}`}
             >
@@ -1227,27 +1370,7 @@ class Profile extends Component {
                 onChange={this.onChange}
               />
             </label>
-          </div>
-
-          {/* <div className="input-row">
-            <label
-              className={`${
-                !this.state.contactCountryCode.isValid ? "error" : ""
-              }`}
-            >
-              Country Code:
-              <input
-                autoComplete="off"
-                name="contactCountryCode"
-                placeholder="Country code"
-                value={this.state.contactCountryCode.value}
-                onChange={this.onChange}
-              />
-            </label>
-       
-          </div> */}
-
-          <div className="input-row two-part">
+     
           <label
               className={`${!this.state.contactEmail.isValid ? "error" : ""}`}
             >
@@ -1349,128 +1472,21 @@ class Profile extends Component {
         <h1>Admin Account Settings</h1>
         <div className="input-fields">
           <div className="input-row">
-          <label
-            id="countryCode1"
-              className={`${
-                !this.state.countryCode.isValid ? "error" : ""
-              } cc-label ${this.state.countryDrop1 && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.countryCode.value}
-                autoComplete="new-password"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop1: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    countryCode: {
-                      ...this.state.countryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.countryCode.value.length &&
-              this.state.countryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop1 && (
-                <div
-                  className="countryDrop"
-                  onBlur={() => this.setState({ countryDrop1: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                countryCode: {
-                                  ...this.state.countryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop1: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.countryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.countryCode.message}
-                </p>
-              )}
-            </label>
-           
-
-            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
-              Phone No:
-              <input
-                name="phoneNo"
-                placeholder="Phone No."
-                value={this.state.phoneNo.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.phoneNo.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.phoneNo.message}
-                </p>
-              )}
-            </label>
-          </div>
-          <div className="input-row">
           <label className={`${!this.state.email.isValid ? "error" : ""}`}>
               Email:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 name="email"
                 placeholder="Email"
                 value={this.state.email.value}
+                disabled={this.state.disableEmail}
                 onChange={(e) => this.onChange(e)}
               />
+                  <div  onClick={()=>this.handleDisable("email")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
               {this.state.email.message && (
                 <p>
                   {" "}
@@ -1479,108 +1495,55 @@ class Profile extends Component {
                 </p>
               )}
             </label>
+           
+
+            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
+              Phone No:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+              <input
+                name="phoneNo"
+                placeholder="Phone No."
+                value={this.state.phoneNo.value}
+                disabled={this.state.disablePhone}
+                onChange={(e) => this.onChange(e)}
+              />
+                  <div  onClick={()=>this.handleDisable("phoneNo")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
+              {this.state.phoneNo.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.phoneNo.message}
+                </p>
+              )}
+
+            </label>
+          </div>
+          <div className="input-row">
+       
             
             <label className={`${!this.state.password.isValid ? "error" : ""}`}>
               Password:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 name="password"
                 type="password"
                 placeholder="************"
                 value={this.state.password.value}
+                disabled={this.state.disablePass}
                 onChange={(e) => this.onChange(e)}
               />
-            </label>
-          </div>
-          <div className="input-row">
-          <label>
-              Language:
-              <Select
-                placeholder="Language"
-                value={this.state.language.value}
-                // search
-                showSearch="true"
-                selection="true"
-                onChange={(e, { value }) =>
-                  this.setState({
-                    formDirty: true,
-                    language: { ...this.state.language, value: value },
-                  })
-                }
-                options={languageOptions}
-              />
-            </label>
+                  <div  onClick={()=>this.handleDisable("password")}>
 
-            <label
-              ref={this.curr}
-              className={`cur-label ${this.state.currencyDrop && "focused"}`}
-              tabIndex={0}
-            >
-              Currency
-              <input
-                className="cur-input"
-                type="text"
-                placeholder="Choose currency"
-                value={this.state.currency.value}
-                onFocus={() => this.setState({ currencyDrop: true })}
-                onChange={(e) => {
-                  filteredCurrencies = Currencies.filter((item, index) => {
-                    const regex = new RegExp(e.target.value, "gi");
-                    return (
-                      item.name.match(regex) || item.currency.code.match(regex)
-                    );
-                  });
-                  this.setState({ filteredCurrencies: filteredCurrencies });
-                  console.log(filteredCurrencies);
-                  this.setState({
-                    currency: { ...this.state.currency, value: e.target.value },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.currencyDrop && (
-                <div
-                  className="currencyDrop"
-                  onBlur={() => this.setState({ currencyDrop: false })}
-                >
-                  <ul>
-                    {this.state.filteredCurrencies &&
-                      this.state.filteredCurrencies.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.currency && item.currency.code) {
-                              console.log(item, e);
-                              this.setState({
-                                currency: {
-                                  ...this.state.currency,
-                                  value: item.currency.code,
-                                },
-                                formDirty: true,
-                                currencyDrop: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img
-                            src={`data:image/jpeg;base64,${item.flag}`}
-                            height="16px"
-                            width="24px"
-                          />
-                          {item.name +
-                            " - " +
-                            item.currency.code +
-                            ` (${
-                              item.currency.symbol !== false &&
-                              item.currency.symbol
-                            })`}{" "}
-                        </li>
-                      ))}
-                  </ul>
+                <FiEdit2/>
                 </div>
-              )}
+                </div>
             </label>
           </div>
+        
           <label style={{ flexDirection: "row" }}>
             Deactivate your account? &nbsp;{" "}
             <span style={{ textDecoration: "underline", color: "red" }}>
@@ -1588,81 +1551,11 @@ class Profile extends Component {
             </span>
           </label>
 
-          <button
-            name="accountBtn"
-            className="save-btn"
-            onClick={this.saveProfile}
-          >
-            Save
-          </button>
+         
         </div>
-        {/* <div className="profile-completion">
-          <button
-            style={{ display: "flex" }}
-            className=""
-            onClick={() => {
-              this.setState({ profCompDiv: !this.state.profCompDiv });
-            }}
-          >
-            <i
-              className={`fe  ${
-                this.state.profCompDiv ? "fe-x-circle" : "fe-info"
-              } `}
-            >
-              {this.state.profCompDiv && (
-                <div className="profile-completion-div">
-                  <h5>Profile Checklist</h5>
-                  <ul>
-                    <li>
-                      <div
-                        className={`checkmark avatar ${
-                          this.state.profileCompletion.profile && "active"
-                        }`}
-                      >
-                        <i className="fa fa-check" />
-                      </div>
-                      Profile Information Setup{" "}
-                      <i className="fe fe-chevron-right" />
-                    </li>
-                    <li>
-                      <div className="checkmark avatar">
-                        <i className="fa fa-check" />
-                      </div>
-                      Update your profile picture{" "}
-                      <i className="fe fe-chevron-right" />
-                    </li>
-                    <li>
-                      <div className="checkmark avatar active">
-                        <i className="fa fa-check" />
-                      </div>
-                      Update your banner picture{" "}
-                      <i className="fe fe-chevron-right" />
-                    </li>
-
-                    <li>
-                      <div className="checkmark avatar ">
-                        <i className="fa fa-check" />
-                      </div>
-                      Contact Information Setup{" "}
-                      <i className="fe fe-chevron-right" />
-                    </li>
-                    <li>
-                      <div
-                        className={`checkmark avatar active ${
-                          this.state.profileCompletion.account && "active"
-                        }`}
-                      >
-                        <i className="fa fa-check" />
-                      </div>
-                      Account Information Setup{" "}
-                      <i className="fe fe-chevron-right" />
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </i>
-          </button>
-        </div> */}
+      {!this.state.disableEmail?<ChangeForm onClose={()=>this.handleDisable("email")} headerText={"Change Email"} email={this.state.email.value} phoneNo={this.state.password.value} onChange={this.onChange}  input1={"New email"} input2={"Password"} type={"email"} history={this.props.history}/>:null }
+      {!this.state.disablePhone?<ChangeForm onClose={()=>this.handleDisable("phoneNo")} headerText={"Change Phone Number"} input1={"New Phone Number"} input2={"Password"} type={"phone"} history={this.props.history}/>:null}
+      {!this.state.disablePass?<ChangeForm onClose={()=>this.handleDisable("password")} headerText={"Change Password"} type={"pass"} history={this.props.history}/>:null}
 
         <NavigationPrompt when={this.state.formDirty}>
           {({ onConfirm, onCancel }) => (
@@ -1712,7 +1605,7 @@ class Profile extends Component {
             </React.Fragment>
           )}
         </NavigationPrompt>
-        {this.state.wizard && this.state.isSignUpWizardCompleted == false && (
+        { this.state.isSignUpWizardCompleted == false && (
       
       <Elements stripe={stripePromise}>
       <SignUpWIzard

@@ -93,7 +93,7 @@ export const googleLogin = (data, history) => (dispatch) => {
           dispatch({
             type: Types.USER_ERRORS,
             payload: {
-              error: error.response.data,
+              error: error.response.data.message[0].messages[0].message,
             },
           });
         }
@@ -133,7 +133,7 @@ export const facebookLogin = (data, history) => (dispatch) => {
           dispatch({
             type: Types.USER_ERRORS,
             payload: {
-              error: error.response.data,
+              error:error.response.data.message[0].messages[0].message,
             },
           });
         }
@@ -207,7 +207,7 @@ export const forgotPassword = (data, history) => (dispatch) => {
       .catch((error) => {
         console.log(error);
         if (error && error.response) {
-          console.log(error.response.data);
+          console.log(error.response.data.message[0].messages[0].message);
           dispatch({ type: Types.USER_ERRORS });
           return resolve(false);
         }
@@ -306,7 +306,7 @@ export const loginWithPhone = (data, history) => (dispatch) => {
         if (error && error.response) {
           console.log(error.response.data);
           // dispatch({ type: Types.USER_ERRORS,error:"" });
-          message.error(error.response.data.message);
+          message.error(error.response.data.message[0].messages[0].message);
           return resolve(false)
         }
         // message.success("Logged in successfully!");
@@ -346,7 +346,7 @@ export const saveProfile = (data,url,id) => (dispatch) => {
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -371,7 +371,7 @@ return new Promise((resolve,reject)=>{
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -414,7 +414,7 @@ export const getProfile = (data, history) => (dispatch) => {
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -459,7 +459,7 @@ export const getLawfirmUserProfile = (data, history) => (dispatch) => {
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -499,7 +499,7 @@ export const getPackages = (history) => dispatch =>{
       if (error && error.response) {
         console.log(error.response.data);
         if (error.response.data.message) {
-          message.error(error.response.data.message);
+          message.error(error.response.data.message[0].messages[0].message);
         }
         return resolve(false);
       }
@@ -528,7 +528,7 @@ export const saveBusinessUserWizard = (props, history) => dispatch => {
       if (error && error.response) {
         console.log(error.response.data);
         if (error.response.data.message) {
-          message.error(error.response.data.message);
+          message.error(error.response.data.message[0].messages[0].message);
         }
         return resolve(false);
       }
@@ -571,7 +571,7 @@ export const updateLawfirmUserProfile = (id, data) => (dispatch) => {
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -612,7 +612,7 @@ export const getLawyerUserProfile = (data, history) => (dispatch) => {
       if (error && error.response) {
         console.log(error.response.data);
         // dispatch({ type: Types.USER_ERRORS,error:"" });
-        message.error(error.response.data.message);
+        message.error(error.response.data.message[0].messages[0].message);
         return resolve(false)
       }
       // message.success("Logged in successfully!");
@@ -643,7 +643,7 @@ export const saveBranches = (props, history) => dispatch => {
       if (error && error.response) {
         console.log(error.response.data);
         if (error.response.data.message) {
-          message.error(error.response.data.message);
+          message.error(error.response.data.message[0].messages[0].message);
         }
         return resolve(false);
       }
@@ -672,7 +672,7 @@ export const updateBranches = (props, id) => dispatch => {
       if (error && error.response) {
         console.log(error.response.data);
         if (error.response.data.message) {
-          message.error(error.response.data.message);
+          message.error(error.response.data.message[0].messages[0].message);
         }
         return resolve(false);
       }
@@ -680,4 +680,50 @@ export const updateBranches = (props, id) => dispatch => {
 
 
   })
+}
+export const updateUserProfile = (id, data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    console.log(token)
+
+    Axios.put(`${REACT_APP_API}/users/${id}`,data,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      })
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+     
+        dispatch({
+          type: Types.GET_PROFILE,
+          payload: {
+            retrievedProfile: res.data,
+          },
+        });
+      console.log("after user")
+      // history.push('/profilePage')
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message[0].messages[0].message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
 }

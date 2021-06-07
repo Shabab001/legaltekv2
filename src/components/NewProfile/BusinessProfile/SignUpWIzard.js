@@ -389,8 +389,8 @@ useEffect(()=>{
 
   const handleCardDetailsChange = (cardElement) => {
     console.log(cardElement);
-    if (cardElement.error && cardElement.error.message) {
-      setCardElementError(cardElement.error.message);
+    if (cardElement.error !== null ) {
+      setCardElementError(cardElement.error);
       setCardElementValid(false);
     } else {
       setCardElementError("");
@@ -398,7 +398,7 @@ useEffect(()=>{
     }
     if (cardElement.empty) {
       setCardElementValid(false);
-      setCardElementError(cardElement.error.message);
+      setCardElementError(cardElement.error);
     }
 
     // ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
@@ -419,6 +419,8 @@ console.log(activeBtn)
       !cardElementValid 
     ){
               setActiveBtn(false)
+              console.log(cardElementValid,"card")
+          
     }
     else{
       console.log("here")
@@ -429,6 +431,7 @@ console.log(activeBtn)
   
   const submitForm = async () => {
     const cardElement = elements.getElement("card");
+    console.log("here")
     const paymentMethodReq = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
@@ -495,7 +498,7 @@ if(paymentMethodReq){
     if (
       paymentMethodReq &&
       paymentMethodReq.paymentMethod &&
-      billingAddressFlag
+      !billingAddressFlag
     ) {
       console.log(paymentMethodReq);
       let obj = {
@@ -1119,6 +1122,7 @@ if(paymentMethodReq){
                             isValid: true,
                             message: "",
                           });
+                          console.log(e.target.value)
                         } else {
                           setBillingCity({
                             ...billingCity,
@@ -1159,6 +1163,7 @@ if(paymentMethodReq){
                             isValid: true,
                             message: "",
                           });
+                          console.log(e.target.value)
                         } else {
                           setBillingState({
                             ...billingState,
@@ -1200,6 +1205,7 @@ if(paymentMethodReq){
                             isValid: true,
                             message: "",
                           });
+                          console.log(e.target.value)
                         } else {
                           setBillingAddress({
                             ...billingAddress,
@@ -1241,6 +1247,7 @@ if(paymentMethodReq){
                             isValid: true,
                             message: "",
                           });
+                          console.log(e.target.value)
                         } else {
                           setBillingZip({
                             ...billingZip,
@@ -1274,11 +1281,11 @@ if(paymentMethodReq){
                         onChange={handleCardDetailsChange}
                       />
                     </div>
-                    {/* <StripeComp /> */}
+                 
                     <p>
-                      {" "}
-                      <i className="fe fe-alert-triangle" />{" "}
-                      {/* {this.state.contactPhone.message} */}
+                   
+                      <i className="fe fe-alert-triangle" />
+                 
                       {cardElementError
                         ? cardElementError
                         : "Billing card is required"}

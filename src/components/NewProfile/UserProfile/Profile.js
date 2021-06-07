@@ -7,6 +7,7 @@ import Currencies from "../../../assets/json/Currencies.json";
 import languageOptions from "../../../assets/json/Languages.json";
 import Countries from "../../../assets/json/Countries.json";
 import { DatePicker, message, Space } from "antd";
+import { Menu, Dropdown } from "antd";
 import { Select as Select2 } from "antd";
 import validator from "validator";
 import moment from "moment";
@@ -714,1200 +715,846 @@ export class Profile extends Component {
         this.setState(state);
       }
     render() {
-        const dateFormat = "YYYY/MM/DD";
-        let filteredCurrencies = Currencies;
-        let filteredCountryCode = Countries;
-        return (
-            <div className=" user-profile">
-                <div className="coverImage">
-              <img src="https://source.unsplash.com/random/1600x900" />
-              <div className="overlay">
-              <div className="addCoverImage">
-          <UploadOutlined style={{ fontSize: '30px', color: '#f7f7f7' }} />
-          </div>
-              </div>
-               
-          </div>
-            <div className="profileHead">
-              <div className="profilePic">
-                <img src={girl2} alt="girl" />
-                <i className="fa fa-pencil" />
-              </div>
-
-              <div className="profileName">
-                <p>{this.state.fixedFirstName 
-                ? this.state.fixedFirstName
-                : ""}{" "}
-              {this.state.fixedLastName 
-                ? this.state.fixedLastName
-                : ""}</p>
-                <span> <i className="fe fe-map-pin mr-1" style={{ color: "black" }}></i>{" "}
-              {this.state.locality && this.state.localityCountry && this.state.locality + ", " + this.state.localityCountry}</span>
-              </div>
-            </div>
-            <h1>Account Holder Information</h1>
-            <div>
-              <div className="input-fields">
-                <div className="input-row">
-                  <label
-                  className={!this.state.firstName.isValid ? "error" : ""}
-                  >
-                    First name*:
-                    <input
-                      name="firstName"
-                      placeholder="Firstname"
-                        value={this.state.firstName.value}
-                        onChange={(e) => this.onChange(e)}
-                    />
-                    {this.state.firstName.message && (
-                      <p>
-                        {" "}
-                        <i className="fe fe-alert-triangle" />{" "}
-                        {this.state.firstName.message}
-                      </p>
-                    )}
-                  </label>
-
-                  <label
-                  className={!this.state.lastName.isValid ? "error" : ""}
-                  >
-                    Last name*:
-                    <input
-                      name="lastName"
-                      placeholder="Firstname"
-                        value={this.state.lastName.value}
-                        onChange={(e) => this.onChange(e)}
-                    />
-                    {this.state.lastName.message && (
-                      <p>
-                        {" "}
-                        <i className="fe fe-alert-triangle" />{" "}
-                        {this.state.lastName.message}
-                      </p>
-                    )}
-                  </label>
-                </div>
-                <div className="input-row">
-                  <label>
-                    Date of Birth:
-                    <DatePicker
-                      name="dob"
-                      placeholder="Date of Birth"
-                      value={
-                        this.state.dob.value
-                          ? moment(this.state.dob.value, dateFormat)
-                          :
-                        ""
-                      }
-                        onChange={this.onChangeDate.bind(this)}
-                    />
-                  </label>
-                  <label>
-                    Gender:
-                    <Select2
-                      name="gender"
-                      showSearch
-                      placeholder="Gender"
-                        value={this.state.gender.value}
-                        onChange={(e, { value }) =>
-                          this.setState({
-                            gender: { ...this.state.gender, value: value },
-                          })
-                        }
-                      options={gender}
-                    />
-                  </label>
-                </div>
-
-                <div className="input-row ">
-                  <label className="textareaLabel">
-                    Profile Summary:
-                    <textarea
-                      placeholder=""
-                        value={this.state.profileSummary.value}
-                        onChange={(e) =>
-                          this.setState({
-                            formDirty: true,
-                            profileSummary: {
-                              ...this.state.profileSummary,
-                              value: e.target.value,
-                            },
-                          })
-                        }
-                    />
-                  </label>
-                </div>
-                {/* <button
-                  name="profileBtn"
-                  className="save-btn"
-                    onClick={(e) => this.saveProfile(e)}
-                >
-                  Save Changes
-                </button> */}
-              </div>
-
-
-
-
-
-
-
-              <div class="dividerL"></div>
-
-              <h1>Billing Contact</h1>
-        <div className="input-fields">
-          <div className="input-row">
+      const dateFormat = "YYYY/MM/DD";
+      let filteredCurrencies = Currencies;
+      let filteredCountryCode = Countries;
+      return (
+          <div className=" user-profile">
+              <div className="coverImage">
+        {/* <img src="https://source.unsplash.com/random/1600x900" /> */}
+        <div className="overlay"></div>
+        {this.state.tempCoverImage || this.state.coverImage ? (
+          <img
+            src={
+              this.state.tempCoverImage
+                ? this.state.tempCoverImage
+                : this.state.coverImage
+                ? this.state.coverImage
+                : ""
+            }
+          />
+        ) : (
+          ""
+        )}
+        <div className="addCoverImage">
           <label
-          id="contactCountryCode"
-              className={`${
-                !this.state.contactCountryCode.isValid ? "error" : ""
-              } cc-label ${this.state.countryDrop1 && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.contactCountryCode.value}
-                autocomplete="off"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop1: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
+            htmlFor="coverImage"
+            style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
+          >
+            <input
+              type="file"
+              id="coverImage"
+              onChange={(e) => {
+                if (e.target.files[0])
                   this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    contactCountryCode: {
-                      ...this.state.contactCountryCode,
-                      value: e.target.value,
-                    },
+                    coverImage: e.target.files[0],
+                    formImageDirty: true,
+                    tempCoverImage: URL.createObjectURL(e.target.files[0]),
                   });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.contactCountryCode.value.length &&
-              this.state.contactCountryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop1 && (
-                <div
-                  className="countryDrop"
-                  onBlur={() => this.setState({ countryDrop1: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                contactCountryCode: {
-                                  ...this.state.contactCountryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop1: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.contactCountryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactCountryCode.message}
-                </p>
-              )}
-            </label>
-            <label className={!this.state.contactPhone.isValid ? "error" : ""}>
-              Phone No:
-              <input
-                name="contactPhone"
-                placeholder="Phone No."
-                value={this.state.contactPhone.value}
-                onChange={this.onChange}
-              />
-              {this.state.contactPhone.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactPhone.message}
-                </p>
-              )}
-            </label>
-            
-          </div>
-          <div className="input-row two-part">
-          <label className={`${!this.state.contactEmail.isValid ? "error" : ""} one-half`}>
-              Email Address:
-              <input
-                name="contactEmail"
-                placeholder="Email address"
-                value={this.state.contactEmail.value}
-                onChange={this.onChange}
-              />
-              {this.state.contactEmail.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactEmail.message}
-                </p>
-              )}
-            </label>
-            <label className="one-half">
-              Billing Location:
-             
-                  <Geolocate chooseAddress={(address) => this.updateBillingAddress(address)}/>
-            </label>
-          </div>
-          <div className="input-row two-part">
-          <label className="one-half">
-              Billing Address:
-              <input
-                name="billingAddress"
-                value={this.state.billingAddress.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Billing Address"
-              />
-            </label>
-            <label className="one-half">
-              Billing Country:
-             
-              <input
-                name="billingCountry"
-                value={this.state.billingCountry.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Billing Address"
-              />
-            </label>
-
-          </div>
-
-          <div className="input-row three-part">
-            <label className="one-third">
-              City:
-              <input
-                name="billingCity"
-                value={this.state.billingCity.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="City"
-              />
-            </label>
-            <label className="one-third">
-              Province/State:
-              <input
-                name="billingState"
-                value={this.state.billingState.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Province/State"
-              />
-            </label>
-            <label className="one-third">
-              Postal/Zip Code:
-              <input
-                name="billingZip"
-                value={this.state.billingZip.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Postal/Zip Code"
-              />
-            </label>
-          </div>
-
-          {this.state.deliveryLocationInfo &&
-            this.state.deliveryLocationInfo.map((info, index) => (
-              <>
-                <div className="input-row">
-                  <label className="fullLabel">
-                    {index == 0 ? (
-                      <>
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            flexWrap: "wrap",
-                          }}
-                        >
-                          Default delivery location:
-                          <label
-                            
-                            htmlFor="dba"
-                            style={{ marginLeft: 20,marginTop: 0, minWidth: "fit-content" }}
-                          >
-                            {" "}
-                            <input type="checkbox" checked={this.state.dba} value={"dba"} name="dba" id="dba" onChange={this.onChange}/>
-                            <span className="checkBox">
-                              <i className="fe fe-check" />
-                            </span>
-                            Same as Billing Address
-                          </label>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <i
-                          className="fe fe-x"
-                          onClick={(e) => {
-                            console.log("index", index);
-                            if (this.state.deliveryLocationInfo.length > 1) {
-                              this.deleteAddressInfo(index);
-                            }
-                          }}
-                        />
-                        {"Delivery Location " + (index + 1)}
-                      </>
-                    )}
-
-                    <input value={this.state.deliveryLocationInfo && this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].address} onChange={(e) => this.changeAddressInfo(e, index)} name="address" placeholder="Delivery address" disabled={this.state.deliveryLocationInfo && this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].disabled ? this.state.deliveryLocationInfo[index].disabled : false}/>
-                  </label>
-                </div>
-
-                <div className="input-row three-part">
-                  <label className="one-third">
-                    City:
-                    <input
-                    name="city"
-                     disabled={this.state.deliveryLocationInfo && this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].disabled ? this.state.deliveryLocationInfo[index].disabled : false}
-                      placeholder="City"
-                      value={this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].city && this.state.deliveryLocationInfo[index].city }
-                      onChange={(e) => this.changeAddressInfo(e, index)}
-                    />
-                  </label>
-                  <label className="one-third">
-                    Province/State:
-                    <input
-                    name="state"
-                    value={this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].state &&this.state.deliveryLocationInfo[index].state}
-                    disabled={this.state.deliveryLocationInfo && this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].disabled ? this.state.deliveryLocationInfo[index].disabled : false}
-                     onChange={(e) => this.changeAddressInfo(e, index)}
-                    placeholder="Province/State" />
-                  </label>
-                  <label className="one-third">
-                    Postal/Zip Code:
-                    <input
-                    name="zip"
-                    value={this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].zip && this.state.deliveryLocationInfo[index].zip}
-                    disabled={this.state.deliveryLocationInfo && this.state.deliveryLocationInfo[index] && this.state.deliveryLocationInfo[index].disabled ? this.state.deliveryLocationInfo[index].disabled : false}
-                     onChange={(e) => this.changeAddressInfo(e, index)}
-                    placeholder="Postal/Zip Code" />
-                  </label>
-                </div>
-              </>
-            ))}
-
-          <div className="input-row-btns">
-            {/* <button
-              name="contactBtn"
-              className="save-btn"
-              onClick={this.saveProfile}
-            >
-              Save Changes
-            </button> */}
-            {this.state.deliveryLocationInfo.length < 5 && (
-              <button
-                className="save-btn"
-                onClick={() => {
-                  if (this.state.deliveryLocationInfo.length < 5) {
-                    this.setState({
-                      formDirty: true,
-                      deliveryLocationInfo: [
-                        ...this.state.deliveryLocationInfo,
-                        { city: "", address: "", zipCode: "", state: "" },
-                      ],
-                    });
-                  }
-                }}
-              >
-                Add
-              </button>
-            )}
-          </div>
+              }}
+              style={{ display: "none" }}
+            />
+            <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
+          </label>
         </div>
-        <div className="dividerL"></div>
+        <div className="coverButtons">
+        {this.state.tempCoverImage && this.state.formImageDirty && 
+          <button onClick={() => this.saveCoverImage()}>
+            <span>Save</span>
+          </button>
+        }
+
+        {this.state.coverImage && !this.state.formImageDirty && 
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("clicked");
+              this.setState({
+                deleteCover: true
+              });
+            }}
+          >
+            Remove Cover
+          </button>}
+        </div>
+      </div>
+      <div className="profileHead">
+        <div className="profilePic">
+          {/* <img src={girl2} alt="girl" /> */}
+          {this.state.tempProfileImage || this.state.profileImage ? (
+            <img
+              src={
+                this.state.tempProfileImage
+                  ? this.state.tempProfileImage
+                  : this.state.profileImage
+                  ? this.state.profileImage
+                  : ""
+              }
+            />
+          ) : (
+            ""
+          )}
+
+          <label for="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
+            <input
+              type="file"
+              id="profileImage"
+              onChange={(e) => {
+                if (e.target.files[0])
+                  this.setState({
+                    formImageDirty:true,
+                    profileImage: e.target.files[0],
+                    tempProfileImage: URL.createObjectURL(e.target.files[0]),
+                  });
+              }}
+              style={{ display: "none" }}
+            />
+
+            <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
+          </label>
+          <Dropdown
+            trigger={["click"]}
+            overlay={() => this.profileImageMenu()}
+            placement="bottomLeft"
+            arrow
+          >
+            <button>
+              {/* <ThreeDotsIcon /> */}
+              <i style={{ bottom: "17px" }} className="fe fe-chevron-down" />
+            </button>
+          </Dropdown>
+        </div>
+      </div>
+      <div className="viewPublicProfile">
+        <button
+          className=""
+          onClick={() =>
+            this.props.history.push(
+              `/view-profile/${this.props.auth.user._id}`
+            )
+          }
+        >
+          View Public Profile
+        </button>
+      </div>
+          <h1>Account Holder Information</h1>
+          <div>
+            <div className="input-fields">
+              <div className="input-row">
+                <label
+                className={!this.state.firstName.isValid ? "error" : ""}
+                >
+                  First name*:
+                  <input
+                    name="firstName"
+                    placeholder="Firstname"
+                      value={this.state.firstName.value}
+                      onChange={(e) => this.onChange(e)}
+                  />
+                  {this.state.firstName.message && (
+                    <p>
+                      {" "}
+                      <i className="fe fe-alert-triangle" />{" "}
+                      {this.state.firstName.message}
+                    </p>
+                  )}
+                </label>
+
+                <label
+                className={!this.state.lastName.isValid ? "error" : ""}
+                >
+                  Last name*:
+                  <input
+                    name="lastName"
+                    placeholder="Firstname"
+                      value={this.state.lastName.value}
+                      onChange={(e) => this.onChange(e)}
+                  />
+                  {this.state.lastName.message && (
+                    <p>
+                      {" "}
+                      <i className="fe fe-alert-triangle" />{" "}
+                      {this.state.lastName.message}
+                    </p>
+                  )}
+                </label>
+              </div>
+              <div className="input-row">
+                <label>
+                  Date of Birth:
+                  <DatePicker
+                    name="dob"
+                    placeholder="Date of Birth"
+                    value={
+                      this.state.dob.value
+                        ? moment(this.state.dob.value, dateFormat)
+                        :
+                      ""
+                    }
+                      onChange={this.onChangeDate.bind(this)}
+                  />
+                </label>
+                <label>
+                  Gender:
+                  <Select2
+                    name="gender"
+                    showSearch
+                    placeholder="Gender"
+                      value={this.state.gender.value}
+                      onChange={(e, { value }) =>
+                        this.setState({
+                          gender: { ...this.state.gender, value: value },
+                        })
+                      }
+                    options={gender}
+                  />
+                </label>
+              </div>
+
+              <div className="input-row ">
+                <label className="textareaLabel">
+                  Profile Summary:
+                  <textarea
+                    placeholder=""
+                      value={this.state.profileSummary.value}
+                      onChange={(e) =>
+                        this.setState({
+                          formDirty: true,
+                          profileSummary: {
+                            ...this.state.profileSummary,
+                            value: e.target.value,
+                          },
+                        })
+                      }
+                  />
+                </label>
+                <div className="input-row">
+          <label>
+            Language:
+            <Select2
+              placeholder="Language"
+              value={this.state.language.value}
+              // search
+              showSearch
+              selection
+              onChange={(e, { value }) =>
+                this.setState({
+                  language: { ...this.state.language, value: value },
+                })
+              }
+              options={languageOptions}
+            />
+          </label>
+
+          <label
+            className={`cur-label ${this.state.currencyDrop && "focused"}`}
+            tabIndex={0}
+          >
+            Currency
+            <input
+              className="cur-input"
+              type="text"
+              placeholder="Choose currency"
+              value={this.state.currency.value}
+              onFocus={() => this.setState({ currencyDrop: true })}
+              onChange={(e) => {
+                filteredCurrencies = Currencies.filter((item, index) => {
+                  const regex = new RegExp(e.target.value, "gi");
+                  return (
+                    item.name.match(regex) || item.currency.code.match(regex)
+                  );
+                });
+                this.setState({ filteredCurrencies: filteredCurrencies });
+                console.log(filteredCurrencies);
+                this.setState({ currency: e.target.value });
+              }}
+            />
+            <i className="dropdown icon"></i>
+            {this.state.currencyDrop && (
+              <div
+                className="currencyDrop"
+                ref={this.curr}
+                onBlur={() => this.setState({ currencyDrop: false })}
+              >
+                <ul>
+                  {this.state.filteredCurrencies &&
+                    this.state.filteredCurrencies.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log(item, e);
+                          if (item && item.currency && item.currency.code) {
+                            this.setState({
+                              currency: {
+                                ...this.state.currency,
+                                value: item.currency.code,
+                              },
+                              formDirty: true,
+                              currencyDrop: false,
+                            });
+                          }
+                        }}
+                      >
+                        <img
+                          src={`data:image/jpeg;base64,${item.flag}`}
+                          height="16px"
+                          width="24px"
+                        />
+                        {item.name +
+                          " - " +
+                          item.currency.code +
+                          ` (${
+                            item.currency.symbol !== false &&
+                            item.currency.symbol
+                          })`}{" "}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+          </label>
+        </div>
+              </div>
+              <button
+                name="profileBtn"
+                className="save-btn"
+                  onClick={(e) => this.saveProfile(e)}
+              >
+                Save
+              </button>
+            </div>
+
+
+
+
+
+
+
+            <div class="dividerL"></div>
+
+            <h1>Billing Contact</h1>
+      <div className="input-fields">
+        <div className="input-row">
+        <label
+        id="contactCountryCode"
+            className={`${
+              !this.state.contactCountryCode.isValid ? "error" : ""
+            } cc-label ${this.state.countryDrop1 && "focused"}`}
+            tabIndex={0}
+          >
+            Country Code:
+            <input
+              type="text"
+              name="countryCode"
+              placeholder="Country code"
+              value={this.state.contactCountryCode.value}
+              autocomplete="off"
+              style={
+                this.state.countryCode.value.match(/^\d+$/) && {
+                  paddingLeft: 20,
+                }
+              }
+              className="cc-input"
+              onFocus={() => this.setState({ countryDrop1: true })}
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  filteredCountryCode = Countries.filter((item, index) => {
+                    const regex = new RegExp(e.target.value, "gi");
+                    return (
+                      item.name.match(e.target.value) ||
+                      item.dialCode.match(e.target.value) ||
+                      item.isoCode.match(e.target.value)
+                    );
+                  });
+                  this.setState({ filteredCountryCode: filteredCountryCode });
+                } else {
+                  this.setState({ filteredCountryCode: Countries });
+                }
+                this.setState({
+                  formAccountDirty: true,
+                  formDirty: true,
+                  contactCountryCode: {
+                    ...this.state.contactCountryCode,
+                    value: e.target.value,
+                  },
+                });
+              }}
+            />
+            <i className="dropdown icon"></i>
+            {this.state.contactCountryCode.value.length &&
+            this.state.contactCountryCode.value.match(/^\d+$/) ? (
+              <i className="plus-icon">&#43;</i>
+            ) : null}
+            {this.state.countryDrop1 && (
+              <div
+                className="countryDrop"
+                onBlur={() => this.setState({ countryDrop1: false })}
+              >
+                <ul>
+                  {this.state.filteredCountryCode &&
+                    this.state.filteredCountryCode.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (item && item.flag && item.dialCode) {
+                            this.setState({
+                              contactCountryCode: {
+                                ...this.state.contactCountryCode,
+                                value: item.dialCode.split("+")[1],
+                              },
+                              formDirty: true,
+                              countryDrop1: false,
+                            });
+                          }
+                        }}
+                      >
+                        <img src={item.flag} height="16px" width="24px" />
+                        {item.name +
+                          " (" +
+                          item.isoCode +
+                          ") " +
+                          item.dialCode}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+            {this.state.contactCountryCode.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.contactCountryCode.message}
+              </p>
+            )}
+          </label>
+          <label className={!this.state.contactPhone.isValid ? "error" : ""}>
+            Phone No:
+            <input
+              name="contactPhone"
+              placeholder="Phone No."
+              value={this.state.contactPhone.value}
+              onChange={this.onChange}
+            />
+            {this.state.contactPhone.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.contactPhone.message}
+              </p>
+            )}
+          </label>
+          
+        </div>
+        <div className="input-row two-part">
+        <label className={`${!this.state.contactEmail.isValid ? "error" : ""} one-half`}>
+            Email Address:
+            <input
+              name="contactEmail"
+              placeholder="Email address"
+              value={this.state.contactEmail.value}
+              onChange={this.onChange}
+            />
+            {this.state.contactEmail.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.contactEmail.message}
+              </p>
+            )}
+          </label>
+          <label className="one-half">
+            Billing Location:
+           
+                <Geolocate chooseAddress={(address) => this.updateBillingAddress(address)}/>
+          </label>
+        </div>
+        <div className="input-row two-part">
+        <label className="one-half">
+            Billing Address:
+            <input
+              name="billingAddress"
+              value={this.state.billingAddress.value}
+              onChange={(e) => this.onChange(e)}
+              placeholder="Billing Address"
+            />
+          </label>
+          <label className="one-half">
+            Billing Country:
+           
+            <input
+              name="billingCountry"
+              value={this.state.billingCountry.value}
+              onChange={(e) => this.onChange(e)}
+              placeholder="Billing Address"
+            />
+          </label>
+
+        </div>
+
+        <div className="input-row three-part">
+          <label className="one-third">
+            City:
+            <input
+              name="billingCity"
+              value={this.state.billingCity.value}
+              onChange={(e) => this.onChange(e)}
+              placeholder="City"
+            />
+          </label>
+          <label className="one-third">
+            Province/State:
+            <input
+              name="billingState"
+              value={this.state.billingState.value}
+              onChange={(e) => this.onChange(e)}
+              placeholder="Province/State"
+            />
+          </label>
+          <label className="one-third">
+            Postal/Zip Code:
+            <input
+              name="billingZip"
+              value={this.state.billingZip.value}
+              onChange={(e) => this.onChange(e)}
+              placeholder="Postal/Zip Code"
+            />
+          </label>
+        </div>
+
+       
+        <div className="input-row-btns">
+          <button
+            name="contactBtn"
+            className="save-btn"
+            onClick={this.saveProfile}
+          >
+            Save
+          </button>
+
+        </div>
+      </div>
+      <div className="dividerL"></div>
 
 
 
 <h1>Social Account Settings</h1>
 <div className="input-fields">
-  <div className="input-row social">
-    <label>
-      Facebook:
-      <i className="fa fa-facebook" />
+<div className="input-row social">
+  <label>
+    Facebook:
+    <i className="fa fa-facebook" />
 
-      <input
-        name="social"
-        placeholder="Facebook"
-        onChange={(e) =>
-          this.setState({
-            formDirty: true,
-            social: { ...this.state.social, facebook: e.target.value },
-          })
-        }
-        value={this.state.social && this.state.social.facebook}
-      />
-    </label>
+    <input
+      name="social"
+      placeholder="Facebook"
+      onChange={(e) =>
+        this.setState({
+          formDirty: true,
+          social: { ...this.state.social, facebook: e.target.value },
+        })
+      }
+      value={this.state.social && this.state.social.facebook}
+    />
+  </label>
 
-    <label>
-      Instagram:
-      <i className="fa fa-instagram" />
+  <label>
+    Instagram:
+    <i className="fa fa-instagram" />
 
-      <input
-        name="social"
-        placeholder="Instagram"
-        onChange={(e) =>
-          this.setState({
-            formDirty: true,
-            social: { ...this.state.social, instagram: e.target.value },
-          })
-        }
-        value={this.state.social && this.state.social.instagram}
-      />
-    </label>
-  </div>
-  <div className="input-row social">
-    <label>
-      Twitter:
-      <i className="fa fa-twitter" />
+    <input
+      name="social"
+      placeholder="Instagram"
+      onChange={(e) =>
+        this.setState({
+          formDirty: true,
+          social: { ...this.state.social, instagram: e.target.value },
+        })
+      }
+      value={this.state.social && this.state.social.instagram}
+    />
+  </label>
+</div>
+<div className="input-row social">
+  <label>
+    Twitter:
+    <i className="fa fa-twitter" />
 
-      <input
-        name="social"
-        placeholder="Twitter"
-        onChange={(e) =>
-          this.setState({
-            formDirty: true,
-            social: { ...this.state.social, twitter: e.target.value },
-          })
-        }
-        value={this.state.social && this.state.social.twitter}
-      />
-    </label>
-    <label>
-      LinkedIn
-      <i className="fa fa-linkedin" />
-      <input
-        name="social"
-        placeholder="LinkedIn"
-        onChange={(e) =>
-          this.setState({
-            formDirty: true,
-            social: { ...this.state.social, linkedin: e.target.value },
-          })
-        }
-        value={this.state.social && this.state.social.linkedin}
-      />
-    </label>
-  </div>
+    <input
+      name="social"
+      placeholder="Twitter"
+      onChange={(e) =>
+        this.setState({
+          formDirty: true,
+          social: { ...this.state.social, twitter: e.target.value },
+        })
+      }
+      value={this.state.social && this.state.social.twitter}
+    />
+  </label>
+  <label>
+    LinkedIn
+    <i className="fa fa-linkedin" />
+    <input
+      name="social"
+      placeholder="LinkedIn"
+      onChange={(e) =>
+        this.setState({
+          formDirty: true,
+          social: { ...this.state.social, linkedin: e.target.value },
+        })
+      }
+      value={this.state.social && this.state.social.linkedin}
+    />
+  </label>
+</div>
 
-  {/* <button
-    name="socialBtn"
-    className="save-btn"
-    onClick={this.saveProfile}
-  >
-    Save
-  </button> */}
+<button
+  name="socialBtn"
+  className="save-btn"
+  onClick={this.saveProfile}
+>
+  Save
+</button>
 </div>
 
 
-       
-        <div className="dividerL"></div>
-        <h1>Dietary Preferences</h1>
-        <div className="input-fields checkBoxes">
-          <div className="input-row checkboxRows">
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="dairy-free"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("dairy-free")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              dairy-free
-            </label>
+     
+    
+     
 
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="gluten-free"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("gluten-free")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              gluten-free
-            </label>
 
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="Halal"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("Halal")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              Halal
-            </label>
-            {/* </div>
-          <div className="input-row  checkboxRows"> */}
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="kosher"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("kosher")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              kosher
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="vegan"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("vegan")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              vegan
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="vegetarian"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("vegetarian")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              vegetarian
-            </label>
-            {/* </div>
-          <div className="input-row  checkboxRows"> */}
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="dietaryPref"
-                value="sugar-free"
-                onChange={this.onChange}
-                checked={this.state.dietaryPref.includes("sugar-free")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              sugar-free
-            </label>
-          </div>
+      <div className="dividerL"></div>
 
-          {/* <button
-            name="dietaryPrefBtn"
-            className="save-btn"
-            onClick={this.saveProfile}
-          >
-            Save
-          </button> */}
+      <h1>Account Settings</h1>
+      <div className="input-fields">
+        <div className="input-row">
+          <label className={!this.state.email.isValid ? "error" : ""}>
+            Email:
+            <input
+              name="email"
+              placeholder="Email"
+              value={this.state.email.value}
+              onChange={(e) => this.onChange(e)}
+            />
+            {this.state.email.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.email.message}
+              </p>
+            )}
+          </label>
+          <label className={!this.state.phoneNo.isValid ? "error" : ""}>
+            Phone No:
+            <input
+              name="phoneNo"
+              placeholder="Phone No."
+              value={this.state.phoneNo.value}
+              onChange={(e) => this.onChange(e)}
+            />
+            {this.state.phoneNo.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.phoneNo.message}
+              </p>
+            )}
+          </label>
         </div>
-
-        <div className="dividerL"></div>
-        <h1>Allergens</h1>
-        <div className="input-fields checkBoxes">
-          <div className="input-row checkboxRows">
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="crustaceans and molluscs"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes(
-                  "crustaceans and molluscs"
-                )}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              crustaceans and molluscs
-            </label>
-
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="eggs"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("eggs")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              eggs
-            </label>
-
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="fish"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("fish")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              fish
-            </label>
-            {/* </div>
-          <div className="input-row  checkboxRows"> */}
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="milk"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("milk")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              milk
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="mustard"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("mustard")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              mustard
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="peanuts"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("peanuts")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              peanuts
-            </label>
-            {/* </div>
-          <div className="input-row  checkboxRows"> */}
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="sesame seeds"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("sesame seeds")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              sesame seeds
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="soy"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("soy")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              soy
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="sulphites"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("sulphites")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              sulphites
-            </label>
-            {/* </div>
-          <div className="input-row  checkboxRows"> */}
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="tree nuts"
-                onChange={this.onChange}
-                checked={this.state.allergens.includes("tree nuts")}
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              <div>
-                tree nuts
-                <i
-                  className="fe fe-info"
-                  onMouseOver={() => {
-                    this.setState({ toolTip: true });
-                  }}
-                  onMouseOut={() => this.setState({ toolTip: false })}
-                />
-                {this.state.toolTip && (
-                  <div className="infoToolTip">
-                    <span>
-                      (Almonds, Brazil nuts, cashews, hazelnuts, macadamia nuts,
-                      pecans, pine nuts, pistachios and walnuts)
-                    </span>
-                  </div>
-                )}
-              </div>
-            </label>
-            <label className="fullLabel">
-              <input
-                type="checkbox"
-                name="allergens"
-                value="wheat and triticale"
-              />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              wheat and triticale
-            </label>
-            <label className="fullLabel">
-              <input type="checkbox" name="allergens" value="sulphites" />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              sulphites
-            </label>
-          </div>
-
-          {/* <button
-            name="allergensBtn"
-            className="save-btn"
-            onClick={this.saveProfile}
+        <div className="input-row">
+            
+          <label
+            className={`${
+              !this.state.countryCode.isValid ? "error" : ""
+            } cc-label account ${this.state.countryDrop && "focused"}`}
+            tabIndex={0}
           >
-            Save
-          </button> */}
-        </div>
-
-        <div className="dividerL"></div>
-
-        <h1>Special Requests</h1>
-        <div className="input-fields">
-          <div className="input-row ">
-            <label className="textareaLabel">
-              Request:
-              <textarea placeholder="" rows="4" />
-            </label>
-          </div>
-          {/* <button
-            name="specialReqBtn"
-            className="save-btn"
-            onClick={() => this.setState({ formDirty: false })}
-          >
-            Save
-          </button> */}
-        </div>
-
-        <div className="dividerL"></div>
-
-        <h1>Account Settings</h1>
-        <div className="input-fields">
-          <div className="input-row">
-            <label className={!this.state.email.isValid ? "error" : ""}>
-              Email:
-              <input
-                name="email"
-                placeholder="Email"
-                value={this.state.email.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.email.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.email.message}
-                </p>
-              )}
-            </label>
-            <label className={!this.state.phoneNo.isValid ? "error" : ""}>
-              Phone No:
-              <input
-                name="phoneNo"
-                placeholder="Phone No."
-                value={this.state.phoneNo.value}
-                onChange={(e) => this.onChange(e)}
-              />
-              {this.state.phoneNo.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.phoneNo.message}
-                </p>
-              )}
-            </label>
-          </div>
-          <div className="input-row">
-              
-            <label
-              className={`${
-                !this.state.countryCode.isValid ? "error" : ""
-              } cc-label account ${this.state.countryDrop && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.countryCode.value}
-                autocomplete="off"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
+            Country Code:
+            <input
+              type="text"
+              name="countryCode"
+              placeholder="Country code"
+              value={this.state.countryCode.value}
+              autocomplete="off"
+              style={
+                this.state.countryCode.value.match(/^\d+$/) && {
+                  paddingLeft: 20,
                 }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    countryCode: {
-                      ...this.state.countryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.countryCode.value.length &&
-              this.state.countryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop && (
-                <div
-                  className="countryDrop"
-                //   onBlur={() => this.setState({ countryDrop: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                countryCode: {
-                                  ...this.state.countryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.countryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.countryCode.message}
-                </p>
-              )}
-            </label>
-            <label>
-              Password:
-              <input
-                name="password"
-                type="password"
-                placeholder="************"
-                value={this.state.password.value}
-                onChange={(e) => this.onChange(e)}
-              />
-            </label>
-          </div>
-          <div className="input-row">
-            <label>
-              Language:
-              <Select2
-                placeholder="Language"
-                value={this.state.language.value}
-                // search
-                showSearch
-                selection
-                onChange={(e, { value }) =>
-                  this.setState({
-                    language: { ...this.state.language, value: value },
-                  })
-                }
-                options={languageOptions}
-              />
-            </label>
-
-            <label
-              className={`cur-label ${this.state.currencyDrop && "focused"}`}
-              tabIndex={0}
-            >
-              Currency
-              <input
-                className="cur-input"
-                type="text"
-                placeholder="Choose currency"
-                value={this.state.currency.value}
-                onFocus={() => this.setState({ currencyDrop: true })}
-                onChange={(e) => {
-                  filteredCurrencies = Currencies.filter((item, index) => {
+              }
+              className="cc-input"
+              onFocus={() => this.setState({ countryDrop: true })}
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  filteredCountryCode = Countries.filter((item, index) => {
                     const regex = new RegExp(e.target.value, "gi");
                     return (
-                      item.name.match(regex) || item.currency.code.match(regex)
+                      item.name.match(e.target.value) ||
+                      item.dialCode.match(e.target.value) ||
+                      item.isoCode.match(e.target.value)
                     );
                   });
-                  this.setState({ filteredCurrencies: filteredCurrencies });
-                  console.log(filteredCurrencies);
-                  this.setState({ currency: e.target.value });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.currencyDrop && (
-                <div
-                  className="currencyDrop"
-                  ref={this.curr}
-                  onBlur={() => this.setState({ currencyDrop: false })}
-                >
-                  <ul>
-                    {this.state.filteredCurrencies &&
-                      this.state.filteredCurrencies.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            console.log(item, e);
-                            if (item && item.currency && item.currency.code) {
-                              this.setState({
-                                currency: {
-                                  ...this.state.currency,
-                                  value: item.currency.code,
-                                },
-                                formDirty: true,
-                                currencyDrop: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img
-                            src={`data:image/jpeg;base64,${item.flag}`}
-                            height="16px"
-                            width="24px"
-                          />
-                          {item.name +
-                            " - " +
-                            item.currency.code +
-                            ` (${
-                              item.currency.symbol !== false &&
-                              item.currency.symbol
-                            })`}{" "}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-            </label>
-          </div>
-          {/* <div className="input-row">
-            <label>
-              Password:
-              <input
-                type="password"
-                placeholder="************"
-                value={this.state.pass}
-                onChange={(e) => this.setState({ pass: e.target.value })}
-              />
-            </label>
-          </div> */}
-
-          <div className="input-row checkboxRows" style={{ marginTop: 20 }}>
-            <label className="fullLabel">
-              <input type="checkbox" />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              Private Profile
-            </label>
-
-            <label className="fullLabel">
-              <input type="checkbox" />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              Share Social info
-            </label>
-
-            <label className="fullLabel">
-              <input type="checkbox" />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              Share Favourites
-            </label>
-            <label className="fullLabel">
-              <input type="checkbox" />
-              <span className="checkBox">
-                <i className="fe fe-check" />
-              </span>
-              Allow Messaging
-            </label>
-          </div>
-
-          <label style={{ flexDirection: "row" }}>
-            Deactivate your account? &nbsp;{" "}
-            <span style={{ textDecoration: "underline", color: "red" }}>
-              Deactivate now.
-            </span>
+                  this.setState({ filteredCountryCode: filteredCountryCode });
+                } else {
+                  this.setState({ filteredCountryCode: Countries });
+                }
+                this.setState({
+                  formAccountDirty: true,
+                  formDirty: true,
+                  countryCode: {
+                    ...this.state.countryCode,
+                    value: e.target.value,
+                  },
+                });
+              }}
+            />
+            <i className="dropdown icon"></i>
+            {this.state.countryCode.value.length &&
+            this.state.countryCode.value.match(/^\d+$/) ? (
+              <i className="plus-icon">&#43;</i>
+            ) : null}
+            {this.state.countryDrop && (
+              <div
+                className="countryDrop"
+              //   onBlur={() => this.setState({ countryDrop: false })}
+              >
+                <ul>
+                  {this.state.filteredCountryCode &&
+                    this.state.filteredCountryCode.map((item, index) => (
+                      <li
+                        key={index}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (item && item.flag && item.dialCode) {
+                            this.setState({
+                              countryCode: {
+                                ...this.state.countryCode,
+                                value: item.dialCode.split("+")[1],
+                              },
+                              formDirty: true,
+                              countryDrop: false,
+                            });
+                          }
+                        }}
+                      >
+                        <img src={item.flag} height="16px" width="24px" />
+                        {item.name +
+                          " (" +
+                          item.isoCode +
+                          ") " +
+                          item.dialCode}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+            {this.state.countryCode.message && (
+              <p>
+                {" "}
+                <i className="fe fe-alert-triangle" />{" "}
+                {this.state.countryCode.message}
+              </p>
+            )}
           </label>
-
-          <button
-            name="accountBtn"
-            className="save-btn"
-            onClick={(e) => this.saveProfile(e)}
-          >
-            Save
-          </button>
+          <label>
+            Password:
+            <input
+              name="password"
+              type="password"
+              placeholder="************"
+              value={this.state.password.value}
+              onChange={(e) => this.onChange(e)}
+            />
+          </label>
         </div>
        
+        {/* <div className="input-row">
+          <label>
+            Password:
+            <input
+              type="password"
+              placeholder="************"
+              value={this.state.pass}
+              onChange={(e) => this.setState({ pass: e.target.value })}
+            />
+          </label>
+        </div> */}
 
-        <NavigationPrompt when={this.state.formDirty}>
-          {({ onConfirm, onCancel }) => (
-            <>
-              {this.state.formDirty &&
-        ReactDOM.createPortal(
-          <div className="modal-overlay nav-prompt">
-            <div className="form-modal">
-              <div className="modal-title">
-                <p>Your Profile is not saved yet</p>
-              </div>
-              <div className="modal-content">
-                <p> You need to save your unsaved changes, do you really want to
-                    leave without saving your changes?</p>
-              </div>
-              <div className="modal-actions">
+       
+        <label style={{ flexDirection: "row" }}>
+          Deactivate your account? &nbsp;{" "}
+          <span style={{ textDecoration: "underline", color: "red" }}>
+            Deactivate now.
+          </span>
+        </label>
 
-              <button
-                    className="btn--pink-outlined"
-                    style={{ borderRadius: 8 }}
-                    color="primary"
-                    onClick={onCancel}
-                  >
-                    No
-                  </button>
-                  <button
-                    className="btn--pink"
-                    style={{
-                      borderRadius: 8,
-                      // backgroundColor: "rgb(255,114,69)",
-                    }}
-                    color="primary"
-                    autoFocus
-                    onClick={onConfirm}
-                  >
-                    Yes
-                  </button>
-              </div>
+        <button
+          name="accountBtn"
+          className="save-btn"
+          onClick={(e) => this.saveProfile(e)}
+        >
+          Save
+        </button>
+      </div>
+     
+
+      <NavigationPrompt when={this.state.formDirty}>
+        {({ onConfirm, onCancel }) => (
+          <>
+            {this.state.formDirty &&
+      ReactDOM.createPortal(
+        <div className="modal-overlay nav-prompt">
+          <div className="form-modal">
+            <div className="modal-title">
+              <p>Your Profile is not saved yet</p>
             </div>
-          </div>,
-          document.querySelector("#modal-root")
-        )}
-            </>
-          )}
-        </NavigationPrompt>
+            <div className="modal-content">
+              <p> You need to save your unsaved changes, do you really want to
+                  leave without saving your changes?</p>
+            </div>
+            <div className="modal-actions">
 
-
-
-
-
-
+            <button
+                  className="btn--pink-outlined"
+                  style={{ borderRadius: 8 }}
+                  color="primary"
+                  onClick={onCancel}
+                >
+                  No
+                </button>
+                <button
+                  className="btn--pink"
+                  style={{
+                    borderRadius: 8,
+                    // backgroundColor: "rgb(255,114,69)",
+                  }}
+                  color="primary"
+                  autoFocus
+                  onClick={onConfirm}
+                >
+                  Yes
+                </button>
             </div>
           </div>
-        )
-    }
+        </div>,
+        document.querySelector("#modal-root")
+      )}
+          </>
+        )}
+      </NavigationPrompt>
+
+
+
+
+
+
+          </div>
+        </div>
+      )
+  }
 }
+
 
 const mapStateToProps = (state) => ({
     auth: state.auth,

@@ -51,6 +51,7 @@ function BusinessProfile (props) {
       console.log(props.auth.user.lawfirm_user.id)
     }
   },[])
+
   useEffect(()=>{
     const getMyBlogs=async()=>{
       
