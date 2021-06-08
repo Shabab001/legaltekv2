@@ -1492,7 +1492,20 @@ sup .infoToolTip {
   background-color: aliceblue;
   cursor: pointer;
 }
-
+.location-header {
+  background-color: var(--secondary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.location-delete {
+  margin-left: auto;
+  width: 1rem;
+}
 @media only screen and (max-width: 1224px) {
   .newProfile .main > div {
     padding: 30px;
@@ -1600,6 +1613,13 @@ sup .infoToolTip {
     display: block;
     font-size: 12px;
   }
+}
+.blu-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  text-transform: uppercase;
 }
 
 @keyframes scaleUp {

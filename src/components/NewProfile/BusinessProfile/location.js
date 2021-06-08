@@ -19,6 +19,7 @@ import girl2 from "../../../assets/img/girl2.jpg";
 import { UploadOutlined } from "@ant-design/icons";
 import Search from "../../MiniComponents/CanadaPost/Search";
 import { convertLegacyProps } from "antd/lib/button/button";
+import {ImCross} from "react-icons/im"
 const gender = [
   { key: "male", text: "Male", value: "Male" },
   { key: "female", text: "Female", value: "Female" },
@@ -600,8 +601,31 @@ const gender = [
 
   deleteBusiness = async (e, index) => {
     let state = this.state;
-    state.businesses.splice(index, 1);
-    this.setState(state);
+    if(this.props.profile.branches.length!==0 &&this.props.profile.branches[index]){
+         
+      let response = await this.props.actions.deleteBranches(
+        this.props.profile.branches[index].id,
+       
+      );
+
+      if (response) {
+          console.log(response)
+        let profileShort = {
+          userId: this.props.auth.user._id,
+          userType: this.props.auth.user.userType,
+        };
+        const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
+        if(
+          firmuser
+        ){
+          state.businesses.splice(index, 1);
+          this.setState(state);
+        }
+      }
+
+    }
+    
+  
   };
 
   saveProfile = async (e, index) => {
@@ -897,6 +921,7 @@ const gender = [
       deliveryOptsError: false,
       kitchenTypesMessage: "",
       kitchenTypesError: false,
+      accordion:false,
     });
     for (let i = 0; i < state.businesses.length; i++) {
       state.businesses[i].accordion = false;
@@ -958,13 +983,13 @@ const gender = [
     let filteredCountryCode = Countries;
     return (
       <div className="user-profile tab">
-        <button className="red-btn" onClick={this.addBusiness}>
+        <button className="blu-btn" onClick={this.addBusiness}>
           Add Location
         </button>
         {this.state.businesses &&
           this.state.businesses.map((item, index) => (
             <>
-              <h1
+              <div className="location-header"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   let state = this.state;
@@ -973,6 +998,7 @@ const gender = [
                   this.setState(state);
                 }}
               >
+                <div>
                 {this.state.businessName && this.state.businessName.value
                   ? this.state.businessName.value
                   : `Business Location ${index + 1}`}
@@ -1010,13 +1036,21 @@ const gender = [
                 <span className="infoHidden">
                   (This information will be displayed on your profile)
                 </span>
-              </h1>
+                  </div>
+                  {index==0?null:
+
+                    <div className="location-delete" onClick={(e)=>{ e.stopPropagation()
+                      this.deleteBusiness(e,index)}}> <ImCross/></div>
+                  }
+              </div>
               {/* {console.log(item)} */}
+             
               <div
                 className={`input-fields-container accordion ${
                   this.state.businesses[index].accordion ? "open" : ""
                 }`}
               >
+                
                 <div className={`input-fields accordion `}>
                   <div className="input-row">
                     <label

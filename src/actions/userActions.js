@@ -681,6 +681,35 @@ export const updateBranches = (props, id) => dispatch => {
 
   })
 }
+export const deleteBranches = (id) => dispatch => {
+  return new Promise((resolve, reject) => {
+     console.log(localStorage.auth_token)
+    Axios.delete(`${REACT_APP_API}/branches/${id}`,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.auth_token,
+      },
+    }).then(res=>{
+      console.log(res.data);
+      if (res) {
+       
+        message.success("branch deleted");
+        return resolve(res.data);
+      }
+    })
+    .catch((error) => {
+      if (error && error.response) {
+        console.log(error.response.data);
+        if (error.response.data.message) {
+          message.error(error.response.data.message[0].messages[0].message);
+        }
+        return resolve(false);
+      }
+    });
+
+
+  })
+}
 export const updateUserProfile = (id, data) => (dispatch) => {
   return new Promise((resolve, reject) => {
     const token =localStorage.getItem('auth_token')
