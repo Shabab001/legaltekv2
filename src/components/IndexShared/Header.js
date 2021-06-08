@@ -303,12 +303,14 @@ function Header(props) {
   }, [props.match && props.match.path]);
 
   let linkPrefix = props.auth.isAuthenticated
-    ? props.auth.user.userType == "CUSTOMER"
+    ? props.auth.user.role.type == "lawfirm"
+      ? "/lawfirm/"
+      :props.auth.user.role.type == "lawyer"
+      ? "/lawyer/"
+      : props.auth.user.role.type =="authenticated"
       ? "/user/"
-      : props.auth.user.userType == "BUSINESS"
-      ? "/business/"
       : ""
-    : "";
+      :"" ;
   return (
     <>
       <div className="indexHeader inVisibleSearchBar">

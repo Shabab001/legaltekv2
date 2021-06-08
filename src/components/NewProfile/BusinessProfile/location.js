@@ -288,36 +288,7 @@ const gender = [
     return state;
   }
 
-  componentDidMount() {
-    window.addEventListener("mouseup", (e) => {
-      let ccLabel = document.querySelector(".cc-label");
-      let ccLabel1 = document.getElementById("countryCode");
-      let ccLabels = document.querySelectorAll("#countryCode");
-      // if (ccLabel && !ccLabel.contains(e.target) && this.state.countryDrop) {
-      //   this.setState({ countryDrop: false });
-      // }
-      let state = this.state;
-      for (let i = 0; i < ccLabels.length; i++) {
-        if (
-          ccLabels[i] &&
-          !ccLabels[i].contains(e.target) &&
-          state.businesses[i].countryDrop
-        ) {
-          state.businesses[i].countryDrop = false;
-        }
-      }
-      this.setState(state);
-
-      // if (ccLabel1 && !ccLabel1.contains(e.target) && this.state.countryDrop1) {
-      //   this.setState({ countryDrop1: false });
-      // }
-
-      // if (ccLabel2 && !ccLabel2.contains(e.target) && this.state.countryDrop2) {
-      //   this.setState({ countryDrop2: false });
-      // }
-    });
-  }
-
+  
   onChangeCC(e, index, item) {
     var state = this.state;
     console.log(e.target.value, item);
