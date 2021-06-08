@@ -618,13 +618,13 @@ const gender = [
         if(
           firmuser
         ){
-          state.businesses.splice(index, 1);
-          this.setState(state);
+       console.log(firmuser)
         }
       }
 
     }
-    
+    state.businesses.splice(index, 1);
+    this.setState(state);
   
   };
 
