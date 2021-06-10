@@ -31,6 +31,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ChangeForm from "../../modals/changeForm";
+import StateManager from "react-select";
 
 let stripePK =
   "pk_test_51Is6EeC4OeYiOOOcteEEbNdaXD8s9VSrf9DDyeEb4MaOXH4lTou9AqziwpVCb9I8fMOkgjFCOG5XLpP4AISd0Riv00nOsSXCJF";
@@ -91,6 +92,8 @@ class Profile extends Component {
       billingState: { value: "", isValid: true, message: "" },
       billingZip: { value: "", isValid: true, message: "" },
       billingCountry: { value: "", isValid: true, message: "" },
+      billingEmail: { value: "", isValid: true, message: "" },
+      billingPhone: { value: "", isValid: true, message: "" },
       businessCountry: { value: "", isValid: true, message: "" },
       businessName: { value: "", isValid: true, message: "" },
       businessAddress: { value: "", isValid: true, message: "" },
@@ -273,6 +276,19 @@ class Profile extends Component {
               state.billingCountry.value =
                 billing.billingCountry;
             }
+            if (billing.billingEmail) {
+              state.billingEmail.value =billing.billingEmail;
+            }
+            else if(profile.user.email){
+              state.billingEmail.value = profile.user.email;
+            }
+            if (billing.billingPhone ) {
+              state.billingPhone.value = billing.billingPhone;
+            }
+            else if(profile.user.phone){
+              state.billingPhone.value = profile.user.phone;
+            }
+            
           }
         
 
@@ -440,10 +456,10 @@ class Profile extends Component {
       if (e.target.value == "") {
         state["contactPhone"].isValid = false;
         state["contactPhone"].message = "Phone number cannot be left empty";
-      } else if (e.target.value.length !== 10) {
+      } else if (e.target.value.length !== 14) {
         state["contactPhone"].isValid = false;
-        state["contactPhone"].message = "Phone number must be 10 digits";
-      } else if (!e.target.value.match(/^\d+$/)) {
+        state["contactPhone"].message = "Phone number must be 14 digits";
+      } else if (!e.target.value.match(/^[0-9 -+]+$/)) {
         state["contactPhone"].isValid = false;
         state["contactPhone"].message =
           "Phone number must only contain numbers";
@@ -463,6 +479,38 @@ class Profile extends Component {
       } else {
         state["contactEmail"].isValid = true;
         state["contactEmail"].message = "";
+      }
+    }
+    if (e.target.name == "billingPhone") {
+      if (e.target.value == "") {
+        
+        state["billingPhone"].isValid = false;
+        state["billingPhone"].message = "Phone number cannot be left empty";
+      } else if (e.target.value.length !== 10) {
+        state["billingPhone"].isValid = false;
+        state["billingPhone"].message = "Phone number must be 10 digits";
+      } else if (!e.target.value.match(/^\d+$/)) {
+        state["billingPhone"].isValid = false;
+        state["billingPhone"].message =
+          "Phone number must only contain numbers";
+      } else {
+        state["billingPhone"].isValid = true;
+        state["billingPhone"].message = "";
+      }
+    }
+
+    if (e.target.name == "billingEmail") {
+      if (e.target.value == "") {
+        state["billingEmail"].isValid = false;
+        state["billingEmail"].message = "Email cannot be left empty";
+      } else if (!validator.isEmail(e.target.value)) {
+        console.log("email")
+        state["billingEmail"].isValid = false;
+        state["billingEmail"].message = "Not a valid email address";
+      } else {
+        console.log("email")
+        state["billingEmail"].isValid = true;
+        state["billingEmail"].message = "";
       }
     }
     if (e.target.name == "websiteName") {
@@ -594,11 +642,12 @@ class Profile extends Component {
   saveProfile = async (e) => {
     e.preventDefault()
     let state = this.state;
-    let data = null;
+    let data = {};
     let section = null;
     if (e.target.name == "firmBtn") {
     console.log("here")
-    if (!this.state.businessName.value  || !this.state.lawfirmRegNo.value) {
+    if (!this.state.businessName.value  || !this.state.lawfirmRegNo.value || !this.state.contactPhone.value || !this.state.contactPhone.value 
+      )  {
       message.error("Fill up required fields");
   
       if(state.businessName.value==""){
@@ -612,16 +661,39 @@ class Profile extends Component {
     }
   console.log(state.language.value)
   console.log(state.currency.value)
- 
+      if(state.lawfirmRegNo.value !== this.props.profile.lawFirmRegistrationNumber){
+        data = {
+          lawfirmName:state.businessName.value,
+          language: state.language.value,
+          currency: state.currency.value,
+          websiteName:state.websiteName.value,
+          firmProfile:state.businessProfile.value,
+          lawFirmRegistrationNumber:state.lawfirmRegNo.value,
+          contact:{
+            email:state.contactEmail.value,
+            phoneNo:state.contactPhone.value
+          },
+          firmRegNoVerified:"PENDING"
+         
+        };
+   
+       
+      }
+      else{
       data = {
         lawfirmName:state.businessName.value,
         language: state.language.value,
         currency: state.currency.value,
         websiteName:state.websiteName.value,
         firmProfile:state.businessProfile.value,
-        lawFirmRegistrationNumber:state.lawfirmRegNo.value
+        lawFirmRegistrationNumber:state.lawfirmRegNo.value,
+        contact:{
+          email:state.contactEmail.value,
+          phoneNo:state.contactPhone.value
+        }
        
       };
+    }
       const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
     if(firmSave){
            console.log(firmSave);
@@ -663,18 +735,15 @@ class Profile extends Component {
       data = {
         firstname: state.firstName.value,
         lastname: state.lastName.value,
-        contact:{
-
-          email: state.contactEmail.value,
-          phoneNo: state.contactPhone.value,
-          countryCode: state.contactCountryCode.value.replace("+", ""),
-        },
+     
         billing: {
           billingAddress: state.billingAddress.value,
           billingCity: state.billingCity.value,
           billingState: state.billingState.value,
           billingZip: state.billingZip.value,
           billingCountry: state.billingCountry.value,
+          billingEmail: state.billingEmail.value,
+          billingPhone: state.billingPhone.value,
         },
       };
       const firmSave=await this.props.actions.saveProfile(data, "lawfirm-users",this.props.profile.id);
@@ -1043,38 +1112,38 @@ class Profile extends Component {
           </div>
           <div className="input-row">
    
-                     <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
+                     <label className={`${!this.state.contactPhone.isValid ? "error" : ""}`}>
               Phone No:
               <input
-                name="phoneNo"
-                disabled={true}
+                name="contactPhone"
+               
                 placeholder="Phone No."
-                value={this.state.phoneNo.value}
+                value={this.state.contactPhone.value}
                 onChange={(e) => this.onChange(e)}
               />
-              {this.state.phoneNo.message && (
+              {this.state.contactPhone.message && (
                 <p>
                   {" "}
                   <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.phoneNo.message}
+                  {this.state.contactPhone.message}
                 </p>
               )}
             </label>
       
-          <label className={`${!this.state.email.isValid ? "error" : ""}`}>
+          <label className={`${!this.state.contactEmail.isValid ? "error" : ""}`}>
               Email:
               <input
-                name="email"
-                disabled={true}
+                name="contactEmail"
+               
                 placeholder="Email"
-                value={this.state.email.value}
+                value={this.state.contactEmail.value}
                 onChange={(e) => this.onChange(e)}
               />
-              {this.state.email.message && (
+              {this.state.contactEmail.message && (
                 <p>
                   {" "}
                   <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.email.message}
+                  {this.state.contactEmail.message}
                 </p>
               )}
             </label>
@@ -1364,9 +1433,9 @@ class Profile extends Component {
               Phone No:
               <input
                 autoComplete="off"
-                name="contactPhone"
+                name="billingPhone"
                 placeholder="Phone No."
-                value={this.state.contactPhone.value}
+                value={this.state.billingPhone.value}
                 onChange={this.onChange}
               />
             </label>
@@ -1376,9 +1445,9 @@ class Profile extends Component {
             >
               Email Address:
               <input
-                name="contactEmail"
+                name="billingEmail"
                 placeholder="Email address"
-                value={this.state.contactEmail.value}
+                value={this.state.billingEmail.value}
                 onChange={this.onChange}
               />
             </label>

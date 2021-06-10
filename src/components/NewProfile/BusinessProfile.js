@@ -35,6 +35,8 @@ const Menu = lazy( ()=>import("./BusinessProfile/Menu")) ;
 function BusinessProfile (props) {
   const [activeMenu, setActiveMenu] = useState(1);
   const [sidebarCollapse, setSidebarCollapse] = useState(true)
+  const [approvedBranches,setApprovedBranches]=useState(false)
+
   let hold=null
   console.log(activeMenu)
   useEffect(()=>{
@@ -72,10 +74,16 @@ function BusinessProfile (props) {
           console.log(props.blogs)
        }
  },[props.blogs])
+
+
+   console.log(props.lawfirm_user)
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
     
    
+
 
    
     if (props.location.pathname === "/lawfirm/profile" || props.location.pathname === "/lawfirm/") {
@@ -132,6 +140,28 @@ function BusinessProfile (props) {
     message.success(<p> Logged out Successfully!!" &nbsp; &#9749;</p>);
   };
 
+  useEffect(()=>{
+    console.log("running")
+    let count=false;
+    if(props.lawfirm_user.branches && props.lawfirm_user.branches.length !==0){
+      console.log("APPRovdsssssssssssssssssss")
+      props.lawfirm_user.branches.forEach(item => {
+     
+        if(item.locationVerified==="APPROVED"){
+         count=true;
+        }
+      
+   
+ });
+               if(count){
+                 setApprovedBranches(true)
+               }
+               else{
+                 setApprovedBranches(false)
+               }
+    }
+
+  },[props.lawfirm_user.branches,props.lawfirm_user])
 
     return (
       <div className={`newProfile ${sidebarCollapse? '' : 'sidebar-collapse' }`}>
@@ -140,7 +170,7 @@ function BusinessProfile (props) {
           <h3>{props.auth && props.auth.user && props.auth.user.business && props.auth.user.business.name? props.auth.user.business.name : ""} {" "}  {props.auth && props.auth.user && props.auth.user.business && props.auth.user.business && !props.auth.user.business.name &&  "Business Profile"}</h3>
         <button onClick={()=>setSidebarCollapse(!sidebarCollapse)}><i className={`fa  ${sidebarCollapse? "fa-chevron-left": "fa-chevron-right"} `} /></button>
           </div>
-     
+          {props.lawfirm_user && props.lawfirm_user.branches && props.lawfirm_user.branches.length !==0 && approvedBranches ?
          
           <ul>
             <Link to="/lawfirm/profile" data-tooltip="My Account">
@@ -199,25 +229,90 @@ function BusinessProfile (props) {
           </li>
           </Link>
          
+          </ul>:
+          <ul>
+              <Link to="/lawfirm/profile" data-tooltip="My Account">
+              <li className={activeMenu === 1 ? "active" : ""}>
+                <span></span> <i className="fa fa-user-o" />
+                <span className="link-title">Account</span> 
+              </li>
+            </Link>
+            <Link to='/lawfirm/branches' data-tooltip="branches">
+          <li className={activeMenu === 9 ? "active" : ""} >
+            <span></span> <i className="fa fa-star-o" /> <span className="link-title">Location</span>
+          </li></Link>
+
+
+               
+          <Link to="/lawfirm/documents" data-tooltip="Order History">
+            <li  className={activeMenu === 2 ? "active" : ""}>
+              <span></span> <i className="fa fa-gift stroke-transparent" /><span className="link-title">Documents</span> 
+            </li>
+          </Link>
+           <Link>
+          <li  className={activeMenu === 3 ? "active" : ""} style={{color:"grey"}}>
+            <span></span> <i className="fa fa-star-o" /><span className="link-title">Lawyers</span> 
+          </li>
+          </Link>
+           <Link>    
+            <li  className={activeMenu === 4 ? "active" : ""} style={{color:"grey"}}>
+              <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
+            </li>
+               </Link>
+        
+         <Link>    
+          <li  className={activeMenu === 5 ? "active" : ""} style={{color:"grey"}}>
+            <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
+          </li>
+             </Link>
+          <Link>    
+          <li  className={activeMenu === 6 ? "active" : ""} style={{color:"grey"}}>
+            <span></span>
+            <i className="fa fa-bell-o" /><span className="link-title">Notifications</span> 
+          </li>   
+            </Link>
+           <Link>    
+          <li className={activeMenu === 7 ? "active" : ""} style={{color:"grey"}} >
+            <span></span> <i className="fa fa-cog" /> <span className="link-title">Messaging</span>
+          </li>
+          </Link>
+                <Link>          
+          <li className={activeMenu === 8 ? "active" : ""} style={{color:"grey"}} >
+            <span></span> <i className="fa fa-gift"   /> <span className="link-title">Blogs</span>
+          </li>
+       </Link>
+        
+          <Link to="#" onClick={(e)=>logout(e)} data-tooltip="Logout">
+          <li>
+            <span></span> <i className="fa fa-sign-out stroke-transparent" /><span  className="link-title">Logout</span> 
+          </li>
+          </Link>
+         
+
+
           </ul>
+
+                  }
         </div>
 
         <div className="main">
-
+        
+          
+        
           
         <Switch>
 
             <Route exact path="/lawfirm/profile" component={Profile} />
             <Route exact path="/lawfirm/documents" component={Orders} />
             <Route exact path="/lawfirm/lawyers" component={AddLawyers} />
-            
+            <Route exact path="/lawfirm/branches" component={Location} />
             <Route exact path="/lawfirm/favourites" component={Favourites} />
             <Route exact path="/lawfirm/notifications" component={Notifications} />
             <Route exact path="/lawfirm/reviews" component={Reviews} />
            
             <Route exact path="/lawfirm/management" component={Management} />
             <Route exact path="/lawfirm/blogs" component={Blogs} />
-            <Route exact path="/lawfirm/branches" component={Location} />
+           
             <Route exact path="/lawfirm/portfolio" component={Portfolio} />
             
             <Route
@@ -230,6 +325,7 @@ function BusinessProfile (props) {
             
        
           </Switch> 
+
           
            {/* {activeMenu == 1 && <Profile {...props} />}
           {activeMenu == 2 && <Orders {...props}/>}
@@ -251,6 +347,7 @@ function BusinessProfile (props) {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.auth.userProfile,
+  lawfirm_user:state.auth.lawfirmUserProfile,
   blogs: state.blog,
 });
 

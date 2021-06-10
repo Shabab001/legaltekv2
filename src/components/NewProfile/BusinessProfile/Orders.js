@@ -1,17 +1,35 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState,memo} from 'react'
 import "./order.css"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../../actions/userActions";
+import DocumentsType from "./Documents/documentsType"
+import RegNoDocs from "./Documents/regNoDocs"
+import LocationDocs from './Documents/locationDocs';
 const Orders = (props) => {
-
+const [approvedBranch,setApprovedBranch]=useState(false);
+const [rejectedBranch,setRejectedBranch]=useState(false);
+const [pendingBranch,setPendingBranch]=useState(false);
+const [requiredBranch,setRequiredBranch]=useState(false);
 
 useEffect(()=>{
-  console.log("herrrrrrrrrrrrrrrrrrr")
-  console.log(props.auth.user)
-   if(props.auth.user && props.profile){
-     console.log(props.profile.firmRegNoVerified);
-   } 
+  if(props.profile && props.profile.branches){
+   props.profile.branches.forEach(item => {
+          if(item.locationVerified==="REQUIRED"){
+            setRequiredBranch(true)
+          }
+          if(item.locationVerified==="APPROVED"){
+            setApprovedBranch(true)
+          }
+          if(item.locationVerified==="REJECTED"){
+            setRejectedBranch(true)
+          }
+          if(item.locationVerified==="PENDING"){
+            setPendingBranch(true)
+          }
+     
+   });
+  }
 },[props.profile.lawFirmRegistrationNumber, props.profile.branches])
 
   return (
@@ -31,71 +49,115 @@ useEffect(()=>{
           <div className="percentage-box"></div>
         </div>
       </div>
-      <div className="order-required">
-         <div className="order-required-first">
-           <p>Required Documents</p>
-           <p>Please see the list of items below that we need in order to lodge yoour application.</p>
-         </div>
-         <div className="order-required-second">
-           <p>0 out of 4 files uploaded</p>
-         </div>
-      </div>
+      {props.profile.firmRegNoVerified=="REQUIRED" || requiredBranch? 
+      <div className="order-segments">
+         <DocumentsType document={"Required"} />
       <div className="order-sections">
-        <div className={`Order-sections-first ${props.profile.firmRegNoVerified}`}>
-          <div>
 
-          <p>Registration Number For Lawfirm Named {props.profile.lawfirmName}</p>
-          <p>2 files uploaded</p>
-          </div>
-          <div>
-            { props.profile.firmRegNoVerified==="APPROVED"?
-              <p>Approved</p>:
-               props.profile.firmRegNoVerified==="REQUIRED"?
-              <p>Required</p>:
-               props.profile.firmRegNoVerified==="REJECTED"?
-              <p>Rejected</p>:
-               props.profile.firmRegNoVerified==="PENDING"?
-              <p>Pending</p>:
-              null
-            }
-          
-          </div>
-        </div>
+      {props.profile.firmRegNoVerified=="REQUIRED"?
+                 <RegNoDocs type={"Required"} lawfirmName={props.profile && props.profile.lawfirmName} regNo={props.profile.lawFirmRegistrationNumber}  css={"REQUIRED"}/>:null
+                 }
         {props.profile && props.profile.branches &&
          props.profile.branches.map((item,index)=>{
-           return(
-            <div key={index} className={`order-section-second ${item.locationVerified}`}>
-            <div>
-            
-            <p>Proof of location of {props.profile.lawfirmName} Lawfirm at {item.location.businessAddress}</p>
-            </div>
-            <div>
-              {item.locationVerified ==="APPROVED"?
-              <p>Approved</p>:
-              item.locationVerified ==="REQUIRED"?
-              <p>Required</p>:
-              item.locationVerified ==="REJECTED"?
-              <p>Rejected</p>:
-              item.locationVerified ==="PENDING"?
-              <p>Pending</p>:
-              null
-              
-            }
-             
-            </div>
-          </div>
-           )
+           if(item.locationVerified =="REQUIRED"){
+
+             return(
+               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Required"} css={"REQUIRED"} />
+               )
+              }
+              else{
+                return null;
+              }
          })  
       
       
       }
-  
+      </div>
+      </div>:null
+      }
+       {props.profile.firmRegNoVerified=="REJECTED" || rejectedBranch? 
+      <div className="order-segments">
+         <DocumentsType document={"Rejected"}/>
+      <div className="order-sections">
+
+      {props.profile.firmRegNoVerified=="REJECTED"?
+                 <RegNoDocs type={"Rejected"} lawfirmName={props.profile && props.profile.lawfirmName} regNo={props.profile.lawFirmRegistrationNumber } css={"REQUIRED"}/>:null
+                 }
+        {props.profile && props.profile.branches &&
+         props.profile.branches.map((item,index)=>{
+           if(item.locationVerified =="REJECTED"){
+
+             return(
+               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Rejected"} css={"REQUIRED"} />
+               )
+              }
+              else{
+                return null;
+              }
+         })  
+      
+      
+      }
+      </div>
+      </div>:null
+      }
+       {props.profile.firmRegNoVerified=="PENDING" || pendingBranch? 
+      <div className="order-segments">
+         <DocumentsType document={"Pending"}/>
+      <div className="order-sections">
+
+      {props.profile.firmRegNoVerified=="PENDING"?
+                 <RegNoDocs type={"Pending"} lawfirmName={props.profile && props.profile.lawfirmName} regNo={props.profile.lawFirmRegistrationNumber}css={"PENDING"}/>:null
+                 }
+        {props.profile && props.profile.branches &&
+         props.profile.branches.map((item,index)=>{
+           if(item.locationVerified =="PENDING"){
+
+             return(
+               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Pending"} css={"PENDING"} />
+               )
+              }
+              else{
+                return null;
+              }
+         })  
+      
+      
+      }
+      </div>
+      </div>:null
+      }
+       {props.profile.firmRegNoVerified=="APPROVED" || approvedBranch? 
+      <div className="order-segments">
+         <DocumentsType document={"Approved"}/>
+      <div className="order-sections">
+
+      {props.profile.firmRegNoVerified=="APPROVED"?
+                 <RegNoDocs type={"Approved"} lawfirmName={props.profile && props.profile.lawfirmName} regNo={props.profile.lawFirmRegistrationNumber} css={"APPROVED"}/>:null
+                 }
+        {props.profile && props.profile.branches &&
+         props.profile.branches.map((item,index)=>{
+           if(item.locationVerified =="APPROVED"){
+
+             return(
+               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Approved"} css={"APPROVED"} />
+               )
+              }
+              else{
+                return null;
+              }
+         })  
+      
+      
+      }
+      </div>
+      </div>:null
+      }
       
          <div className="order-caution">
            <p>Your information is protected by bank-level security and covered by an industry first insurance policy</p>
-         </div>
       </div>
-    </div>
+         </div>
   )
 }
 
@@ -108,4 +170,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Orders));

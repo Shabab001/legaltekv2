@@ -653,6 +653,7 @@ const gender = [
                           businessZip: this.state.businesses[index].businessZip.value,
                           businessCoords: this.state.businesses[index].businessCoords,
                         },
+                        locationVerified:"REQUIRED"
                 
                       };
                       delete profileObj.filteredCountryCode;

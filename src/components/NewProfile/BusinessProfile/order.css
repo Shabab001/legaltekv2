@@ -24,6 +24,9 @@ p {
   height: 0.3rem;
   width: 5rem;
 }
+.order-segments {
+  padding-bottom: 2rem;
+}
 .order-required {
   display: flex;
   gap: 19rem;
