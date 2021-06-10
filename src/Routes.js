@@ -57,8 +57,8 @@ function Routes(props) {
        
             <BottomNav {...props} />
             {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?
-            <Header {...props} />:
-            <FixedHeader/>
+            <Header {...props}  fixed={true} />
+            :<Header {...props} fixed={false}/>
             
           }
             <Route exact path="/" component={Index} />

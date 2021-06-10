@@ -227,7 +227,11 @@ function Header(props) {
 
   useEffect(() => {
     let body = document.querySelector("body");
-    window.addEventListener("scroll", fixedHeader);
+    console.log("fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxed",props.fixed)
+    if(props.fixed){
+
+      window.addEventListener("scroll", fixedHeader);
+    }
     window.addEventListener("click", function (e) {
       if (
         language &&
@@ -313,7 +317,8 @@ function Header(props) {
       :"" ;
   return (
     <>
-      <div className="indexHeader inVisibleSearchBar">
+    
+      <div className={props.fixed ?`indexHeader inVisibleSearchBar`:"indexHeader inVisibleSearchBar notfixed"}>
         <div className="header-items">
           <div style={{ display: "flex" }}>
             <div className="brand">
