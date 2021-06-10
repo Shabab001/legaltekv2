@@ -10,6 +10,8 @@ import Guidelines from "./components/Guidelines";
 
 
 const Header = lazy(() => import("./components/IndexShared/Header"));
+
+const FixedHeader = lazy(() => import("./components/IndexShared/FixedHeader"));
 const Footer = lazy(() => import("./components/IndexShared/Footer"));
 const BottomNav = lazy(() => import("./components/IndexShared/BottomNav"));
 
@@ -50,11 +52,15 @@ function Routes(props) {
     <>
       <Switch>
         <>
-          <div className="index">
+          <div className="index" style={{paddingTop:"0px !important"}}>
          
        
             <BottomNav {...props} />
-            <Header {...props} />
+            {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?
+            <Header {...props} />:
+            <FixedHeader/>
+            
+          }
             <Route exact path="/" component={Index} />
            
             {/* <Route exact path="/newProfile" component={UserProfile} /> */}
