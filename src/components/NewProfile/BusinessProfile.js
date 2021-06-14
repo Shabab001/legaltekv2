@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect, lazy ,memo} from "react";
 import "../../assets/css/newProfile.css";
 import { Link, Redirect,Switch,Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -355,4 +355,4 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
   blogActions:bindActionCreators(blogActions,dispatch)
 });
-export default connect(mapStateToProps, mapDispatchToProps)(BusinessProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(BusinessProfile));

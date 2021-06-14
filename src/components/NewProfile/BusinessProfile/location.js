@@ -20,6 +20,11 @@ import { UploadOutlined } from "@ant-design/icons";
 import Search from "../../MiniComponents/CanadaPost/Search";
 import { convertLegacyProps } from "antd/lib/button/button";
 import {ImCross} from "react-icons/im"
+import {deleteRequest} from "../../../utils/upload"
+
+
+const {REACT_APP_API}= process.env
+
 const gender = [
   { key: "male", text: "Male", value: "Male" },
   { key: "female", text: "Female", value: "Female" },
@@ -159,7 +164,7 @@ const gender = [
         if (profile.branches) {
           for (let index = 0; index < profile.branches.length; index++) {
             if (state.businesses.length < profile.branches.length) {
-                console.log("sdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
+              
               state.businesses.push({
                 businessId: "",
                 name: { value: "", isValid: true, message: "" },
@@ -660,7 +665,7 @@ const gender = [
                       delete profileObj.countryDrop;
                       delete profileObj.accordion;
 
-
+                         
                       let response = await this.props.actions.updateBranches(
                         profileObj,
                         this.props.profile.branches[index].id
@@ -668,6 +673,17 @@ const gender = [
                 
                       if (response) {
                           console.log(response)
+                          if(response.document ){
+                            if(response.document.docs && response.document.docs!==0){
+                              let del
+                          del=  await Promise.all(response.document.docs.map(async(doc)=>{
+                                console.log(doc.id)
+                                 deleteRequest(`${REACT_APP_API}/upload/files/${doc.id}`,"DELETE")
+                              
+                              }))
+                             
+                            }
+                          }
                         let profileShort = {
                           userId: this.props.auth.user._id,
                           userType: this.props.auth.user.userType,
@@ -900,6 +916,8 @@ const gender = [
     }
     this.setState(state);
   }
+
+ 
 
   handleSelectionCanadaPost(item, index) {
     console.log("item", item);

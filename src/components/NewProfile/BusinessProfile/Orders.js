@@ -60,9 +60,9 @@ useEffect(()=>{
         {props.profile && props.profile.branches &&
          props.profile.branches.map((item,index)=>{
            if(item.locationVerified =="REQUIRED"){
-
+            console.log(item)
              return(
-               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Required"} css={"REQUIRED"} />
+               <LocationDocs docs={item.document} id={item.id} key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Required"} css={"REQUIRED"} />
                )
               }
               else{
@@ -88,7 +88,7 @@ useEffect(()=>{
            if(item.locationVerified =="REJECTED"){
 
              return(
-               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Rejected"} css={"REQUIRED"} />
+               <LocationDocs docs={item.document} id={item.id} key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Rejected"} css={"REQUIRED"} />
                )
               }
               else{
@@ -114,7 +114,7 @@ useEffect(()=>{
            if(item.locationVerified =="PENDING"){
 
              return(
-               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Pending"} css={"PENDING"} />
+               <LocationDocs docs={item.document} id={item.id} key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Pending"} css={"PENDING"} />
                )
               }
               else{
@@ -138,9 +138,9 @@ useEffect(()=>{
         {props.profile && props.profile.branches &&
          props.profile.branches.map((item,index)=>{
            if(item.locationVerified =="APPROVED"){
-
+                  
              return(
-               <LocationDocs key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Approved"} css={"APPROVED"} />
+               <LocationDocs docs={item.document} id={item.id} key={index} lawfirmName={props.profile && props.profile.lawfirmName} businessAddress={item.location.businessAddress} type={"Approved"} css={"APPROVED"} />
                )
               }
               else{

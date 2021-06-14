@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,memo} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../../actions/userActions";
@@ -1699,4 +1699,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Profile));
