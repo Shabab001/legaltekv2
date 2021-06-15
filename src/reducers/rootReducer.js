@@ -4,6 +4,7 @@ import admin from './adminReducer'
 import settings from './settings'
 import blog from "./blogReducer"
 import message from "./messagingReducer"
+import lawfirmAgencies from "./lawfrmReducer"
 
  const rootReducer = combineReducers({
      auth,
@@ -11,6 +12,7 @@ import message from "./messagingReducer"
      settings,
      blog,
      message,
+     lawfirmAgencies,
 })
 
 export default rootReducer

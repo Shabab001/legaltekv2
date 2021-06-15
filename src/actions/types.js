@@ -41,3 +41,9 @@ export const GET_CHATLIST = "GET_CHATLIST"
 export const CREATE_CONVERSATION = "CREATE_CONVERSATION"
 export const SEND_MESSAGE = "SEND_MESSAGE"
 export const GET_MESSAGES = "GET_MESSAGES"
+
+// Lawfirm Agency Types
+
+export const GET_LAWFIRMS= "GET_LAWFIRMS"
+
+export const CLEAR_LAWFIRMS= "CLEAR_LAWFIRMS"

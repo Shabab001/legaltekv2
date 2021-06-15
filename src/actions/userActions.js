@@ -1,8 +1,8 @@
 // import jwtDecode from "jwt-decode";
 import Axios from "axios";
 import * as Types from "./types";
-import setAuthToken from "../utils/setAuthToken";
 import { message } from "antd";
+import setAuthToken from "../utils/setAuthToken";
 import { reject } from "async";
 
 const {REACT_APP_API}= process.env

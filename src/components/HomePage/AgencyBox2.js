@@ -10,7 +10,9 @@ import {GrMail} from "react-icons/gr"
 import{BsDot} from "react-icons/bs"
 import Building from "./images/buildings.jpg"
 import WWW from "../IndexShared/images/website.svg"
-const AgencyBox2 = () => {
+
+const AgencyBox2 = (props) => {
+    console.log(props.lawfirm)
     return (
         <div className="agency-box">
             <div className="agency-box2-image">
@@ -18,8 +20,8 @@ const AgencyBox2 = () => {
                  <div className="agency-box2-overlay"></div>
             <div className="agency-box2-details">
 
-
-                <p>The Law Firm</p>
+                  
+                <p>{props.lawfirm.lawfirmName}</p>
                 <div className="agency-box2-address">
 
                 <p>Address Line 1</p>
@@ -57,7 +59,7 @@ const AgencyBox2 = () => {
                 <div className="agency-box-right" >
                     <div className="agency-right-box">
                         <div className="agency-right-para">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  </p>
+                            <p>{props.lawfirm.firmProfile} </p>
                         </div>
                         <div className="agency-area">
                             <p>Area Of Practise</p>
