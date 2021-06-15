@@ -195,11 +195,12 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Lawyers</span> 
           </li>
           </Link>
-          <Link to="/lawfirm/management" data-tooltip="Favourites">
-            <li  className={activeMenu === 4 ? "active" : ""}>
-              <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
-            </li>
-          </Link>
+          <Link to='/lawfirm/notifications' data-tooltip="Notifications">
+          <li  className={activeMenu === 6 ? "active" : ""}>
+            <span></span>
+            <i className="fa fa-bell-o" /><span className="link-title">Notifications</span> 
+          </li></Link>
+         
         
       
           <Link to="/lawfirm/reviews" data-tooltip="Reviews">
@@ -207,11 +208,11 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
           </li>
           </Link>
-          <Link to='/lawfirm/notifications' data-tooltip="Notifications">
-          <li  className={activeMenu === 6 ? "active" : ""}>
-            <span></span>
-            <i className="fa fa-bell-o" /><span className="link-title">Notifications</span> 
-          </li></Link>
+          <Link to="/lawfirm/management" data-tooltip="Favourites">
+            <li  className={activeMenu === 4 ? "active" : ""}>
+              <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
+            </li>
+          </Link>
           <Link to='/lawfirm/chats' data-tooltip="Messaging">
           <li className={activeMenu === 7 ? "active" : ""} >
             <span></span> <i className="fa fa-cog stroke-transparent" /> <span className="link-title">Messaging</span>
@@ -249,28 +250,30 @@ function BusinessProfile (props) {
               <span></span> <i className="fa fa-gift stroke-transparent" /><span className="link-title">Documents</span> 
             </li>
           </Link>
-           <Link>
-          <li  className={activeMenu === 3 ? "active" : ""} style={{color:"grey"}}>
-            <span></span> <i className="fa fa-star-o" /><span className="link-title">Lawyers</span> 
-          </li>
-          </Link>
-           <Link>    
-            <li  className={activeMenu === 4 ? "active" : ""} style={{color:"grey"}}>
-              <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
-            </li>
-               </Link>
-        
-         <Link>    
-          <li  className={activeMenu === 5 ? "active" : ""} style={{color:"grey"}}>
-            <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
-          </li>
-             </Link>
           <Link>    
           <li  className={activeMenu === 6 ? "active" : ""} style={{color:"grey"}}>
             <span></span>
             <i className="fa fa-bell-o" /><span className="link-title">Notifications</span> 
           </li>   
             </Link>
+           <Link>
+          <li  className={activeMenu === 3 ? "active" : ""} style={{color:"grey"}}>
+            <span></span> <i className="fa fa-star-o" /><span className="link-title">Lawyers</span> 
+          </li>
+          </Link>
+          
+         <Link>    
+          <li  className={activeMenu === 5 ? "active" : ""} style={{color:"grey"}}>
+            <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
+          </li>
+             </Link>
+             <Link>    
+            <li  className={activeMenu === 4 ? "active" : ""} style={{color:"grey"}}>
+              <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
+            </li>
+               </Link>
+        
+       
            <Link>    
           <li className={activeMenu === 7 ? "active" : ""} style={{color:"grey"}} >
             <span></span> <i className="fa fa-cog" /> <span className="link-title">Messaging</span>

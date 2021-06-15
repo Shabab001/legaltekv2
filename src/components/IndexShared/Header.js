@@ -24,6 +24,7 @@ import {
   HeartFilled,
   GiftFilled,
   InfoCircleFilled,
+  SettingFilled
 } from "@ant-design/icons";
 
 import SignIn from "../modals/SignInModal";
@@ -614,7 +615,7 @@ function Header(props) {
                     </>
                   )}
 
-                  {props.auth.isAuthenticated && (
+                  {props.auth.isAuthenticated &&  props.auth.user?(
                     <>
                       <h5
                         style={{
@@ -638,29 +639,51 @@ function Header(props) {
                         />
                         My Account
                       </Link>
+
+                      {props.auth.user.role.type==="lawfirm"?
+
+                          <Link to={{pathname:linkPrefix + "branches"}}>
+                          <MessageFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+
+                          Location
+                            </Link>:null}
+
+
+                      {props.auth.user.role.type!=="authenticated"?
+                        <Link to={{pathname:linkPrefix + "documents"}}>
+                       <  SettingFilled
+                          style={{ color: "lightslategray", fontSize: 18 }}
+                        />
+                        
+                        Documents
+                      </Link>:null
+                    
+                    
+                    }
+                        {props.auth.user.role.type==="lawfirm"?
+                        <Link to={{pathname:linkPrefix + "lawyers"}}>
+                       <  SettingFilled
+                          style={{ color: "lightslategray", fontSize: 18 }}
+                        />
+                        
+                        Lawyers
+                      </Link>:null
+                    
+                    
+                    }
+                     {props.auth.user.role.type!=="lawfirm"?
                       <Link
-                        to={{
-                          pathname: linkPrefix + "orders",
-                          state: {
-                            tab: "orders",
-                          },
-                        }}
+                        to={{  pathname: linkPrefix + "appointments",}}
                       >
                         <GiftFilled
                           style={{ color: "lightslategray", fontSize: 18 }}
                         />
-                        Order History
-                      </Link>
-                      <Link
-                        to={{
-                          pathname: "#",
-                        }}
-                      >
-                        <CreditCardFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        Payment History
-                      </Link>
+                        Appointmets
+                      </Link>:null
+                        }
+                     {props.auth.user.role.type!=="lawfirm"?
                       <Link
                         to={{
                           pathname: linkPrefix + "favourites",
@@ -670,31 +693,72 @@ function Header(props) {
                           style={{ color: "lightslategray", fontSize: 18 }}
                         />
                         Favorites
-                      </Link>
-                      <a>
+                      </Link>:null
+}
+
+                        <Link
+                        to={{
+                          pathname: linkPrefix + "notifications",
+                        }}
+                      >
                         <BellFilled
                           style={{ color: "lightslategray", fontSize: 18 }}
                         />
                         Notifications
-                      </a>
+                      </Link>
                       {/* <div className="divider"></div> */}
                       <Link
                         to={{
                           pathname: linkPrefix + "reviews",
-                          state: {
-                            tab: "reviews",
-                          },
                         }}
                       >
                         <ReviewIcon />
                         Ratings & Reviews
                       </Link>
-                      <Link to={linkPrefix + "chats"}>
+                      {props.auth.user.role.type!=="authenticated"?
+                        <Link to={{pathname:linkPrefix + "management"}}>
+                       <  SettingFilled
+                          style={{ color: "lightslategray", fontSize: 18 }}
+                        />
+                        
+                        Management
+                      </Link>:null
+                    
+                    
+                    }
+                      <Link to={{pathname:linkPrefix + "chats"}}>
                         <MessageFilled
                           style={{ color: "lightslategray", fontSize: 18 }}
                         />
-                        Chats
+                        
+                        Message
                       </Link>
+                      {props.auth.user.role.type!=="authenticated"?
+                          <Link
+                          to={{
+                            pathname: linkPrefix + "blogs",
+                          }}
+                        >
+  
+                          <CreditCardFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                         Blogs
+                        </Link>:null}
+
+                        {props.auth.user.role.type!=="lawfirm"?
+                      <Link
+                        to={{
+                          pathname: linkPrefix + "paymenthistory",
+                        }}
+                      >
+                        
+
+                        <CreditCardFilled
+                          style={{ color: "lightslategray", fontSize: 18 }}
+                        />
+                        Payment History
+                      </Link>:null}
                       <div className="divider"></div>
                       <a>
                         <i
@@ -743,7 +807,7 @@ function Header(props) {
                         <Link to="/privacy-policy">Privacy</Link>
                       </div>
                     </>
-                  )}
+                  ):null}
                 </div>
               </li>
             </ul>

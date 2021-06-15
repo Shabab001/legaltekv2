@@ -62,7 +62,7 @@ function LawtyerProfile(props) {
     if (props.location.pathname === "/lawyer/notifications") {
       setActiveMenu(7);
     }
-    if (props.location.pathname === "/lawyer/messaging") {
+    if (props.location.pathname === "/lawyer/chats") {
       setActiveMenu(8);
     }
   }, [props.location.pathname]);
@@ -134,7 +134,7 @@ function LawtyerProfile(props) {
                <span className="link-title">Managements</span>
             </li>
           </Link>
-          <Link to="/lawyer/messaging" data-tooltip="Subscriptions">
+          <Link to="/lawyer/chats" data-tooltip="Subscriptions">
             <li className={activeMenu === 8 ? "active" : ""}>
             <span></span>
                <i className="fa fa-envelope" />{" "}
@@ -190,7 +190,7 @@ function LawtyerProfile(props) {
             />
              <Route
               exact
-              path="/lawyer/messaging"
+              path="/lawyer/chats"
               component={Message}
             />
               <Route
