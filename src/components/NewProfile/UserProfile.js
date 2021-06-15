@@ -17,6 +17,7 @@ import PaymentHistory from "./UserProfile/PaymentHistory";
 import { message } from "antd";
 import Notifications from "./UserProfile/Notifications";
 import Appointments from "./UserProfile/Appointments";
+import UserMessage from "./UserProfile/UserMessage";
 const Profile = lazy( ()=>import("./UserProfile/Profile")) ;
 const Orders = lazy( ()=>import("./UserProfile/Orders")) ;
 
@@ -61,7 +62,7 @@ function UserProfile(props) {
     if (props.match.path === "/user/notifications") {
       setActiveMenu(7);
     }
-    if (props.match.path === "/user/payment-history") {
+    if (props.match.path === "/user/paymenthistory") {
       setActiveMenu(8);
     }
   }, [props.match.path]);
@@ -121,11 +122,11 @@ function UserProfile(props) {
               <span className="link-title">Messaging</span> 
             </li>
           </Link>
-          <Link to="/user/subscriptions" data-tooltip="Subscriptions">
-            <li className={activeMenu === 5 ? "active" : ""}>
+          <Link to="/user/paymenthistory" data-tooltip="PaymentHistory">
+            <li className={activeMenu === 8 ? "active" : ""}>
             <span></span>
                <i className="fa fa-cog stroke-transparent" />{" "}
-               <span className="link-title">Subscriptions</span>
+               <span className="link-title">Payment History</span>
             </li>
           </Link>
           <Link to="#" data-tooltip="Logout" onClick={(e)=>logout(e)}>
@@ -146,7 +147,7 @@ function UserProfile(props) {
         {activeMenu == 3 && <Favourites {...props} />}
         {activeMenu == 4 && <Reviews {...props} />}
         {activeMenu == 5 && <Subscriptions {...props} />}
-        {activeMenu == 6 && <Chats {...props} />}
+        {activeMenu == 6 &&  <UserMessage {...props} />}
         {activeMenu == 7 && <Notifications {...props} />}
         {activeMenu == 8 && <PaymentHistory {...props} />}
       </div>

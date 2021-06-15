@@ -61,6 +61,13 @@ p {
 }
 .order-section-second {
   padding: 2rem;
+
+  border-bottom: 2px solid rgb(206, 206, 206);
+  border-left: 2px solid rgb(206, 206, 206);
+  border-top: 2px solid rgb(206, 206, 206);
+}
+.order-section-second2 {
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

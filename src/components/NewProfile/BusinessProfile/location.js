@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,memo } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../../actions/userActions";
@@ -1436,4 +1436,4 @@ const gender = [
   const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(userActions, dispatch),
   });
-  export default connect(mapStateToProps, mapDispatchToProps)(Location);
+  export default connect(mapStateToProps, mapDispatchToProps)(memo(Location));

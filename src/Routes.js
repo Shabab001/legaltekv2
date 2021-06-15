@@ -82,9 +82,9 @@ function Routes(props) {
               path="/user/reviews"
               component={UserProfile}
             />
-            <CustomerPrivateRoute
+            <Route
               exact
-              path="/user/subscriptions"
+              path="/user/paymenthistory"
               component={UserProfile}
             />
             <Route
@@ -92,7 +92,7 @@ function Routes(props) {
               path="/user/notifications"
               component={UserProfile}
             />
-            <CustomerPrivateRoute
+            <Route
               exact
               path="/user/chats"
               component={UserProfile}

@@ -190,14 +190,17 @@ if(
   lawyerInputs.lastname
 ){
   
+  if(lawyerInputs.email ===""){
+
     if (lawyerInputs.phone.length !== 14) {
-    
+      
       setPhoneMessage("not a valid phone number")
       return;
     }
     else{
       setPhoneMessage(null)
     }
+  }
 
   let inputs ={
     username:lawyerInputs.username,

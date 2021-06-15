@@ -661,7 +661,7 @@ class Profile extends Component {
     }
   console.log(state.language.value)
   console.log(state.currency.value)
-      if(state.lawfirmRegNo.value !== this.props.profile.lawFirmRegistrationNumber){
+      if(state.lawfirmRegNo.value !== this.props.profile.lawFirmRegistrationNumber || state.businessName.value !== this.props.profile.lawfirmName){
         data = {
           lawfirmName:state.businessName.value,
           language: state.language.value,
