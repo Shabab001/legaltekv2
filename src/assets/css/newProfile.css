@@ -784,7 +784,10 @@
   border-radius: 8px;
   background-color: #dddddd;
 }
-
+.ant-picker-input input{
+  margin-top: 0 !important;
+  border:none !important;
+}
 .newProfile .user-profile .button-group {
   display: flex;
   column-gap: 15px;

@@ -10,17 +10,24 @@ import { DatePicker, message, Space } from "antd";
 import { Menu, Dropdown } from "antd";
 import { Select as Select2 } from "antd";
 import validator from "validator";
+import {AiOutlineUpload} from "react-icons/ai"
 import moment from "moment";
 import NavigationPrompt from "react-router-navigation-prompt";
 import { UploadOutlined } from '@ant-design/icons';
 import ReactDOM from "react-dom";
+import {FiEdit2, FiUserPlus} from "react-icons/fi"
+import ChangeForm from "../../modals/changeForm";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 import Geolocate from "./../../MiniComponents/Geolocate";
+import { ThemeProvider } from '@material-ui/styles';
+import{makeRequest,deleteRequest} from "../../../utils/upload"
+import { CgChevronDoubleLeft } from 'react-icons/cg';
 
 
+const {REACT_APP_API}= process.env
 const gender = [
   { key: "male", text: "Male", value: "Male" },
   { key: "female", text: "Female", value: "Female" },
@@ -47,6 +54,7 @@ export class Profile extends Component {
             gender: { value: "", isValid: true, message: "" },
             language: { value: "", isValid: true, message: "" },
             currency: { value: "", isValid: true, message: "" },
+            dateOfBirth: { value: "", isValid: true, message: "" },
             toolTip: "",
             allergens: [],
             dietaryPref: [],
@@ -56,14 +64,13 @@ export class Profile extends Component {
             filteredCurrencies: Currencies,
             filteredCountryCode: Countries,
             profCompDiv: true,
-            formContactDirty: false,
-            formProfileDirty: false,
-            formAccountDirty: false,
-            formAllergensDirty: false,
-            formSocialDirty: false,
-            formDietaryPrefDirty: false,
-            contactPhone: { value: "", isValid: true, message: "" },
-            contactEmail: { value: "", isValid: true, message: "" },
+            coverImage:null,
+            tempCoverImage:null,
+            profileImage:null,
+            tempProfileImage:null,
+            disablePhone:true,
+            disableEmail:true,
+            disablePass:true,
             contactCountryCode: { value: "", isValid: true, message: "" },
             deliveryLocationInfo: [{ address: "", state: "", city: "", zip: "",disabled : false }],
             billingAddress: { value: "", isValid: true, message: "" },
@@ -83,6 +90,10 @@ export class Profile extends Component {
           this.saveProfile = this.saveProfile.bind(this);
           this.onChange = this.onChange.bind(this);
           this.updateBillingAddress = this.updateBillingAddress.bind(this);
+          this.handleDis= this.handleDis.bind(this)
+          this.handleDistrue= this.handleDistrue.bind(this)
+        this.saveCoverImage=this.saveCoverImage.bind(this)
+        this.saveProfileImage=this.saveProfileImage.bind(this)
     }
 
 
@@ -93,36 +104,37 @@ export class Profile extends Component {
         //   localStorage.setItem("auth_token", props.profile.token);
         // }
     
-        const { profile } = props;
+        const { profile} = props;
         if (state.formDirty == false) {
-          if (props.auth.isAuthenticated && profile) {
-            if (profile.firstName) {
-              state.firstName.value = profile.firstName;
-              state.fixedFirstName = profile.firstName
+          if (props.auth.isAuthenticated && profile &&props.auth.user) {
+            if (profile.firstname) {
+              state.firstName.value = profile.firstname;
+              state.fixedFirstName = profile.firstname
 
             }
-            if (profile.lastName) {
-              state.lastName.value = profile.lastName;
-              state.fixedLastName = profile.lastName
+            if (profile.lastname) {
+              state.lastName.value = profile.lastname;
+              state.fixedLastName = profile.lastname
             }
             if (profile.dob) {
               state.dob.value = profile.dob;
             }
-            if (profile.phoneNo) {
-              state.phoneNo.value = profile.phoneNo;
+            if (props.auth.user.phone) {
+              state.phoneNo.value = props.auth.user.phone;
             }
             if (profile.countryCode) {
               state.countryCode.value = profile.countryCode;
             }
-            if (profile.email) {
-              state.email.value = profile.email;
+            if (props.auth.user.email) {
+              state.email.value = props.auth.user.email;
             }
-            if (localStorage.getItem("currency")) {
-              state.currency.value = localStorage.getItem("currency");
+            if (profile.currency) {
+              state.currency.value = profile.currency;
             }
-            if (profile.social) {
-              state.social = profile.social;
+            if(profile.dateOfBirth){
+                state.dateOfBirth.value=profile.dateOfBirth;
             }
+         
             if (profile.gender) {
               state.gender.value = profile.gender;
             }
@@ -130,45 +142,21 @@ export class Profile extends Component {
               state.profileCompletion = profile.profileCompletion
             }
     
-            if (profile.dob) {
-              state.dob.value = profile.dob;
-            }
+            
             if (profile.language) {
               state.language.value = profile.language;
             }
-    
-            if (profile.allergens) {
-              state.allergens = profile.allergens;
+            if(profile.coverImage){
+              state.coverImage=profile.coverImage.url;
             }
-    
-            if (profile.dietaryPref) {
-              state.dietaryPref = profile.dietaryPref;
+            if(profile.profileImage){
+              state.profileImage=profile.profileImage.url;
             }
     
             if (profile.profileSummary) {
               state.profileSummary.value = profile.profileSummary;
             }
     
-            if(profile.contact){
-              state.billingAddress.value =  profile.contact.billing.billingAddress 
-              state.billingCity.value =  profile.contact.billing.billingCity 
-              state.billingZip.value =  profile.contact.billing.billingZip 
-              state.billingState.value =  profile.contact.billing.billingState
-              state.contactEmail.value = profile.contact.email 
-              state.contactPhone.value = profile.contact.phoneNo 
-              state.contactCountryCode.value = profile.contact.countryCode
-              state.dba = profile.contact.defaultDeliSameAsBillingAddress
-              state.deliveryLocationInfo[0] = profile.contact.defaultDeliveryLoc
-              if(profile.contact.defaultDeliSameAsBillingAddress){
-                state.deliveryLocationInfo[0].disabled = profile.contact.defaultDeliSameAsBillingAddress
-              }
-              if(profile.contact.otherDeliveryLoc && profile.contact.otherDeliveryLoc.length){
-                for(let i= 0;i < profile.contact.otherDeliveryLoc.length;i++){
-                  state.deliveryLocationInfo[i+1]=profile.contact.otherDeliveryLoc[i]
-                }
-              }
-              
-            }
           }
         }
     
@@ -200,6 +188,60 @@ export class Profile extends Component {
           }
         });
       }
+      saveCoverImage= async()=>{
+        console.log(this.state.coverImage)
+        if(this.state.coverImage && this.state.tempCoverImage){
+
+        let form= new FormData()
+        form.append("files",this.state.coverImage)
+        form.append("ref","customer")
+        form.append("refId",this.props.profile.id)
+        form.append("field","coverImage")
+        if(!this.props.profile.coverImage){
+          
+          let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+          if(up){
+            message.success("Cover Image Uploaded")
+          }
+          
+        }
+        if(this.props.profile.coverImage){
+       let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`,"DELETE")
+
+        let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+        if(up){
+          message.success("Cover Image Uploaded")
+        }
+        }
+      }
+    }
+      saveProfileImage=async()=>{
+        console.log(this.state.profileImage)
+        if(this.state.profileImage){
+          let form= new FormData()
+          form.append("files",this.state.profileImage)
+          form.append("ref","customer")
+          form.append("refId",this.props.profile.id)
+          form.append("field","profileImage")
+
+          if(!this.props.profile.profileImage){
+            
+            
+            let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+            if(up){
+              console.log("uploaded")
+            }
+            
+          }
+          if(this.props.profile.profileImage){
+            let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`,"DELETE")
+            let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+            if(up){
+              console.log("uploaded")
+            }
+          }
+        }
+      }
     
       onChange(e) {
         var state = this.state;
@@ -229,164 +271,7 @@ export class Profile extends Component {
           }
         }
     
-        if (e.target.name == "email") {
-          if (e.target.value == "") {
-            state["email"].isValid = false;
-            state["email"].message = "Email cannot be left empty";
-          } else if (!validator.isEmail(e.target.value)) {
-            state["email"].isValid = false;
-            state["email"].message = "Not a valid email address";
-          } else {
-            state["email"].isValid = true;
-            state["email"].message = "";
-          }
-        }
-    
-        if (e.target.name == "phoneNo") {
-          if (e.target.value == "") {
-            state["phoneNo"].isValid = false;
-            state["phoneNo"].message = "Phone number cannot be left empty";
-          } else if (e.target.value.length !== 10) {
-            state["phoneNo"].isValid = false;
-            state["phoneNo"].message = "Phone number must be 10 digits";
-          } else if (!e.target.value.match(/^\d+$/)) {
-            state["phoneNo"].isValid = false;
-            state["phoneNo"].message = "Phone number must only contain numbers";
-          } else {
-            state["phoneNo"].isValid = true;
-            state["phoneNo"].message = "";
-          }
-        }
-    
-        if (e.target.name == "contactPhone") {
-          if (e.target.value == "") {
-            state["contactPhone"].isValid = false;
-            state["contactPhone"].message = "Phone number cannot be left empty";
-          } else if (e.target.value.length !== 10) {
-            state["contactPhone"].isValid = false;
-            state["contactPhone"].message = "Phone number must be 10 digits";
-          } else if (!e.target.value.match(/^\d+$/)) {
-            state["contactPhone"].isValid = false;
-            state["contactPhone"].message =
-              "Phone number must only contain numbers";
-          } else {
-            state["contactPhone"].isValid = true;
-            state["contactPhone"].message = "";
-          }
-        }
-    
-        if (e.target.name == "contactEmail") {
-          if (e.target.value == "") {
-            state["contactEmail"].isValid = false;
-            state["contactEmail"].message = "Email cannot be left empty";
-          } else if (!validator.isEmail(e.target.value)) {
-            state["contactEmail"].isValid = false;
-            state["contactEmail"].message = "Not a valid email address";
-          } else {
-            state["contactEmail"].isValid = true;
-            state["contactEmail"].message = "";
-          }
-        }
-    
-        if (e.target.name == "countryCode") {
-          if (e.target.value == "") {
-            state["countryCode"].isValid = false;
-            state["countryCode"].message = "Country code cannot be left empty";
-          }
-    
-          if (!e.target.value.match(/^\d+$/)) {
-            state["countryCode"].isValid = false;
-            state["countryCode"].message = "Country code must only contain numbers";
-          }
-        }
-    
-        if (e.target.name == "contactCountryCode") {
-          if (e.target.value == "") {
-            state["contactCountryCode"].isValid = false;
-            state["contactCountryCode"].message =
-              "Country code cannot be left empty";
-          }
-    
-          if (!e.target.value.match(/^\d+$/)) {
-            state["contactCountryCode"].isValid = false;
-            state["contactCountryCode"].message =
-              "Country code must only contain numbers";
-          }
-        }
-    
-        if (e.target.name == "allergens") {
-          console.log(state.allergens, e.target.value);
-          if (e.target.checked) {
-            if (!state.allergens.includes(e.target.value)) {
-              let temp = state.allergens;
-              temp.push(e.target.value);
-              state["allergens"] = temp;
-            }
-          } else {
-            let temp = state.allergens.filter((item) => {
-              return item !== e.target.value;
-            });
-    
-            state["allergens"] = temp;
-          }
-        }
-    
-        if (e.target.name == "dietaryPref") {
-          console.log(state.dietaryPref, e.target.value);
-          if (e.target.checked) {
-            if (!state.dietaryPref.includes(e.target.value)) {
-              let temp = state.dietaryPref;
-              temp.push(e.target.value);
-              state["dietaryPref"] = temp;
-            }
-          } else {
-            let temp = state.dietaryPref.filter((item) => {
-              return item !== e.target.value;
-            });
-    
-            state["dietaryPref"] = temp;
-          }
-        }
-    
-    
-        if(e.target.name=="billingCity" && this.state.dba){
-          state["deliveryLocationInfo"][0].city = e.target.value
-        }
-    
-        
-        if(e.target.name=="billingState" && this.state.dba){
-          state["deliveryLocationInfo"][0].state = e.target.value
-        }
-    
-        if(e.target.name=="billingZip" && this.state.dba){
-          state["deliveryLocationInfo"][0].zip = e.target.value
-        }
-    
-        
-        if(e.target.name=="billingAddress" && this.state.dba){
-          state["deliveryLocationInfo"][0].address = e.target.value
-        }
-    
-    
-        if(e.target.name=="dba"){
-          console.log(e.target.checked)
-          if(e.target.checked){
-            state["dba"] = true
-            state["deliveryLocationInfo"][0].disabled = true
-            state["deliveryLocationInfo"][0].address = state["billingAddress"].value
-            state["deliveryLocationInfo"][0].state = state["billingState"].value
-            state["deliveryLocationInfo"][0].zip = state["billingZip"].value
-            state["deliveryLocationInfo"][0].city = state["billingCity"].value
-          }
-          else{
-            state["dba"] = false
-            state["deliveryLocationInfo"][0].disabled = false
-            state["deliveryLocationInfo"][0].address = ""
-            state["deliveryLocationInfo"][0].state = ""
-            state["deliveryLocationInfo"][0].zip = ""
-            state["deliveryLocationInfo"][0].city = ""
-          }
-        }
+      
     
         this.setState(state);
       }
@@ -429,159 +314,77 @@ export class Profile extends Component {
       onChangeDate(date, dateString) {
         console.log(date, dateString);
         this.setState({
-          dob: { value: dateString, isValid: true, message: "" },
+          dateOfBirth: { value: dateString, isValid: true, message: "" },
         });
       }
     
+      handleDis (e){
+        console.log(e)
+   
+        if(e==="phoneNo"){
+          console.log(this.state.disablePhone)
+          this.state.disablePhone=false
+        }
+        if(e==="email"){
+          console.log(this.state.disableEmail)
+          this.state.disableEmail=false
+        }
+        if(e==="password"){
+          console.log(this.state.disablePass)
+          this.state.disablePass=false
+            }
+    
+      }
+      handleDistrue(){
+        this.state.disablePhone=true
+        this.state.disableEmail=true
+        this.state.disablePass=true
+      }
       saveProfile = async (e) => {
         let state = this.state;
         let data = null;
         let section = null;
         let valid = true
+        this.state.formDirty=true;
         if (e.target.name == "profileBtn") {
           console.log("clicked");
           section = "profile";
           if (state.firstName.value == "") {
             state.firstName.isValid = false;
+            return;
           } else {
             state.firstName.isValid = true;
           }
           if (state.lastName.value == "") {
             state.lastName.isValid = false;
+            return;
           } else {
             state.lastName.isValid = true;
           }
-    
+           
           data = {
-            firstName: state.firstName.value,
-            lastName: state.lastName.value,
+            firstname: state.firstName.value,
+            lastname: state.lastName.value,
             gender: state.gender.value,
-            dob: state.dob.value,
+            dateOfBirth: state.dateOfBirth.value,
             profileSummary: state.profileSummary.value,
+            language:state.language.value,
+            currency:state.currency.value,
           };
-        }
-    
-        if (e.target.name == "accountBtn") {
-          section = "account";
-          data = {
-            email: state.email.value,
-            phoneNo: state.phoneNo.value,
-            countryCode: state.countryCode.value.replace("+", ""),
-            language: state.language.value,
-            currency: state.currency.value,
-          };
-        }
-    
-        if (e.target.name == "contactBtn") {
-          section = "contact";
-          if(!state.contactCountryCode.isValid || !state.contactPhone.isValid || !state.contactEmail.isValid){
-            valid = false
+          console.log(data)
+          let updateUser = await this.props.actions.updateCustomerUserProfile(this.props.profile.id, data)
+          if(updateUser){
+            this.props.actions.getCustomerUserProfile(this.props.profile.id)
           }
-          data = {
-            email: state.contactEmail.value,
-            phoneNo: state.contactPhone.value,
-            countryCode: state.contactCountryCode.value.replace("+", ""),
-            billing: {
-              billingAddress: state.billingAddress.value,
-              billingCity: state.billingCity.value,
-              billingState: state.billingState.value,
-              billingZip: state.billingZip.value,
-            },
-            defaultDeliSameAsBillingAddress: this.state.dba,
-            defaultDeliveryLoc: {
-              city: state.deliveryLocationInfo[0].city,
-              address: state.deliveryLocationInfo[0].address,
-              zip: state.deliveryLocationInfo[0].zip,
-              state: state.deliveryLocationInfo[0].state,
-            },
-            otherDeliveryLoc: state.deliveryLocationInfo.filter((item,index)=> {
-              if(index==0){
-                return false
-              }
-            })
-          }
-        }
-        console.log(data)
-    
-        if (e.target.name == "socialBtn") {
-          section = "social";
-          data = { ...state.social };
+          state.formDirty=false;
+          return;
         }
     
-        if (e.target.name == "dietaryPrefBtn") {
-          section = "dietaryPref";
-          data = { dietaryPref: state.dietaryPref };
-        }
+   
     
-        if (e.target.name == "allergensBtn") {
-          section = "allergens";
-          data = { allergens: state.allergens };
-        }
-    
-        let profileData = {
-          data: data,
-          userType: this.props.auth.user.userType,
-          userId: this.props.auth.user._id,
-          section: section,
-        };
+ 
 
 
-
-        if(state.firstName.isValid && state.lastName.isValid && state.firstName.value !== "" && state.lastName.value !== ""){
-          let profileObj = {
-            data: {
-              firstName: state.firstName.value,
-              lastName: state.lastName.value,
-              gender: state.gender.value,
-              dob: state.dob.value,
-              profileSummary: state.profileSummary.value,
-              contact: {email: state.contactEmail.value,
-                phoneNo: state.contactPhone.value,
-                countryCode: state.contactCountryCode.value.replace("+", ""),
-                billing: {
-                  billingAddress: state.billingAddress.value,
-                  billingCity: state.billingCity.value,
-                  billingState: state.billingState.value,
-                  billingZip: state.billingZip.value,
-                },
-                defaultDeliSameAsBillingAddress: this.state.dba,
-                defaultDeliveryLoc: {
-                  city: state.deliveryLocationInfo[0].city,
-                  address: state.deliveryLocationInfo[0].address,
-                  zip: state.deliveryLocationInfo[0].zip,
-                  state: state.deliveryLocationInfo[0].state,
-                },
-                otherDeliveryLoc: state.deliveryLocationInfo.filter((item,index)=> {
-                  if(index==0){
-                    return false
-                  }
-                })
-              },
-              social: {
-                ...state.social
-              },
-              dietaryPref: state.dietaryPref,
-              allergens: state.allergens,
-              
-            },
-            userType: this.props.auth.user.userType,
-              userId: this.props.auth.user._id,
-          }
-          console.log(profileObj)
-  
-          if(!valid==false){
-            await this.props.actions.saveProfile(profileObj, this.props.history);
-      
-            let profileShort = {
-              userId: this.props.auth.user._id,
-              userType: this.props.auth.user.userType,
-            };
-            await this.props.actions.getProfile(profileShort, this.props.history);
-          }
-          else{
-            message.error("Fill up required fields!")
-          }
-        }
         
     
       };
@@ -758,24 +561,13 @@ export class Profile extends Component {
           </label>
         </div>
         <div className="coverButtons">
-        {this.state.tempCoverImage && this.state.formImageDirty && 
+      
           <button onClick={() => this.saveCoverImage()}>
-            <span>Save</span>
+            <span>Change</span>
           </button>
-        }
+    
 
-        {this.state.coverImage && !this.state.formImageDirty && 
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              console.log("clicked");
-              this.setState({
-                deleteCover: true
-              });
-            }}
-          >
-            Remove Cover
-          </button>}
+    
         </div>
       </div>
       <div className="profileHead">
@@ -802,7 +594,7 @@ export class Profile extends Component {
               onChange={(e) => {
                 if (e.target.files[0])
                   this.setState({
-                    formImageDirty:true,
+               
                     profileImage: e.target.files[0],
                     tempProfileImage: URL.createObjectURL(e.target.files[0]),
                   });
@@ -812,17 +604,10 @@ export class Profile extends Component {
 
             <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
           </label>
-          <Dropdown
-            trigger={["click"]}
-            overlay={() => this.profileImageMenu()}
-            placement="bottomLeft"
-            arrow
-          >
-            <button>
-              {/* <ThreeDotsIcon /> */}
-              <i style={{ bottom: "17px" }} className="fe fe-chevron-down" />
-            </button>
-          </Dropdown>
+          <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+      <AiOutlineUpload/>
+
+          </div>
         </div>
       </div>
       <div className="viewPublicProfile">
@@ -885,9 +670,10 @@ export class Profile extends Component {
                   <DatePicker
                     name="dob"
                     placeholder="Date of Birth"
+                    className="profile-datepicker"
                     value={
-                      this.state.dob.value
-                        ? moment(this.state.dob.value, dateFormat)
+                      this.state.dateOfBirth.value
+                        ? moment(this.state.dateOfBirth.value, dateFormat)
                         :
                       ""
                     }
@@ -1040,145 +826,79 @@ export class Profile extends Component {
 
       <h1>Account Settings</h1>
       <div className="input-fields">
-        <div className="input-row">
-          <label className={!this.state.email.isValid ? "error" : ""}>
-            Email:
-            <input
-              name="email"
-              placeholder="Email"
-              value={this.state.email.value}
-              onChange={(e) => this.onChange(e)}
-            />
-            {this.state.email.message && (
-              <p>
-                {" "}
-                <i className="fe fe-alert-triangle" />{" "}
-                {this.state.email.message}
-              </p>
-            )}
-          </label>
-          <label className={!this.state.phoneNo.isValid ? "error" : ""}>
-            Phone No:
-            <input
-              name="phoneNo"
-              placeholder="Phone No."
-              value={this.state.phoneNo.value}
-              onChange={(e) => this.onChange(e)}
-            />
-            {this.state.phoneNo.message && (
-              <p>
-                {" "}
-                <i className="fe fe-alert-triangle" />{" "}
-                {this.state.phoneNo.message}
-              </p>
-            )}
-          </label>
-        </div>
-        <div className="input-row">
+      <div className="input-row">
+          <label className={`${!this.state.email.isValid ? "error" : ""}`}>
+              Email:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+              <input
+                name="email"
+                placeholder="Email"
+                value={this.state.email.value}
+                disabled={this.state.disableEmail}
+                onChange={(e) => this.onChange(e)}
+              />
+                  <div  onClick={()=>this.handleDis("email")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
+              {this.state.email.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.email.message}
+                </p>
+              )}
+            </label>
+           
+
+            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
+              Phone No:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+              <input
+                name="phoneNo"
+                placeholder="Phone No."
+                value={this.state.phoneNo.value}
+                disabled={this.state.disablePhone}
+                onChange={(e) => this.onChange(e)}
+              />
+                  <div  onClick={()=>this.handleDis("phoneNo")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
+              {this.state.phoneNo.message && (
+                <p>
+                  {" "}
+                  <i className="fe fe-alert-triangle" />{" "}
+                  {this.state.phoneNo.message}
+                </p>
+              )}
+
+            </label>
+          </div>
+          <div className="input-row">
+       
             
-          <label
-            className={`${
-              !this.state.countryCode.isValid ? "error" : ""
-            } cc-label account ${this.state.countryDrop && "focused"}`}
-            tabIndex={0}
-          >
-            Country Code:
-            <input
-              type="text"
-              name="countryCode"
-              placeholder="Country code"
-              value={this.state.countryCode.value}
-              autoComplete="dfdff"
-              style={
-                this.state.countryCode.value.match(/^\d+$/) && {
-                  paddingLeft: 20,
-                }
-              }
-              className="cc-input"
-              onFocus={() => this.setState({ countryDrop: true })}
-              onChange={(e) => {
-                if (e.target.value !== "") {
-                  filteredCountryCode = Countries.filter((item, index) => {
-                    const regex = new RegExp(e.target.value, "gi");
-                    return (
-                      item.name.match(e.target.value) ||
-                      item.dialCode.match(e.target.value) ||
-                      item.isoCode.match(e.target.value)
-                    );
-                  });
-                  this.setState({ filteredCountryCode: filteredCountryCode });
-                } else {
-                  this.setState({ filteredCountryCode: Countries });
-                }
-                this.setState({
-                  formAccountDirty: true,
-                  formDirty: true,
-                  countryCode: {
-                    ...this.state.countryCode,
-                    value: e.target.value,
-                  },
-                });
-              }}
-            />
-            <i className="dropdown icon"></i>
-            {this.state.countryCode.value.length &&
-            this.state.countryCode.value.match(/^\d+$/) ? (
-              <i className="plus-icon">&#43;</i>
-            ) : null}
-            {this.state.countryDrop && (
-              <div
-                className="countryDrop"
-              //   onBlur={() => this.setState({ countryDrop: false })}
-              >
-                <ul>
-                  {this.state.filteredCountryCode &&
-                    this.state.filteredCountryCode.map((item, index) => (
-                      <li
-                        key={index}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (item && item.flag && item.dialCode) {
-                            this.setState({
-                              countryCode: {
-                                ...this.state.countryCode,
-                                value: item.dialCode.split("+")[1],
-                              },
-                              formDirty: true,
-                              countryDrop: false,
-                            });
-                          }
-                        }}
-                      >
-                        <img src={item.flag} height="16px" width="24px" />
-                        {item.name +
-                          " (" +
-                          item.isoCode +
-                          ") " +
-                          item.dialCode}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
-            {this.state.countryCode.message && (
-              <p>
-                {" "}
-                <i className="fe fe-alert-triangle" />{" "}
-                {this.state.countryCode.message}
-              </p>
-            )}
-          </label>
-          <label>
-            Password:
-            <input
-              name="password"
-              type="password"
-              placeholder="************"
-              value={this.state.password.value}
-              onChange={(e) => this.onChange(e)}
-            />
-          </label>
-        </div>
+            <label className={`${!this.state.password.isValid ? "error" : ""}`}>
+              Password:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+              <input
+                name="password"
+                type="password"
+                placeholder="************"
+                value={this.state.password.value}
+                disabled={this.state.disablePass}
+                onChange={(e) => this.onChange(e)}
+              />
+                  <div  onClick={()=>this.handleDis("password")}>
+
+                <FiEdit2/>
+                </div>
+                </div>
+            </label>
+          </div>
+       
        
         {/* <div className="input-row">
           <label>
@@ -1200,15 +920,9 @@ export class Profile extends Component {
           </span>
         </label>
 
-        <button
-          name="accountBtn"
-          className="save-btn"
-          onClick={(e) => this.saveProfile(e)}
-        >
-          Save
-        </button>
-      </div>
      
+      </div>
+    
 
       <NavigationPrompt when={this.state.formDirty}>
         {({ onConfirm, onCancel }) => (
@@ -1256,8 +970,10 @@ export class Profile extends Component {
       </NavigationPrompt>
 
 
-
-
+      {!this.state.disableEmail?<ChangeForm onClose={this.handleDistrue} headerText={"Change Email"} email={this.state.email.value} phoneNo={this.state.password.value} onChange={this.onChange}  input1={"New email"} input2={"Password"} type={"email"} history={this.props.history}/>:null }
+      {!this.state.disablePhone?<ChangeForm onClose={this.handleDistrue} headerText={"Change Phone Number"} input1={"New Phone Number"} input2={"Password"} type={"phone"} history={this.props.history}/>:null}
+      {!this.state.disablePass?<ChangeForm onClose={this.handleDistrue} headerText={"Change Password"} type={"pass"} history={this.props.history}/>:null}trhandleDistrue
+trhandleDistrue
 
 
           </div>
@@ -1269,7 +985,7 @@ export class Profile extends Component {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    profile: state.auth.userProfile
+    profile: state.auth.customerUserProfile
   });
   
   const mapDispatchToProps = (dispatch) => ({

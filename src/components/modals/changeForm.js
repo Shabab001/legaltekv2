@@ -65,7 +65,8 @@ function ChangeForm(props) {
         }
   }
   
-const handleButton = async()=>{
+const handleButton = async(e)=>{
+  e.preventDefault();
   if(props.auth.user && (props.auth.user.email || props.auth.user.phone)){
 
     if(!password ||!confPassword){
@@ -96,10 +97,10 @@ const handleButton = async()=>{
         const updateUser= await props.actions.updateUserProfile(props.auth.user.id, {email})
         if(updateUser){
           console.log(updateUser)
-         await props.actions.getProfile(props.auth.user.id, props);
+         await props.actions.getProfile(props.auth.user.id);
        
           props.onClose()
-         return;
+       
         }
       }
   }
@@ -122,9 +123,9 @@ const handleButton = async()=>{
           const updateUser= await props.actions.updateUserProfile(props.auth.user.id, {phone:newPhone})
           if(updateUser){
             console.log(updateUser)
-           await props.actions.getProfile(props.auth.user.id, props);
+           await props.actions.getProfile(props.auth.user.id);
          
-       
+             console.log("here")
             props.onClose()
            return;
           }
@@ -150,10 +151,10 @@ const handleButton = async()=>{
         }
         let reset =await resetCall(obj)
         if(reset){
-          await props.actions.getProfile(props.auth.user.id, props);
+          await props.actions.getProfile(props.auth.user.id);
+          props.onClose()
          
     
-            props.onClose()
            return;
         }
       }
@@ -233,9 +234,11 @@ const handleButton = async()=>{
                 value={email}
               />
             </label>:props.type==="phone"?
-                          <div className="pmodal-name-cat-time3">
+                              <label className="one-half" style={{display:"flex",flexDirection:"column",width:"100%"}}>
+                                {props.type}:
+                          <div className="pmodal-name-cat-time3" style={{display:"flex",gap:".5rem"}}>
     
-                          <PhoneInput inputStyle={{width:"100% !important",  padding:"0px 0px !important"}} style={{width:"6rem"}}
+                          <PhoneInput inputStyle={{width:"100% !important",  padding:"0px 0px !important"}} style={{width:"8rem"}}
                                  // country={"us"}
                                  onChange={(phone) =>
                                   setCountryCode({ ...countryCode, value:`+${phone}`})
@@ -243,8 +246,10 @@ const handleButton = async()=>{
                                  placeholder="Code"
                               
                                />
-                               <input className="lawyer-phone-input" placeholder="Phone" name="phone" onChange={handleChange} />
-                          </div>:
+                               <input className="lawyer-phone-input" placeholder="Phone" name="phone" onChange={handleChange} style={{width:"100%"}} />
+                          </div>
+                                  </label>
+                          :
                                   <label className="one-half" style={{display:"flex",flexDirection:"column",width:"100%"}}>
                                   Old Password
                                   <input

@@ -12,6 +12,7 @@ export const SET_COUNTRY_INFO = "SET_COUNTRY_INFO"
 export const LOGOUT = "LOGOUT"
 export const SAVE_PROFILE = "SAVE_PROFILE"
 export const GET_PROFILE = "GET_PROFILE"
+export const GET_CUSTOMERUSER_PROFILE= "GET_CUSTOMERUSER_PROFILE"
 //Admin Types
 export const SET_ADMIN = "SET_ADMIN"
 export const ADMINS_ERROR = "ADMINS_ERROR"

@@ -381,7 +381,7 @@ return new Promise((resolve,reject)=>{
 
 })}
 
-export const getProfile = (data, history) => (dispatch) => {
+export const getProfile = () => (dispatch) => {
   return new Promise((resolve, reject) => {
     const token =localStorage.getItem('auth_token')
     if(token){
@@ -464,6 +464,50 @@ export const getLawfirmUserProfile = (data, history) => (dispatch) => {
       }
       // message.success("Logged in successfully!");
       // return resolve(false)
+    });
+  }
+  
+});
+  
+}
+export const getCustomerUserProfile = (data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    
+
+    Axios.get(`${REACT_APP_API}/customers/${data}`,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      },)
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+      dispatch({
+        type: Types.GET_CUSTOMERUSER_PROFILE,
+        payload: {
+          customerUserProfile: res.data,
+        },
+      });
+     
+
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      
+      if (error && error.response) {
+        console.log(error.response.data);
+       
+        message.error(error.response.data.message[0].messages[0].message);
+        return resolve(false)
+      }
+      
     });
   }
   
@@ -769,6 +813,52 @@ export const updateUserProfile = (id, data) => (dispatch) => {
         });
       console.log("after user")
       // history.push('/profilePage')
+      return resolve(true); 
+      }
+    })
+    .catch((error) => {
+      // console.log(error);
+      if (error && error.response) {
+        console.log(error.response.data);
+        // dispatch({ type: Types.USER_ERRORS,error:"" });
+        message.error(error.response.data.message[0].messages[0].message);
+        return resolve(false)
+      }
+      // message.success("Logged in successfully!");
+      // return resolve(false)
+    });
+  }
+  
+});
+  
+}
+export const updateCustomerUserProfile = (id, data) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    const token =localStorage.getItem('auth_token')
+    if(token){
+
+    console.log(token)
+
+    Axios.put(`${REACT_APP_API}/customers/${id}`,data,{
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      }
+      })
+    .then((res) => {
+      if (res) {
+       
+    
+
+      dispatch({
+        type: Types.GET_CUSTOMERUSER_PROFILE,
+        payload: {
+          customerUserProfile: res.data,
+        },
+      });
+     
+      // history.push('/profilePage')
+      message.success("Profile Updated")
       return resolve(true); 
       }
     })

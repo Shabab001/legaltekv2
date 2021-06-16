@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect, lazy,memo } from "react";
 import "../../assets/css/newProfile.css";
 // import "../../assets/css/profile.css";
 import girl2 from "../../assets/img/girl2.jpg";
@@ -18,6 +18,7 @@ import { message } from "antd";
 import Notifications from "./UserProfile/Notifications";
 import Appointments from "./UserProfile/Appointments";
 import UserMessage from "./UserProfile/UserMessage";
+import { startOfWeek } from "date-fns";
 const Profile = lazy( ()=>import("./UserProfile/Profile")) ;
 const Orders = lazy( ()=>import("./UserProfile/Orders")) ;
 
@@ -66,6 +67,18 @@ function UserProfile(props) {
       setActiveMenu(8);
     }
   }, [props.match.path]);
+useEffect(()=>{
+  if(props.auth && props.auth.user && props.auth.user.customer){
+
+    const fetchdata=async()=>{
+      
+      await props.actions.getProfile();
+      await props.actions.getCustomerUserProfile(props.auth.user.customer.id?props.auth.user.customer.id:props.auth.user.customer)
+    }
+    fetchdata()
+  }
+},[])
+ 
 
   const logout = (e) => {
     e.preventDefault();
@@ -78,7 +91,8 @@ function UserProfile(props) {
       <div className="sidebar">
       <div className="sidebar-head">
       <button onClick={()=>setSidebarCollapse(!sidebarCollapse)}><i className={`fa  ${sidebarCollapse? "fa-chevron-left": "fa-chevron-right"} `} /></button>
-        <h3>{props.auth && props.auth.user && props.auth.user.firstName? props.auth.user.firstName : ""} {" "} {props.auth && props.auth.user && props.auth.user.lastName? props.auth.user.lastName : ""} {props.auth && props.auth.user && !props.auth.user.firstName &&  "User Profile"}</h3>
+        <h3>{props.customer && props.customer.firstname? props.customer.firstname : ""} {" "} {props.customer&& props.customer.lastname? props.customer.lastname : ""} {!props.customer.firstname &&  "User Profile"}</h3>
+        <p>User</p>
     </div>
         
         <ul>
@@ -160,9 +174,10 @@ function UserProfile(props) {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.auth.userProfile,
+  customer:state.auth.customerUserProfile
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(UserProfile));

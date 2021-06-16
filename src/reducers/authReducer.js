@@ -6,7 +6,8 @@ const init = {
     countryInfo: {},
     userProfile:{},
     packages:[],
-    lawfirmUserProfile:{}
+    lawfirmUserProfile:{},
+    customerUserProfile:{}
 }
 
 
@@ -85,6 +86,14 @@ const authReducer = (state=init,action) =>{
                 ...state,
                 
                 lawfirmUserProfile: action.payload.lawfirmUserProfile
+            }
+        }
+        case Types.GET_CUSTOMERUSER_PROFILE: {
+          
+            return {
+                ...state,
+                
+                customerUserProfile: action.payload.customerUserProfile
             }
         }
     

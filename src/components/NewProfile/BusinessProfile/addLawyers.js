@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,memo} from 'react'
 import "./addlawyers.css"
 import ListSearchInput from './listSearchInput'
 import ListSearchLabel from './listSearchLabel'
@@ -165,4 +165,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(AddLawyers);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(AddLawyers));

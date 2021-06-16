@@ -1,0 +1,216 @@
+.events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.events .ant-badge-status {
+  width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.notes-month {
+  font-size: 28px;
+  text-align: center;
+}
+.notes-month section {
+  font-size: 28px;
+}
+
+.chefCont {
+  display: flex;
+  column-gap: 30px;
+}
+.chefCont .chefCalendar {
+  width: 100%;
+  /* max-height: 600px; */
+  overflow: visible;
+  border-bottom: 1px solid #ddd;
+}
+.chefCont .chefCalendar .ant-picker-calendar-full .ant-picker-panel {
+  max-height: 600px;
+  overflow: auto;
+}
+/* .ant-picker-calendar-header .ant-picker-calendar-mode-switch{
+  margin-right: 80px;
+} */
+.chefCont .chefAside {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  border: 1px solid #ddd;
+  padding: 15px 15px;
+}
+.chefCont .chefAside h3 {
+  text-align: center;
+}
+.chefModal .rowDiv {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  column-gap: 10px;
+}
+.chefModal .rowDiv label {
+  flex: 1;
+}
+
+.chef .ant-btn {
+  margin-bottom: 20px;
+}
+
+.e-schedule .e-month-view .e-work-cells,
+.e-schedule .e-month-agenda-view .e-work-cells {
+  padding: 5px;
+}
+
+.newProfile
+  .chef
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner {
+  background-color: whitesmoke !important;
+}
+.chef
+  .ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner
+  .ant-picker-calendar-date-value {
+  color: black;
+}
+.chef .ant-badge-status-text {
+  color: black !important;
+}
+
+.chef
+  .ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner
+  span {
+  color: black !important;
+}
+
+.chef .chefSidebar {
+  transition: all 0.8s ease-in-out;
+  position: fixed;
+  right: 0;
+  z-index: 2;
+  top: 60px;
+  bottom: 0;
+  width: 280px;
+  border-right: 1px solid #ddd;
+  padding: 15px;
+  padding-top: 50px;
+  transform: translate3d(100%, 0px, 0px);
+  background-color: whitesmoke;
+  min-height: calc(100vh - 80px);
+  box-shadow: 2px 0px 12px rgba(0, 0, 0, 0.2);
+}
+.chef .chefSidebar > p.head{
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: gray;
+}
+.chef .chefSidebar .chefSidebarCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.chef .chefSidebar.active {
+  transform: translate3d(0%, 0px, 0px);
+}
+
+.serviceCards {
+  display: flex;
+  flex-direction: column;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-today{
+  background-color: aliceblue;
+}
+.ant-picker-calendar-date-content .events p{
+  font-family: Rubik;
+  color:gray;
+  font-weight: 500;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-content::-webkit-scrollbar-thumb{
+  background-color: red;
+}
+.serviceCards .card{
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 10px 5px;
+  position: relative;
+}
+.serviceCards .card button{
+  position: absolute;
+  top:9px;
+  right: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  color: gray;
+}
+.appointments .btnGrp{
+  display:flex;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  column-gap: 20px;
+}
+.chooseDiv {
+  display:flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+.chooseDiv button{
+  background-color: transparent;
+  padding: 3px 15px;
+  cursor: pointer;
+}
+.chooseDiv button:nth-of-type(1){
+  background-color: red;
+  color: white;
+}
+.chooseDiv button:nth-of-type(2){
+  border: 1px solid red;
+  color: red;
+}
+.appointments .btnGrp button{
+  background-color: transparent;
+  cursor: pointer;
+}
+.appointments .singleAppointment{
+  position: relative;
+  /* padding-top: 20px; */
+  margin-bottom: 20px;
+}
+.appointments .singleAppointment p{
+  margin-bottom: 0px;
+}
+.serviceCards .card p{
+  margin-bottom: 0px;
+}
+.e-schedule{
+  overflow: visible !important;
+}
+.chefModal .canadaSearch{
+  position: relative;
+}
+.chefModal .canadaSearch i{
+  position: absolute;
+  left: 10px;
+  top: 33px;
+  z-index: 1;
+}
+.chefModal .Search div[class*="control"]{
+  padding-left: 20px;
+}
+@media only screen and (max-width: 756px) {
+  .chef .chefSidebar {
+    top: 0;
+  }
+}
