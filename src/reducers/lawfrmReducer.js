@@ -1,7 +1,8 @@
 import * as Types from "../actions/types";
 
 const init = {
- lawfirmAgencies:[]
+ lawfirmAgencies:[],
+ singleLawfirm:null
 };
 
 const lawfirmReducer = (state = init, action) => {
@@ -11,6 +12,13 @@ const lawfirmReducer = (state = init, action) => {
       return {
         ...state,
         lawfirmAgencies: action.payload.lawfirmAgencies,
+      };
+    }
+    case Types.GET_SINGLE_LAWFIRM: {
+     
+      return {
+        ...state,
+        singleLawfirm: action.payload.lawfirmAgency,
       };
     }
     case Types.CLEAR_LAWFIRMS: {

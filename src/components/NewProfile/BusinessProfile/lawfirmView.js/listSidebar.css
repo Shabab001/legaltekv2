@@ -1,0 +1,30 @@
+.lawfirm-view-sidebar{
+    background: white;
+    max-width: 400px;
+    width: 100%;
+    background-color: #f4f6f9;
+  
+    
+}
+.lawfirm-view-box1-header{
+    background-color: var(--secondary);
+    color:white;
+    padding:.5rem 0rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+.lawfirm-view-box1-body{
+    max-height: 600px;
+    min-height: 200px;
+   
+}
+.lawfirm-view-box2{
+margin-top: 2rem;
+background-color: white;
+}
+.lawfirm-view-box1{
+    margin-top: 1rem;
+    background-color: white;
+    }

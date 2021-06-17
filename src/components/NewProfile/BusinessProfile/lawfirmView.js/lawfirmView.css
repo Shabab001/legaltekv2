@@ -1,0 +1,114 @@
+.lawfirm-view-main{
+    width:100%;
+    max-width: 1920px;
+
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f4f6f9;
+}
+.lawfirm-upper{
+    background-color: var(--primary);
+   width: 100%;
+  padding: 2rem;
+  display: flex;
+  padding-bottom: 5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+gap:1rem;
+}
+.lawfirm-upper-left{
+    display: flex;
+    gap:2rem;
+    padding-bottom: 1rem;
+
+}
+* p{
+    margin-bottom: 0;
+}
+.lawfirm-veiw-image-verified{
+position: absolute;
+right:-4px;
+background-color: var(--primary);
+padding: .4rem;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50px;
+font-size: 1.5rem;
+top:-10px;
+color:orange;
+}
+.lawfirm-veiw-image{
+    position: relative;
+    width:9rem;
+    height: 8.5rem;
+    background-color:azure ;
+    border-radius: 8px;
+}
+.lawfirm-view-social{
+    padding-top: .5rem;
+    display: flex;
+    gap:.4rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color:azure ;
+}
+.lawfirm-view-paras{
+    color:azure ;
+    line-height: 1.2;
+}
+.lawfirm-view-paras p:nth-child(1){
+    font-size: 1.5rem;
+}
+.lawfirm-view-paras p:nth-child(3){
+    padding-top: .5rem;
+}
+.lawfirm-view-sectios{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    padding-top: .8rem;
+}
+.lawfirm-view-sec{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem 1rem;
+    color:white;
+    
+    background-color:#004f8869;
+    border-radius: 4px;
+    
+}
+.lawfirm-view-sec p{
+    font-size: 1rem !important;
+}
+.lawfirm-upper-right{
+   
+}
+.lawfirm-view-btns{
+    display: flex;
+    gap:1rem;
+    color:azure ;
+}
+.lawfirm-views-click{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem 1rem;
+    background-color:#00508a50;
+    border-radius: 4px;
+    gap:.5rem
+}
+.lawfirm-view-book{
+    color:azure ;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem 2rem;
+    background-color:orange;
+    border-radius: 4px;
+    margin-top: 1rem;
+    gap:.5rem
+}

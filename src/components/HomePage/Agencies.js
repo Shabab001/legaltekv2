@@ -6,6 +6,7 @@ import store from "../../store/index"
 import { bindActionCreators } from "redux";
 import * as Types from "../../actions/types"
 import * as lawfirmActions from "../../actions/lawfirmActions";
+import {Link } from "react-router-dom"
 const Agencies = (props) => {
 
 
@@ -13,11 +14,7 @@ const Agencies = (props) => {
     useEffect(()=>{
         console.log("SSSSSSSSSSSSSSSSSSSSSSSS")
            props.actions.getLawfirms();
-        return()=>{
-              store.dispatch({
-                  type:Types.CLEAR_LAWFIRMS
-              })
-        }
+      
     },[])
     return (
         <div className="agency-main">
@@ -28,8 +25,9 @@ const Agencies = (props) => {
     
                 <div className="agency-grid">
                     {props.lawfirmAgencies && props.lawfirmAgencies.map((lawfirm,index)=>{
-
-                                   return <AgencyBox2 key={index} lawfirm={lawfirm} />
+                            return <Link style={{color:"black"}} to ={`/lawfirm-view/${lawfirm.id}`} key={index}>
+                                  <AgencyBox2  lawfirm={lawfirm} />
+                                   </Link>
                     })}
                  
 

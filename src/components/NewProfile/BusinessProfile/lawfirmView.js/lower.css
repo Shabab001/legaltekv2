@@ -1,0 +1,49 @@
+.lawfirm-view-lower{
+    padding:0rem 2rem ;
+    position: relative;
+    top:-30px;
+
+}
+.lawfirm-view-lower-top{
+    display: flex;
+    gap:2rem;
+    border-radius: 8px;
+}
+.lawfirm-view-lower-top-btns{
+    display: flex;
+    gap:.3rem;    
+    background: white;
+    border-radius: 4px;
+    padding: .3rem;
+
+}
+.lawfirm-view-lower-btns, .lawfirm-view-lower-optns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .9rem 3rem;
+     cursor: pointer;
+    border-radius: 4px;
+    color:var(--primary)
+}
+
+.lawfirm-view-lower-optns{
+    background-color: white;
+}
+
+.lawfirm-view-lower-optns-wrapper{
+    display: flex;
+    gap:.3rem;    
+    background: white;
+    border-radius: 4px;
+    padding: .3rem;
+}
+.lawfirm-view-lower-grid{
+    display: flex;
+    gap:.5rem;
+    justify-content: space-between;
+}
+.blogs, .following, .lawyers, .reviews{
+    background-color: var(--primary);
+    color:azure;
+}
