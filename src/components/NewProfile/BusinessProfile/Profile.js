@@ -434,7 +434,7 @@ class Profile extends Component {
       
       let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
       if(up){
-        this.props.actions.getCustomerUserProfile(this.props.profile.id)
+       this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history)
         message.success("Cover Image Uploaded")
 
       }
@@ -454,7 +454,7 @@ delProfileImage=async()=>{
     let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`)
     if(del){
  
-    let up= await  this.props.actions.getCustomerUserProfile(this.props.profile.id)
+    let up= await  await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history)
     if(up){
       this.setState({
         tempProfileImage:null,
@@ -474,7 +474,7 @@ delCoverImage=async()=>{
     if(this.props.profile.coverImage){
       let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`)
       if(del){
-        let update= await this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        let update= await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history)
         if(update){
 
                this.setState({
@@ -503,7 +503,7 @@ delCoverImage=async()=>{
      
           let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
           if(up){
-            this.props.actions.getCustomerUserProfile(this.props.profile.id)
+          this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history)
             message.success("image uploaded")
           }
           

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,memo} from 'react'
+import React,{useState,useEffect,memo,Linking} from 'react'
 import "./lawfirmView.css"
 import { FaFacebookF,FaTwitter,FaLinkedinIn } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -43,7 +43,7 @@ const LawfirmView = (props) => {
                        <div className="lawfirm-veiw-image-verified">
                            <GoVerified/>
                        </div>
-                       img
+                           <img style={{width:"100%",objectFit:"cover",height:"100%",borderRadius:"8px"}} src={props.lawfirmAgencies.singleLawfirm.profileImage.url}/>
                        </div>
                        
                    <div className="lawfirm-view-social">
@@ -78,7 +78,7 @@ const LawfirmView = (props) => {
                <div className="lawfirm-upper-right">
                    <div className="lawfirm-view-btns">
 
-                    <div className="lawfirm-views-click" >
+                    <div className="lawfirm-views-click" onClick ={()=>Linking.openURL(`mailto:${props.auth.user.email}`)} >
                         <BsEnvelope fontSize="1.5rem"/>
                      
                     </div>
