@@ -167,7 +167,8 @@ function BusinessProfile (props) {
       <div className={`newProfile ${sidebarCollapse? '' : 'sidebar-collapse' }`}>
         <div className="sidebar">
           <div className="sidebar-head">
-          <h3>{props.auth && props.auth.user && props.auth.user.business && props.auth.user.business.name? props.auth.user.business.name : ""} {" "}  {props.auth && props.auth.user && props.auth.user.business && props.auth.user.business && !props.auth.user.business.name &&  "Business Profile"}</h3>
+          <h3>{props.lawfirm_user && props.lawfirm_user.firstname? props.lawfirm_user.firstname : ""} {" "} {props.lawfirm_user&& props.lawfirm_user.lastname? props.lawfirm_user.lastname : ""} {!props.lawfirm_user.firstname &&  "User Profile"}</h3>
+        <p>Lawfrim User</p>
         <button onClick={()=>setSidebarCollapse(!sidebarCollapse)}><i className={`fa  ${sidebarCollapse? "fa-chevron-left": "fa-chevron-right"} `} /></button>
           </div>
           {props.lawfirm_user && props.lawfirm_user.branches && props.lawfirm_user.branches.length !==0 && approvedBranches ?

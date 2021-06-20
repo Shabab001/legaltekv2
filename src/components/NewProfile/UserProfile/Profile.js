@@ -10,7 +10,6 @@ import { DatePicker, message, Space } from "antd";
 import { Menu, Dropdown } from "antd";
 import { Select as Select2 } from "antd";
 import validator from "validator";
-import {AiOutlineUpload} from "react-icons/ai"
 import moment from "moment";
 import NavigationPrompt from "react-router-navigation-prompt";
 import { UploadOutlined } from '@ant-design/icons';
@@ -23,6 +22,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import Geolocate from "./../../MiniComponents/Geolocate";
 import { ThemeProvider } from '@material-ui/styles';
+import {AiOutlineUpload} from "react-icons/ai"
 import{makeRequest,deleteRequest} from "../../../utils/upload"
 import { CgChevronDoubleLeft } from 'react-icons/cg';
 
@@ -147,10 +147,14 @@ export class Profile extends Component {
               state.language.value = profile.language;
             }
             if(profile.coverImage){
+              console.log("pacche")
               state.coverImage=profile.coverImage.url;
+              state.tempCoverImage=profile.coverImage.url;
             }
+         
             if(profile.profileImage){
               state.profileImage=profile.profileImage.url;
+              state.tempProfileImage=profile.profileImage.url;
             }
     
             if (profile.profileSummary) {
@@ -197,23 +201,65 @@ export class Profile extends Component {
         form.append("ref","customer")
         form.append("refId",this.props.profile.id)
         form.append("field","coverImage")
-        if(!this.props.profile.coverImage){
+     
           
           let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
           if(up){
+            this.props.actions.getCustomerUserProfile(this.props.profile.id)
             message.success("Cover Image Uploaded")
+
           }
           
-        }
-        if(this.props.profile.coverImage){
-       let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`,"DELETE")
+  
+  
 
-        let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
-        if(up){
-          message.success("Cover Image Uploaded")
-        }
-        }
+
+         
+      
       }
+    }
+
+    delProfileImage=async()=>{
+
+      if(this.props.profile.profileImage){
+        let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`)
+        if(del){
+     
+        let up= await  this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        if(up){
+          this.setState({
+            tempProfileImage:null,
+            profileImage:null
+          })
+        }
+          console.log(del)
+          message.success("image deleted")
+              }
+    
+            }
+    }
+
+    delCoverImage=async()=>{
+
+    
+        if(this.props.profile.coverImage){
+          let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`)
+          if(del){
+            let update= await this.props.actions.getCustomerUserProfile(this.props.profile.id)
+            if(update){
+
+                   this.setState({
+                     tempCoverImage:null,
+                     coverImage:null
+                   })
+              console.log("update")
+            }
+           
+          console.log(del)
+          message.success("Cover image deleted")
+              }
+    
+            }
     }
       saveProfileImage=async()=>{
         console.log(this.state.profileImage)
@@ -224,22 +270,15 @@ export class Profile extends Component {
           form.append("refId",this.props.profile.id)
           form.append("field","profileImage")
 
-          if(!this.props.profile.profileImage){
-            
-            
-            let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
-            if(up){
-              console.log("uploaded")
-            }
-            
-          }
-          if(this.props.profile.profileImage){
-            let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`,"DELETE")
-            let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
-            if(up){
-              console.log("uploaded")
-            }
-          }
+    
+         
+              let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+              if(up){
+                this.props.actions.getCustomerUserProfile(this.props.profile.id)
+                message.success("image uploaded")
+              }
+              
+          
         }
       }
     
@@ -539,36 +578,50 @@ export class Profile extends Component {
         ) : (
           ""
         )}
+          {!this.state.tempCoverImage?
         <div className="addCoverImage">
           <label
             htmlFor="coverImage"
             style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
           >
             <input
-              type="file"
-              id="coverImage"
-              onChange={(e) => {
-                if (e.target.files[0])
-                  this.setState({
-                    coverImage: e.target.files[0],
-                    formImageDirty: true,
-                    tempCoverImage: URL.createObjectURL(e.target.files[0]),
-                  });
-              }}
-              style={{ display: "none" }}
+            type="file"
+            id="coverImage"
+            onChange={(e) => {
+              if (e.target.files[0])
+              this.setState({
+                coverImage: e.target.files[0],
+                formImageDirty: true,
+                tempCoverImage: URL.createObjectURL(e.target.files[0]),
+              });
+            }}
+            style={{ display: "none" }}
             />
             <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
           </label>
-        </div>
+          
+        </div>:null}
+        {!this.props.profile.coverImage?
+          this.state.tempCoverImage?
         <div className="coverButtons">
       
           <button onClick={() => this.saveCoverImage()}>
-            <span>Change</span>
+            <span>Save</span>
           </button>
     
 
     
-        </div>
+        </div>:null:
+         <div className="coverButtons">
+      
+         <button onClick={() => this.delCoverImage()}>
+           <span>Remove</span>
+         </button>
+   
+
+   
+       </div>
+        }
       </div>
       <div className="profileHead">
         <div className="profilePic">
@@ -586,7 +639,8 @@ export class Profile extends Component {
           ) : (
             ""
           )}
-
+           {!this.state.tempProfileImage?
+             
           <label htmlFor="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
             <input
               type="file"
@@ -603,11 +657,17 @@ export class Profile extends Component {
             />
 
             <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
-          </label>
+          </label>:null}
+          {!this.props.profile.profileImage?
           <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
       <AiOutlineUpload/>
 
-          </div>
+          </div>:
+             <div onClick ={this.delProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+             <AiOutlineUpload/>
+       
+                 </div>
+          }
         </div>
       </div>
       <div className="viewPublicProfile">

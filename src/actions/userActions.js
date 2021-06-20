@@ -496,7 +496,7 @@ export const getCustomerUserProfile = (data) => (dispatch) => {
       });
      
 
-      return resolve(true); 
+      resolve(true); 
       }
     })
     .catch((error) => {

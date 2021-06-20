@@ -19,8 +19,12 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import Geolocate from "./../../MiniComponents/Geolocate";
+import {AiOutlineUpload} from "react-icons/ai"
+import{makeRequest,deleteRequest} from "../../../utils/upload"
 
 
+
+const {REACT_APP_API}= process.env
 const gender = [
   { key: "male", text: "Male", value: "Male" },
   { key: "female", text: "Female", value: "Female" },
@@ -56,6 +60,10 @@ export class LawyerAccount extends Component {
             filteredCurrencies: Currencies,
             filteredCountryCode: Countries,
             profCompDiv: true,
+            coverImage:null,
+            tempCoverImage:null,
+            profileImage:null,
+            tempProfileImage:null,
             formContactDirty: false,
             formProfileDirty: false,
             formAccountDirty: false,
@@ -129,6 +137,16 @@ export class LawyerAccount extends Component {
             if(profile.profileCompletion){
               state.profileCompletion = profile.profileCompletion
             }
+            if(profile.coverImage){
+              console.log("pacche")
+              state.coverImage=profile.coverImage.url;
+              state.tempCoverImage=profile.coverImage.url;
+            }
+         
+            if(profile.profileImage){
+              state.profileImage=profile.profileImage.url;
+              state.tempProfileImage=profile.profileImage.url;
+            }
     
             if (profile.dob) {
               state.dob.value = profile.dob;
@@ -200,7 +218,95 @@ export class LawyerAccount extends Component {
           }
         });
       }
+      saveCoverImage= async()=>{
+        console.log(this.state.coverImage)
+        if(this.state.coverImage && this.state.tempCoverImage){
+
+        let form= new FormData()
+        form.append("files",this.state.coverImage)
+        form.append("ref","lawyer_user")
+        form.append("refId",this.props.profile.id)
+        form.append("field","coverImage")
+     
+          
+          let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+          if(up){
+            this.props.actions.getCustomerUserProfile(this.props.profile.id)
+            message.success("Cover Image Uploaded")
+
+          }
+          
+  
+  
+
+
+         
+      
+      }
+    }
+
+    delProfileImage=async()=>{
+
+      if(this.props.profile.profileImage){
+        let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`)
+        if(del){
+     
+        let up= await  this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        if(up){
+          this.setState({
+            tempProfileImage:null,
+            profileImage:null
+          })
+        }
+          console.log(del)
+          message.success("image deleted")
+              }
     
+            }
+    }
+
+    delCoverImage=async()=>{
+
+    
+        if(this.props.profile.coverImage){
+          let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`)
+          if(del){
+            let update= await this.props.actions.getCustomerUserProfile(this.props.profile.id)
+            if(update){
+
+                   this.setState({
+                     tempCoverImage:null,
+                     coverImage:null
+                   })
+              console.log("update")
+            }
+           
+          console.log(del)
+          message.success("Cover image deleted")
+              }
+    
+            }
+    }
+      saveProfileImage=async()=>{
+        console.log(this.state.profileImage)
+        if(this.state.profileImage){
+          let form= new FormData()
+          form.append("files",this.state.profileImage)
+          form.append("ref","lawyer_user")
+          form.append("refId",this.props.profile.id)
+          form.append("field","profileImage")
+
+    
+         
+              let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
+              if(up){
+                this.props.actions.getCustomerUserProfile(this.props.profile.id)
+                message.success("image uploaded")
+              }
+              
+          
+        }
+      }
       onChange(e) {
         var state = this.state;
         if (e.target.name !== "allergens" && e.target.name !== "dietaryPref" && e.target.name !=="dba") {
@@ -719,121 +825,124 @@ export class LawyerAccount extends Component {
         let filteredCurrencies = Currencies;
         let filteredCountryCode = Countries;
         return (
-            <div className=" user-profile">
-                <div className="coverImage">
-          {/* <img src="https://source.unsplash.com/random/1600x900" /> */}
-          <div className="overlay"></div>
-          {this.state.tempCoverImage || this.state.coverImage ? (
-            <img
-              src={
-                this.state.tempCoverImage
-                  ? this.state.tempCoverImage
-                  : this.state.coverImage
-                  ? this.state.coverImage
-                  : ""
-              }
-            />
-          ) : (
-            ""
-          )}
-          <div className="addCoverImage">
-            <label
-              htmlFor="coverImage"
-              style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
-            >
-              <input
-                type="file"
-                id="coverImage"
-                onChange={(e) => {
-                  if (e.target.files[0])
-                    this.setState({
-                      coverImage: e.target.files[0],
-                      formImageDirty: true,
-                      tempCoverImage: URL.createObjectURL(e.target.files[0]),
-                    });
-                }}
-                style={{ display: "none" }}
-              />
-              <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
-            </label>
-          </div>
-          <div className="coverButtons">
-          {this.state.tempCoverImage && this.state.formImageDirty && 
-            <button onClick={() => this.saveCoverImage()}>
-              <span>Save</span>
-            </button>
+          <div className=" user-profile">
+          <div className="coverImage">
+    {/* <img src="https://source.unsplash.com/random/1600x900" /> */}
+    <div className="overlay"></div>
+    {this.state.tempCoverImage || this.state.coverImage ? (
+      <img
+        src={
+          this.state.tempCoverImage
+            ? this.state.tempCoverImage
+            : this.state.coverImage
+            ? this.state.coverImage
+            : ""
+        }
+      />
+    ) : (
+      ""
+    )}
+      {!this.state.tempCoverImage?
+    <div className="addCoverImage">
+      <label
+        htmlFor="coverImage"
+        style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
+      >
+        <input
+        type="file"
+        id="coverImage"
+        onChange={(e) => {
+          if (e.target.files[0])
+          this.setState({
+            coverImage: e.target.files[0],
+            formImageDirty: true,
+            tempCoverImage: URL.createObjectURL(e.target.files[0]),
+          });
+        }}
+        style={{ display: "none" }}
+        />
+        <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
+      </label>
+      
+    </div>:null}
+    {!this.props.profile.coverImage?
+      this.state.tempCoverImage?
+    <div className="coverButtons">
+  
+      <button onClick={() => this.saveCoverImage()}>
+        <span>Save</span>
+      </button>
+
+
+
+    </div>:null:
+     <div className="coverButtons">
+  
+     <button onClick={() => this.delCoverImage()}>
+       <span>Remove</span>
+     </button>
+
+
+
+   </div>
+    }
+  </div>
+  <div className="profileHead">
+    <div className="profilePic">
+      {/* <img src={girl2} alt="girl" /> */}
+      {this.state.tempProfileImage || this.state.profileImage ? (
+        <img
+          src={
+            this.state.tempProfileImage
+              ? this.state.tempProfileImage
+              : this.state.profileImage
+              ? this.state.profileImage
+              : ""
           }
+        />
+      ) : (
+        ""
+      )}
+       {!this.state.tempProfileImage?
+         
+      <label htmlFor="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
+        <input
+          type="file"
+          id="profileImage"
+          onChange={(e) => {
+            if (e.target.files[0])
+              this.setState({
+           
+                profileImage: e.target.files[0],
+                tempProfileImage: URL.createObjectURL(e.target.files[0]),
+              });
+          }}
+          style={{ display: "none" }}
+        />
 
-          {this.state.coverImage && !this.state.formImageDirty && 
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                console.log("clicked");
-                this.setState({
-                  deleteCover: true
-                });
-              }}
-            >
-              Remove Cover
-            </button>}
-          </div>
-        </div>
-        <div className="profileHead">
-          <div className="profilePic">
-            {/* <img src={girl2} alt="girl" /> */}
-            {this.state.tempProfileImage || this.state.profileImage ? (
-              <img
-                src={
-                  this.state.tempProfileImage
-                    ? this.state.tempProfileImage
-                    : this.state.profileImage
-                    ? this.state.profileImage
-                    : ""
-                }
-              />
-            ) : (
-              ""
-            )}
+        <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
+      </label>:null}
+      {!this.props.profile.profileImage?
+      <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+  <AiOutlineUpload/>
 
-            <label for="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
-              <input
-                type="file"
-                id="profileImage"
-                onChange={(e) => {
-                  if (e.target.files[0])
-                    this.setState({
-                      formImageDirty:true,
-                      profileImage: e.target.files[0],
-                      tempProfileImage: URL.createObjectURL(e.target.files[0]),
-                    });
-                }}
-                style={{ display: "none" }}
-              />
-
-              <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
-            </label>
-            <Dropdown
-              trigger={["click"]}
-              overlay={() => this.profileImageMenu()}
-              placement="bottomLeft"
-              arrow
-            >
-              <button>
-                {/* <ThreeDotsIcon /> */}
-                <i style={{ bottom: "17px" }} className="fe fe-chevron-down" />
-              </button>
-            </Dropdown>
-          </div>
-        </div>
-        <div className="viewPublicProfile">
-          <button
-            className=""
-            onClick={() =>
-              this.props.history.push(
-                `/view-profile/${this.props.auth.user._id}`
-              )
-            }
-          >
+      </div>:
+         <div onClick ={this.delProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+         <AiOutlineUpload/>
+   
+             </div>
+      }
+    </div>
+  </div>
+  <div className="viewPublicProfile">
+    <button
+      className=""
+      onClick={() =>
+        this.props.history.push(
+          `/view-profile/${this.props.auth.user._id}`
+        )
+      }
+    >
             View Public Profile
           </button>
         </div>

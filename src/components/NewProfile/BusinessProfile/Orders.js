@@ -6,6 +6,7 @@ import * as userActions from "../../../actions/userActions";
 import DocumentsType from "./Documents/documentsType"
 import RegNoDocs from "./Documents/regNoDocs"
 import LocationDocs from './Documents/locationDocs';
+import DocCaution from './Documents/docCaution';
 const Orders = (props) => {
 const [approvedBranch,setApprovedBranch]=useState(false);
 const [rejectedBranch,setRejectedBranch]=useState(false);
@@ -154,9 +155,7 @@ useEffect(()=>{
       </div>:null
       }
       
-         <div className="order-caution">
-           <p>Your information is protected by bank-level security and covered by an industry first insurance policy</p>
-      </div>
+     <DocCaution/>
          </div>
   )
 }

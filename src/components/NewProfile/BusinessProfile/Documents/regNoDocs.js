@@ -5,13 +5,10 @@ const RegNoDocs = (props) => {
         <div className={`Order-sections-first ${props.css}`}>
         <div>
 
-        <p>Registration Number For Lawfirm Named {props.lawfirmName}</p>
+        <p>Registration Number For Lawfirm: {props.lawfirmName}</p>
         <p>Lawfirm Registration Number: {props.regNo}</p>
         </div>
-        <div>
-             <p>{props.type}</p>
-        
-        </div>
+       
       </div>
     )
 }

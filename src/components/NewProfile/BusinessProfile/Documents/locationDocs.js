@@ -95,22 +95,26 @@ const handleUpload=async()=>{
 
     return (
         <div  className={props.type ==="Required" || props.type === "Rejected"?`order-section-file ${props.css}`:`order-section-second ${props.css}`}>
-          <div className="order-location-box">
+          <div >
         <div>
         
-        <p>Proof of location of {props.lawfirmName} Lawfirm at {props.businessAddress}</p>
+        <p>Proof of Location For Lawfirm: {props.lawfirmName} </p>
+        <p>Lawfirm Address: {props.businessAddress}</p>
         </div>
           
-        <div>
-      
-          <p>{props.type}</p>
-         
-        </div>
-        </div>
+     
         {props.type ==="Required" || props.type === "Rejected"?
              <div className="order-loc-file-input"> 
                  <input type="file" accept=".doc,.docx,.pdf" multiple onChange={handleFileChange}/>
-                 {!loading?
+             
+              </div>:null
+            }
+           
+            
+        </div>
+        {props.type ==="Required" || props.type === "Rejected"?
+        <>
+        {!loading?
                  <div onClick={handleUpload} className="order-file-btn">
                    
                    <p>Upload</p>
@@ -118,9 +122,9 @@ const handleUpload=async()=>{
                   <div className="upload-loader"> 
                     </div>
                 }
-              </div>:null
-            }
-            {uploadError !== ""?<p>{uploadError}</p>:null}
+                 {uploadError !== ""?<p>{uploadError}</p>:null}
+                 </>:null
+              }
       </div>
     )
 }
