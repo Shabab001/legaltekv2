@@ -1,0 +1,13 @@
+.location-availability{
+    margin-top: 1.3rem;
+    color:white;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: rgb(255, 115, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    padding:0rem .7rem
+
+}

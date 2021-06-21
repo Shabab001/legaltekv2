@@ -12,6 +12,10 @@ import {useParams} from "react-router-dom"
 import * as lawfirmActions from "../../../../actions/lawfirmActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {FaRegHeart} from "react-icons/fa"
+import {BsFillCalendarFill} from "react-icons/bs"
+import {GoGlobe} from "react-icons/go"
+import {Link} from "react-router-dom"
 
 
 
@@ -43,20 +47,20 @@ const LawfirmView = (props) => {
                        <div className="lawfirm-veiw-image-verified">
                            <GoVerified/>
                        </div>
-                       img
+                     <img src={props.lawfirmAgencies.singleLawfirm.profileImage ?props.lawfirmAgencies.singleLawfirm.profileImage.url:"#"} alt="proPic" style={{height:"100%",width:"100%",objectFit:"cover",borderRadius:"8px"}}/>
                        </div>
                        
                    <div className="lawfirm-view-social">
-                       <RiInstagramFill/>
-                       <FaTwitter/>
-                       <FaLinkedinIn/>
-                       <FaFacebookF/>
+                       <RiInstagramFill className={props.lawfirmAgencies.singleLawfirm.instagram? `lawfirm-social-insta insta`:"lawfirm-social-insta"}/>
+                       <FaTwitter className={props.lawfirmAgencies.singleLawfirm.twitter? "lawfirm-social-twit twit":"lawfirm-social-twit"}/>
+                       <FaLinkedinIn className={props.lawfirmAgencies.singleLawfirm.linkedin? "lawfirm-social-linked link":"lawfirm-social-linked"}/>
+                       <FaFacebookF className={props.lawfirmAgencies.singleLawfirm.facebook? "lawfirm-social-fb fb" :"lawfirm-social-fb"}/>
                       
                    </div>
                </div>
                      
                <div className="lawfirm-view-paras">
-                   <p>{props.lawfirmAgencies.singleLawfirm.lawfirmName}</p>
+                   <p style={{color:"yellow"}}>{props.lawfirmAgencies.singleLawfirm.lawfirmName}</p>
                    <p>lawfirm Address</p>
                    <div className="lawfirm-view-sectios">
                        <div className="lawfirm-view-sec">
@@ -72,30 +76,38 @@ const LawfirmView = (props) => {
                            <p>13,10posts</p>
                        </div>
                    </div>
-                   <p style={{paddingTop:".8rem"}}>{props.lawfirmAgencies.singleLawfirm.firmProfile}</p>
+                   <p style={{paddingTop:".8rem" ,color:"yellow"}}>{props.lawfirmAgencies.singleLawfirm.firmProfile}</p>
                </div>
                </div>
                <div className="lawfirm-upper-right">
                    <div className="lawfirm-view-btns">
-
-                    <div className="lawfirm-views-click" >
-                        <BsEnvelope fontSize="1.5rem"/>
+                     <Link to={{pathname:`https://${props.lawfirmAgencies.singleLawfirm.websiteName}`}} target="_blank" >
+                    <div className="lawfirm-views-click"  >
+                    
+                            
+                        <GoGlobe fontSize="1.5rem" className={props.lawfirmAgencies.singleLawfirm.websiteName? "email" :""}/>
+                        
                      
                     </div>
-                    <div className="lawfirm-views-click">
+                    </Link>
+                    <div className="lawfirm-views-click" style={{color:"yellow"}}>
                          <IoQrCodeSharp fontSize="1.5rem"/>
                     </div>
-                    <div className="lawfirm-views-click">
-                        <BiLike fontSize="1.5rem"/>
+                    <div className="lawfirm-views-click" style={{color:"yellow"}}>
+                        <FaRegHeart fontSize="1.5rem"/>
                     </div>
-                    <div className="lawfirm-views-click">
+                    <div className="lawfirm-views-click" style={{color:"yellow"}}>
                         <BiLike fontSize="1.5rem"/>
                     </div>
                
                    </div>
+                    <div className="lawfirm-view-message">
+                        <BsEnvelope/>
+                        <p>Message</p>
+                    </div>
                     <div className="lawfirm-view-book">
-                        <BsBookmarksFill/>
-                        <p>book Appointment</p>
+                        <BsFillCalendarFill/>
+                        <p>Book Appointment</p>
                     </div>
 
                </div>

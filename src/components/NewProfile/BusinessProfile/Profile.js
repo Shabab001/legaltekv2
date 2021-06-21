@@ -13,6 +13,8 @@ import validator from "validator";
 import moment from "moment";
 import SignUpWIzard from "./SignUpWIzard";
 import {message} from "antd";
+import{MdRemove} from "react-icons/md"
+import {IoSaveOutline} from "react-icons/io5"
 import NavigationPrompt from "react-router-navigation-prompt";
 import {
   Dialog,
@@ -35,6 +37,7 @@ import ChangeForm from "../../modals/changeForm";
 import StateManager from "react-select";
 import {AiOutlineUpload} from "react-icons/ai"
 import{makeRequest,deleteRequest} from "../../../utils/upload"
+import {FaSave} from "react-icons/fa" 
 let stripePK =
   "pk_test_51Is6EeC4OeYiOOOcteEEbNdaXD8s9VSrf9DDyeEb4MaOXH4lTou9AqziwpVCb9I8fMOkgjFCOG5XLpP4AISd0Riv00nOsSXCJF";
 let stripeSecret =
@@ -434,7 +437,7 @@ class Profile extends Component {
       
       let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
       if(up){
-        this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
         message.success("Cover Image Uploaded")
 
       }
@@ -454,7 +457,7 @@ delProfileImage=async()=>{
     let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`)
     if(del){
  
-    let up= await  this.props.actions.getCustomerUserProfile(this.props.profile.id)
+    let up= await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
     if(up){
       this.setState({
         tempProfileImage:null,
@@ -474,7 +477,7 @@ delCoverImage=async()=>{
     if(this.props.profile.coverImage){
       let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`)
       if(del){
-        let update= await this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        let update= await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
         if(update){
 
                this.setState({
@@ -503,7 +506,7 @@ delCoverImage=async()=>{
      
           let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
           if(up){
-            this.props.actions.getCustomerUserProfile(this.props.profile.id)
+              this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
             message.success("image uploaded")
           }
           
@@ -1283,15 +1286,19 @@ delCoverImage=async()=>{
               style={{ display: "none" }}
             />
 
-            <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
-          </label>:null}
-          {!this.props.profile.profileImage?
-          <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+<div style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",right:"-12px"}}>
       <AiOutlineUpload/>
 
-          </div>:
+          </div>
+          </label>:null}
+          {!this.props.profile.profileImage?
+          this.state.profileImage?
+          <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+      <IoSaveOutline/>
+
+          </div>:null:
              <div onClick ={this.delProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
-             <AiOutlineUpload/>
+             <MdRemove/>
        
                  </div>
           }

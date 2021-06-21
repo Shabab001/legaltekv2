@@ -19,6 +19,7 @@ gap:1rem;
 .lawfirm-upper-left{
     display: flex;
     gap:2rem;
+    flex-basis: 70%;
     padding-bottom: 1rem;
 
 }
@@ -36,7 +37,7 @@ align-items: center;
 border-radius: 50px;
 font-size: 1.5rem;
 top:-10px;
-color:orange;
+color:yellow;
 }
 .lawfirm-veiw-image{
     position: relative;
@@ -48,11 +49,22 @@ color:orange;
 .lawfirm-view-social{
     padding-top: .5rem;
     display: flex;
-    gap:.4rem;
-    justify-content: center;
+  
+    justify-content: space-around;
     align-items: center;
     font-size: 1.2rem;
     color:azure ;
+}
+.lawfirm-social-insta,.lawfirm-social-twit,.lawfirm-social-linked,.lawfirm-social-fb{
+
+transform: scale(1);
+transition: transform .3s ease-in;
+
+}
+.lawfirm-social-insta:hover
+,.lawfirm-social-twit:hover,.lawfirm-social-linked:hover,.lawfirm-social-fb:hover{
+transform: scale(1.2);
+
 }
 .lawfirm-view-paras{
     color:azure ;
@@ -93,22 +105,64 @@ color:orange;
     color:azure ;
 }
 .lawfirm-views-click{
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding:.5rem 1rem;
     background-color:#00508a50;
     border-radius: 4px;
-    gap:.5rem
+    gap:.5rem;
+    transform: scale(1);
+    transition: transform .3s ease-in;
+}
+.lawfirm-views-click:hover{
+    transform: scale(1.2);
+
 }
 .lawfirm-view-book{
-    color:azure ;    
+    color:var(--primary);    
     display: flex;
     align-items: center;
     justify-content: center;
     padding:.5rem 2rem;
-    background-color:orange;
+    background-color:yellow;
     border-radius: 4px;
     margin-top: 1rem;
-    gap:.5rem
+    gap:.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.lawfirm-view-message{
+    color:azure;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:.5rem 2rem;
+    background-color:var(--secondary);
+    border-radius: 4px;
+    margin-top: 1rem;
+    gap:.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.insta{
+    color:#c32aa3
+}
+.twit{
+
+    color:#1da1f2
+}
+.link{
+
+    color:#0a66c2
+}
+.fb{
+  color:#3b5998
+    
+
+}
+.email{
+    color:yellow;
 }
