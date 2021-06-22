@@ -42,7 +42,7 @@ const Lower = (props) => {
             </div>
             <div className="lawfirm-view-lower-grid">
              <List lawfirm={props.lawfirm}tab={tab}/>
-               <ListSidebar/>
+               <ListSidebar index={props.index}/>
             </div>
         </div>
     )

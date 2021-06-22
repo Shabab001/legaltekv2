@@ -105,6 +105,7 @@ const gender = [
             isDisabled: false,
             
           },
+          save:false,
           modal:false,
           social: { facebook: "", linkedin: "", instagram: "", twitter: "" },
           kitchenTypes: [],
@@ -700,10 +701,7 @@ const gender = [
                              
                             }
                           }
-                        let profileShort = {
-                          userId: this.props.auth.user._id,
-                          userType: this.props.auth.user.userType,
-                        };
+                     
                         const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
                         if(
                           firmuser
@@ -751,11 +749,8 @@ const gender = [
       );
 
       if (response) {
-          console.log(response)
-        let profileShort = {
-          userId: this.props.auth.user._id,
-          userType: this.props.auth.user.userType,
-        };
+       
+   
         const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
         if(
           firmuser
@@ -1428,9 +1423,12 @@ const gender = [
                     >
                       Save
                     </button>
-                    <div className="location-availability" onClick={()=>this.setModal(index)}>
+                    {this.props.profile && this.props.profile.branches&& this.props.profile.branches[index] && this.props.profile.branches[index].firstSave&&
+
+                      <div className="location-availability" onClick={()=>this.setModal(index)}>
                    <p>Availability</p>
                  </div>
+                    }
                   
                     {/* <button
                     name="accountBtn"
@@ -1440,7 +1438,7 @@ const gender = [
                     Delete Business
                   </button> */}
                   </div>
-                  {this.state.businesses[index].modal?(<AvailabilityModal modal={this.state.businesses[index].modal} index={index} set={this.setModal} />):null}
+                  {this.state.businesses[index].modal?(<AvailabilityModal modal={this.state.businesses[index].modal} branchId={this.props.profile.branches[index].id} index={index} set={this.setModal} />):null}
                 </div>
               </div>
             </>

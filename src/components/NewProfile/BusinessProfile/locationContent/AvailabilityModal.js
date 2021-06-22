@@ -1,8 +1,12 @@
 import React ,{useState,useEffect}from 'react'
 import CreateAvailability from "./CreateAvailability";
 import {message} from "antd"
+import * as userActions from "../../../../actions/userActions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
 const AvailabilityModal = (props) => {
-    console.log(props.modal)
+    console.log(props)
     const [createAvailabilityModal, setCreateAvailabilityModal] = useState(false);
     const[timezone,setTimezone]=useState({
         value:"",
@@ -65,37 +69,41 @@ const AvailabilityModal = (props) => {
     console.log(validity);
     if (validity == true) {
       let obj = {
-        sunday,
-        monday,
-        tuesday,
-        wednesday,
-        thursday,
-        friday,
-        saturday,
-        availabilityId:
-          props.chefAvailability &&
-          props.chefAvailability._id &&
-          props.chefAvailability._id,
+        availability:{
+
+          sunday,
+          monday,
+          tuesday,
+          wednesday,
+          thursday,
+          friday,
+          saturday,
+          timezone,
+        },
+         setAvailability:true,
       };
       console.log(obj);
-      let res;
-      if (props.chefAvailability) {
-        res = await props.actions.updateAvailability(
-          {...props, obj},
-          props.history
-        );
-      } else {
-        res = await props.actions.createAvailability(
-          {...props, obj},
-          props.history
-        );
-      }
 
-      if (res) {
+      let response =await props.actions.updateBranches(
+        obj,
+       props.branchId
+      );
+
+      if (response) {
         clearAvailabilityData();
         setCreateAvailabilityModal(false);
-        getChefAvailability();
+
+   
+        const firmuser=await props.actions.getLawfirmUserProfile(props.profile.id);
+        if(
+          firmuser
+        ){
+          console.log(firmuser)
+        }
       }
+
+ 
+      
     } else {
       message.error('Fix the errors below');
     }
@@ -201,55 +209,62 @@ const AvailabilityModal = (props) => {
     return validity;
   };
   
-  const getChefAvailability = async () => {
-    await props.actions.getChefAvailability({...props}, props.history);
-  };
+
   const initializeUpdateAvailability = async () => {
-    let chefAvail = props.chefAvailability;
+     if(props.branches && props.branches[props.index]){
+        
+      console.log(props.branches[props.index].availability.timezone)
+  
+         let chefAvail=props.branches[props.index].availability;
     if (chefAvail) {
       setSunday({
         ...sunday,
-        active: chefAvail.sunday ? true : false,
+        active: chefAvail.sunday.active ? true : false,
         startTime: chefAvail.sunday ? chefAvail.sunday.startTime : '',
         endTime: chefAvail.sunday ? chefAvail.sunday.endTime : '',
       });
       setMonday({
         ...monday,
-        active: chefAvail.monday ? true : false,
+        active: chefAvail.monday.active ? true : false,
         startTime: chefAvail.monday ? chefAvail.monday.startTime : '',
         endTime: chefAvail.monday ? chefAvail.monday.endTime : '',
       });
       setTuesday({
         ...tuesday,
-        active: chefAvail.tuesday ? true : false,
+        active: chefAvail.tuesday.active ? true : false,
         startTime: chefAvail.tuesday ? chefAvail.tuesday.startTime : '',
         endTime: chefAvail.tuesday ? chefAvail.tuesday.endTime : '',
       });
       setWednesday({
         ...wednesday,
-        active: chefAvail.wednesday ? true : false,
+        active: chefAvail.wednesday.active ? true : false,
         startTime: chefAvail.wednesday ? chefAvail.wednesday.startTime : '',
         endTime: chefAvail.wednesday ? chefAvail.wednesday.endTime : '',
       });
       setThursday({
         ...thursday,
-        active: chefAvail.thursday ? true : false,
+        active: chefAvail.thursday.active ? true : false,
         startTime: chefAvail.thursday ? chefAvail.thursday.startTime : '',
         endTime: chefAvail.thursday ? chefAvail.thursday.endTime : '',
       });
       setFriday({
         ...friday,
-        active: chefAvail.friday ? true : false,
+        active: chefAvail.friday.active? true : false,
         startTime: chefAvail.friday ? chefAvail.friday.startTime : '',
         endTime: chefAvail.friday ? chefAvail.friday.endTime : '',
       });
       setSaturday({
         ...saturday,
-        active: chefAvail.saturday ? true : false,
+        active: chefAvail.saturday.active ? true : false,
         startTime: chefAvail.saturday ? chefAvail.saturday.startTime : '',
         endTime: chefAvail.saturday ? chefAvail.saturday.endTime : '',
       });
+      setTimezone({
+        value:chefAvail.timezone? chefAvail.timezone.value:"",
+
+      });
     }
+  }
     setCreateAvailabilityModal(true);
 
 
@@ -296,10 +311,21 @@ const AvailabilityModal = (props) => {
         timezone={timezone}
         setTimezone={setTimezone}
         index={props.index}
+        
         {...props}
       />
         </div>
     )
 }
 
-export default AvailabilityModal
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile:state.auth.lawfirmUserProfile,
+  branches: state.auth.lawfirmUserProfile.branches,
+ 
+});
+
+const mapDispatchToProps = (dispatch) => ({
+actions: bindActionCreators(userActions, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AvailabilityModal);

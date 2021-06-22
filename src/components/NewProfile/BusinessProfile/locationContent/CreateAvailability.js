@@ -103,7 +103,7 @@ function CreateAvailability(props) {
             value:value,
             message:""
         })
-
+          break;
       case 'Sunday':
         setSunday({
           ...sunday,
@@ -171,10 +171,10 @@ function CreateAvailability(props) {
       default:
         break;
     }
-    console.log(sunday, monday);
-    console.log(timezone)
+  
   };
-
+  console.log(sunday, monday);
+  console.log(timezone)
   return (
     <Modal
       className="lessonModal chefModal"
@@ -197,10 +197,11 @@ function CreateAvailability(props) {
       </p>
       <TimezonePicker
                 absolute      = {false}
-                defaultValue  = "Europe/Moscow"
+           
                 placeholder   = "Select timezone..."
                 onChange      = {(newValue)=>onChange("timezone",newValue)}
                  style={{margin:"1rem 0rem"}}
+                 value={timezone.value}
                 />
       <label htmlFor="none">
         <div style={{marginBottom: 10}}>

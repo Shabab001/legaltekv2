@@ -28,3 +28,7 @@ background-color: white;
     margin-top: 1rem;
     background-color: white;
     }
+    .lawfirm-view-timezone,.lawfirm-view-schedule{
+        text-align: center;
+        padding-top: .5rem;
+    }

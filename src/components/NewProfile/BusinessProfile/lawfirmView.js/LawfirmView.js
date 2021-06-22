@@ -16,6 +16,9 @@ import {FaRegHeart} from "react-icons/fa"
 import {BsFillCalendarFill} from "react-icons/bs"
 import {GoGlobe} from "react-icons/go"
 import {Link} from "react-router-dom"
+import {  Select } from "antd";
+
+const { Option } = Select;
 
 
 
@@ -24,6 +27,8 @@ import {Link} from "react-router-dom"
 
 const LawfirmView = (props) => {
     const[lawFirm, setLawFirm]=useState(null)
+    const [selectedAddress, setSelectedAddress] = useState("")
+    const [selectedAddressIndex, setSelectedAddressIndex] = useState(null)
     let {id} =useParams()
     const getlawfirm=async()=>{
         await props.actions.getLawfirmById(id)
@@ -31,10 +36,17 @@ const LawfirmView = (props) => {
 
     useEffect(()=>{
        getlawfirm()
+    
    
 
     },[])
-    console.log(lawFirm)
+    useEffect(()=>{
+        if(props.lawfirmAgencies.singleLawfirm){
+            setSelectedAddress(props.lawfirmAgencies.singleLawfirm.branches[0].id)
+            setSelectedAddressIndex(0)
+        }
+    },[props.lawfirmAgencies.singleLawfirm])
+    console.log(selectedAddressIndex)
 
     return (
         <>
@@ -61,7 +73,19 @@ const LawfirmView = (props) => {
                      
                <div className="lawfirm-view-paras">
                    <p style={{color:"yellow"}}>{props.lawfirmAgencies.singleLawfirm.lawfirmName}</p>
-                   <p>lawfirm Address</p>
+                   <Select placeholder="Select Address"   value={selectedAddress} onChange={(val,obj)=>{
+              console.log(val,obj)
+              setSelectedAddressIndex(obj.key)
+              setSelectedAddress(val)}}>
+            {props.lawfirmAgencies.singleLawfirm.branches &&props.lawfirmAgencies.singleLawfirm.branches !==0&&
+              props.lawfirmAgencies.singleLawfirm.branches.map((it, ind) => (
+                <Option key={ind} value={it._id}> 
+                  {it.location &&
+                    it.location.businessAddress &&
+                    it.location.businessAddress}
+                </Option>
+              ))}
+            </Select>
                    <div className="lawfirm-view-sectios">
                        <div className="lawfirm-view-sec">
                            <p>13,10posts</p>
@@ -112,7 +136,7 @@ const LawfirmView = (props) => {
 
                </div>
            </div>
-            <Lower lawfirm={props.lawfirmAgencies.singleLawfirm}/>
+            <Lower lawfirm={props.lawfirmAgencies.singleLawfirm} index={selectedAddressIndex}/>
         </div>
 }
 </>

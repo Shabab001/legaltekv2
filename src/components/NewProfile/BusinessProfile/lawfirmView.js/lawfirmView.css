@@ -166,3 +166,25 @@ transform: scale(1.2);
 .email{
     color:yellow;
 }
+.ant-select.ant-select-single.ant-select-show-arrow {
+    width: 15rem;
+    background-color: var(--primary)  !important;
+    border: none  !important;
+    color:white !important;
+    outline: none !important;
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+background-color: transparent  !important;
+border:none !important;
+outline: none !important;
+}
+.ant-select-arrow{
+    color:white!important;
+}
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: var(--primary)  !important;
+    color:white !important;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+padding:0 !important;
+}
