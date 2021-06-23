@@ -57,14 +57,13 @@ color:yellow;
 }
 .lawfirm-social-insta,.lawfirm-social-twit,.lawfirm-social-linked,.lawfirm-social-fb{
 
-
-transition: transform .3s;
-
+transform: scale(1);
+transition: transform .3s ease-in;
 
 }
 .lawfirm-social-insta:hover
 ,.lawfirm-social-twit:hover,.lawfirm-social-linked:hover,.lawfirm-social-fb:hover{
-transform: scale(1.4);
+transform: scale(1.2);
 
 }
 .lawfirm-view-paras{

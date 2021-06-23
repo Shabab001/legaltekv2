@@ -1309,7 +1309,7 @@ delCoverImage=async()=>{
           className=""
           onClick={() =>
             this.props.history.push(
-              `/view-profile/${this.props.auth.user._id}`
+              `/lawfirm-view/${this.props.profile.id}`
             )
           }
         >
@@ -1450,6 +1450,8 @@ delCoverImage=async()=>{
                 placeholder="Language"
                 value={this.state.language.value}
                 // search
+                id="language"
+                style={{backgroundColor:"white !important"}}
                 showSearch="true"
                 selection="true"
                 onChange={(e, { value }) =>

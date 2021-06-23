@@ -48,3 +48,9 @@ export const GET_MESSAGES = "GET_MESSAGES"
 export const GET_LAWFIRMS= "GET_LAWFIRMS"
 export const GET_SINGLE_LAWFIRM= "GET_SINGLE_LAWFIRM"
 export const CLEAR_LAWFIRMS= "CLEAR_LAWFIRMS"
+
+// Lawfirm Agency Types
+
+export const GET_LAWYERS= "GET_LAWYERS"
+export const GET_SINGLE_LAWYER= "GET_SINGLE_LAWYER"
+export const CLEAR_LAWYERS= "CLEAR_LAWYERS"
