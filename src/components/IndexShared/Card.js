@@ -18,7 +18,7 @@ function Card(props) {
   return (
     <div className="lawyers-card">
     <div className="card-image">
-     <img className="lawyer-image" src={Lawyer} alt="lawyer"/>
+     <img className="lawyer-image" src={lawyer.profileImage?lawyer.profileImage.url:Lawyer} alt="lawyer"/>
     </div>
 
     <div className="card-description">

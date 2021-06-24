@@ -595,8 +595,8 @@ export class LawyerAccount extends Component {
           }
     
           data = {
-            firstName: state.firstName.value,
-            lastName: state.lastName.value,
+            firstname: state.firstName.value,
+            lastname: state.lastName.value,
             gender: state.gender.value,
             dateOfBirth: state.dob.value,
             language:state.language.value,
