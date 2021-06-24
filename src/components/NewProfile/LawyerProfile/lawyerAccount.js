@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {FiEdit2} from "react-icons/fi"
 import girl2 from "../../../assets/img/girl2.jpg";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -21,8 +22,9 @@ import PlacesAutocomplete, {
 import Geolocate from "./../../MiniComponents/Geolocate";
 import {AiOutlineUpload} from "react-icons/ai"
 import{makeRequest,deleteRequest} from "../../../utils/upload"
-
-
+import{MdRemove} from "react-icons/md"
+import {IoSaveOutline} from "react-icons/io5"
+import ChangeForm from "../../modals/changeForm";
 
 const {REACT_APP_API}= process.env
 const gender = [
@@ -47,7 +49,12 @@ export class LawyerAccount extends Component {
             dob: { stringValue: "", value: "", isValid: true, message: "" },
             email: { value: "", isValid: true, message: "" },
             password: { value: "", isValid: true, message: "" },
-            social: "",
+            social: {
+              facebook:"",
+              instagram:"",
+              linkedin:"",
+              twitter:""
+            },
             gender: { value: "", isValid: true, message: "" },
             language: { value: "", isValid: true, message: "" },
             currency: { value: "", isValid: true, message: "" },
@@ -68,6 +75,9 @@ export class LawyerAccount extends Component {
             formProfileDirty: false,
             formAccountDirty: false,
             formAllergensDirty: false,
+            disableEmail:true,
+            disablePass:true,
+            disablePhone:true,
             formSocialDirty: false,
             formDietaryPrefDirty: false,
             contactPhone: { value: "", isValid: true, message: "" },
@@ -83,6 +93,7 @@ export class LawyerAccount extends Component {
             profileCompletion : {},
             locality: localStorage.getItem("locality")? localStorage.getItem("locality"): "",
             localityCountry: localStorage.getItem("localityCountry")? localStorage.getItem("localityCountry") : ""
+
   
           };
           this.curr = React.createRef();
@@ -91,6 +102,7 @@ export class LawyerAccount extends Component {
           this.saveProfile = this.saveProfile.bind(this);
           this.onChange = this.onChange.bind(this);
           this.updateBillingAddress = this.updateBillingAddress.bind(this);
+          this.handleDisable=this.handleDisable.bind(this);
     }
 
 
@@ -103,36 +115,55 @@ export class LawyerAccount extends Component {
     
         const { profile } = props;
         if (state.formDirty == false) {
-          if (props.auth.isAuthenticated && profile) {
-            if (profile.firstName) {
-              state.firstName.value = profile.firstName;
-              state.fixedFirstName = profile.firstName
+          if (props.auth.isAuthenticated && profile && props.auth.user) {
+            if (profile.firstname) {
+              state.firstName.value = profile.firstname;
+              state.fixedFirstName = profile.firstname
 
             }
-            if (profile.lastName) {
-              state.lastName.value = profile.lastName;
-              state.fixedLastName = profile.lastName
+            if (profile.lastname) {
+              state.lastName.value = profile.lastname;
+              state.fixedLastName = profile.lastname
             }
-            if (profile.dob) {
-              state.dob.value = profile.dob;
+            if (profile.dateOfBirth) {
+              state.dob.value = profile.dateOfBirth;
             }
-            if (profile.phoneNo) {
-              state.phoneNo.value = profile.phoneNo;
-            }
+        
             if (profile.countryCode) {
               state.countryCode.value = profile.countryCode;
             }
-            if (profile.email) {
-              state.email.value = profile.email;
+            if (props.auth.user.phone) {
+              state.phoneNo.value = props.auth.user.phone;
+            }
+            if(props.auth.user.password){
+              state.password.value=props.auth.user.password;
+            }
+            if (props.auth.user.email) {
+              state.email.value = props.auth.user.email;
             }
             if (localStorage.getItem("currency")) {
               state.currency.value = localStorage.getItem("currency");
             }
-            if (profile.social) {
-              state.social = profile.social;
+            if (profile.facebook) {
+              state.social.facebook = profile.facebook;
+            }
+            if (profile.twitter) {
+              state.social.twitter = profile.twitter;
+            }
+            if (profile.instagram) {
+              state.social.instagram = profile.instagram;
+            }
+            if (profile.linkedin) {
+              state.social.linkedin = profile.linkedin;
             }
             if (profile.gender) {
               state.gender.value = profile.gender;
+            }
+            if (profile.language) {
+              state.language.value = profile.language;
+            }
+            if (profile.currency) {
+              state.currency.value = profile.currency;
             }
             if(profile.profileCompletion){
               state.profileCompletion = profile.profileCompletion
@@ -148,20 +179,8 @@ export class LawyerAccount extends Component {
               state.tempProfileImage=profile.profileImage.url;
             }
     
-            if (profile.dob) {
-              state.dob.value = profile.dob;
-            }
-            if (profile.language) {
-              state.language.value = profile.language;
-            }
+          
     
-            if (profile.allergens) {
-              state.allergens = profile.allergens;
-            }
-    
-            if (profile.dietaryPref) {
-              state.dietaryPref = profile.dietaryPref;
-            }
     
             if (profile.profileSummary) {
               state.profileSummary.value = profile.profileSummary;
@@ -192,7 +211,24 @@ export class LawyerAccount extends Component {
     
         return state;
       }
-    
+      handleDisable (e){
+        console.log(e)
+     
+         let state=this.state
+        if(e==="phoneNo"){
+          console.log(state.disableRegNo)
+          state.disablePhone=!state.disablePhone
+        }
+        if(e==="email"){
+          console.log(state.disableRegNo)
+          state.disableEmail=!state.disableEmail
+        }
+        if(e==="password"){
+          console.log(state.disableRegNo)
+          state.disablePass=!state.disablePass
+            }
+        this.setState(state);
+      }
       componentDidMount() {
         let profileDate = {
           userId: this.props.auth.user._id,
@@ -224,14 +260,14 @@ export class LawyerAccount extends Component {
 
         let form= new FormData()
         form.append("files",this.state.coverImage)
-        form.append("ref","lawyer_user")
+        form.append("ref","lawyer-user")
         form.append("refId",this.props.profile.id)
         form.append("field","coverImage")
      
           
           let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
           if(up){
-            this.props.actions.getCustomerUserProfile(this.props.profile.id)
+            this.props.actions.getLawyerProfile(this.props.profile.id)
             message.success("Cover Image Uploaded")
 
           }
@@ -251,7 +287,7 @@ export class LawyerAccount extends Component {
         let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.profileImage.id}`)
         if(del){
      
-        let up= await  this.props.actions.getCustomerUserProfile(this.props.profile.id)
+        let up= await  this.props.actions.getLawyerProfile(this.props.profile.id)
         if(up){
           this.setState({
             tempProfileImage:null,
@@ -271,7 +307,7 @@ export class LawyerAccount extends Component {
         if(this.props.profile.coverImage){
           let del= await deleteRequest(`${REACT_APP_API}/upload/files/${this.props.profile.coverImage.id}`)
           if(del){
-            let update= await this.props.actions.getCustomerUserProfile(this.props.profile.id)
+            let update= await this.props.actions.getLawyerProfile(this.props.profile.id)
             if(update){
 
                    this.setState({
@@ -292,7 +328,7 @@ export class LawyerAccount extends Component {
         if(this.state.profileImage){
           let form= new FormData()
           form.append("files",this.state.profileImage)
-          form.append("ref","lawyer_user")
+          form.append("ref","lawyer-user")
           form.append("refId",this.props.profile.id)
           form.append("field","profileImage")
 
@@ -300,7 +336,7 @@ export class LawyerAccount extends Component {
          
               let up =await makeRequest(`${REACT_APP_API}/upload`,"POST",form)
               if(up){
-                this.props.actions.getCustomerUserProfile(this.props.profile.id)
+                this.props.actions.getLawyerProfile(this.props.profile.id)
                 message.success("image uploaded")
               }
               
@@ -562,10 +598,21 @@ export class LawyerAccount extends Component {
             firstName: state.firstName.value,
             lastName: state.lastName.value,
             gender: state.gender.value,
-            dob: state.dob.value,
+            dateOfBirth: state.dob.value,
+            language:state.language.value,
+            currency:state.currency.value,
             profileSummary: state.profileSummary.value,
           };
-        }
+                      console.log(data);
+                      let updateUser = await this.props.actions.updateLawyerUserProfile(this.props.profile.id, data)
+                      if(updateUser){
+                        this.props.actions.getLawyerProfile(this.props.profile.id)
+                      }
+                      state.formDirty=false;
+                      return;
+                     
+         }
+      
     
         if (e.target.name == "accountBtn") {
           section = "account";
@@ -612,6 +659,19 @@ export class LawyerAccount extends Component {
         if (e.target.name == "socialBtn") {
           section = "social";
           data = { ...state.social };
+          let firmSave=await this.props.actions.updateLawyerUserProfile(this.props.profile.id, data);
+          if(firmSave){
+                 console.log(firmSave);
+                 this.props.actions.getLawyerProfile(this.props.profile.id);
+            
+          }
+         
+       
+            this.setState({
+              formDirty: false,
+             
+            });
+            return;
         }
     
         if (e.target.name == "dietaryPrefBtn") {
@@ -826,114 +886,118 @@ export class LawyerAccount extends Component {
         let filteredCountryCode = Countries;
         return (
           <div className=" user-profile">
-          <div className="coverImage">
-    {/* <img src="https://source.unsplash.com/random/1600x900" /> */}
-    <div className="overlay"></div>
-    {this.state.tempCoverImage || this.state.coverImage ? (
-      <img
-        src={
-          this.state.tempCoverImage
-            ? this.state.tempCoverImage
-            : this.state.coverImage
-            ? this.state.coverImage
-            : ""
-        }
-      />
-    ) : (
-      ""
-    )}
-      {!this.state.tempCoverImage?
-    <div className="addCoverImage">
-      <label
-        htmlFor="coverImage"
-        style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
-      >
-        <input
-        type="file"
-        id="coverImage"
-        onChange={(e) => {
-          if (e.target.files[0])
-          this.setState({
-            coverImage: e.target.files[0],
-            formImageDirty: true,
-            tempCoverImage: URL.createObjectURL(e.target.files[0]),
-          });
-        }}
-        style={{ display: "none" }}
-        />
-        <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
-      </label>
-      
-    </div>:null}
-    {!this.props.profile.coverImage?
-      this.state.tempCoverImage?
-    <div className="coverButtons">
-  
-      <button onClick={() => this.saveCoverImage()}>
-        <span>Save</span>
-      </button>
-
-
-
-    </div>:null:
-     <div className="coverButtons">
-  
-     <button onClick={() => this.delCoverImage()}>
-       <span>Remove</span>
-     </button>
-
-
-
-   </div>
-    }
-  </div>
-  <div className="profileHead">
-    <div className="profilePic">
-      {/* <img src={girl2} alt="girl" /> */}
-      {this.state.tempProfileImage || this.state.profileImage ? (
-        <img
-          src={
-            this.state.tempProfileImage
-              ? this.state.tempProfileImage
-              : this.state.profileImage
-              ? this.state.profileImage
-              : ""
-          }
-        />
-      ) : (
-        ""
-      )}
-       {!this.state.tempProfileImage?
-         
-      <label htmlFor="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
-        <input
-          type="file"
-          id="profileImage"
-          onChange={(e) => {
-            if (e.target.files[0])
+             <div className="coverImage">
+        {/* <img src="https://source.unsplash.com/random/1600x900" /> */}
+        <div className="overlay"></div>
+        {this.state.tempCoverImage || this.state.coverImage ? (
+          <img
+            src={
+              this.state.tempCoverImage
+                ? this.state.tempCoverImage
+                : this.state.coverImage
+                ? this.state.coverImage
+                : ""
+            }
+          />
+        ) : (
+          ""
+        )}
+          {!this.state.tempCoverImage?
+        <div className="addCoverImage">
+          <label
+            htmlFor="coverImage"
+            style={{ width: "100%", marginTop: 0, cursor: "pointer" }}
+          >
+            <input
+            type="file"
+            id="coverImage"
+            onChange={(e) => {
+              if (e.target.files[0])
               this.setState({
-           
-                profileImage: e.target.files[0],
-                tempProfileImage: URL.createObjectURL(e.target.files[0]),
+                coverImage: e.target.files[0],
+                formImageDirty: true,
+                tempCoverImage: URL.createObjectURL(e.target.files[0]),
               });
-          }}
-          style={{ display: "none" }}
-        />
+            }}
+            style={{ display: "none" }}
+            />
+            <UploadOutlined style={{ fontSize: "30px", color: "#f7f7f7" }} />
+          </label>
+          
+        </div>:null}
+        {!this.props.profile.coverImage?
+          this.state.tempCoverImage?
+        <div className="coverButtons">
+      
+          <button onClick={() => this.saveCoverImage()}>
+            <span>Save</span>
+          </button>
+    
 
-        <i className="fa fa-pencil" style={{ cursor: "pointer" }} />
-      </label>:null}
-      {!this.props.profile.profileImage?
-      <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
-  <AiOutlineUpload/>
-
-      </div>:
-         <div onClick ={this.delProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
-         <AiOutlineUpload/>
+    
+        </div>:null:
+         <div className="coverButtons">
+      
+         <button onClick={() => this.delCoverImage()}>
+           <span>Remove</span>
+         </button>
    
-             </div>
-      }
-    </div>
-  </div>
+
+   
+       </div>
+        }
+      </div>
+      <div className="profileHead">
+        <div className="profilePic">
+          {/* <img src={girl2} alt="girl" /> */}
+          {this.state.tempProfileImage || this.state.profileImage ? (
+            <img
+              src={
+                this.state.tempProfileImage
+                  ? this.state.tempProfileImage
+                  : this.state.profileImage
+                  ? this.state.profileImage
+                  : ""
+              }
+            />
+          ) : (
+            ""
+          )}
+           {!this.state.tempProfileImage?
+             
+          <label htmlFor="profileImage" style={{ width: "100%", position:'absolute',bottom:0 }}>
+            <input
+              type="file"
+              id="profileImage"
+              onChange={(e) => {
+                if (e.target.files[0])
+                  this.setState({
+               
+                    profileImage: e.target.files[0],
+                    tempProfileImage: URL.createObjectURL(e.target.files[0]),
+                  });
+              }}
+              style={{ display: "none" }}
+            />
+
+<div style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",right:"-12px"}}>
+      <AiOutlineUpload/>
+
+          </div>
+          </label>:null}
+          {!this.props.profile.profileImage?
+          this.state.profileImage?
+          <div onClick ={this.saveProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+      <IoSaveOutline/>
+
+          </div>:null:
+             <div onClick ={this.delProfileImage}style={{cursor:"pointer",borderRadius:"50px",height:"1.5rem" ,width:"1.5rem", backgroundColor:"#fc612b",color:"white",fontSize:"1.2rem",display:"flex",alignItems:"center",justifyContent:"center",position:"absolute",    bottom: "10px",left:"-12px"}}>
+             <MdRemove/>
+       
+                 </div>
+          }
+        </div>
+      </div>
   <div className="viewPublicProfile">
     <button
       className=""
@@ -1140,210 +1204,6 @@ export class LawyerAccount extends Component {
 
 
 
-              <div class="dividerL"></div>
-
-              <h1>Billing Contact</h1>
-        <div className="input-fields">
-          <div className="input-row">
-          <label
-          id="contactCountryCode"
-              className={`${
-                !this.state.contactCountryCode.isValid ? "error" : ""
-              } cc-label ${this.state.countryDrop1 && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.contactCountryCode.value}
-                autocomplete="off"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop1: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    contactCountryCode: {
-                      ...this.state.contactCountryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.contactCountryCode.value.length &&
-              this.state.contactCountryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop1 && (
-                <div
-                  className="countryDrop"
-                  onBlur={() => this.setState({ countryDrop1: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                contactCountryCode: {
-                                  ...this.state.contactCountryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop1: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.contactCountryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactCountryCode.message}
-                </p>
-              )}
-            </label>
-            <label className={!this.state.contactPhone.isValid ? "error" : ""}>
-              Phone No:
-              <input
-                name="contactPhone"
-                placeholder="Phone No."
-                value={this.state.contactPhone.value}
-                onChange={this.onChange}
-              />
-              {this.state.contactPhone.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactPhone.message}
-                </p>
-              )}
-            </label>
-            
-          </div>
-          <div className="input-row two-part">
-          <label className={`${!this.state.contactEmail.isValid ? "error" : ""} one-half`}>
-              Email Address:
-              <input
-                name="contactEmail"
-                placeholder="Email address"
-                value={this.state.contactEmail.value}
-                onChange={this.onChange}
-              />
-              {this.state.contactEmail.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.contactEmail.message}
-                </p>
-              )}
-            </label>
-            <label className="one-half">
-              Billing Location:
-             
-                  <Geolocate chooseAddress={(address) => this.updateBillingAddress(address)}/>
-            </label>
-          </div>
-          <div className="input-row two-part">
-          <label className="one-half">
-              Billing Address:
-              <input
-                name="billingAddress"
-                value={this.state.billingAddress.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Billing Address"
-              />
-            </label>
-            <label className="one-half">
-              Billing Country:
-             
-              <input
-                name="billingCountry"
-                value={this.state.billingCountry.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Billing Address"
-              />
-            </label>
-
-          </div>
-
-          <div className="input-row three-part">
-            <label className="one-third">
-              City:
-              <input
-                name="billingCity"
-                value={this.state.billingCity.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="City"
-              />
-            </label>
-            <label className="one-third">
-              Province/State:
-              <input
-                name="billingState"
-                value={this.state.billingState.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Province/State"
-              />
-            </label>
-            <label className="one-third">
-              Postal/Zip Code:
-              <input
-                name="billingZip"
-                value={this.state.billingZip.value}
-                onChange={(e) => this.onChange(e)}
-                placeholder="Postal/Zip Code"
-              />
-            </label>
-          </div>
-
-         
-          <div className="input-row-btns">
-            <button
-              name="contactBtn"
-              className="save-btn"
-              onClick={this.saveProfile}
-            >
-              Save
-            </button>
-
-          </div>
-        </div>
         <div className="dividerL"></div>
 
 
@@ -1439,14 +1299,21 @@ export class LawyerAccount extends Component {
         <h1>Account Settings</h1>
         <div className="input-fields">
           <div className="input-row">
-            <label className={!this.state.email.isValid ? "error" : ""}>
+          <label className={`${!this.state.email.isValid ? "error" : ""}`}>
               Email:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 name="email"
                 placeholder="Email"
                 value={this.state.email.value}
+                disabled={this.state.disableEmail}
                 onChange={(e) => this.onChange(e)}
               />
+                  <div  onClick={()=>this.handleDisable("email")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
               {this.state.email.message && (
                 <p>
                   {" "}
@@ -1455,14 +1322,23 @@ export class LawyerAccount extends Component {
                 </p>
               )}
             </label>
-            <label className={!this.state.phoneNo.isValid ? "error" : ""}>
+           
+
+            <label className={`${!this.state.phoneNo.isValid ? "error" : ""}`}>
               Phone No:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 name="phoneNo"
                 placeholder="Phone No."
                 value={this.state.phoneNo.value}
+                disabled={this.state.disablePhone}
                 onChange={(e) => this.onChange(e)}
               />
+                  <div  onClick={()=>this.handleDisable("phoneNo")}>
+
+                  <FiEdit2/>
+                  </div>
+                  </div>
               {this.state.phoneNo.message && (
                 <p>
                   {" "}
@@ -1470,127 +1346,31 @@ export class LawyerAccount extends Component {
                   {this.state.phoneNo.message}
                 </p>
               )}
+
             </label>
           </div>
           <div className="input-row">
-              
-            <label
-              className={`${
-                !this.state.countryCode.isValid ? "error" : ""
-              } cc-label account ${this.state.countryDrop && "focused"}`}
-              tabIndex={0}
-            >
-              Country Code:
-              <input
-                type="text"
-                name="countryCode"
-                placeholder="Country code"
-                value={this.state.countryCode.value}
-                autocomplete="off"
-                style={
-                  this.state.countryCode.value.match(/^\d+$/) && {
-                    paddingLeft: 20,
-                  }
-                }
-                className="cc-input"
-                onFocus={() => this.setState({ countryDrop: true })}
-                onChange={(e) => {
-                  if (e.target.value !== "") {
-                    filteredCountryCode = Countries.filter((item, index) => {
-                      const regex = new RegExp(e.target.value, "gi");
-                      return (
-                        item.name.match(e.target.value) ||
-                        item.dialCode.match(e.target.value) ||
-                        item.isoCode.match(e.target.value)
-                      );
-                    });
-                    this.setState({ filteredCountryCode: filteredCountryCode });
-                  } else {
-                    this.setState({ filteredCountryCode: Countries });
-                  }
-                  this.setState({
-                    formAccountDirty: true,
-                    formDirty: true,
-                    countryCode: {
-                      ...this.state.countryCode,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-              />
-              <i className="dropdown icon"></i>
-              {this.state.countryCode.value.length &&
-              this.state.countryCode.value.match(/^\d+$/) ? (
-                <i className="plus-icon">&#43;</i>
-              ) : null}
-              {this.state.countryDrop && (
-                <div
-                  className="countryDrop"
-                //   onBlur={() => this.setState({ countryDrop: false })}
-                >
-                  <ul>
-                    {this.state.filteredCountryCode &&
-                      this.state.filteredCountryCode.map((item, index) => (
-                        <li
-                          key={index}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (item && item.flag && item.dialCode) {
-                              this.setState({
-                                countryCode: {
-                                  ...this.state.countryCode,
-                                  value: item.dialCode.split("+")[1],
-                                },
-                                formDirty: true,
-                                countryDrop: false,
-                              });
-                            }
-                          }}
-                        >
-                          <img src={item.flag} height="16px" width="24px" />
-                          {item.name +
-                            " (" +
-                            item.isoCode +
-                            ") " +
-                            item.dialCode}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {this.state.countryCode.message && (
-                <p>
-                  {" "}
-                  <i className="fe fe-alert-triangle" />{" "}
-                  {this.state.countryCode.message}
-                </p>
-              )}
-            </label>
-            <label>
+       
+            
+            <label className={`${!this.state.password.isValid ? "error" : ""}`}>
               Password:
+              <div style={{display:"flex",alignItems:"center",gap:"1rem"}}>
               <input
                 name="password"
                 type="password"
                 placeholder="************"
                 value={this.state.password.value}
+                disabled={this.state.disablePass}
                 onChange={(e) => this.onChange(e)}
               />
+                  <div  onClick={()=>this.handleDisable("password")}>
+
+                <FiEdit2/>
+                </div>
+                </div>
             </label>
           </div>
-         
-          {/* <div className="input-row">
-            <label>
-              Password:
-              <input
-                type="password"
-                placeholder="************"
-                value={this.state.pass}
-                onChange={(e) => this.setState({ pass: e.target.value })}
-              />
-            </label>
-          </div> */}
-
-         
+        
           <label style={{ flexDirection: "row" }}>
             Deactivate your account? &nbsp;{" "}
             <span style={{ textDecoration: "underline", color: "red" }}>
@@ -1598,16 +1378,8 @@ export class LawyerAccount extends Component {
             </span>
           </label>
 
-          <button
-            name="accountBtn"
-            className="save-btn"
-            onClick={(e) => this.saveProfile(e)}
-          >
-            Save
-          </button>
+         
         </div>
-       
-
         <NavigationPrompt when={this.state.formDirty}>
           {({ onConfirm, onCancel }) => (
             <>
@@ -1653,7 +1425,9 @@ export class LawyerAccount extends Component {
           )}
         </NavigationPrompt>
 
-
+        {!this.state.disableEmail?<ChangeForm onClose={()=>this.handleDisable("email")} headerText={"Change Email"} email={this.state.email.value} phoneNo={this.state.password.value} onChange={this.onChange}  input1={"New email"} input2={"Password"} type={"email"} history={this.props.history}/>:null }
+      {!this.state.disablePhone?<ChangeForm onClose={()=>this.handleDisable("phoneNo")} headerText={"Change Phone Number"} input1={"New Phone Number"} input2={"Password"} type={"phone"} history={this.props.history}/>:null}
+      {!this.state.disablePass?<ChangeForm onClose={()=>this.handleDisable("password")} headerText={"Change Password"} type={"pass"} history={this.props.history}/>:null}
 
 
 
@@ -1666,7 +1440,7 @@ export class LawyerAccount extends Component {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    profile: state.auth.userProfile
+    profile: state.auth.lawyerUserProfile 
   });
   
   const mapDispatchToProps = (dispatch) => ({

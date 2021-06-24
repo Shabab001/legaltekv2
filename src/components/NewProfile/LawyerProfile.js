@@ -1,6 +1,7 @@
-import React, { useState, useEffect, lazy } from "react";
+import React, { useState, useEffect, lazy,memo } from "react";
 import "../../assets/css/newProfile.css";
 import { Link, Redirect,Switch,Route } from "react-router-dom";
+import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
 import Currencies from "../../assets/json/Currencies.json";
@@ -18,6 +19,9 @@ import Notifications from "./LawyerProfile/Notifications";
 import Appointments from "./LawyerProfile/Appointments";
 import LawyerAccount from "./LawyerProfile/lawyerAccount";
 import Management from "./LawyerProfile/management";
+
+
+
 const Profile = lazy( ()=>import("./UserProfile/Profile")) ;
 const Orders = lazy( ()=>import("./UserProfile/Orders")) ;
 
@@ -30,7 +34,7 @@ const gender = [
   { key: "other", text: "Other", value: "Other" },
 ];
 
-function LawtyerProfile(props) {
+function LawyerProfile(props) {
   // render() {
   const dateFormat = "YYYY/MM/DD";
   let filteredCurrencies = Currencies;
@@ -72,19 +76,31 @@ function LawtyerProfile(props) {
     props.actions.logout(props.history);
     message.success(<p> Logged out Successfully!!" &nbsp; &#9749;</p>);
   };
+  useEffect(()=>{
+    if(props.auth && props.auth.user && props.auth.user.lawyer_user){
+  
+      const fetchdata=async()=>{
+        
+        await props.actions.getProfile();
+        await props.actions.getLawyerProfile(props.auth.user.lawyer_user.id?props.auth.user.lawyer_user.id:props.auth.user.lawyer_users)
+      }
+      fetchdata()
+    }
+  },[])
 
   return (
     <div className={`newProfile ${sidebarCollapse? '' : 'sidebar-collapse' }`}>
       <div className="sidebar">
       <div className="sidebar-head">
       <button onClick={()=>setSidebarCollapse(!sidebarCollapse)}><i className={`fa  ${sidebarCollapse? "fa-chevron-left": "fa-chevron-right"} `} /></button>
-        <h3>{props.auth && props.auth.user && props.auth.user.firstName? props.auth.user.firstName : ""} {" "} {props.auth && props.auth.user && props.auth.user.lastName? props.auth.user.lastName : ""} {props.auth && props.auth.user && !props.auth.user.firstName &&  "User Profile"}</h3>
+      <h3>{props.lawyer && props.lawyer.firstname? props.lawyer.firstname : ""} {" "} {props.lawyer&& props.lawyer.lastname? props.lawyer.lastname : ""} {!props.lawyer.firstname &&  "User Profile"}</h3>
+        <p>Lawyer User</p>
     </div>
     <div className="profile-pic">
                
                
                </div>
-               <p>Lawyer Name</p>
+         
         <ul>
           <Link to="/lawyer/profile" data-tooltip="My Account">
             <li className={activeMenu === 1 ? "active" : ""}>
@@ -217,10 +233,10 @@ function LawtyerProfile(props) {
 // export default UserProfile;
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.auth.userProfile,
+  lawyer:state.auth.lawyerUserProfile
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
 });
-export default LawtyerProfile
+export default connect(mapStateToProps, mapDispatchToProps)(memo(LawyerProfile));

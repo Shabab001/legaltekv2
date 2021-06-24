@@ -2,16 +2,12 @@ import React,{useState,useEffect} from 'react'
 import "./listSidebar.css"
 import { connect } from "react-redux";
 const ListSidebar = (props) => {
-  let schedule=null
-    console.log(props.index)
  
 
-        if(props.lawfirmAgency.branches && props.lawfirmAgency.branches[props.index]){
-            
-            schedule=props.lawfirmAgency.branches[props.index].availability
-        }
+ 
 
-    console.log(schedule)
+ 
+
     return (
         <>
 
@@ -21,9 +17,9 @@ const ListSidebar = (props) => {
                     <p>Hours of Operation</p>
                 </div>
                 <div className="lawfirm-view-box1-body">
-                {props.lawfirmAgency.branches && props.lawfirmAgency.branches[props.index]&&props.lawfirmAgency.branches[props.index].setAvailability&&schedule?
-                <>
-                    <div className="lawfirm-view-timezone">
+                
+ 
+                    {/* <div className="lawfirm-view-timezone">
                         <p>TimeZone: {props.lawfirmAgency.branches[props.index].availability.timezone.value} </p>
                     </div>
                     <div className="lawfirm-view-schedule">
@@ -60,11 +56,11 @@ const ListSidebar = (props) => {
                         
 
                         </div>
-                        </>:
+                       
                          <div className="lawfirm-view-timezone">
                              <p>Schedule not fixed yet</p>
                           </div>
-                    }
+                    } */}
                 </div>
             </div>
             <div className="lawfirm-view-box2">

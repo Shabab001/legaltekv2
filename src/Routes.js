@@ -5,6 +5,7 @@ import EmailConfirmation2 from "./components/emailConfirmation/emailConfirmation
 import VerifyEmail from "./components/emailConfirmation/verifyEmail";
 import Guidelines from "./components/Guidelines";
 import LawfirmView from "./components/NewProfile/BusinessProfile/lawfirmView.js/LawfirmView";
+import LawyerView from "./components/NewProfile/LawyerProfile/lawyerView/LawyerView"
 
 
 
@@ -195,6 +196,7 @@ function Routes(props) {
             <Route exact path="/lawfirm/blogs/:id" component={BusinessProfile} />
             <Route exact path="/lawfirm/blogs/editblog/:id" component={BusinessProfile} />
             <Route exact path="/lawfirm-view/:id" component={LawfirmView} />
+            <Route exact path="/lawyer-view/:id" component={LawyerView} />
           
 
             {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?

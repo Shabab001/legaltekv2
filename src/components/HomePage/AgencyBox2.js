@@ -16,7 +16,7 @@ const AgencyBox2 = (props) => {
     return (
         <div className="agency-box">
             <div className="agency-box2-image">
-                 <img className="agency-building-image" src={Building} alt="building"/>
+                 <img className="agency-building-image" src={props.lawfirm.coverImage?props.lawfirm.coverImage.url:Building} alt="building"/>
                  <div className="agency-box2-overlay"></div>
             <div className="agency-box2-details">
 
@@ -59,7 +59,7 @@ const AgencyBox2 = (props) => {
                 <div className="agency-box-right" >
                     <div className="agency-right-box">
                         <div className="agency-right-para">
-                            <p>{props.lawfirm.firmProfile} </p>
+                            <p>{props.lawfirm.firmProfile?`${props.lawfirm.firmProfile.substring(0,125)}...`:""} </p>
                         </div>
                         <div className="agency-area">
                             <p>Area Of Practise</p>

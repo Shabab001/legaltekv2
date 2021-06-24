@@ -1,10 +1,10 @@
 import React,{useEffect,memo} from 'react'
 import "./Agencies.css"
-import { connect } from "react-redux"
 import AgencyBox2 from './AgencyBox2'
 import store from "../../store/index"
 import { bindActionCreators } from "redux";
-import * as Types from "../../actions/types"
+
+import { connect } from "react-redux"
 import * as lawfirmActions from "../../actions/lawfirmActions";
 import {Link } from "react-router-dom"
 const Agencies = (props) => {

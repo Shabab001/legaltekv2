@@ -32,20 +32,32 @@ function ChangeForm(props) {
           if(e.target.value !==""){
             setEmail(e.target.value)
           }
+          else{
+            setEmail("")
+          }
         }
         if(e.target.name==="oldPass"){
           if(e.target.value !==""){
             setOldPass(e.target.value)
+          }
+          else{
+            setOldPass("")
           }
         }
         if(e.target.name==="password"){
           if(e.target.value !==""){
             setPassword(e.target.value)
           }
+          else{
+            setPassword("")
+          }
         }
         if(e.target.name==="Confirm Password"){
           if(e.target.value !==""){
             setConfPassword(e.target.value)
+          }
+          else{
+            setConfPassword("")
           }
         }
         if(e.target.name==="phone"){

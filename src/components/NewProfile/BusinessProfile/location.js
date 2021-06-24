@@ -22,6 +22,11 @@ import { convertLegacyProps } from "antd/lib/button/button";
 import {ImCross} from "react-icons/im"
 import {deleteRequest} from "../../../utils/upload"
 
+import "./lessons.css"
+
+import AvailabilityModal from './locationContent/AvailabilityModal'
+import "./location.css"
+import { IoConstructOutline } from "react-icons/io5";
 
 const {REACT_APP_API}= process.env
 
@@ -53,6 +58,7 @@ const gender = [
       toolTip: "",
       profCompDiv: true,
       accordion: false,
+      modal:false,
       toolTip: "",
       profCompDiv: true,
       address: { value: "", isValid: true, message: "" },
@@ -97,7 +103,10 @@ const gender = [
             isValid: true,
             message: "",
             isDisabled: false,
+            
           },
+          save:false,
+          modal:false,
           social: { facebook: "", linkedin: "", instagram: "", twitter: "" },
           kitchenTypes: [],
           deliveryOpts: [],
@@ -131,6 +140,7 @@ const gender = [
     this.updateAddress = this.updateAddress.bind(this);
     this.addBusiness = this.addBusiness.bind(this);
     this.handleSelectionCanadaPost = this.handleSelectionCanadaPost.bind(this);
+    this.setModal=this.setModal.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -305,6 +315,13 @@ const gender = [
     }
     state.formDirty = true;
     this.setState(state);
+  }
+  setModal(index){
+       console.log(index)
+      let state=this.state;
+      state.businesses[index].modal=!state.businesses[index].modal
+      this.setState(state)
+    
   }
 
   onChange(e, index) {
@@ -684,10 +701,7 @@ const gender = [
                              
                             }
                           }
-                        let profileShort = {
-                          userId: this.props.auth.user._id,
-                          userType: this.props.auth.user.userType,
-                        };
+                     
                         const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
                         if(
                           firmuser
@@ -735,11 +749,8 @@ const gender = [
       );
 
       if (response) {
-          console.log(response)
-        let profileShort = {
-          userId: this.props.auth.user._id,
-          userType: this.props.auth.user.userType,
-        };
+       
+   
         const firmuser=await this.props.actions.getLawfirmUserProfile(this.props.profile.id, this.props.history);
         if(
           firmuser
@@ -960,8 +971,12 @@ const gender = [
     state.formDirty = true;
     this.setState(state, () => console.log(this.state));
   }
-
+ 
   render() {
+    
+    console.log("kdhfjkshfjksfjkjkdfsh")
+    let mo=this.state.modal
+    console.log( "mo",mo)
     let country = localStorage.getItem("country_short");
     let countryCondition =
       country != "US" &&
@@ -979,6 +994,7 @@ const gender = [
         {this.state.businesses &&
           this.state.businesses.map((item, index) => (
             <>
+
               <div className="location-header"
                 style={{ cursor: "pointer" }}
                 onClick={() => {
@@ -1396,10 +1412,7 @@ const gender = [
                     </label>
                   </div>
 
-                  
-                 
-
-                  
+             
 
                   <div className="dividerL"></div>
                   <div className="button-group">
@@ -1410,24 +1423,36 @@ const gender = [
                     >
                       Save
                     </button>
+                    {this.props.profile && this.props.profile.branches&& this.props.profile.branches[index] && this.props.profile.branches[index].firstSave&&
+
+                      <div className="location-availability" onClick={()=>this.setModal(index)}>
+                   <p>Availability</p>
+                 </div>
+                    }
+                  
                     {/* <button
                     name="accountBtn"
                     className="save-btn"
                     onClick={(e) => this.deleteBusiness(e, index)}
-                  >
+                    >
                     Delete Business
                   </button> */}
                   </div>
+                  {this.state.businesses[index].modal?(<AvailabilityModal modal={this.state.businesses[index].modal} branchId={this.props.profile.branches[index].id} index={index} set={this.setModal} />):null}
                 </div>
               </div>
             </>
           ))}
+       
+                        
+               
+
       </div>
     );
   }
  }
 
-
+    
  const mapStateToProps = (state) => ({
     auth: state.auth,
     profile: state.auth.lawfirmUserProfile
@@ -1436,4 +1461,4 @@ const gender = [
   const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(userActions, dispatch),
   });
-  export default connect(mapStateToProps, mapDispatchToProps)(memo(Location));
+  export default connect(mapStateToProps, mapDispatchToProps)(Location);

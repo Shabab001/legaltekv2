@@ -7,7 +7,8 @@ const init = {
     userProfile:{},
     packages:[],
     lawfirmUserProfile:{},
-    customerUserProfile:{}
+    customerUserProfile:{},
+    lawyerUserProfile:{}
 }
 
 
@@ -96,7 +97,14 @@ const authReducer = (state=init,action) =>{
                 customerUserProfile: action.payload.customerUserProfile
             }
         }
-    
+        case Types.GET_LAWYERUSER_PROFILE: {
+          
+            return {
+                ...state,
+                
+                lawyerUserProfile: action.payload.lawyerUserProfile
+            }
+        }
         default: return state
     }
 }

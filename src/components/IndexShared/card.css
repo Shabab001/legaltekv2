@@ -66,6 +66,9 @@
   justify-content: center;
   color: var(--primary);
 }
+.none{
+  color:white;
+}
 .lawyer-contact-icons4 {
   display: flex;
   width: 100%;
@@ -110,12 +113,12 @@
 }
 
 .messege-btn:hover {
-  background-color: #1c8bad;
+  background-color: var(--primary);
   border: none;
   color: white;
 }
 .messege-btn2:hover {
-  background-color: #1c8bad;
+  background-color: var(--primary);
   border: none;
   color: white;
 }

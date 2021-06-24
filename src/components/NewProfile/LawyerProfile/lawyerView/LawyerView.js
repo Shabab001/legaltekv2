@@ -1,4 +1,4 @@
-import React,{useState,useEffect,memo,Linking} from 'react'
+import React,{useState,useEffect,memo} from 'react'
 import "./lawfirmView.css"
 import { FaFacebookF,FaTwitter,FaLinkedinIn } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -9,7 +9,7 @@ import {BiLike} from "react-icons/bi"
 import Lower from './lower'
 import {GoVerified} from "react-icons/go"
 import {useParams} from "react-router-dom"
-import * as lawfirmActions from "../../../../actions/lawfirmActions";
+import * as lawyerActions from "../../../../actions/lawyerActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {FaRegHeart} from "react-icons/fa"
@@ -25,32 +25,32 @@ const { Option } = Select;
 
 
 
-const LawfirmView = (props) => {
+const LawyerView = (props) => {
     const[lawFirm, setLawFirm]=useState(null)
     const [selectedAddress, setSelectedAddress] = useState("")
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(null)
     let {id} =useParams()
-    const getlawfirm=async()=>{
-        await props.actions.getLawfirmById(id)
+    const getlawyers=async()=>{
+        await props.actions.getLawyerById(id)
     }
 
     useEffect(()=>{
-       getlawfirm()
+       getlawyers()
     
    
 
     },[])
-    useEffect(()=>{
-        if(props.lawfirmAgencies.singleLawfirm){
-            setSelectedAddress(props.lawfirmAgencies.singleLawfirm.branches[0].id)
-            setSelectedAddressIndex(0)
-        }
-    },[props.lawfirmAgencies.singleLawfirm])
-    console.log(selectedAddressIndex)
+    // useEffect(()=>{
+    //     if(props.lawyer.singleLawyer){
+    //         setSelectedAddress(props.lawfirmAgencies.singleLawfirm.branches[0].id)
+    //         setSelectedAddressIndex(0)
+    //     }
+    // },[props.lawyer.singleLawyer])
+    // console.log(selectedAddressIndex)
 
     return (
         <>
-        {props.lawfirmAgencies.singleLawfirm &&
+        {props.lawyer.singleLawyer &&
         <div className="lawfirm-view-main">
            <div className="lawfirm-upper">
                <div className="lawfirm-upper-left">
@@ -59,34 +59,21 @@ const LawfirmView = (props) => {
                        <div className="lawfirm-veiw-image-verified">
                            <GoVerified/>
                        </div>
-                     <img src={props.lawfirmAgencies.singleLawfirm.profileImage ?props.lawfirmAgencies.singleLawfirm.profileImage.url:"#"} alt="proPic" style={{height:"100%",width:"100%",objectFit:"cover",borderRadius:"8px"}}/>
-
+                     <img src={props.lawyer.singleLawyer.profileImage ?props.lawyer.singleLawyer.profileImage.url:"#"} alt="proPic" style={{height:"100%",width:"100%",objectFit:"cover",borderRadius:"8px"}}/>
                        </div>
                        
                    <div className="lawfirm-view-social">
-                       <RiInstagramFill className={props.lawfirmAgencies.singleLawfirm.instagram? `lawfirm-social-insta insta`:"lawfirm-social-insta"}/>
-                       <FaTwitter className={props.lawfirmAgencies.singleLawfirm.twitter? "lawfirm-social-twit twit":"lawfirm-social-twit"}/>
-                       <FaLinkedinIn className={props.lawfirmAgencies.singleLawfirm.linkedin? "lawfirm-social-linked link":"lawfirm-social-linked"}/>
-                       <FaFacebookF className={props.lawfirmAgencies.singleLawfirm.facebook? "lawfirm-social-fb fb" :"lawfirm-social-fb"}/>
+                       <RiInstagramFill className={props.lawyer.singleLawyer.instagram? `lawfirm-social-insta insta`:"lawfirm-social-insta"}/>
+                       <FaTwitter className={props.lawyer.singleLawyer.twitter? "lawfirm-social-twit twit":"lawfirm-social-twit"}/>
+                       <FaLinkedinIn className={props.lawyer.singleLawyer.linkedin? "lawfirm-social-linked link":"lawfirm-social-linked"}/>
+                       <FaFacebookF className={props.lawyer.singleLawyer.facebook? "lawfirm-social-fb fb" :"lawfirm-social-fb"}/>
                       
                    </div>
                </div>
                      
                <div className="lawfirm-view-paras">
-                   <p style={{color:"yellow"}}>{props.lawfirmAgencies.singleLawfirm.lawfirmName}</p>
-                   <Select placeholder="Select Address"   value={selectedAddress} onChange={(val,obj)=>{
-              console.log(val,obj)
-              setSelectedAddressIndex(obj.key)
-              setSelectedAddress(val)}}>
-            {props.lawfirmAgencies.singleLawfirm.branches &&props.lawfirmAgencies.singleLawfirm.branches !==0&&
-              props.lawfirmAgencies.singleLawfirm.branches.map((it, ind) => (
-                <Option key={ind} value={it._id}> 
-                  {it.location &&
-                    it.location.businessAddress &&
-                    it.location.businessAddress}
-                </Option>
-              ))}
-            </Select>
+                   <p style={{color:"yellow"}}>{props.lawyer.singleLawyer.firstname} {props.lawyer.singleLawyer.lastname}</p>
+            
                    <div className="lawfirm-view-sectios">
                        <div className="lawfirm-view-sec">
                            <p>13,10posts</p>
@@ -101,20 +88,17 @@ const LawfirmView = (props) => {
                            <p>13,10posts</p>
                        </div>
                    </div>
-                   <p style={{paddingTop:".8rem" ,color:"yellow"}}>{props.lawfirmAgencies.singleLawfirm.firmProfile}</p>
+                   <p style={{paddingTop:".8rem" ,color:"yellow"}}>ksdfjkdsjf</p>
                </div>
                </div>
                <div className="lawfirm-upper-right">
                    <div className="lawfirm-view-btns">
-
-
-                     <Link to={{pathname:`https://${props.lawfirmAgencies.singleLawfirm.websiteName}`}} target="_blank" >
+                     <Link to={{pathname:`https://`}} target="_blank" >
                     <div className="lawfirm-views-click"  >
                     
                             
-                        <GoGlobe fontSize="1.5rem" className={props.lawfirmAgencies.singleLawfirm.websiteName? "email" :""}/>
+                        <GoGlobe fontSize="1.5rem" className={props.lawyer.singleLawyer.websiteName? "email" :""}/>
                         
-
                      
                     </div>
                     </Link>
@@ -140,7 +124,7 @@ const LawfirmView = (props) => {
 
                </div>
            </div>
-            <Lower lawfirm={props.lawfirmAgencies.singleLawfirm} index={selectedAddressIndex}/>
+            <Lower />
         </div>
 }
 </>
@@ -149,11 +133,10 @@ const LawfirmView = (props) => {
 
 const mapStateToProps = (state) => ({
    auth: state.auth,
-   profile: state.auth.lawfirmUserProfile,
-   lawfirmAgencies:state.lawfirmAgencies
+    lawyer:state.lawyers
  });
  const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(lawfirmActions, dispatch),
+    actions: bindActionCreators(lawyerActions, dispatch),
   });
 
- export default connect(mapStateToProps,mapDispatchToProps)(memo(LawfirmView));
+ export default connect(mapStateToProps,mapDispatchToProps)(memo(LawyerView));

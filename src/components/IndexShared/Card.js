@@ -8,9 +8,13 @@ import {RiUserAddFill} from "react-icons/ri"
 import {GrMail} from "react-icons/gr"
 import{BsDot} from "react-icons/bs"
 import "./card.css"
+import {GoGlobe} from "react-icons/go"
 import Lawyer from "./images/lawyer.jpg"
-import WWW from "./images/website.svg"
+
 function Card(props) {
+  
+  let {lawyer}=props;
+  console.log(JSON.parse(lawyer.expertiseCategory).length)
   return (
     <div className="lawyers-card">
     <div className="card-image">
@@ -18,21 +22,21 @@ function Card(props) {
     </div>
 
     <div className="card-description">
-      <p>Hasan Masud</p>
-      <p>The Law Firm of Dorsey</p>
+      <p>{lawyer.firstname} {lawyer.lastname}</p>
+      <p>{lawyer.lawfirm_user.lawfirmName}</p>
       <div className="lawyer-contact-grid">
-            <div className="lawyer-contact-icons">
+            <div className={lawyer.qrCode?"lawyer-contact-icons": "lawyer-contact-icons none"}>
                  <IoQrCodeSharp/>
             </div>
-            <div className="lawyer-contact-icons">
+            <div className={lawyer.qrCode?"lawyer-contact-icons": "lawyer-contact-icons none"}>
                 
                 <FaUserAlt/>
             </div>
-            <div className="lawyer-contact-icons">
+            <div className={lawyer.qrCode?"lawyer-contact-icons": "lawyer-contact-icons none"}>
                  <ImMobile2/>
             </div>
-            <div className="lawyer-contact-icons4">
-                    <img src={WWW} style={{height:"1rem",width:"1rem"}} placeholder="www"/>
+            <div className={lawyer.qrCode?"lawyer-contact-icons": "lawyer-contact-icons none"}>
+                 <GoGlobe/>
             </div>
             
       </div>
@@ -54,19 +58,39 @@ function Card(props) {
     <div className="lawyer-area">
       <p>Area Of Practise</p>
       <div className="lawyer-expertise">
-      <p>Qatar Stock Exchange</p>
-       <BsDot style={{fontSize:"1rem"}}/>
-       <p>Dubai Stock Exchange</p>
+     { JSON.parse(lawyer.expertiseCategory).map((item,index)=>{
+
+            return(
+             
+              <div key={index} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                {index+1 ===JSON.parse(lawyer.expertiseCategory).length?
+                     <p >{item}</p>:
+                       
+                      <>
+                       <p >{item}</p>
+                       <BsDot style={{fontSize:"1rem"}}/>
+                      
+                       </>
+
+              
+              }
+            
+              </div>
+          
+            )
+
+     })}
+   
       </div>
       
-      <p>Riyad Stock Exchange</p>
+   
 
     </div>
     <div className="card-icons">
-     <RiInstagramFill  style={{color:"#c32aa3"}}/>
-     <FaTwitter style={{color:"#1da1f2"}}/>
-     <FaLinkedinIn style={{color:"#0a66c2"}}/>
-     <FaFacebookF style={{color:"#3b5998"}}/>
+                     <RiInstagramFill className={lawyer.instagram? `lawfirm-social-insta insta`:"lawfirm-social-insta"}/>
+                       <FaTwitter className={lawyer.twitter? "lawfirm-social-twit twit":"lawfirm-social-twit"}/>
+                       <FaLinkedinIn className={lawyer.linkedin? "lawfirm-social-linked link":"lawfirm-social-linked"}/>
+                       <FaFacebookF className={lawyer.facebook? "lawfirm-social-fb fb" :"lawfirm-social-fb"}/>
     </div>
 
     </div>
