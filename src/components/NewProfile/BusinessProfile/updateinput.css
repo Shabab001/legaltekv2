@@ -1,4 +1,4 @@
-.list-s-input {
+.list-s-input2 {
   display: flex;
   align-items: center;
 
@@ -7,18 +7,25 @@
   width: 100%;
   height: 100%;
 }
-.s-input {
+.s-input2 {
   width: 100%;
   height: 100%;
   font-size: 0.9rem;
   border: none;
   outline: none;
   cursor: pointer;
+  border-radius: 4px;
 }
-.list-s-input select {
+.s-input2:hover {
+  border: 1px solid #49c5b6;
+}
+.s-input2:focus {
+  border: 2px solid #49c5b6;
+}
+.list-s-input2 select {
   width: 100%;
   background-color: white;
 }
-.list-s-input select option:hover {
+.list-s-input2 select option:hover {
   background-color: var(--primary);
 }

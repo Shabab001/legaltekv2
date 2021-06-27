@@ -56,31 +56,37 @@ console.log(lawyerProfile)
                  <BsCheck className={check?"list-minimize2":"list-minimize1"}/>
                  </div>
                  <div className="lawyer-name">
-                     <p>{lawyerProfile.username}</p>
-                 </div>
-                 <div className="lawyer-pos">
-                     <p>{lawyer.title}</p>
-                     <p>{lawyer.experience}</p>
-                 </div>
-                 <div className="lawyer-email">
-                     <p>{lawyerProfile.email}</p>
-                      <p>{lawyer.mobile}</p>
-                 </div>
-                 <div className="lawyer-status">
-                     <p>{lawyer.address}</p>
-                     <p>{lawyer.category}</p>
+                   <p>{lawyerProfile?lawyerProfile.username:""}</p>
+               </div>
+               <div className="lawyer-pos">
+               {lawyer &&JSON.parse(lawyer.specializedRole).map((item)=>
+                       
+                       <p>{item}</p>
+                    )}
                     
-                 </div>
-                 <div className="lawyer-password">
-                     <p>{lawyerProfile.password}</p>
+               </div>
+               <div className="lawyer-email">
+                   <p>{lawyerProfile?lawyerProfile.email:""}</p>
+                   
+               </div>
+               <div className="lawyer-status">
+               <p>{lawyerProfile?lawyerProfile.phone:""}</p>
+                  
+                  
+               </div>
+               <div className="lawyer-password">
+               {lawyerProfile&&JSON.parse(lawyerProfile.lawyer_user.expertiseCategory).map((item)=>
+                       
+                       <p>{item}</p>
+                    )}
                     
                    
                  </div>
-                 <div className="lawyer-cat">
-                     <p>{lawyer.status}</p>
-                    
-                     <p>{lawyer.caseHandled}</p>
-                 </div>
+               <div className="lawyer-cat">
+                   <p>Active</p>
+                  
+                   <p>{lawyer.caseHandled}</p>
+               </div>
                  <div className="lawyer-edit" onClick={handleDropdown}>
                     <FiChevronUp/>
                  </div>
@@ -164,29 +170,31 @@ console.log(lawyerProfile)
                    <p>{lawyerProfile?lawyerProfile.username:""}</p>
                </div>
                <div className="lawyer-pos">
-                   <p>{lawyer.title}</p>
-                   <p>{lawyer.experience}</p>
+               {lawyer &&JSON.parse(lawyer.specializedRole).map((item)=>
+                       
+                       <p>{item}</p>
+                    )}
+                    
                </div>
                <div className="lawyer-email">
                    <p>{lawyerProfile?lawyerProfile.email:""}</p>
-                    <p>{lawyerProfile?lawyerProfile.phone:""}</p>
+                
                </div>
                <div className="lawyer-status">
-                   <p>{lawyer.address}</p>
-                   {lawyerProfile&&JSON.parse(lawyerProfile.lawyer_user.expertiseCategory).map((item)=>
-                       
-                          <p>{item}</p>
-                       )}
+               <p>{lawyerProfile?lawyerProfile.phone:""}</p>
                   
                   
                </div>
                <div className="lawyer-password">
-                     <p>{lawyer.password}</p>
+               {lawyerProfile&&JSON.parse(lawyerProfile.lawyer_user.expertiseCategory).map((item)=>
+                       
+                       <p>{item}</p>
+                    )}
                     
                    
                  </div>
                <div className="lawyer-cat">
-                   <p>{lawyer.status}</p>
+                   <p>Active</p>
                   
                    <p>{lawyer.caseHandled}</p>
                </div>

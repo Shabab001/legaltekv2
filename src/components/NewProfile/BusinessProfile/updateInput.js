@@ -1,8 +1,8 @@
 import React from 'react'
-import "./listinput.css"
+import "./updateinput.css"
 const UpdateInput = (props) => {
     return (
-        <div className="list-s-input">
+        <div className="list-s-input2">
         {props.icon? <props.icon style={{fontSize:"1.1rem"}}/>:null}
        {props.type==="dropdown"? 
        <select name={props.label} >
@@ -11,7 +11,7 @@ const UpdateInput = (props) => {
           <option value="C">Cat</option>
        </select>
        
-       :<input className="s-input" type={props.type} placeholder={props.placeholder}/>}
+       :<input className="s-input2" type={props.type} placeholder={props.placeholder}/>}
     </div>
     )
 }

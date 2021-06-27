@@ -1,5 +1,6 @@
 import React from 'react'
 import {FiPlus} from "react-icons/fi"
+import "./lawyerAdd.css"
 const LawyerAdd = () => {
     const handleModal =()=>{
         console.log("hi")
@@ -9,7 +10,7 @@ const LawyerAdd = () => {
         <div className="add-lawyer" onClick={handleModal}><p> 
                      Add Lawyer
                        </p>
-                     <FiPlus/>
+                     <FiPlaaus/>
                   </div>
     )
 }

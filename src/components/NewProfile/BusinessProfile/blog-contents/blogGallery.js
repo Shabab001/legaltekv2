@@ -11,8 +11,7 @@ import { fromString } from 'uuidv4'
 import * as blogActions from "../../../../actions/blogActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
-
+import {GoPlus} from "react-icons/go"
 
 const BlogGallery = (props) => {
    const [posts,setPosts]=useState([])
@@ -37,29 +36,40 @@ const BlogGallery = (props) => {
         
   
         <div className="bgallery-main">
-            <div className="bgallery-header">
-                    <Link to="/lawfirm/blogs/createblog">
+        
                 <div  className="bgallery-header-title">
                     <p>Blogs</p>
                     
-                    < BsPlusSquareFill color="red" style={{fontSize:"1.5rem"}}/>
-                </div>
+                    <Link to="/lawfirm/blogs/createblog" style={{display:'flex',alignItems:"center"}}>
+                  <GoPlus/>
                    </Link>
-                <div className="bgallery-header-cat">
-                    <p>All</p>
-                    <BsDot style={{color:"red",fontSize:"1.2rem"}}/>
-                    <p>Common</p>
-                    <BsDot style={{color:"red",fontSize:"1.2rem"}}/>
-                    <p>Administrative</p>
-                    <BsDot style={{color:"red",fontSize:"1.2rem"}}/>
-                    <p>Criminal</p>
-                    <BsDot style={{color:"red",fontSize:"1.2rem"}}/>
-                    <p>Civil</p>
                 </div>
-                <div className="bgallery-header-Search">
-                    <BiSearch/>
+                <div className="bg-text">
+
+               <p>We are committed to helping Law Firms set-up and maintain their Legal Practise online. our digital software equips you to communicate and practise on a global scale. When searching for the right Legal Professionals to address client's needs, they will see your verified badge on profile listing. Verified bdges indicate Law Firm has undergone and been approved by our vetting agency</p>
                 </div>
-            </div>
+                    
+                <div className="list-search3">
+                  
+                    <input className="bg-search-sec" type="text" placeholder="search" />
+
+               
+                  <div className="bg-input-grid">
+
+                  <div className="bg-sort-inputs">
+                    <p>Area of Practise</p>
+                    <input/>
+                  </div>
+                  <div className="bg-sort-inputs">
+                    <p>sort by</p>
+                    <input/>
+                  </div>
+                  <div className="bg-sort-inputs">
+                    <p>Select Date</p>
+                    <input/>
+                  </div>
+                  </div>
+                  </div>   
             <div className="bgallery-body-container">
                {(posts && posts.length!==0)?
                  props.blogs.posts.map((item,index)=>{

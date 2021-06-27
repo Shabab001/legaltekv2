@@ -1,0 +1,9 @@
+.add-lawyer p:nth-child(1) {
+  font-size: 2rem;
+}
+.add-lawyer {
+  background-color: aqua;
+}
+.focusOn {
+  border: 2px solid #49c5b6;
+}
