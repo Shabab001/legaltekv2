@@ -12,10 +12,16 @@ h4 {
 }
 .lawyers-heading h4 {
   margin-top: 1rem;
-  margin-left: 10rem;
+  margin-left: 9rem;
   font-size: 2rem;
   padding-left: 1rem;
+
   border-left: 4px solid var(--secondary);
+}
+.lawyers-heading p {
+  margin-top: 0.6rem;
+  margin-left: 10.5rem;
+  margin-right: 8.5rem;
 }
 .Featured-lawyers {
   max-width: 1850px;
@@ -25,7 +31,7 @@ h4 {
   padding: 1rem 9rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-template-rows: repeat(2, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem 1rem;
   grid-auto-flow: wrap;
 }
@@ -39,5 +45,11 @@ h4 {
     font-size: 1rem;
     padding: 0.5rem;
     border-left: 3px solid var(--secondary);
+  }
+  .lawyers-heading p {
+    margin-top: 1rem 1rem;
+    margin-left: 1rem;
+    margin-right: 0.3rem;
+    font-size: 0.8rem;
   }
 }

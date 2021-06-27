@@ -12,8 +12,9 @@ function Stats() {
     <div className="stats-main">
         <div className="stats-left">
            <div className="stats-title">
-               <p>We Provide Comfortable <br/>Workspace For You</p>
-               <p>It is a long established fact that a reader will be<br/> distracted by the readable content of a page <br/>when looking at its layout.</p>
+               <p>Stay Informed!<br/>The latest in Legal<br/>Developments</p>
+               <p>We are here to give you few reasons to make an effort and try to be aware of what's going on with the Legal Industry.</p>
+               <p>Since society and laws are constantly evolving, get involved in making all the needed positive changes</p>
            </div>
            <div className="stats-numbers-sec"> 
              <div className="stats-number">

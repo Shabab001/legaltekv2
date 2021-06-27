@@ -14,7 +14,7 @@
 }
 @media screen and (max-width: 1024px) {
   .agency-container {
-    padding: 5rem 5%;
+    padding: 1rem 5%;
   }
   .agency-grid {
     gap: 2rem;

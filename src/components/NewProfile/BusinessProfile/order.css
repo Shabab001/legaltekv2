@@ -5,7 +5,11 @@ p {
   font-size: 2rem;
 }
 .order-headings p:nth-child(2) {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.order-headings {
+  width: 70rem;
 }
 .order-percentage {
   padding: 3rem 0;

@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: space-between;
   font-size: 1rem;
-  background-color: #eeeeee;
+  background-color: var(--primary);
 
   border: 2px solid #dddddd;
 }
@@ -66,8 +66,8 @@
   justify-content: center;
   color: var(--primary);
 }
-.none{
-  color:white;
+.none {
+  color: white;
 }
 .lawyer-contact-icons4 {
   display: flex;

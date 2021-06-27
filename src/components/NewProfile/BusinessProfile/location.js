@@ -21,7 +21,7 @@ import Search from "../../MiniComponents/CanadaPost/Search";
 import { convertLegacyProps } from "antd/lib/button/button";
 import {ImCross} from "react-icons/im"
 import {deleteRequest} from "../../../utils/upload"
-
+import {GoPlus} from "react-icons/go"
 import "./lessons.css"
 
 import AvailabilityModal from './locationContent/AvailabilityModal'
@@ -988,9 +988,16 @@ const gender = [
     let filteredCountryCode = Countries;
     return (
       <div className="user-profile tab">
-        <button className="blu-btn" onClick={this.addBusiness}>
-          Add Location
-        </button>
+        <div className="location-add-btn ">
+
+        <p>Law Firm Locations</p>
+       
+        <GoPlus  onClick={this.addBusiness}/>
+        </div>
+        <div className="location-headings">
+          <p>Please add a location for each of your Law Firm's physical location. You will need of provide proof of Business Address for each of your locations</p>
+          <p>NOTE: Please ensure your location is entered correctly as time you chnage location it will go through the verification process</p>
+        </div>
         {this.state.businesses &&
           this.state.businesses.map((item, index) => (
             <>

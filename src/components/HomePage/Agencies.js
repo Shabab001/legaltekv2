@@ -19,7 +19,8 @@ const Agencies = (props) => {
     return (
         <div className="agency-main">
                     <div className="lawyers-heading" >
-        <h4 >Featured Law Firms</h4>
+        <h4 >Featured Law Firms in Your Area</h4>
+        <p>Law Firm profiles are always kept up-to-date with accurate and verified information and details. We thoroughly review a Law Firm's information, registration credentials to confirm requirements and prerequisites are met. We ensure that the advice and services you receive meet your expectations from Legal Professional licensed and has the practice privileges in your area and affiliated with a registered Law Firm. Benefit from our global list of verified Legal Professional at reputed Law Firms.</p>
       </div>
             <div className="agency-container">
     

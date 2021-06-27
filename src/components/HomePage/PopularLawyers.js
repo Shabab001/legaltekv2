@@ -20,7 +20,8 @@ function PopularLawyers(props) {
   return (
     <div className="PopularLawyers">
       <div className="lawyers-heading" >
-        <h4 >Featured Lawyers</h4>
+        <h4 >Featured Lawyers in Your Area</h4>
+        <p>Interacting with a verified Legal Professional means receiving legal advice from a fully vetted legal professional. Our Legal Professionals undergo an in-depth verification procedure to set-up their services with us. We implement a multi-step credentialing process to authenticate the validity of our Legal Professional which gives you peace of mind that the advice you are receiving is from a qualified licensed Legal Professional who is fully aware of the laws and regulations of your jurisdiction.</p>
       </div>
     
    

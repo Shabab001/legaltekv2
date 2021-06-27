@@ -26,6 +26,9 @@
   padding-top: 1.5rem;
   font-size: calc(0.7vw + 0.4rem);
 }
+.stats-left p:nth-child(3) {
+  font-size: calc(0.7vw + 0.4rem);
+}
 .stats-numbers-sec {
   padding-top: 1.5rem;
   display: flex;
@@ -114,8 +117,11 @@
     font-size: 3rem;
     font-weight: bold;
   }
-  .stats-left P:nth-child(2) {
+  .stats-left p:nth-child(2) {
     padding-top: 2rem;
+    font-size: 1.2rem;
+  }
+  .stats-left p:nth-child(3) {
     font-size: 1.2rem;
   }
   .stats-numbers-sec p:nth-child(1) {
@@ -164,8 +170,11 @@
     font-size: 1.5rem;
     font-weight: bold;
   }
-  .stats-left P:nth-child(2) {
+  .stats-left p:nth-child(2) {
     padding-top: 1.5rem;
+    font-size: 0.8rem;
+  }
+  .stats-left p:nth-child(3) {
     font-size: 0.8rem;
   }
   .stats-numbers-sec p:nth-child(1) {

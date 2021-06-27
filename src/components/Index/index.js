@@ -148,9 +148,9 @@ window.addEventListener('scroll',handleScroll)
          <div className="banner-right-main">
            <div className="banner-left-upper">
                 <div className="banner-left-headings">
-                  <p>Online legal appointments</p>
-                   <p>With a verified specialist.</p>
-                   <p>Best Lawyer with Professional Experiences <br/>you can only find in LegalTek</p>
+                  <p> Book Online Appointments</p>
+                   <p>With a verified Legal Professional.</p>
+                   <p>Consult with the right Legal Professional in-person or using our secure video technology, <br/>free to use,and only takes a few minutes</p>
                 </div>
               <SearchBar/>
            

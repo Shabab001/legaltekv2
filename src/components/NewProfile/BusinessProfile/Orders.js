@@ -34,10 +34,10 @@ useEffect(()=>{
 },[props.profile.lawFirmRegistrationNumber, props.profile.branches])
 
   return (
-    <div>
+    <div style={{color:"var(--primary)"}}>
       <div className="order-headings">
-        <p>Upload Your Supporting Documents</p>
-        <p>Please Upload images of documents below. Some more info about required files</p>
+        <p>Upload Required Documents to get Verified</p>
+        <p>We are commited to help Law Firms setting-up and maintaing their Legal Practise online. Our digital software equips you to communicate and practise on a globe scale. When searching for the right Legal Professionals to address client's needs, they will verified Badge on your public listing. Verified Badges indicate the Law Firm has undergone and approved by our vetting agency.</p>
       </div>
       <div className="order-percentage">
         <p>0%</p>
