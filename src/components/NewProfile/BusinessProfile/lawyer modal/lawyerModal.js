@@ -10,7 +10,9 @@ import { message , Select} from "antd";
 import validator from "validator";
 import PhoneInput from "react-phone-input-2";
 import { Multiselect } from 'multiselect-react-dropdown';
+import{ lawCatsModal} from "./lawCats"
 
+console.log(lawCatsModal)
 
 const LawyerModal = (props) => {
   const [otp,setOtp]=useState(false)
@@ -34,6 +36,7 @@ const LawyerModal = (props) => {
     isValid: true,
   });
   
+
 const[lawyerInputs,setLawyerInput]=useState({
   username:"",
   firstname:"",
@@ -50,7 +53,7 @@ const[lawyerInputs,setLawyerInput]=useState({
 
 })
 const options= [{value: 'Senior-Partner', id: 1},{value: 'Partner', id: 2},{value: 'Assosiate', id: 3},{value: 'Legal-Assistant', id: 4},{value: 'Law-Clerk', id: 5}]
-const categories =[{value:"criminology" ,id:1},{value:"civil", id:3} ]
+const categories =[...lawCatsModal ]
 const onSelect=(selectedList, selectedItem) =>{
   console.log(selectedItem.value)
   let arr =lawyerInputs.specializedRole;
