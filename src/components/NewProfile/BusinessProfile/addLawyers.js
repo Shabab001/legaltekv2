@@ -60,6 +60,9 @@ const AddLawyers = (props) => {
     setFocus5(false)
     setFocus6(false)
   }
+  const searchHandler =()=>{
+
+  }
     return (
         <div className="list-main" onClick={handleFocus}>
           <div className="list-heading-grid">
@@ -73,7 +76,7 @@ const AddLawyers = (props) => {
                     
                   <GoPlus onClick={handleModal}/>
           </div>
-            <p style={{color:"var(--primary)"}}>it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing</p>
+            <p style={{color:"var(--primary)"}}>Please add the lawyers in your firm here. Your license with us determines how many lawyers you can add here. Removing a lawyer deactivates the lawyer in the system and frees up a license that can be used to add another lawyer. You can also change/ rename a lawyer or edit lawyer information from here. When you add a New Lawyer they will need to verify their email address and/or phone number to activate their account.</p>
           <div className="lawyer-limit">
                        <p>Add Lawyers Limit:{addLawyersLimit}</p>
                      </div>
@@ -87,19 +90,19 @@ const AddLawyers = (props) => {
                    
                     </div>
                      <div className="list-search-name">
-                                 <ListSearchLabel label={"Name"}/>
+                                 <ListSearchLabel label={"Firstname"}/>
                                  </div>
-                        <div className="list-search-pos">
-                                 <ListSearchLabel label={"Role"}/>
+                        <div className="list-search-name">
+                                 <ListSearchLabel label={"Lastname"}/>
                                  </div>
                          <div className="list-search-email">
+                                 <ListSearchLabel label={"Username"}/>
+                                 </div>
+                         <div className="list-search-name">
                                  <ListSearchLabel label={"Email"}/>
                                  </div>
-                         <div className="list-search-address">
+                                 <div className="list-search-name">
                                  <ListSearchLabel label={"Phone"}/>
-                                 </div>
-                                 <div className="list-search-address">
-                                 <ListSearchLabel label={"Category"}/>
                                  </div>
                           <div className="list-search-status">
                                  <ListSearchLabel label={"Status"}/>
@@ -117,23 +120,33 @@ const AddLawyers = (props) => {
                                   
                                </div>
                                <div className="list-search-name">
-                                 <ListSearchLabel label={"Name"}/>
+                                 <ListSearchLabel label={"Firstname"}/>
                                  <div className={focus1?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
                                    setFocus1(true)
                                  }} >
-                                 <ListSearchInput label={"Name"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput label={"Fristname"} icon={AiOutlineSearch} type={"text"}/>
                                   </div>                               
                                </div>
-                               <div className="list-search-pos">
-                                 <ListSearchLabel label={"Role"} />
+                               <div className="list-search-role">
+                                 <ListSearchLabel label={"Lastname"} />
                                  <div className={focus2?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
                                    setFocus2(true)
                                  }}>
-                                 <ListSearchInput label={"Position"}  type={"dropdown"}/>
+                                 <ListSearchInput label={"Lastname"}  type={"text"}/>
+                                 </div>
+                               </div>
+                               <div className="list-search-category">
+                                 <ListSearchLabel label={"Username"}/>
+                                 <div className={focus5?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
+                                   e.stopPropagation()
+                                   handleFocus();
+                                   setFocus5(true)
+                                 }}>
+                                 <ListSearchInput label={"Password"} icon={AiOutlineSearch} type={"text"}/>
                                  </div>
                                </div>
                                <div className="list-search-email">
@@ -146,7 +159,7 @@ const AddLawyers = (props) => {
                                  <ListSearchInput  label={"Email"} icon={AiOutlineSearch} type={"text"}/>
                                  </div>
                                </div>
-                               <div className="list-search-address">
+                               <div className="list-search-email">
                                  <ListSearchLabel label={"Phone"}/>
                                  <div  className={focus4?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
@@ -156,19 +169,10 @@ const AddLawyers = (props) => {
                                  <ListSearchInput label={"Phone"} icon={AiOutlineSearch} type={"text"}/>
                                  </div>
                                </div>
-                               <div className="list-search-address">
-                                 <ListSearchLabel label={"Category"}/>
-                                 <div className={focus5?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
-                                   e.stopPropagation()
-                                   handleFocus();
-                                   setFocus5(true)
-                                 }}>
-                                 <ListSearchInput label={"Password"} icon={AiOutlineSearch} type={"text"}/>
-                                 </div>
-                               </div>
+                          
                                <div className="list-search-status">
                                  <ListSearchLabel label={"Status"}/>
-                                 <div className={focus6?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
+                                 <div className={focus6?"list-input-container-drop input1":"list-input-container-drop input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
                                    setFocus6(true)

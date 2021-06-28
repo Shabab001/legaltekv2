@@ -73,10 +73,10 @@
 .list-search-email {
   flex-basis: 18%;
 }
-.list-search-pos {
+.list-search-role {
   flex-basis: 18%;
 }
-.list-search-address {
+.list-search-category {
   flex-basis: 18%;
 }
 .list-search-status {
@@ -88,7 +88,13 @@
   border: 1px solid rgb(233, 232, 232);
   border-radius: 4px;
 
-  height: 1.6rem;
+  height: 40px;
+}
+.list-input-container-drop {
+  margin: 0;
+  padding: 0;
+
+  height: 40px;
 }
 .input1 {
   width: 100%;
@@ -110,4 +116,11 @@
 }
 .focusOn {
   border: 2px solid #49c5b6;
+}
+.newProfile
+  .ant-select-show-search.ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  max-width: 100%;
+  border-radius: 4px;
+  height: 2.5rem;
 }

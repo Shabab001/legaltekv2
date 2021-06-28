@@ -56,6 +56,7 @@
   border-radius: 4px;
   padding-left: 0.5rem;
   cursor: pointer;
+  height: 2.2rem;
   width: 100%;
 }
 .bg-sort-inputs {

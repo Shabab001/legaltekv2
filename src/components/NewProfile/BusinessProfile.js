@@ -209,11 +209,11 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
           </li>
           </Link>
-          <Link to="/lawfirm/management" data-tooltip="Favourites">
+          {/* <Link to="/lawfirm/management" data-tooltip="Favourites">
             <li  className={activeMenu === 4 ? "active" : ""}>
               <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
             </li>
-          </Link>
+          </Link> */}
           <Link to='/lawfirm/chats' data-tooltip="Messaging">
           <li className={activeMenu === 7 ? "active" : ""} >
             <span></span> <i className="fa fa-cog stroke-transparent" /> <span className="link-title">Messaging</span>
@@ -268,12 +268,12 @@ function BusinessProfile (props) {
             <span></span> <i className="fa fa-star-o" /><span className="link-title">Reviews</span> 
           </li>
              </Link>
-             <Link>    
+             {/* <Link>    
             <li  className={activeMenu === 4 ? "active" : ""} style={{color:"grey"}}>
               <span></span> <i className="fa fa-heart-o" /><span className="link-title">Management</span> 
             </li>
                </Link>
-        
+         */}
        
            <Link>    
           <li className={activeMenu === 7 ? "active" : ""} style={{color:"grey"}} >
@@ -314,7 +314,7 @@ function BusinessProfile (props) {
             <Route exact path="/lawfirm/notifications" component={Notifications} />
             <Route exact path="/lawfirm/reviews" component={Reviews} />
            
-            <Route exact path="/lawfirm/management" component={Management} />
+            {/* <Route exact path="/lawfirm/management" component={Management} /> */}
             <Route exact path="/lawfirm/blogs" component={Blogs} />
            
             <Route exact path="/lawfirm/portfolio" component={Portfolio} />

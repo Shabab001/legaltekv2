@@ -1,15 +1,47 @@
 import React from 'react'
 import "./listinput.css"
+import { Select } from 'antd';
+
+const { Option } = Select;
 const ListSearchInput = (props) => {
+
+ function onChange(value) {
+  console.log(`selected ${value}`);
+}
+
+function onBlur() {
+  console.log('blur');
+}
+
+function onFocus() {
+  console.log('focus');
+}
+
+function onSearch(val) {
+  console.log('search:', val);
+}
+
     return (
         <div className="list-s-input">
-            {props.icon? <props.icon style={{fontSize:"1.1rem"}}/>:null}
+          
            {props.type==="dropdown"? 
-           <select name={props.label} >
-              <option value="A">Apple</option>
-              <option value="B">Banana</option>
-              <option value="C">Cat</option>
-           </select>
+           <Select
+           showSearch
+           style={{ width: "100%" }}
+          
+           optionFilterProp="children"
+           onChange={onChange}
+           onFocus={onFocus}
+           onBlur={onBlur}
+           onSearch={onSearch}
+           filterOption={(input, option) =>
+             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+           }
+         >
+           <Option value="Active">Active</Option>
+           <Option value="Inactive">Inactive</Option>
+       
+         </Select>
            
            :<input className="s-input" type={props.type} />}
         </div>

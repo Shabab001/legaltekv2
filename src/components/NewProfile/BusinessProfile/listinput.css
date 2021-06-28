@@ -14,11 +14,19 @@
   border: none;
   outline: none;
   cursor: pointer;
+  border-radius: 8px;
+  padding-left: 0.4rem;
 }
 .list-s-input select {
   width: 100%;
   background-color: white;
+  cursor: pointer;
 }
 .list-s-input select option:hover {
   background-color: var(--primary);
+}
+.ant-select-selection-search-input,
+.ant-select-selector,
+.ant-select ant-select-single ant-select-show-arrow ant-select-show-search {
+  cursor: pointer !important;
 }

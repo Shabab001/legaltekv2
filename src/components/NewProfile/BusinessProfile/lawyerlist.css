@@ -15,9 +15,10 @@
 .lawyer-status,
 .lawyer-password {
   flex-basis: 18%;
+  text-align: center;
 }
 .lawyer-edit {
-  flex-basis: 2%;
+  flex-basis: 3%;
 }
 .lawyer-dropdown {
   padding: 1rem 2rem;
@@ -33,7 +34,7 @@
 .update-pos,
 .update-address,
 .update-status {
-  flex-basis: 18%;
+  flex-basis: 100%;
 }
 .update-btn {
   flex-basis: 2%;
@@ -53,7 +54,7 @@
   border: 1px solid rgb(233, 232, 232);
   border-radius: 4px;
 
-  height: 1.6rem;
+  height: 40px;
   margin-bottom: 0.5rem;
   background-color: white;
 }

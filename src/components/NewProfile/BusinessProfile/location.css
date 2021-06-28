@@ -19,6 +19,7 @@
 }
 .location-headings {
   color: var(--primary);
+  margin-bottom: 3rem;
 }
 
 .location-headings p:nth-child(2) {
