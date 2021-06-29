@@ -30,3 +30,6 @@
 .list-s-input2 select option:hover {
   background-color: var(--primary);
 }
+.ant-select-selection-placeholder {
+  color: grey !important;
+}

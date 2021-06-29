@@ -14,7 +14,7 @@ import Lawyer from "./images/lawyer.jpg"
 function Card(props) {
   
   let {lawyer}=props;
-  console.log(JSON.parse(lawyer.expertiseCategory).length)
+
   return (
     <div className="lawyers-card">
     <div className="card-image">
@@ -58,12 +58,12 @@ function Card(props) {
     <div className="lawyer-area">
       <p>Area Of Practise</p>
       <div className="lawyer-expertise">
-     { JSON.parse(lawyer.expertiseCategory).map((item,index)=>{
+     {lawyer.expertiseCategory &&  lawyer.expertiseCategory.map((item,index)=>{
 
             return(
              
               <div key={index} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                {index+1 ===JSON.parse(lawyer.expertiseCategory).length?
+                {index+1 ===lawyer.expertiseCategory.length?
                      <p >{item}</p>:
                        
                       <>

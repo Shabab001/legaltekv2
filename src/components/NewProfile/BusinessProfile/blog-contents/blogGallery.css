@@ -38,10 +38,14 @@
   border: 1px solid rgb(230, 228, 228);
   border-radius: 4px;
   padding-left: 0.5rem;
-  height: 2.2rem;
+  height: 2.5rem;
   flex-basis: 50%;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.bg-search-sec::placeholder {
+  color: #bfbfbf !important;
+  padding-left: 0.5rem;
 }
 .bg-search-sec:hover,
 .bg-sort-inputs input:hover {
@@ -56,8 +60,12 @@
   border-radius: 4px;
   padding-left: 0.5rem;
   cursor: pointer;
-  height: 2.2rem;
+  height: 2.5rem;
   width: 100%;
+}
+.bg-sort-inputs > input::placeholder {
+  color: #bfbfbf !important;
+  padding-left: 0.4rem;
 }
 .bg-sort-inputs {
   width: 100%;
@@ -97,4 +105,9 @@
   grid-template-columns: repeat(4, minmax(300px, 1fr));
   grid-template-rows: repeat(auto, minmax(300px, 1fr));
   gap: 1rem;
+}
+.ant-select-selection-placeholder {
+  font-weight: normal;
+  padding-top: 0.3rem !important;
+  color: #bfbfbf !important;
 }

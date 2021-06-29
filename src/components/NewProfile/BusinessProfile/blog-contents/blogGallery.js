@@ -12,6 +12,10 @@ import * as blogActions from "../../../../actions/blogActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {GoPlus} from "react-icons/go"
+import { DatePicker,Select } from 'antd'
+import {lawCats} from "../lawyer modal/lawCats"
+
+const { Option } = Select;
 
 const BlogGallery = (props) => {
    const [posts,setPosts]=useState([])
@@ -56,19 +60,36 @@ Here you can see a list of Blogs written by the people in your Firm.</p>
 
                
                   <div className="bg-input-grid">
-
+                  
                   <div className="bg-sort-inputs">
-              
-                    <input placeholder="Area of practise"/>
-                  </div>
+                  <Select
+                      showSearch
+                      style={{ width: "100%" }}
+                      placeholder="Area of practise"
+                   
+                    >
+                      {lawCats.map((item,index)=>
+                          <Option  key={index} value={item}>{item}</Option>
+                      )}
+                     
+                  
+                    </Select>
+                 </div>
+                        
+
+
+
                   <div className="bg-sort-inputs">
                 
                     <input placeholder="Sort by"/>
                   </div>
                   <div className="bg-sort-inputs">
-                  
-                    <input placeholder="Select Date"/>
-                  </div>
+                  <DatePicker
+                      name="dob"
+                      placeholder="Search by date"
+                     style={{width:"100%",height:"2.5rem",borderRadius:"4px"}}
+                    />
+                </div>
                   </div>
                   </div>   
             <div className="bgallery-body-container">

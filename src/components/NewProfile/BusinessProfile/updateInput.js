@@ -22,6 +22,40 @@ const UpdateInput = (props) => {
       console.log('search:', val);
     }
 
+    const handleInputs =(e)=>{
+      console.log(props.label)
+      if(props.label!== "status"){
+
+        if(e.target.value){
+          
+          props.setUpdateInputs({
+            ...props.updateInputs,
+            [props.label]:e.target.value,
+          })
+        }
+        else{
+          props.setUpdateInputs({
+            ...props.updateInputs,
+            [props.label]:e.target.value
+          })
+        }
+      }
+      else{
+        if(e){
+          
+          props.setUpdateInputs({
+            ...props.updateInputs,
+            [props.label]:e,
+          })
+        }
+        else{
+          props.setUpdateInputs({
+            ...props.updateInputs,
+            [props.label]:e
+          })
+        }
+      }
+    }
 
     return (
         <div className="list-s-input2">
@@ -30,9 +64,10 @@ const UpdateInput = (props) => {
            <Select
            showSearch
            style={{ width: "100%" }}
-      
+            value={props.value}
+            placeholder={`${props.placeholder}`}
            optionFilterProp="children"
-           onChange={onChange}
+           onChange={handleInputs}
            onFocus={onFocus}
            onBlur={onBlur}
            onSearch={onSearch}
@@ -45,7 +80,7 @@ const UpdateInput = (props) => {
        
          </Select>
        
-       :<input className="s-input2" type={props.type} placeholder={props.placeholder}/>}
+       :<input value={props.value} placeholder={props.placeholder} className="s-input2" type={props.type} onChange={handleInputs} />}
     </div>
     )
 }
