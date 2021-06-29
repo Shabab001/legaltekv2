@@ -28,17 +28,28 @@ const AddLawyers = (props) => {
   const[focus4,setFocus4]=useState(false)
   const[focus5,setFocus5]=useState(false)
   const[focus6,setFocus6]=useState(false)
+  const[searchTerm, setSearchTerm]=useState("")
+  const[criteria,setCriteria]=useState("")
+  const[disable,setDisable]=useState({
+    firstname:false,
+    lastname:false,
+    username:false,
+    email:false,
+    phone:false,
+    status:false
+
+  })
 
 
 
   const{profile}=props;
   useEffect(()=>{
-    if(profile.numbersOfLawyers && profile){
+    if(profile.numbersOfLawyers){
       console.log(profile.numbersOfLawyers)
       setAddLawyersLimit(profile.numbersOfLawyers)
     }
-  },[addLawyersLimit,profile.numbersOfLawyers])
-  console.log(profile.id)
+  },[profile.numbersOfLawyers])
+  
   let id =profile? profile.id:""
  
   
@@ -60,9 +71,7 @@ const AddLawyers = (props) => {
     setFocus5(false)
     setFocus6(false)
   }
-  const searchHandler =()=>{
 
-  }
     return (
         <div className="list-main" onClick={handleFocus}>
           <div className="list-heading-grid">
@@ -126,7 +135,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus1(true)
                                  }} >
-                                 <ListSearchInput label={"Fristname"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput label={"Firstname"} icon={AiOutlineSearch} type={"text"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.firstname} setDisable={setDisable}/>
                                   </div>                               
                                </div>
                                <div className="list-search-role">
@@ -136,7 +145,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus2(true)
                                  }}>
-                                 <ListSearchInput label={"Lastname"}  type={"text"}/>
+                                 <ListSearchInput label={"Lastname"}  type={"text"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.lastname} setDisable={setDisable}/>
                                  </div>
                                </div>
                                <div className="list-search-category">
@@ -146,7 +155,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus5(true)
                                  }}>
-                                 <ListSearchInput label={"Password"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput label={"Username"} icon={AiOutlineSearch} type={"text"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.username} setDisable={setDisable}/>
                                  </div>
                                </div>
                                <div className="list-search-email">
@@ -156,7 +165,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus3(true)
                                  }}>
-                                 <ListSearchInput  label={"Email"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput  label={"Email"} icon={AiOutlineSearch} type={"text"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.email} setDisable={setDisable}/>
                                  </div>
                                </div>
                                <div className="list-search-email">
@@ -166,7 +175,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus4(true)
                                  }}>
-                                 <ListSearchInput label={"Phone"} icon={AiOutlineSearch} type={"text"}/>
+                                 <ListSearchInput label={"Phone"} icon={AiOutlineSearch} type={"text"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.phone} setDisable={setDisable}/>
                                  </div>
                                </div>
                           
@@ -177,7 +186,7 @@ const AddLawyers = (props) => {
                                    handleFocus();
                                    setFocus6(true)
                                  }}>
-                                 <ListSearchInput label={"Status"} type={"dropdown"}/>
+                                 <ListSearchInput label={"Status"} type={"dropdown"} setSearchTerm={setSearchTerm} setCriteria={setCriteria} disable={disable.status} setDisable={setDisable}/>
                                  </div>
                                </div>
                                <div style={{position:"relative",flexBasis:"3%",opacity:0}}>
@@ -188,10 +197,53 @@ const AddLawyers = (props) => {
                        } 
           
                         {profile.lawyer_users&&profile.lawyer_users.map((lawyer,index)=>{
-                          return(
 
+
+                        if(searchTerm){
+                          console.log(searchTerm,criteria)
+                          if (criteria==="Firstname" && lawyer.firstname.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                          if (criteria==="Lastname" && lawyer.lastname.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                          if (criteria==="Email" &&lawyer.email && lawyer.email.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                          if (criteria==="Phone" &&lawyer.phone && lawyer.phone.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                          if (criteria==="Username" && lawyer.username.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                          if (criteria==="Status" &&lawyer.status && lawyer.status.toLowerCase().includes(searchTerm.toLowerCase())){
+                            return(
+                              
+                              <LawyerList key={index} lawyer={lawyer} />
+                            )
+                          }
+                        }else{
+
+                          return(
+                            
                             <LawyerList key={index} lawyer={lawyer} />
-                          )
+                            )
+                          }
                         })}
 
 

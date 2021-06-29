@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}from 'react'
+import React ,{useState,useEffect,memo}from 'react'
 import "./lawyerlist.css"
 import {BsCheck} from 'react-icons/bs';
 import {FiChevronDown, FiChevronUp} from 'react-icons/fi';
@@ -76,7 +76,7 @@ console.log(lawyerProfile)
                </div>
             
                <div className="lawyer-cat">
-                   <p>Active</p>
+               <p>{lawyer? lawyer.status:""}</p>
 
                </div>
                  <div className="lawyer-edit" onClick={handleDropdown}>
@@ -161,7 +161,7 @@ console.log(lawyerProfile)
                </div>
             
                <div className="lawyer-cat">
-                   <p>Active</p>
+                   <p>{lawyer? lawyer.status:""}</p>
 
                </div>
                <div className="lawyer-edit" onClick={handleDropdown}>
@@ -183,5 +183,5 @@ const mapStateToProps = (state) => ({
   const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(userActions, dispatch),
   });
-  export default connect(mapStateToProps, mapDispatchToProps)(LawyersList);
+  export default connect(mapStateToProps, mapDispatchToProps)(memo(LawyersList));
   
