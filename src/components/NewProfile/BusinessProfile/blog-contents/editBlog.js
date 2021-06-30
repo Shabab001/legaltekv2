@@ -17,6 +17,7 @@ import MyCKEditorUploadAdapter from "../MyCKEditorUploadAdapter";
 import { Select, message } from "antd";
 import {useParams} from "react-router-dom"
 import { AiOutlineConsoleSql } from "react-icons/ai";
+import {lawCats} from "../lawyer modal/lawCats"
 
 const { Option } = Select;
 const {REACT_APP_API}= process.env
@@ -301,7 +302,7 @@ const createBlog = async () => {
         onChange={handleChange}
         style={{ width: "100%" }}
       >
-        {categories.map((item, index) => (
+        {lawCats.map((item, index) => (
           <Option value={item} key={index}>
             {item}
           </Option>

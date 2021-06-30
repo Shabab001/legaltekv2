@@ -88,7 +88,11 @@ const SingleBlog = (props) => {
         let obj = {
           postId: singleBlog._id,
         };
-      props.blogActions.getSinglePost({ id, ...props });
+      let p= await  props.blogActions.getSinglePost({ id, ...props });
+      if(p){
+      props.blogActions.getUserPosts(id,"skjdk")
+     
+      }
       }
     } else {
       message.error("write your comment!");

@@ -15,6 +15,7 @@ import { CONFIG } from "../../../MiniComponents/CKeditorConfig";
 import "../../../../assets/css/createBlog.css";
 import MyCKEditorUploadAdapter from "../MyCKEditorUploadAdapter";
 import { Select, message } from "antd";
+import {lawCats} from "../lawyer modal/lawCats"
 
 const { Option } = Select;
 const {REACT_APP_API}= process.env
@@ -29,7 +30,7 @@ function CreateBlog(props) {
   const [editorValue, setEditorValue] = useState({value:"Hello from CkEditor", message:""});
   const [category, setCategory] = useState({value:"", message:""});
 
-  const categories = ["Criminology", "Civil", "Food and Travel", "Food Industry News"];
+
   const[loading,setLoading]=useState(false)
 
 
@@ -209,7 +210,7 @@ const createBlog = async () => {
         onChange={handleChange}
         style={{ width: "100%" }}
       >
-        {categories.map((item, index) => (
+        {lawCats.map((item, index) => (
           <Option value={item} key={index}>
             {item}
           </Option>

@@ -225,37 +225,40 @@ console.log(updateInputs)
 
                      <UpdateInput label={"firstname"} value={updateInputs.firstname} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs}  placeholder={lawyer.firstname}/>
                      </div>
-                     <p>Last Name</p>
+                        <p>Email</p>
                      <div className="update-inputs">
 
-                     <UpdateInput label={"lastname"} value={updateInputs.lastname} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.lastname}/>
+                     <UpdateInput label={"email"} value={updateInputs.email} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.email}/>
                      </div>
+                 
                  </div>
 
                  <div className="update-pos">
              
-                     <p>Username</p>
+                 <p>Last Name</p>
                      <div className="update-inputs">
 
-                     <UpdateInput label={"username"} value={updateInputs.username} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.username}/>
-                     </div>
-
-                     <p>Status</p>
-                     <div className="update-inputs">
-
-                     <UpdateInput label={"status"} value={updateInputs.status} type="dropdown" setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.status}/>
-                     </div>
-                 </div>
-                 <div className="update-email">
-                     <p>Email</p>
-                     <div className="update-inputs">
-
-                     <UpdateInput label={"email"} value={updateInputs.email} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.email}/>
+                     <UpdateInput label={"lastname"} value={updateInputs.lastname} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.lastname}/>
                      </div>
                      <p>Mobile</p>
                      <div className="update-inputs">
 
                      <UpdateInput label={"phone"} value={updateInputs.phone} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.phone}/>
+                     </div>
+                    
+                 </div>
+                 <div className="update-email">
+                 <p>Username</p>
+                     <div className="update-inputs">
+
+                     <UpdateInput label={"username"} value={updateInputs.username} setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.username}/>
+                     </div>
+                  
+                  
+                     <p>Status</p>
+                     <div className="update-inputs">
+
+                     <UpdateInput label={"status"} value={updateInputs.status} type="dropdown" setUpdateInputs={setUpdateInputs} updateInputs={updateInputs} placeholder={lawyer.status}/>
                      </div>
                  </div>
             

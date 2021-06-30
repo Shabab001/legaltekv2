@@ -10,6 +10,9 @@ import { Empty, message, Skeleton, Menu, Dropdown,Image } from "antd";
 import * as blogActions from "../../../../actions/blogActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import {deleteRequest} from "../../../../utils/upload"
+
+const {REACT_APP_API}= process.env
 
 const BlogCard = (props) => {
     const [option,setOption]=useState(false);
@@ -44,16 +47,20 @@ async function deletePost(post, index) {
   let obj = {
     blogId: post._id,
   };
-  console.log(obj)
-  let deletedPost = await props.blogActions.deletePost(
-    { ...props, obj },
-    props.history
-  );
-  if (deletedPost) {
-    message.success("Post Successfully deleted");
-  }
-  setItemToBeDeleted(null);
-  setModalOpen(false);
+  let del =await deleteRequest(`${REACT_APP_API}/upload/files/${post.coverImage.id}`,"DELETE")
+  if(del){
+    console.log(del)
+    
+    let deletedPost = await props.blogActions.deletePost(
+      { ...props, obj },
+      props.history
+      );
+      if (deletedPost) {
+        message.success("Post Successfully deleted");
+      }
+      setItemToBeDeleted(null);
+      setModalOpen(false);
+    }
 }
 
 
@@ -110,14 +117,17 @@ async function deletePost(post, index) {
           </div>
           <div className="bcard-lower">
              {props.blog.blogCategory.map((item,index)=>{
-               return(
+               if(index < 2){
 
-                 <p key={index}>{item}</p>
-               )
+                 return(
+                   
+                   <p key={index}>{item}</p>
+                   )
+                  }
              })}
              <div style={{display:"flex",gap:".3rem",alignItems:"center"}}>
              <BiLike/>
-              <p><span style={{color:"black"}}>0 </span></p>
+              <p><span style={{color:"black"}}>{props.blog.likes} </span></p>
              </div>
           </div>
           {modalOpen && (

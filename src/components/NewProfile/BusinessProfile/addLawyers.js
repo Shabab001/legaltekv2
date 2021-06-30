@@ -1,4 +1,4 @@
-import React,{useState,useEffect,memo} from 'react'
+import React,{useState,useEffect,memo,useCallback} from 'react'
 import "./addlawyers.css"
 import ListSearchInput from './listSearchInput'
 import ListSearchLabel from './listSearchLabel'
@@ -19,6 +19,7 @@ const { Option } = Select;
 
 
 const AddLawyers = (props) => {
+  const [allLawyers, setAllLawyers]=useState([])
   const[minimize,setMinimize]=useState(false);
   const [modal,setModal]=useState(false);
   const[addLawyersLimit,setAddLawyersLimit]=useState(0)
@@ -28,6 +29,7 @@ const AddLawyers = (props) => {
   const[focus4,setFocus4]=useState(false)
   const[focus5,setFocus5]=useState(false)
   const[focus6,setFocus6]=useState(false)
+  const [trigger,setTrigger]=useState(false)
   const[searchTerm, setSearchTerm]=useState("")
   const[criteria,setCriteria]=useState("")
   const[disable,setDisable]=useState({
@@ -39,10 +41,147 @@ const AddLawyers = (props) => {
     status:false
 
   })
-
-
+  const[sort,setSort]=useState("")
+  const [des,setDes]=useState({
+    firstname:false,
+    lastname:false,
+    username:false,
+    email:false,
+    phone:false,
+    status:false
+  })
 
   const{profile}=props;
+
+    useEffect(( )=>{
+        if(profile.lawyer_users){
+          
+          let lUser=[...profile.lawyer_users]
+               
+                  if(sort && sort === "Firstname"){
+                       if(!des.firstname){
+                         console.log("asc")
+                         setAllLawyers(lUser.sort((a,b)=>a.firstname.localeCompare(b.firstname)));
+                         setDes({...des, firstname:true})
+                       
+                         return
+                       }
+                       if(des.firstname){
+                        console.log("dsc")
+                        setAllLawyers(lUser.sort((a,b)=>b.firstname.localeCompare(a.firstname)));
+                        setDes({...des, firstname:false})
+                        
+                        return
+                       }
+                    
+                }
+             if(sort && sort === "Lastname"){
+                       if(!des.lastname){
+                         console.log("asc")
+                         setAllLawyers(lUser.sort((a,b)=>a.lastname.localeCompare(b.lastname)));
+                         setDes({...des, lastname:true})
+                       
+                         return
+                       }
+                       if(des.lastname){
+                        console.log("dsc")
+                        setAllLawyers(lUser.sort((a,b)=>b.lastname.localeCompare(a.lastname)));
+                        setDes({...des, lastname:false})
+                        
+                        return
+                       }
+                    
+                }
+                if(sort && sort === "Username"){
+                  if(!des.username){
+                    console.log("asc")
+                    setAllLawyers(lUser.sort((a,b)=>a.username.localeCompare(b.username)));
+                    setDes({...des, username:true})
+                  
+                    return
+                  }
+                  if(des.username){
+                   console.log("dsc")
+                   setAllLawyers(lUser.sort((a,b)=>b.username.localeCompare(a.username)));
+                   setDes({...des, username:false})
+                   
+                   return
+                  }
+               
+           }
+           if(sort && sort === "Email"){
+            if(!des.email){
+              console.log("asc")
+              setAllLawyers(lUser.sort((a,b)=>a.email.localeCompare(b.email)));
+              setDes({...des, email:true})
+            
+              return
+            }
+            if(des.email){
+             console.log("dsc")
+             setAllLawyers(lUser.sort((a,b)=>b.email.localeCompare(a.email)));
+             setDes({...des, email:false})
+             
+             return
+            }
+         
+     }
+     if(sort && sort === "Phone"){
+      if(!des.phone){
+        console.log("asc")
+        setAllLawyers(lUser.sort((a,b)=>a.phone.localeCompare(b.phone)));
+        setDes({...des, phone:true})
+      
+        return
+      }
+      if(des.phone){
+       console.log("dsc")
+       setAllLawyers(lUser.sort((a,b)=>b.phone.localeCompare(a.phone)));
+       setDes({...des, phone:false})
+       
+       return
+      }
+   
+}   
+if(sort && sort === "Status"){
+  if(!des.status){
+    console.log("asc")
+    setAllLawyers(lUser.sort((a,b)=>a.status.localeCompare(b.status)));
+    setDes({...des, status:true})
+  
+    return
+  }
+  if(des.status){
+   console.log("dsc")
+   setAllLawyers(lUser.sort((a,b)=>b.status.localeCompare(a.status)));
+   setDes({...des, status:false})
+   
+   return
+  }
+
+}
+
+
+  
+        
+        
+
+
+
+                setAllLawyers(lUser)
+                return;
+        }
+
+        
+   
+
+
+
+          },[sort,profile,trigger])
+
+          console.log(des)
+
+
   useEffect(()=>{
     if(profile.numbersOfLawyers){
       console.log(profile.numbersOfLawyers)
@@ -99,22 +238,22 @@ const AddLawyers = (props) => {
                    
                     </div>
                      <div className="list-search-name">
-                                 <ListSearchLabel label={"Firstname"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Firstname"}/>
                                  </div>
                         <div className="list-search-name">
-                                 <ListSearchLabel label={"Lastname"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Lastname"}/>
                                  </div>
                          <div className="list-search-email">
-                                 <ListSearchLabel label={"Username"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Username"}/>
                                  </div>
                          <div className="list-search-name">
-                                 <ListSearchLabel label={"Email"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Email"}/>
                                  </div>
                                  <div className="list-search-name">
-                                 <ListSearchLabel label={"Phone"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Phone"}/>
                                  </div>
                           <div className="list-search-status">
-                                 <ListSearchLabel label={"Status"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Status"}/>
                                  </div>  
                                  <div style={{position:"relative",flexBasis:"3%",opacity:0}}>
                     <FiChevronDown/>
@@ -129,7 +268,7 @@ const AddLawyers = (props) => {
                                   
                                </div>
                                <div className="list-search-name">
-                                 <ListSearchLabel label={"Firstname"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Firstname"}/>
                                  <div className={focus1?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -139,7 +278,7 @@ const AddLawyers = (props) => {
                                   </div>                               
                                </div>
                                <div className="list-search-role">
-                                 <ListSearchLabel label={"Lastname"} />
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Lastname"} />
                                  <div className={focus2?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -149,7 +288,7 @@ const AddLawyers = (props) => {
                                  </div>
                                </div>
                                <div className="list-search-category">
-                                 <ListSearchLabel label={"Username"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Username"}/>
                                  <div className={focus5?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -159,7 +298,7 @@ const AddLawyers = (props) => {
                                  </div>
                                </div>
                                <div className="list-search-email">
-                                 <ListSearchLabel label={"Email"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Email"}/>
                                  <div  className={focus3?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -169,7 +308,7 @@ const AddLawyers = (props) => {
                                  </div>
                                </div>
                                <div className="list-search-email">
-                                 <ListSearchLabel label={"Phone"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Phone"}/>
                                  <div  className={focus4?"list-input-container input1 focusOn":"list-input-container input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -180,7 +319,7 @@ const AddLawyers = (props) => {
                                </div>
                           
                                <div className="list-search-status">
-                                 <ListSearchLabel label={"Status"}/>
+                                 <ListSearchLabel trigger={trigger} setTrigger={setTrigger} setSort={setSort} label={"Status"}/>
                                  <div className={focus6?"list-input-container-drop input1":"list-input-container-drop input1"} onClick={(e)=>{
                                    e.stopPropagation()
                                    handleFocus();
@@ -196,7 +335,7 @@ const AddLawyers = (props) => {
                        
                        } 
           
-                        {profile.lawyer_users&&profile.lawyer_users.map((lawyer,index)=>{
+                        {allLawyers&&  allLawyers.sort().map((lawyer,index)=>{
 
 
                         if(searchTerm){

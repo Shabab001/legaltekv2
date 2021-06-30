@@ -15,7 +15,6 @@
 .lawyer-status,
 .lawyer-password {
   flex-basis: 18%;
-  text-align: center;
 }
 .lawyer-edit {
   flex-basis: 3%;

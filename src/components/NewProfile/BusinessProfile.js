@@ -68,7 +68,7 @@ function BusinessProfile (props) {
        console.log(props.auth.user)
     getMyBlogs()
     }
- },[props.auth,props.blogs.deletedPost])
+ },[props.auth,props.blogs.deletedPost,props.blogs.singlePost])
  useEffect(()=>{
        if(props.blogs){
           console.log(props.blogs)

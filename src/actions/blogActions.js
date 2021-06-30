@@ -17,11 +17,11 @@ export const getBlogs = (props) => (dispatch) => {
     })
       .then((response) => {
         console.log(response);
-        console.log("posts", response.data.posts);
+        console.log("posts", response.data);
         dispatch({
           type: Types.GET_POSTS,
           payload: {
-            posts: response.data.posts,
+            posts: response.data,
           },
         });
         // message.success(response.data.message);
