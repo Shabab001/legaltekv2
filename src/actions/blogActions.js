@@ -288,9 +288,10 @@ export const likePost = (props) => (dispatch) => {
   return new Promise((resolve, reject) => {
     console.log(props)
     let obj={
-      likes:props.likes
+      blog:props.blogId,
+      user:props.user
     }
-    Axios.put(`${REACT_APP_API}/blogs/${props.blogId}`, obj, {
+    Axios.post(`${REACT_APP_API}/likes`, obj, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
@@ -317,7 +318,7 @@ export const unlikePost = (props) => (dispatch) => {
     likes:props.likes
   }
   return new Promise((resolve, reject) => {
-    Axios.put(`${REACT_APP_API}/blogs/${props.blogId}`, obj, {
+    Axios.delete(`${REACT_APP_API}/likes/${props.likeId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.auth_token,
@@ -358,3 +359,72 @@ export const reportPost = (props) => (dispatch) => {
       });
   });
 };
+export const getBlogUserById = (id,type) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+ 
+
+    if(type === "Lawfirm"){
+
+   
+    Axios.get(`${REACT_APP_API}/lawfirm-users/${id}`)
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+      dispatch({
+        type: Types.BLOG_USER,
+        payload: {
+         blogUser: res.data,
+        },
+      });
+     
+     
+      return resolve(res.data); 
+      }
+    })
+    .catch((error) => {
+
+      if (error && error.response) {
+        console.log(error.response.data);
+      
+        message.error(error.response.data.message[0].messages[0].message);
+        return resolve(false)
+      }
+    
+    });
+  }
+  else{
+    Axios.get(`${REACT_APP_API}/lawyer-users/${id}`)
+    .then((res) => {
+      if (res) {
+        console.log(res.data);
+    
+
+      dispatch({
+        type: Types.BLOG_USER,
+        payload: {
+          blogUser: res.data,
+        },
+      });
+     
+     
+      return resolve(res.data); 
+      }
+    })
+    .catch((error) => {
+
+      if (error && error.response) {
+        console.log(error.response.data);
+      
+        message.error(error.response.data.message[0].messages[0].message);
+        return resolve(false)
+      }
+    
+    });
+  }
+  
+  
+});
+  
+}

@@ -69,6 +69,12 @@
   background-color: white;
   border-radius: 50px 50px;
 }
+.bcard-round-image {
+  height: 100%;
+  width: 100%;
+  border-radius: 50px 50px;
+  object-fit: cover;
+}
 .bcard-middle > P {
   padding-top: 0.5rem;
 }

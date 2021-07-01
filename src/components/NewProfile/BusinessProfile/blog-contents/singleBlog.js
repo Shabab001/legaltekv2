@@ -31,28 +31,42 @@ const SingleBlog = (props) => {
   const likePost = async (blog) => {
     let likePost = await props.blogActions.likePost({
       blogId:blog.id,
-      likes:blog.likes+1,
+      user:props.profile.id,
       ...props,
     });
     if (likePost) {
-    
+           setLiked(true)
       props.blogActions.getSinglePost({ id, ...props });
     }
   };
 
+
+
+  const searchLike =()=>{
+    for(let i=0; props.blogs.singlePost.likes.length;i++){
+      if(props.blogs.singlePost.likes[i].user===props.profile.id){
+        return props.blogs.singlePost.likes[i].id
+       
+      }
+   }
+  }
   const unlikePost = async (blog) => {
+    if(props.blogs.singlePost.likes && props.blogs.singlePost.likes.length !== 0){
+     
+     let likeId=searchLike()
+    console.log(likeId)
     let unlikePost = await props.blogActions.unlikePost({
-      blogId:blog.id,
-      likes:blog.likes,
-      ...props,
+    likeId
     });
     if (unlikePost) {
-
+         setLiked(false)
       props.blogActions.getSinglePost({ id, ...props });
     }
   };
+}
 
   const deleteComment = async (commentId) => {
+  
     let deleteComment = await props.blogActions.deleteComment({
       commentId,
       ...props,
@@ -79,6 +93,7 @@ const SingleBlog = (props) => {
         author: props.auth.user.lawfirm_user.id?props.auth.user.lawfirm_user.id:props.auth.user.lawfirm_user,
         blog: singleBlog.id,
         comment: comment,
+        profilepic:props.profile.profileImage.url
       };
       console.log("sdffffffffffffffffffffposting")
       let postComment = await props.blogActions.postComment({ obj, ...props });
@@ -103,13 +118,26 @@ const SingleBlog = (props) => {
 useEffect(()=>{
 
   props.blogActions.getSinglePost({ id, ...props });
+ 
+
 
 },[])
 
 useEffect(()=>{
-  if(props.blogs.singlePost){
-    
+  if(props.blogs.singlePost && props.profile){
+    props.blogActions.getBlogUserById(props.blogs.singlePost.author, props.blogs.singlePost.authorType)
+  
     console.log(props.blogs.singlePost)
+    if(props.blogs.singlePost.likes && props.blogs.singlePost.likes.length !== 0){
+      props.blogs.singlePost.likes.forEach((item)=>{
+        console.log(item.user,props.profile.id)
+        if(item.user === props.profile.id){
+        
+          setLiked(true);
+
+        }
+      })
+    }
 
       if(props.blogs.singlePost.id===id){
         console.log(props.blogs.singlePost)
@@ -122,7 +150,7 @@ useEffect(()=>{
 
   }
 
-},[props.blogs.singlePost])
+},[props.blogs.singlePost,props.profile.id])
 console.log(comments)
 console.log(singleBlog)
 useEffect(()=>{
@@ -132,7 +160,8 @@ useEffect(()=>{
 },[singleBlog])
     return (
       <>
-      {singleBlog&&(
+      {singleBlog&& props.blogs.blogUser&&
+      (
         <div className="singleBlog">
         <div className="blog-main-content">
           <div className="singleBlog-tags">
@@ -158,7 +187,7 @@ useEffect(()=>{
               <span>   {singleBlog?date:""}</span>
             </div>
             <div className="profilePicture">
-              <img src={Civil} alt="pretty_girl" />
+              <img src={ props.blogs.blogUser.profileImage?props.blogs.blogUser.profileImage.url:Civil} alt="pretty_girl" />
             </div>
             <img
              
@@ -194,11 +223,11 @@ useEffect(()=>{
                             onClick={() =>{
                               liked? unlikePost(singleBlog):
                               likePost(singleBlog)
-                              setLiked(!liked)
+                            
                             } }
                           />
 
-                          <span>{singleBlog && singleBlog.likes? liked?singleBlog.likes+1:singleBlog.likes:0}</span>
+                          <span>{singleBlog && singleBlog.likes? singleBlog.likes.length:0}</span>
                         </p>
                         
                       )}
@@ -240,13 +269,16 @@ useEffect(()=>{
                 <ul className="commentsList">
                 {comments &&
                       comments.map((item, index) => (
+                        
                         <li key={index}>
-                          <div className="avatar"></div>{" "}
+                          <div className="avatar">
+                            <img src={item.profilepic} style={{height:"100%",width:"100%",objectFit:"cover"}}/>
+                            </div>{" "}
                           <div className="commenterInfo">
                             <p>{item.author.firstName}</p>{" "}
                             <span>{item.comment}</span>
                           </div>
-                          <div><p>{moment(item.createdAt).format("H")}hours ago</p></div>
+                          <div><p>{moment().diff(item.createdAt,'hours')> 1?`${moment().diff(item.createdAt,'hours')} hours ago` :moment().diff(item.createdAt,'minutes') >1 ? `${moment().diff(item.createdAt,'minutes')} minutes ago`:`just now`}</p></div>
                           {item.author === singleBlog.author && (
                             <div
                               className="deleteComment"
@@ -263,7 +295,7 @@ useEffect(()=>{
           
                 </ul>
                 <div className="inputContainer">
-                  <img src={Civil} alt="user_image" />
+                  <img src={props.auth.lawfirmUserProfile.profileImage.url} alt="user_image" />
                   <input
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import "./blogCard.css"
 import {BiLike,BiDotsVerticalRounded} from "react-icons/bi"
 import BlogOptions from './blogOptions';
@@ -18,10 +18,32 @@ const BlogCard = (props) => {
     const [option,setOption]=useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [itemToBeDeleted, setItemToBeDeleted] = useState(null);
+    const [blogUser,setBlogUser]=useState(null)
 
 let date=moment(props.blog.createdAt).format("MMMM, D, YYYY").split(',')
 
 console.log(date)
+
+
+
+
+useEffect(()=>{
+  console.log(props.blog)
+const callBlogUser=async()=>{
+
+  let user= await props.blogActions.getBlogUserById(props.blog.author, props.blog.authorType)
+  if(user){
+  setBlogUser(user)
+  }
+}
+callBlogUser()
+
+},[])
+useEffect(()=>{
+ console.log("hi")
+},[blogUser,props.blogs])
+
+
 
 const menu = (props) =>  (
   <Menu>
@@ -73,6 +95,8 @@ async function deletePost(post, index) {
         setOption(false)
     }
     return (
+      <>
+      {blogUser &&
         <div className="bcard-container" >
           <div className="bcard-time">
           {date.map((item,index)=>
@@ -88,7 +112,7 @@ async function deletePost(post, index) {
               <div className="bcard-middle-first">
                       <div className="bcard-image">
                          <div className="bcard-round">
-
+                             <img className="bcard-round-image" src={blogUser.profileImage.url} alt="propic" />
                          </div>
                          <div onClick={()=>props.history.push(`/lawfirm/blogs/${props.blog.id}`)} style={{cursor:"pointer"}}>
 
@@ -127,7 +151,7 @@ async function deletePost(post, index) {
              })}
              <div style={{display:"flex",gap:".3rem",alignItems:"center"}}>
              <BiLike/>
-              <p><span style={{color:"black"}}>{props.blog.likes} </span></p>
+              <p><span style={{color:"black"}}>{props.blog.likes?props.blog.likes.length:0} </span></p>
              </div>
           </div>
           {modalOpen && (
@@ -142,6 +166,8 @@ async function deletePost(post, index) {
           />
         )}
         </div>
+}
+</>
     )
 }
 

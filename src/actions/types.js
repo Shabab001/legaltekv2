@@ -31,6 +31,7 @@ export const UPDATE_POST = "UPDATE_POST";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENTS";
 export const POST_COMMENT = "DELETE_COMMENTS";
+export const BLOG_USER = "BLOG_USER"
 
 //Businesses Types
 export const GET_BUSINESSES = "GET_BUSINESSES";

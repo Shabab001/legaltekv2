@@ -117,7 +117,9 @@ const createBlog = async () => {
            body:editorValue.value,
            blogCategory:[...category.value],
            author:props.profile.id,
-           authorType:props.auth.user.role.name
+           authorType:props.auth.user.role.name,
+           identify:props.profile.id
+           
          }
        }
     
@@ -125,6 +127,8 @@ const createBlog = async () => {
           console.log(props.history)
          const blog=await props.blogActions.createPost(blogParams,props.history)
          if(blog){
+
+         
           
              console.log(blog)
              let form= new FormData()

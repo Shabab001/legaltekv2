@@ -9,6 +9,7 @@ const init = {
   deletedComment: null,
   searchPosts: [],
   count: 0,
+  blogUser:null,
 };
 const blogReducer = (state = init, action) => {
   switch (action.type) {
@@ -58,6 +59,12 @@ const blogReducer = (state = init, action) => {
       return {
         ...state,
         comments: action.payload.comments,
+      };
+    }
+    case Types.BLOG_USER: {
+      return {
+        ...state,
+        blogUser: action.payload.blogUser,
       };
     }
 
