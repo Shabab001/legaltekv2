@@ -1,0 +1,15 @@
+.blog-options{
+font-size: 1rem;
+font-weight: 500;
+cursor: pointer;
+}
+.blog-opt-2{
+    padding:.5rem 1rem;
+ 
+}
+.blog-opt-1{
+    padding:.5rem 1rem;
+}
+.blog-opt-1:hover, .blog-opt-2:hover{
+    background-color: red;
+}

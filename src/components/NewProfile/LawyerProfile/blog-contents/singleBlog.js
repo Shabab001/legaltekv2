@@ -97,7 +97,7 @@ const SingleBlog = (props) => {
     if (comment && singleBlog._id) {
       console.log(props.auth.user)
       let obj = {
-        author: props.auth.user.lawfirm_user.id?props.auth.user.lawfirm_user.id:props.auth.user.lawfirm_user,
+        author: props.profile.id,
         blog: singleBlog.id,
         comment: comment,
         profilepic:props.profile.profileImage.url
@@ -107,9 +107,7 @@ const SingleBlog = (props) => {
       if (postComment) {
         console.log(postComment);
         setComment("");
-        let obj = {
-          postId: singleBlog._id,
-        };
+      
       let p= await  props.blogActions.getSinglePost({ id, ...props });
       if(p){
       props.blogActions.getUserPosts(id,"skjdk")
@@ -329,7 +327,7 @@ else{
           
                 </ul>
                 <div className="inputContainer">
-                  <img src={props.auth.lawfirmUserProfile.profileImage.url} alt="user_image" />
+                  <img src={props.profile && props.profile.profileImage &&props.profile.profileImage.url} alt="user_image" />
                   <input
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
@@ -385,7 +383,7 @@ else{
 
 const mapStateToProps = (state) => ({
    auth: state.auth,
-   profile: state.auth.lawfirmUserProfile,
+   profile: state.auth.lawyerUserProfile,
    blogs: state.blog,
  });
  

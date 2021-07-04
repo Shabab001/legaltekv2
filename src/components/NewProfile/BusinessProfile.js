@@ -11,8 +11,8 @@ import AddLawyers from "./BusinessProfile/addLawyers";
 import Management from "./BusinessProfile/management";
 import CreateBlog from "./BusinessProfile/blog-contents/createBlog";
 import SingleBlog from "./BusinessProfile/blog-contents/singleBlog";
-import PopularLawyers from "../HomePage/PopularLawyers";
 import EditBlog from "./BusinessProfile/blog-contents/editBlog";
+import PopularLawyers from "../HomePage/PopularLawyers";
 import  Location  from "./BusinessProfile/location";
 
 

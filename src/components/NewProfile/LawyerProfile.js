@@ -4,6 +4,7 @@ import { Link, Redirect,Switch,Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as userActions from "../../actions/userActions";
+import * as blogActions from "../../actions/blogActions";
 import Currencies from "../../assets/json/Currencies.json";
 import Countries from "../../assets/json/Countries.json";
 
@@ -19,6 +20,10 @@ import Notifications from "./LawyerProfile/Notifications";
 import Appointments from "./LawyerProfile/Appointments";
 import LawyerAccount from "./LawyerProfile/lawyerAccount";
 import Management from "./LawyerProfile/management";
+import Blogs from "./LawyerProfile/blogs"
+import CreateBlog from "./LawyerProfile/blog-contents/createBlog";
+import SingleBlog from "./LawyerProfile/blog-contents/singleBlog";
+import EditBlog from "./LawyerProfile/blog-contents/editBlog";
 
 
 
@@ -69,6 +74,9 @@ function LawyerProfile(props) {
     if (props.location.pathname === "/lawyer/chats") {
       setActiveMenu(8);
     }
+    if (props.location.pathname === "/lawyer/blogs" ||  props.location.pathname.includes("/lawyer/blogs/")) {
+      setActiveMenu(9);
+    }
   }, [props.location.pathname]);
 
   const logout = (e) => {
@@ -87,6 +95,24 @@ function LawyerProfile(props) {
       fetchdata()
     }
   },[])
+  useEffect(()=>{
+    const getMyBlogs=async()=>{
+      
+        console.log(props.auth)
+          let myBlogs= await props.blogActions.getUserPosts(props.lawyer.lawfirm_user.id,props.history)
+          if(myBlogs){
+             console.log(myBlogs);
+          }    
+       
+    }
+  
+       console.log(props.auth.user)
+       if(props.lawyer && props.lawyer.lawfirm_user){
+
+         getMyBlogs()
+        }
+    
+ },[props.lawyer.lawfirm_user])
 
   return (
     <div className={`newProfile ${sidebarCollapse? '' : 'sidebar-collapse' }`}>
@@ -157,6 +183,13 @@ function LawyerProfile(props) {
                <span className="link-title">Messages</span>
             </li>
           </Link>
+          <Link to="/lawyer/blogs" data-tooltip="blogs">
+            <li className={activeMenu === 9 ? "active" : ""}>
+            <span></span>
+               <i className="fa fa-cog stroke-transparent" />{" "}
+               <span className="link-title">Blogs</span>
+            </li>
+          </Link>
           <Link to="#" data-tooltip="Logout" onClick={(e)=>logout(e)}>
             <li >
             <span></span>
@@ -219,7 +252,18 @@ function LawyerProfile(props) {
               path="/lawyer/favourites"
               component={Favourites}
             />
-      
+                  <Route
+              exact
+              path="/lawyer/blogs"
+              component={Blogs}
+            />
+        <Route
+              exact
+              path="/lawyer/blogs/createblog"
+              component={CreateBlog}
+            />
+              <Route  path="/lawyer/blogs/editblog/:id" component={EditBlog} />
+            <Route  path="/lawyer/blogs/:id" component={SingleBlog} />
       
       
       
@@ -238,5 +282,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(userActions, dispatch),
+  blogActions: bindActionCreators(blogActions, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(memo(LawyerProfile));

@@ -11,6 +11,7 @@ import * as blogActions from "../../../../actions/blogActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {deleteRequest} from "../../../../utils/upload"
+import blogs from '../blogs';
 
 const {REACT_APP_API}= process.env
 
@@ -44,7 +45,7 @@ useEffect(()=>{
 },[blogUser,props.blogs])
 
 
-
+console.log(blogUser)
 const menu = (props) =>  (
   <Menu>
     <Menu.Item onClick={()=>{
@@ -56,7 +57,7 @@ const menu = (props) =>  (
     }}>
       <a>Delete post</a>
     </Menu.Item>
-    <Menu.Item onClick={()=>props.history.push(`/lawfirm/blogs/editblog/${props.item._id}`)}>
+    <Menu.Item onClick={()=>props.history.push(`/lawyer/blogs/editblog/${props.item._id}`)}>
       <a>Edit post</a>
     </Menu.Item>
   </Menu>
@@ -114,7 +115,7 @@ async function deletePost(post, index) {
                          <div className="bcard-round">
                              <img className="bcard-round-image" src={blogUser.profileImage.url} alt="propic" />
                          </div>
-                         <div onClick={()=>props.history.push(`/lawfirm/blogs/${props.blog.id}`)} style={{cursor:"pointer"}}>
+                         <div onClick={()=>props.history.push(`/lawyer/blogs/${props.blog.id}`)} style={{cursor:"pointer"}}>
 
                             <p>{props.blog.title}</p>
                          </div>
@@ -175,7 +176,7 @@ async function deletePost(post, index) {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.auth.lawfirmUserProfile,
+  profile: state.auth.lawyerUserProfile,
   blogs: state.blogs,
 });
 
