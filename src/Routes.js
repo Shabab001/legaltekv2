@@ -48,6 +48,7 @@ const ViewProfile = lazy(() => import("./components/ViewProfile"))
 const UserProfile = lazy(()=>import("./components/NewProfile/UserProfile"))
 const LawyerProfile = lazy(()=>import("./components/NewProfile/LawyerProfile"))
 
+
 function Routes(props) {
   console.log(props);
   return (
@@ -197,6 +198,7 @@ function Routes(props) {
             <Route exact path="/lawfirm/blogs/editblog/:id" component={BusinessProfile} />
             <Route exact path="/lawfirm-view/:id" component={LawfirmView} />
             <Route exact path="/lawyer-view/:id" component={LawyerView} />
+            <Route exact path="/blogs" component={Blogs} />
           
 
             {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?

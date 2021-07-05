@@ -12,9 +12,9 @@ function ReviewIcon() {
       xmlns="http://www.w3.org/2000/svg"
       style={{
         display: "block",
-        height: "20",
-        width: "20",
-        fill: "gray",
+        height: "30",
+        width: "30",
+        fill: "var(--primary)",
       }}
     >
       <g>

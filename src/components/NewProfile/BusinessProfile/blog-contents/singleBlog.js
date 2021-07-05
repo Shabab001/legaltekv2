@@ -12,6 +12,7 @@ import parse from 'html-react-parser';
 import{message} from "antd"
 import ConfirmModal from "../../../modals/ConfirmModal"
 import {FacebookShareButton,TwitterShareButton,LinkedinShareButton} from "react-share"
+import {Link} from "react-router-dom"
 
 import { Select } from 'antd';
 
@@ -30,8 +31,10 @@ const SingleBlog = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [commentToBeDeleted, setCommentToBeDeleted] = useState("");
   const [facebookShareCount, setFacebookShareCount] = useState();
-  const [sort, setSort]=useState(null)
+  const [sort, setSort]=useState(null);
+  const [slideIndex, setSlideIndex]=useState(1);
   const{id}=useParams()
+
   console.log(id)
 
 
@@ -129,7 +132,7 @@ useEffect(()=>{
  
 
 
-},[])
+},[id])
 
 useEffect(()=>{
   if(props.blogs.singlePost && props.profile){
@@ -182,6 +185,25 @@ else{
 }
 
 
+
+}
+const handleNavigation =(type,index)=>{
+  if(type==="next"){
+    if(slideIndex !== props.blogs.posts.length){
+         setSlideIndex(slideIndex+1)
+    }
+    else if(slideIndex === props.blogs.posts.length){
+      setSlideIndex(1)
+    }
+  }
+  if(type === "prev"){
+    if(slideIndex !== 1){
+      setSlideIndex(slideIndex -1)
+ }
+ else if(slideIndex === 1){
+   setSlideIndex(props.blogs.posts.length)
+ }
+  }
 
 }
 
@@ -346,28 +368,46 @@ else{
             </div>
           </div>
         </div>
-        <div className="navigateBlog">
-          <div className="navigateBlogBtns">
+        <div className= "navigateBlog">
+        <div className="navigateBlogBtns">
          
-            <button data-tip="Previous Post">
-              <i className="fa fa-arrow-left" />
-            </button>
-            <button data-tip="Next Post">
-              <i className="fa fa-arrow-right" />
-            </button>
-          </div>
-          <div className="heightLessContainer">
+         <button data-tip="Previous Post" onClick={()=>handleNavigation("prev")}>
+           <i className="fa fa-arrow-left" />
+         </button>
+         <button data-tip="Next Post" onClick={()=>handleNavigation("next")}>
+           <i className="fa fa-arrow-right" />
+         </button>
+       </div>
+        {props.blogs && props.blogs.posts && props.blogs.posts.length > 1 && props.blogs.posts.map((item,index)=>
+          {
+         
+               console.log(item.id)
+            
+            return(
+            
+          
+  
+     
+     
+          <div className={slideIndex === index+1 ?"heightLessContainer anime":"heightLessContainer"} onClick={(e)=>{
+            e.stopPropagation()
+            props.history.push(`/lawfirm/blogs/${props.blogs.posts[index].id}`)}} >
             <div className="nextBlogImageContainer">
-              <img src={Criminal} alt="building.jpg" />
+              <img src={item.coverImage.url} alt="building.jpg" />
             </div>
             <div className="nextBlogTitleContainer">
               <p>
-                NanaPrincess Hotel - The New Jewel in the Crown of Charismatic
-                Crete
+              {item.title}
               </p>
             </div>
           </div>
+         
+          )
+            
+        })}
         </div>
+        
+        
         {modalOpen && (
             <ConfirmModal
               {...props}

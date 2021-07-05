@@ -108,6 +108,7 @@ async function deletePost(post, index) {
             <img src={props.blog.coverImage.url} alt="image"/>
 
           </div>
+          
           <div className="bcard-middle">
               <div className="bcard-middle-first">
                       <div className="bcard-image">
@@ -116,13 +117,14 @@ async function deletePost(post, index) {
                          </div>
                          <div onClick={()=>props.history.push(`/lawfirm/blogs/${props.blog.id}`)} style={{cursor:"pointer"}}>
 
-                            <p>{props.blog.title}</p>
+                            <p>{props.blog.title.substring(0,28)}</p>
                          </div>
                            
                       </div>
+                      
                       {blogUser && props.profile && blogUser.id === props.profile.id?
                       <div className="blogAction">
-                        <Dropdown
+                        <Dropdown 
                           trigger={["click"]}
                           overlay={()=>menu({
                             item: props.blog,
@@ -131,17 +133,19 @@ async function deletePost(post, index) {
                           })}
                           placement="bottomLeft"
                           arrow
+                          overlayStylestyle={{backgroundColor:"grey"}}
                           >
                           <button>
-                            <ThreeDotsIcon />
+                            <ThreeDotsIcon/>
                           </button>
                         </Dropdown>
              </div>:null
                         }
+                        
+
+                        
               </div>
-            { parse(props.blog.body)}
-          </div>
-          <div className="bcard-lower">
+              <div className="bcard-lower">
              {props.blog.blogCategory.map((item,index)=>{
                if(index < 2){
 
@@ -151,11 +155,19 @@ async function deletePost(post, index) {
                    )
                   }
              })}
-             <div style={{display:"flex",gap:".3rem",alignItems:"center"}}>
+             <div style={{display:"flex",gap:".3rem",alignItems:"center",color:"red"}}>
              <BiLike/>
-              <p><span style={{color:"black"}}>{props.blog.likes?props.blog.likes.length:0} </span></p>
+              <p><span style={{color:"white"}}>{props.blog.likes?props.blog.likes.length:0} </span></p>
              </div>
           </div>
+          <div className="bcard-desc">
+
+           <p>
+             { parse(props.blog.body.substring(0,156))}
+             </p> 
+          </div>
+          </div>
+ 
           {modalOpen && (
           <ConfirmModal
             {...props}
