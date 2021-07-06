@@ -13,6 +13,7 @@
   text-align: center;
   padding: 0.3rem 0rem;
   color: white;
+  z-index: 2;
 }
 .bcard-time p:nth-child(2) {
   font-weight: bold;
@@ -43,12 +44,18 @@
   height: 15rem;
   max-width: 30rem;
   max-height: 17rem;
+  overflow: hidden;
 }
 
 .bcard-pic img {
   object-fit: cover;
   height: 100%;
   width: 100%;
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+.bcard-pic img:hover {
+  transform: scale(1.1);
 }
 .bcard-middle {
   position: relative;
@@ -87,6 +94,7 @@
   width: 2.5rem;
   background-color: white;
   border-radius: 50px 50px;
+  cursor: pointer;
 }
 .bcard-round-image {
   height: 100%;

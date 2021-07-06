@@ -7,11 +7,13 @@
   line-height: normal;
   padding: 0;
   margin: 0;
-  background-color: rgb(233, 233, 233);
+  background-color: var(--primary);
   position: absolute;
   width: 3.5rem;
   text-align: center;
   padding: 0.3rem 0rem;
+  color: white;
+  z-index: 2;
 }
 .bcard-time p:nth-child(2) {
   font-weight: bold;
@@ -21,28 +23,48 @@
 .bcard-time p:nth-child(3) {
   font-size: 0.8rem;
 }
-.bcard-time p:nth-child(3) {
-  color: red;
+
+.blogAction {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 0.2rem;
+  left: 1rem;
+  justify-content: center;
+  outline: none;
+}
+.blogAction button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
 }
 .bcard-pic {
   min-height: 13rem;
   height: 15rem;
   max-width: 30rem;
   max-height: 17rem;
+  overflow: hidden;
 }
 
 .bcard-pic img {
   object-fit: cover;
   height: 100%;
   width: 100%;
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+.bcard-pic img:hover {
+  transform: scale(1.1);
 }
 .bcard-middle {
   position: relative;
-  padding: 1rem 1rem;
+
   padding-bottom: 0rem;
 }
 .bcard-middle-first {
-  padding-top: 0.3rem;
+  padding: 0.7rem 1rem;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,8 +77,12 @@
 .bcard-lower {
   padding: 0.5rem 1rem;
   display: flex;
+  background-color: var(--primary);
   justify-content: space-between;
-  color: red;
+  color: white;
+}
+.bcard-desc {
+  padding: 0.5rem 1rem;
 }
 .bcard-image {
   display: flex;
@@ -68,6 +94,7 @@
   width: 2.5rem;
   background-color: white;
   border-radius: 50px 50px;
+  cursor: pointer;
 }
 .bcard-round-image {
   height: 100%;
