@@ -8,12 +8,12 @@ import "../../assets/css/header.css";
 import "../../assets/css/index.css";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom";
 import GoogleMapReact from "google-map-react";
 import Geolocate from "../MiniComponents/Geolocate";
 import { Radio } from "antd";
 import Axios from "axios";
-import Logo from "./images/legaltek.webp"
+import Logo from "./images/legaltek.webp";
 import {
   IdcardFilled,
   CreditCardFilled,
@@ -24,7 +24,7 @@ import {
   HeartFilled,
   GiftFilled,
   InfoCircleFilled,
-  SettingFilled
+  SettingFilled,
 } from "@ant-design/icons";
 
 import SignIn from "../modals/SignInModal";
@@ -40,7 +40,7 @@ const SignUpIcon = lazy(() => import("../../assets/img/svgs/SignUpIcon"));
 const BriefcaseIcon = lazy(() => import("../../assets/img/svgs/BriefcaseIcon"));
 const ReviewIcon = lazy(() => import("../../assets/img/svgs/ReviewIcon"));
 const LogoutIcon = lazy(() => import("../../assets/img/svgs/LogoutIcon"));
-const modalRoot = document.getElementById("modal-root")
+const modalRoot = document.getElementById("modal-root");
 var countries = require("country-data").countries;
 
 const Marker = ({ text }) => (
@@ -100,7 +100,7 @@ function Header(props) {
   const [loading, setLoading] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(true);
   const [value, setValue] = useState(1);
-  const onChange = (e) => {
+  const onChange = e => {
     setValue(e.target.value);
   };
 
@@ -189,7 +189,7 @@ function Header(props) {
     }
   }, [localStorage.getItem("locality")]);
 
-  const logout = (e) => {
+  const logout = e => {
     e.preventDefault();
     setRegProp(false);
     setUserType("");
@@ -198,7 +198,7 @@ function Header(props) {
     props.actions.logout(props.history);
     message.success(<p> Logged out Successfully!!" &nbsp; &#9749;</p>);
   };
-  const fixedHeader = (e) => {
+  const fixedHeader = e => {
     const header = document.querySelector(".indexHeader");
     const index = document.querySelector(".index");
     if (header) {
@@ -228,9 +228,8 @@ function Header(props) {
 
   useEffect(() => {
     let body = document.querySelector("body");
-    console.log("fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxed",props.fixed)
-    if(props.fixed){
-
+    console.log("fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxed", props.fixed);
+    if (props.fixed) {
       window.addEventListener("scroll", fixedHeader);
     }
     window.addEventListener("click", function (e) {
@@ -256,7 +255,7 @@ function Header(props) {
     };
   }, []);
 
-  const chooseAddress = (address) => {
+  const chooseAddress = address => {
     console.log(address);
 
     setTempChosenLocation({
@@ -267,12 +266,12 @@ function Header(props) {
 
     setChosenLocation(address);
     geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => {
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
         setCenter(latLng);
         setMarkerCenter(latLng);
       })
-      .catch((error) => console.error("Error", error));
+      .catch(error => console.error("Error", error));
     // setMapDropdown(false)
     setLocationTray(2);
   };
@@ -310,21 +309,31 @@ function Header(props) {
   let linkPrefix = props.auth.isAuthenticated
     ? props.auth.user.role.type == "lawfirm"
       ? "/lawfirm/"
-      :props.auth.user.role.type == "lawyer"
+      : props.auth.user.role.type == "lawyer"
       ? "/lawyer/"
-      : props.auth.user.role.type =="authenticated"
+      : props.auth.user.role.type == "authenticated"
       ? "/user/"
       : ""
-      :"" ;
+    : "";
   return (
     <>
-    
-      <div className={props.fixed ?`indexHeader inVisibleSearchBar`:"indexHeader inVisibleSearchBar notfixed"}>
+      <div
+        className={
+          props.fixed
+            ? `indexHeader inVisibleSearchBar`
+            : "indexHeader inVisibleSearchBar notfixed"
+        }
+      >
         <div className="header-items">
           <div style={{ display: "flex" }}>
             <div className="brand">
-          
-            <Link to="/"><img src={Logo} alt="logo" style={{height:"2rem", width:"12rem"}}/></Link>
+              <Link to="/">
+                <img
+                  src={Logo}
+                  alt="logo"
+                  style={{ height: "2rem", width: "12rem" }}
+                />
+              </Link>
             </div>
             <div
               style={{
@@ -366,7 +375,9 @@ function Header(props) {
                     : locality + "," + localityCountry}
                 </span>
               ) : (
-                <span style={{color:"var(--primary)"}}>Enter your location</span>
+                <span style={{ color: "var(--primary)" }}>
+                  Enter your location
+                </span>
               )}
               {mapDropdown && (
                 <div
@@ -381,12 +392,15 @@ function Header(props) {
                       <Geolocate
                         ref={geo}
                         Autocomplete={false}
-                        style={{color:"var(--primary)"}}
-                        chooseAddress={(address) => chooseAddress(address)}
+                        style={{ color: "var(--primary)" }}
+                        chooseAddress={address => chooseAddress(address)}
                         icon={
                           <i
                             className="fe fe-map-pin input-marker"
-                            style={{ fontSize: "20px", color: "var(--primary)" }}
+                            style={{
+                              fontSize: "20px",
+                              color: "var(--primary)",
+                            }}
                           ></i>
                         }
                         placeholder="Address"
@@ -433,7 +447,7 @@ function Header(props) {
                           defaultZoom={zoom}
                           center={center}
                           defaultZoom={zoom}
-                          onDrag={(e) => {
+                          onDrag={e => {
                             if (adjustPin) {
                               setMarkerCenter({
                                 lat: e.center.lat(),
@@ -441,7 +455,7 @@ function Header(props) {
                               });
                             }
                           }}
-                          onClick={(e) => {
+                          onClick={e => {
                             // setMarkerCenter({
                             //   lat: e.lat,
                             //   lng: e.lng
@@ -522,7 +536,7 @@ function Header(props) {
                           </button>
                           <button
                             className="pinkBtn"
-                            onClick={(e) => saveLocation(e)}
+                            onClick={e => saveLocation(e)}
                           >
                             Save
                           </button>
@@ -538,21 +552,21 @@ function Header(props) {
           <div className="menu-items">
             <ul>
               <li className="nav-links" id="language">
-                <button className="nav-side-btn" style={{backgroundColor:"var(--primary)"}}>
+                <button
+                  className="nav-side-btn"
+                  style={{ backgroundColor: "var(--primary)" }}
+                >
                   {/* <i
                     className="fa fa-home"
                     style={{ color: "#e50077", fontSize: 28 }}
                   ></i> */}
-                Join Now
+                  Find a Lawyer
                 </button>
               </li>
-              
 
               <li className="nav-links" id="userBtn">
                 <button ref={userBtn} onClick={() => setUserOpen(!userOpen)}>
-                  <div style={{
-                    
-                   }}>
+                  <div style={{}}>
                     <HamMenuIcon />
                   </div>
                   <UserIcon />
@@ -615,7 +629,7 @@ function Header(props) {
                     </>
                   )}
 
-                  {props.auth.isAuthenticated &&  props.auth.user?(
+                  {props.auth.isAuthenticated && props.auth.user ? (
                     <>
                       <h5
                         style={{
@@ -640,63 +654,53 @@ function Header(props) {
                         My Account
                       </Link>
 
-                      {props.auth.user.role.type==="lawfirm"?
-
-                          <Link to={{pathname:linkPrefix + "branches"}}>
+                      {props.auth.user.role.type === "lawfirm" ? (
+                        <Link to={{ pathname: linkPrefix + "branches" }}>
                           <MessageFilled
                             style={{ color: "lightslategray", fontSize: 18 }}
                           />
-
                           Location
-                            </Link>:null}
+                        </Link>
+                      ) : null}
 
-
-                      {props.auth.user.role.type!=="authenticated"?
-                        <Link to={{pathname:linkPrefix + "documents"}}>
-                       <  SettingFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        
-                        Documents
-                      </Link>:null
-                    
-                    
-                    }
-                        {props.auth.user.role.type==="lawfirm"?
-                        <Link to={{pathname:linkPrefix + "lawyers"}}>
-                       <  SettingFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        
-                        Lawyers
-                      </Link>:null
-                    
-                    
-                    }
-                     {props.auth.user.role.type!=="lawfirm"?
-                      <Link
-                        to={{  pathname: linkPrefix + "appointments",}}
-                      >
-                        <GiftFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        Appointmets
-                      </Link>:null
-                        }
-                     {props.auth.user.role.type!=="lawfirm"?
-                      <Link
-                        to={{
-                          pathname: linkPrefix + "favourites",
-                        }}
-                      >
-                        <HeartFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        Favorites
-                      </Link>:null
-}
-
+                      {props.auth.user.role.type !== "authenticated" ? (
+                        <Link to={{ pathname: linkPrefix + "documents" }}>
+                          <SettingFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Documents
+                        </Link>
+                      ) : null}
+                      {props.auth.user.role.type === "lawfirm" ? (
+                        <Link to={{ pathname: linkPrefix + "lawyers" }}>
+                          <SettingFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Lawyers
+                        </Link>
+                      ) : null}
+                      {props.auth.user.role.type !== "lawfirm" ? (
+                        <Link to={{ pathname: linkPrefix + "appointments" }}>
+                          <GiftFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Appointmets
+                        </Link>
+                      ) : null}
+                      {props.auth.user.role.type !== "lawfirm" ? (
                         <Link
+                          to={{
+                            pathname: linkPrefix + "favourites",
+                          }}
+                        >
+                          <HeartFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Favorites
+                        </Link>
+                      ) : null}
+
+                      <Link
                         to={{
                           pathname: linkPrefix + "notifications",
                         }}
@@ -715,50 +719,45 @@ function Header(props) {
                         <ReviewIcon />
                         Ratings & Reviews
                       </Link>
-                      {props.auth.user.role.type!=="authenticated"?
-                        <Link to={{pathname:linkPrefix + "management"}}>
-                       <  SettingFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        
-                        Management
-                      </Link>:null
-                    
-                    
-                    }
-                      <Link to={{pathname:linkPrefix + "chats"}}>
+                      {props.auth.user.role.type !== "authenticated" ? (
+                        <Link to={{ pathname: linkPrefix + "management" }}>
+                          <SettingFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Management
+                        </Link>
+                      ) : null}
+                      <Link to={{ pathname: linkPrefix + "chats" }}>
                         <MessageFilled
                           style={{ color: "lightslategray", fontSize: 18 }}
                         />
-                        
                         Message
                       </Link>
-                      {props.auth.user.role.type!=="authenticated"?
-                          <Link
+                      {props.auth.user.role.type !== "authenticated" ? (
+                        <Link
                           to={{
                             pathname: linkPrefix + "blogs",
                           }}
                         >
-  
                           <CreditCardFilled
                             style={{ color: "lightslategray", fontSize: 18 }}
                           />
-                         Blogs
-                        </Link>:null}
+                          Blogs
+                        </Link>
+                      ) : null}
 
-                        {props.auth.user.role.type!=="lawfirm"?
-                      <Link
-                        to={{
-                          pathname: linkPrefix + "paymenthistory",
-                        }}
-                      >
-                        
-
-                        <CreditCardFilled
-                          style={{ color: "lightslategray", fontSize: 18 }}
-                        />
-                        Payment History
-                      </Link>:null}
+                      {props.auth.user.role.type !== "lawfirm" ? (
+                        <Link
+                          to={{
+                            pathname: linkPrefix + "paymenthistory",
+                          }}
+                        >
+                          <CreditCardFilled
+                            style={{ color: "lightslategray", fontSize: 18 }}
+                          />
+                          Payment History
+                        </Link>
+                      ) : null}
                       <div className="divider"></div>
                       <a>
                         <i
@@ -785,7 +784,7 @@ function Header(props) {
                         />
                         FAQs
                       </Link> */}
-                      <a onClick={(e) => logout(e)}>
+                      <a onClick={e => logout(e)}>
                         <LogoutIcon />
                         Logout
                       </a>
@@ -807,81 +806,87 @@ function Header(props) {
                         <Link to="/privacy-policy">Privacy</Link>
                       </div>
                     </>
-                  ):null}
+                  ) : null}
                 </div>
               </li>
             </ul>
           </div>
 
-          {login && !props.auth.isAuthenticated && (
+          {login &&
+            !props.auth.isAuthenticated &&
             ReactDOM.createPortal(
               <div className="modal-overlay">
-              <SignIn
-                signUpModal={() => setRegister(true)}
-                closeLogin={() => setLogin(false)}
-                forgotPassModal={() => setForgotPass(true)}
-                phoneSignInModal={() => setPhoneSignIn(true)}
-                userTypeProp={userType}
-                setUserTypeProp={(value) => setUserType(value)}
-                regProp={regProp}
-                setRegProp={(value) => setRegProp(value)}
-                {...props}
-              />
-            </div>, modalRoot
-            )
-           
-          )}
+                <SignIn
+                  signUpModal={() => setRegister(true)}
+                  closeLogin={() => setLogin(false)}
+                  forgotPassModal={() => setForgotPass(true)}
+                  phoneSignInModal={() => setPhoneSignIn(true)}
+                  userTypeProp={userType}
+                  setUserTypeProp={value => setUserType(value)}
+                  regProp={regProp}
+                  setRegProp={value => setRegProp(value)}
+                  {...props}
+                />
+              </div>,
+              modalRoot
+            )}
 
-          {register && !props.auth.isAuthenticated && (
-             ReactDOM.createPortal(
-            <div className="modal-overlay">
-              <Register
-                closeRegister={() => setRegister(false)}
-                signInModal={() => setLogin(true)}
-                // otherSignUp={() => setOtherSignUp(true)}
-                forgotPassModal={() => setForgotPass(true)}
-                phoneSignInModal={() => setPhoneSignIn(true)}
-                userTypeProp={userType}
-                setUserTypeProp={(value) => setUserType(value)}
-                regProp={regProp}
-                setRegProp={(value) => setRegProp(value)}
-                {...props}
-              />
-            </div>, modalRoot
-          ))}
-
-          {phoneSignIn && !props.auth.isAuthenticated && (
-             ReactDOM.createPortal(
-            <div className="modal-overlay">
-              <SignInWithPhoneModal
-                closePhoneSignIn={() => setPhoneSignIn(false)}
-                signInModal={() => setLogin(true)}
-                forgotPassModal={() => setForgotPass(true)}
-                signUpModal={() => setRegister(true)}
-                userTypeProp={userType}
-                setUserTypeProp={(value) => setUserType(value)}
-                regProp={regProp}
-                setRegProp={(value) => setRegProp(value)}
-                {...props}
-              />
-            </div> , modalRoot)
-          )}
-
-          {forgotPass && !props.auth.isAuthenticated && (
+          {register &&
+            !props.auth.isAuthenticated &&
             ReactDOM.createPortal(
-            <div className="modal-overlay">
-              <ForgotPass
-                closeForgotPass={() => setForgotPass(false)}
-                signInModal={() => setLogin(true)}
-                signUpModal={() => setRegister(true)}
-                userTypeProp={userType}
-                setUserTypeProp={(value) => setUserType(value)}
-                regProp={regProp}
-                setRegProp={(value) => setRegProp(value)}
-                {...props}
-              />
-            </div>, modalRoot)
-          )}
+              <div className="modal-overlay">
+                <Register
+                  closeRegister={() => setRegister(false)}
+                  signInModal={() => setLogin(true)}
+                  // otherSignUp={() => setOtherSignUp(true)}
+                  forgotPassModal={() => setForgotPass(true)}
+                  phoneSignInModal={() => setPhoneSignIn(true)}
+                  userTypeProp={userType}
+                  setUserTypeProp={value => setUserType(value)}
+                  regProp={regProp}
+                  setRegProp={value => setRegProp(value)}
+                  {...props}
+                />
+              </div>,
+              modalRoot
+            )}
+
+          {phoneSignIn &&
+            !props.auth.isAuthenticated &&
+            ReactDOM.createPortal(
+              <div className="modal-overlay">
+                <SignInWithPhoneModal
+                  closePhoneSignIn={() => setPhoneSignIn(false)}
+                  signInModal={() => setLogin(true)}
+                  forgotPassModal={() => setForgotPass(true)}
+                  signUpModal={() => setRegister(true)}
+                  userTypeProp={userType}
+                  setUserTypeProp={value => setUserType(value)}
+                  regProp={regProp}
+                  setRegProp={value => setRegProp(value)}
+                  {...props}
+                />
+              </div>,
+              modalRoot
+            )}
+
+          {forgotPass &&
+            !props.auth.isAuthenticated &&
+            ReactDOM.createPortal(
+              <div className="modal-overlay">
+                <ForgotPass
+                  closeForgotPass={() => setForgotPass(false)}
+                  signInModal={() => setLogin(true)}
+                  signUpModal={() => setRegister(true)}
+                  userTypeProp={userType}
+                  setUserTypeProp={value => setUserType(value)}
+                  regProp={regProp}
+                  setRegProp={value => setRegProp(value)}
+                  {...props}
+                />
+              </div>,
+              modalRoot
+            )}
         </div>
       </div>
 
@@ -892,11 +897,11 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(userActions, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

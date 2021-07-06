@@ -1,93 +1,53 @@
-.main-blog-container{
-    width:100%;
-    max-width:1820px;
-    margin-left:auto;
-    margin-right:auto;
-    
+.main-blog-container {
+  width: 100%;
+  max-width: 1920px;
+  background-color: #f7f7f7;
+  margin-left: auto;
+  margin-right: auto;
+}
+.header-blogs {
+  height: 700px;
+  background: url(./law.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.header-blogs img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.header-blogs-content {
+  max-width: 1700px;
+  padding: 0rem 2rem;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 8rem;
 
+  height: 100%;
 }
-.header-blogs{
-   
-    height:500px;
-    background-color:rgb(236, 236, 236);
-    
-}
-.header-blogs img{
- height:100%;
- width:100%;
- object-fit:cover;
- 
-
-}
-.header-blogs-content{
-    max-width:1700px;
-    padding:0rem 2rem;
-    width:100%;
-    margin:auto;
-display:flex;
-align-items:center;
-gap:8rem;
-
-height:100%;
-
-}
-.header-blogs-upper{
-  background:white;
-  padding:2rem;
-  width:35rem;
-}
-
-.header-blogs-cat{
-    display:flex;
-    align-items:center;
-    gap:.5rem;
-}
-.header-blog-title{
-    margin-top:1rem;
-    font-size:3rem;
-    line-height:1;
-}
-.header-blog-body{
-    margin-top:1rem;
-    color:grey;
-    font-size:1.1rem;
-    line-height:1.1;
-}
-.header-blog-lower{
-    margin-top:2rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-.header-blog-img-grid,.header-blogs-option-grid{
-    display:flex;
-    gap:.5rem;
-}
-.header-blog-img{
-    background:grey;
-    height:3rem;
-    width:3rem;
-    border-radius:50px 50px;
-}
-
-
-
 
 .list-search3 {
+  position: relative;
+  top: -5.5rem;
+  height: 7rem;
+  background-color: white;
+  margin: auto;
   margin-top: 2rem;
   display: flex;
-
+  width: 1400px;
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 2rem 1rem 1.5rem;
   gap: 1rem;
-  box-shadow: 1px 2px 5px 2px rgb(233, 232, 232);
+  /* box-shadow: 1px 2px 5px 2px rgb(233, 232, 232); */
 }
 .bg-search-sec {
   border: 1px solid rgb(230, 228, 228);
   border-radius: 4px;
   padding-left: 0.5rem;
-  height: 2.5rem;
+  height: 3rem;
   flex-basis: 40%;
   font-size: 1.2rem;
 }
@@ -108,7 +68,7 @@ height:100%;
   border-radius: 4px;
   padding-left: 0.5rem;
   cursor: pointer;
-  height: 2.5rem;
+  height: 3rem;
   width: 100%;
 }
 .bg-sort-inputs > input::placeholder {
@@ -139,7 +99,7 @@ height:100%;
 }
 .ant-select-selector {
   max-width: 100%;
-  height: 2.5rem !important;
+  height: 3rem !important;
   border-radius: 4px;
 }
 .ant-select-selection-placeholder {
@@ -156,6 +116,46 @@ height:100%;
   font-weight: normal;
 }
 .bg-sort-inputs input {
-    border: none;
+  border: none;
+}
+.popularBlogs-main {
+  margin-top: 2rem;
+}
 
+.pop-blogs-grid {
+  max-width: 1600px;
+  margin: auto;
+
+  display: flex;
+  gap: 2rem;
+}
+.pBlogs-normal-grid {
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 350px 350px;
+  grid-template-areas:
+    "box1 box2 box2 box3"
+    "box4 box2 box2 box5";
+  row-gap: 10px;
+  gap: 1rem;
+  background-color: #f7f7f7;
+}
+
+.pblogs-normal-box1 {
+  grid-area: box1;
+  height: 100%;
+}
+.pblogs-normal-box2 {
+  grid-area: box2;
+}
+.pblogs-normal-box3 {
+  grid-area: box3;
+}
+.pblogs-normal-box4 {
+  grid-area: box4;
+}
+.pblogs-normal-box5 {
+  grid-area: box5;
 }

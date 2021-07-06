@@ -1,0 +1,21 @@
+.popularBlogs-main {
+  margin-top: 2rem;
+}
+
+.pop-blogs-grid {
+  max-width: 1600px;
+  margin: auto;
+
+  display: flex;
+  gap: 2rem;
+}
+.po-box-img img:hover {
+  transform: scale(1.1);
+}
+.po-box-img img {
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+.po-box-img {
+  overflow: hidden;
+}
