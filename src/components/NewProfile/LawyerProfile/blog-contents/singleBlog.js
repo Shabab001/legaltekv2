@@ -193,7 +193,14 @@ const SingleBlog = props => {
             <div className="singleBlog-tags">
               {singleBlog
                 ? singleBlog.blogCategory.map((item, index) => {
-                    return <p key={index}>{item}</p>;
+                    if (
+                      index === 0 ||
+                      index === singleBlog.blogCategory.length - 1
+                    ) {
+                      return <p key={index}>{item}</p>;
+                    } else {
+                      return <p key={index}> | {item}</p>;
+                    }
                   })
                 : ""}
             </div>
@@ -206,29 +213,29 @@ const SingleBlog = props => {
               >
                 <i className="fa fa-facebook" />
               </FacebookShareButton>
-              <TwitterShareButton>
-                <i
-                  className="fa fa-twitter"
-                  url={`https://legaltekv2.herokuapp.com/lawfirm/blogs/${props.blogs.singlePost.id}`}
-                />
+              <TwitterShareButton
+                url={`https://legaltekv2.herokuapp.com/lawfirm/blogs/${props.blogs.singlePost.id}`}
+              >
+                <i className="fa fa-twitter" />
               </TwitterShareButton>
-              <LinkedinShareButton>
-                <i
-                  className="fa fa-linkedin"
-                  url={`https://legaltekv2.herokuapp.com/lawfirm/blogs/${props.blogs.singlePost.id}`}
-                />
+              <LinkedinShareButton
+                url={`https://legaltekv2.herokuapp.com/lawfirm/blogs/${props.blogs.singlePost.id}`}
+              >
+                <i className="fa fa-linkedin" />
               </LinkedinShareButton>
             </div>
 
             <div className="featured-image">
+              <div className="infoDate">
+                <p> Date: {singleBlog ? date : ""}</p>
+              </div>
               <div className="shortInfo" style={{ textAlign: "center" }}>
                 <p>
                   {" "}
                   {props.blogs.blogUser.firstname}{" "}
-                  {props.blogs.blogUser.lastname}
-                  <p>{props.blogs.blogUser.lawfirmName}</p>
+                  {props.blogs.blogUser.lastname}{" "}
                 </p>
-                <p> {singleBlog ? date : ""}</p>
+                <p>{props.blogs.blogUser.lawfirmName}</p>
               </div>
               <div className="profilePicture">
                 <img
@@ -281,9 +288,6 @@ const SingleBlog = props => {
 
                   <div className="shareAndFilter">
                     <div className="commentSecShare">
-                      <div>
-                        <i className="fa fa-heart-o" /> Share
-                      </div>
                       <div>
                         <TwitterShareButton
                           url={`https://legaltekv2.herokuapp.com/lawfirm/blogs/${props.blogs.singlePost.id}`}

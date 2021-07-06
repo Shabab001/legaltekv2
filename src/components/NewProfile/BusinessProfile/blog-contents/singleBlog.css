@@ -16,9 +16,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 800px;
   max-width: 100%;
   margin-bottom: 20px;
+  gap: 0.3rem;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
 .singleBlog-tags span {
@@ -124,6 +127,14 @@
   transform: translate3d(-50%, 0px, 0px);
 }
 
+.featured-image .infoDate {
+  position: absolute;
+  top: -120px;
+  left: 1%;
+  transform: translate3d(-50%, 0px, 0px);
+  color: grey;
+}
+
 .shortInfo p {
   text-align: center;
   margin-bottom: 0px;
@@ -141,7 +152,10 @@
     "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
-
+.shortInfo p:nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 .singleBlog .blog-body {
   width: 1200px;
   max-width: 100%;
@@ -252,7 +266,9 @@
   background-color: black;
   color: white;
 }
-
+* button {
+  outline: none !important;
+}
 .singleBlog .heightLessContainer {
   height: 0px;
   overflow: hidden;
@@ -318,22 +334,17 @@
 .singleBlog .blogComments .commentSecShare > div i {
   margin-right: 5px;
 }
+
 .singleBlog .blogComments .commentSecShare > div:nth-child(1) {
-  background-color: transparent;
-  color: gray;
-  font-weight: 400;
-  cursor: context-menu;
-}
-.singleBlog .blogComments .commentSecShare > div:nth-child(2) {
   background-color: #50abf1;
   color: white;
 }
 
-.singleBlog .blogComments .commentSecShare > div:nth-child(3) {
+.singleBlog .blogComments .commentSecShare > div:nth-child(2) {
   background-color: #0f90f2;
   color: white;
 }
-.singleBlog .blogComments .commentSecShare > div:nth-child(4) {
+.singleBlog .blogComments .commentSecShare > div:nth-child(3) {
   background-color: #0e76a8;
   color: white;
 }

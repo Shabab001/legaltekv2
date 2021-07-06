@@ -171,11 +171,21 @@ const BlogCard = props => {
               ) : null}
             </div>
             <div className="bcard-lower">
-              {props.blog.blogCategory.map((item, index) => {
-                if (index < 2) {
-                  return <p key={index}>{item}</p>;
-                }
-              })}
+              <Tooltip
+                title={props.blog.blogCategory.map((item, index) => (
+                  <p key={index}>{item}</p>
+                ))}
+              >
+                {props.blog.blogCategory.map((item, index) => {
+                  if (index < 1) {
+                    return (
+                      <p style={{ cursor: "pointer" }} key={index}>
+                        {item}
+                      </p>
+                    );
+                  }
+                })}
+              </Tooltip>
               <div
                 style={{ display: "flex", gap: ".3rem", alignItems: "center" }}
               >
