@@ -1,0 +1,40 @@
+.recent-blog-box {
+  display: flex;
+  flex-direction: column;
+}
+.recent-blog-pic {
+  height: 15rem;
+  overflow: hidden;
+}
+.recent-blog-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.3s ease-in;
+  cursor: pointer;
+}
+.recent-blog-box-big {
+  display: flex;
+  flex-direction: column;
+}
+.recent-blog-pic-big {
+  overflow: hidden;
+
+  height: 35rem;
+}
+.recent-blog-pic-big img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.3s ease-in;
+}
+.recent-blog-pic img:hover {
+  transform: scale(1.1);
+}
+.recent-blog-pic-big img:hover {
+  transform: scale(1.1);
+}

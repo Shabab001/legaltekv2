@@ -1,7 +1,7 @@
 import * as Types from "../actions/types";
 const init = {
   posts: [],
-  allBlogs:[],
+  allBlogs: [],
   deletePost: null,
   createdPost: null,
   singlePost: null,
@@ -9,7 +9,9 @@ const init = {
   deletedComment: null,
   searchPosts: [],
   count: 0,
-  blogUser:null,
+  blogUser: null,
+  popularPosts: [],
+  recentPosts: [],
 };
 const blogReducer = (state = init, action) => {
   switch (action.type) {
@@ -28,7 +30,7 @@ const blogReducer = (state = init, action) => {
     case Types.GET_USER_POSTS: {
       return {
         ...state,
-        posts:action.payload.posts,
+        posts: action.payload.posts,
       };
     }
     case Types.CREATE_POST: {
@@ -67,7 +69,18 @@ const blogReducer = (state = init, action) => {
         blogUser: action.payload.blogUser,
       };
     }
-
+    case Types.GET_POPULAR_POSTS: {
+      return {
+        ...state,
+        popularPosts: action.payload.posts,
+      };
+    }
+    case Types.GET_RECENT_POSTS: {
+      return {
+        ...state,
+        recentPosts: action.payload.posts,
+      };
+    }
     case Types.GET_POSTS_USING_SEARCH: {
       return {
         ...state,

@@ -7,9 +7,16 @@ const PopularBlogs = props => {
   return (
     <div className="pop-blogs-box">
       <div className="po-box-img">
-        <img src={Law} />
+        <img
+          src={
+            props.blog && props.blog.coverImage
+              ? props.blog.coverImage.url
+              : Law
+          }
+        />
       </div>
       <PBlogCard
+        blog={props.blog}
         type={props.type ? props.type : "normal"}
         body={props.body}
         background={props.background}

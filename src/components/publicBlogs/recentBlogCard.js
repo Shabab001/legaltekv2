@@ -1,27 +1,16 @@
 import React from "react";
-import "./pBlogCard.css";
 import { IoPricetagOutline } from "react-icons/io5";
 import parse from "html-react-parser";
 import moment from "moment";
-const PBlogCard = props => {
+import "./recentBlogcard.css";
+const RecentBlogCard = props => {
   return (
     <div
       className={
-        props.type === "normal"
-          ? "header-blogs-upper-normal"
-          : "header-blogs-upper"
+        props.type === "big" ? "recent-bcard-big" : "recent-bcard-normal"
       }
-      style={{
-        backgroundColor: props.background,
-      }}
     >
-      <div
-        className={
-          props.type === "normal"
-            ? "header-blogs-cat-normal"
-            : "header-blogs-cat"
-        }
-      >
+      <div className="recent-bcard-cat">
         <IoPricetagOutline />
         {props.blog
           ? props.blog.blogCategory.map((item, index) => {
@@ -33,9 +22,7 @@ const PBlogCard = props => {
       </div>
       <div
         className={
-          props.type === "normal"
-            ? "header-blog-title-normal"
-            : "header-blog-title"
+          props.type === "big" ? "recent-blog-title-big" : "recent-blog-title"
         }
       >
         <p>
@@ -47,34 +34,24 @@ const PBlogCard = props => {
       {props.body ? null : (
         <div
           className={
-            props.type === "normal"
-              ? "header-blog-body-normal"
-              : "header-blog-body"
+            props.type === "big" ? "recent-bcard-body-big" : "recent-bcard-body"
           }
         >
           <p>
             {props.blog
               ? parse(props.blog.body.substring(0, 256))
-              : "skfklsjdl lsjkdlkasjd asldjlakjds alksdjaksjd lasjdlasjds sldjfslkdfjs sdfsdfdsfdsfs sdfsdfds sds sdsd sdfsdfdsf sdsds sdsdsdsd sdsd sdfdsfdfd "}
+              : "skfklsjdl lsjkdlkasjd asldjlakjds alksdjaksjd lasjdlasjds sldjfslkdfjs sdfsdfdsfdsfs sdfsdfds sds sdsd sdfsdfdsf sdsds sdsdsdsd sdsd sdfdsfdfd  sdfdsf sdfsdf sdfdsfdsf sdfsdfdsf sdfsdfd sdfdsfdf esds dfd"}
           </p>
         </div>
       )}
       <div
         className={
-          props.type === "normal"
-            ? "header-blog-lower-normal"
-            : "header-blog-lower"
+          props.type === "big" ? "recent-bcard-lower-big" : "recent-bcard-lower"
         }
       >
-        <div className="header-blog-img-grid">
+        <div className="header-blog-img-grid2">
           <div className="header-blog-img"></div>
-          <div
-            className={
-              props.type === "normal"
-                ? "header-blog-date-normal"
-                : "header-blog-date"
-            }
-          >
+          <div>
             <p>Leonard Michel</p>
             <p>
               {props.blog
@@ -96,4 +73,4 @@ const PBlogCard = props => {
   );
 };
 
-export default PBlogCard;
+export default RecentBlogCard;

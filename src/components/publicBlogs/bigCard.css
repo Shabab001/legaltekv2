@@ -2,9 +2,9 @@
   background: white;
   padding-left: 3rem;
   padding-right: 3rem;
-  padding-top: 3rem;
+  padding-top: 5rem;
   padding-bottom: 3rem;
-  width: 40rem;
+  flex-basis: 50%;
 }
 .header-blogs-upper-normal {
   background: white;

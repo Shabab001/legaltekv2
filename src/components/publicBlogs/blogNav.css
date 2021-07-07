@@ -1,0 +1,34 @@
+.header-blog-nav-btn,
+.header-blog-nav-btn-full {
+  color: white;
+  position: relative;
+  cursor: pointer;
+}
+
+.header-blog-nav-btn::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  width: 2rem;
+  height: 1px;
+  left: 25px;
+  top: 10px;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s ease-in;
+}
+.header-blog-nav-btn:hover::after {
+  transform: scaleX(2);
+}
+.header-blog-nav-btn-full::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+  width: 2rem;
+  height: 1px;
+  left: 25px;
+  top: 10px;
+  transform: scaleX(2);
+  transform-origin: left;
+  transition: transform 0.3s ease-in;
+}

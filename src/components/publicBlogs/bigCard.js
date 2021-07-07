@@ -1,9 +1,9 @@
 import React from "react";
-import "./pBlogCard.css";
+import "./bigCard.css";
 import { IoPricetagOutline } from "react-icons/io5";
 import parse from "html-react-parser";
 import moment from "moment";
-const PBlogCard = props => {
+const BigCard = props => {
   return (
     <div
       className={
@@ -55,7 +55,7 @@ const PBlogCard = props => {
           <p>
             {props.blog
               ? parse(props.blog.body.substring(0, 256))
-              : "skfklsjdl lsjkdlkasjd asldjlakjds alksdjaksjd lasjdlasjds sldjfslkdfjs sdfsdfdsfdsfs sdfsdfds sds sdsd sdfsdfdsf sdsds sdsdsdsd sdsd sdfdsfdfd "}
+              : "skfklsjdl lsjkdlkasjd asldjlakjds alksdjaksjd lasjdlasjds sldjfslkdfjs sdfsdfdsfdsfs sdfsdfds sds sdsd sdfsdfdsf sdsds sdsdsdsd sdsd sdfdsfdfd iasdhajs askdhaksdh kashdkasdh askdhaskdh kasks sksk ksks sksks "}
           </p>
         </div>
       )}
@@ -96,4 +96,4 @@ const PBlogCard = props => {
   );
 };
 
-export default PBlogCard;
+export default BigCard;
