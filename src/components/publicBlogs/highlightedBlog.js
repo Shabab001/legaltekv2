@@ -10,7 +10,7 @@ const HighlightedBlog = () => {
         <div className="high-blog-img">
           <img src={Law} alt="pic" />
         </div>
-        <BigCard background={"white"} />
+        <BigCard background={"#f7f7f7"} />
       </div>
     </div>
   );

@@ -1,60 +1,55 @@
-.lawfirm-view-list{
-    width: 100%;
-    max-width: 1450px;
-    margin-top: 1rem;
-    background: white;
-    padding:1rem 1rem
+.lawfirm-view-list {
+  width: 100%;
+  max-width: 1450px;
+  margin-top: 0rem !important;
+  background-color: #f4f6f9 !important;
+  padding: 1rem 0rem !important;
 }
-.lawfirm-view-list>p{
-   font-size: 2.5rem;
-   font-weight: 500;
+.lawfirm-view-list > p {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.lawfirm-view-list-sec {
+  margin-top: 1rem;
+  max-width: 700px;
 
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
 }
-.lawfirm-view-list-sec{
-    margin-top: 1rem;
-    max-width: 700px;
-   
-    
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-   
-
+.lawfirm-view-list-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f4f6f9;
+  padding: 0.5rem;
 }
-.lawfirm-view-list-box{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f4f6f9;
-    padding:.5rem
-
+.lawfirm-view-list-image {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 4px;
+  background: azure;
 }
-.lawfirm-view-list-image{
-    height: 3rem;
-    width: 3rem;
-    border-radius: 4px;
-    background: azure;
+.lawfirm-view-list-index {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 32, 158, 0.055);
 }
-.lawfirm-view-list-index{
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(4, 32, 158, 0.055);
+.even {
+  background-color: white;
 }
-.even{
-    background-color: white;
+.lawfirm-view-list-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-weight: bold;
 }
-.lawfirm-view-list-intro{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap:2rem;
-    font-weight: bold;
-}
-.lawfirm-view-list-likes{
-    color:grey;
-    font-weight: bold;
+.lawfirm-view-list-likes {
+  color: grey;
+  font-weight: bold;
 }

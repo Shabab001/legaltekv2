@@ -19,22 +19,26 @@ const BlogNav = props => {
       if (activeBtn === "btn1") {
         setActiveBtn("btn2");
         props.setNavBtn("btn2");
+        return;
       }
       if (activeBtn === "btn2") {
         setActiveBtn("btn3");
         props.setNavBtn("btn3");
+        return;
       }
       if (activeBtn === "btn3") {
         setActiveBtn("btn1");
         props.setNavBtn("btn1");
+        return;
       }
-    }, 4000);
+    }, 10000);
   };
   const handleClickOut = () => {
     handleTime = setTimeout(() => {
       if (activeBtn === "btn1") {
         setActiveBtn("btn2");
         props.setNavBtn("btn2");
+        return;
       }
       if (activeBtn === "btn2") {
         setActiveBtn("btn3");
@@ -44,7 +48,7 @@ const BlogNav = props => {
         setActiveBtn("btn1");
         props.setNavBtn("btn1");
       }
-    }, 4000);
+    }, 20000);
   };
 
   useEffect(() => {
@@ -54,6 +58,9 @@ const BlogNav = props => {
     } else {
       handleTimeout();
     }
+    return () => {
+      clearTimeout(handleTime);
+    };
   }, [activeBtn]);
 
   return (

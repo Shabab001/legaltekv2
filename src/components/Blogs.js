@@ -58,7 +58,7 @@ function Blogs(props) {
           {popBlogs &&
             popBlogs.map((item, index) => {
               return (
-                <PopularBlogs blog={item} key={index} background={"#f7f7f7"} />
+                <PopularBlogs blog={item} key={index} background={"white"} />
               );
             })}
         </div>

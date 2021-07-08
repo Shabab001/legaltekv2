@@ -1,14 +1,18 @@
 .header-blog-nav-btn,
 .header-blog-nav-btn-full {
-  color: white;
   position: relative;
   cursor: pointer;
+}
+.header-blogs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .header-blog-nav-btn::after {
   content: "";
   position: absolute;
-  background-color: white;
+  background-color: black;
   width: 2rem;
   height: 1px;
   left: 25px;
@@ -23,7 +27,7 @@
 .header-blog-nav-btn-full::after {
   content: "";
   position: absolute;
-  background-color: white;
+  background-color: black;
   width: 2rem;
   height: 1px;
   left: 25px;

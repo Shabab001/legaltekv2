@@ -1,0 +1,28 @@
+.lawfirm-general-main {
+  background-color: #f4f6f9;
+}
+.genral-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.general-sec1 {
+  border-radius: 4px 4px;
+  width: 100%;
+  background-color: white;
+}
+.general-intro-header {
+  height: 3rem;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  color: white;
+}
+.general-intro-body {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  padding: 2rem 2rem;
+}

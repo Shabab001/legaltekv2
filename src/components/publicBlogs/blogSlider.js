@@ -30,7 +30,7 @@ const BlogSlider = props => {
             : "header-blog-slider"
         }
       >
-        <PBlogCard type={"header"} />
+        <PBlogCard type={"header"} background={"white"} />
       </div>
       <div
         className={

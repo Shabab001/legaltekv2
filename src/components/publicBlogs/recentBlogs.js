@@ -1,5 +1,5 @@
 import React from "react";
-import Law from "../law.jpg";
+import Law from "../law.jpeg";
 import RecentBlogCard from "./recentBlogCard";
 import "./recentBlogs.css";
 const RecentBlogs = props => {

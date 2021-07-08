@@ -1,7 +1,7 @@
 import React from "react";
 import PBlogCard from "./pBlogCard";
 import "./popularBlogs.css";
-import Law from "../law.jpg";
+import Law from "../law.jpeg";
 const PopularBlogs = props => {
   const blogs = [1, 2, 3];
   return (

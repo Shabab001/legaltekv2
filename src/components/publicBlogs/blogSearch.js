@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import "./blogSearch.css";
 import { DatePicker, Select } from "antd";
 import { lawCats } from ".././NewProfile/BusinessProfile/lawyer modal/lawCats";
+import { Link } from "react-router-dom";
 const { Option } = Select;
 
-const BlogSearch = () => {
+const BlogSearch = props => {
   const [posts, setPosts] = useState([]);
   const [title, setTitle] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,7 +99,7 @@ const BlogSearch = () => {
   };
 
   return (
-    <div className="list-search3">
+    <div className={props.type !== "blog" ? "list-search3" : "list-search4"}>
       <input
         className="bg-search-sec"
         disabled={disableInput.title}
@@ -157,9 +158,11 @@ const BlogSearch = () => {
       <div className="bg-reset-btn" onClick={handleReset}>
         <p>Reset</p>
       </div>
-      <div className="bg-reset-btn">
-        <p>Search</p>
-      </div>
+      <Link to="/blogs/search/sdfjskldfjls">
+        <div className="bg-reset-btn">
+          <p>Search</p>
+        </div>
+      </Link>
     </div>
   );
 };

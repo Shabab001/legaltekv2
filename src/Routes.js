@@ -5,11 +5,8 @@ import EmailConfirmation2 from "./components/emailConfirmation/emailConfirmation
 import VerifyEmail from "./components/emailConfirmation/verifyEmail";
 import Guidelines from "./components/Guidelines";
 import LawfirmView from "./components/NewProfile/BusinessProfile/lawfirmView.js/LawfirmView";
-import LawyerView from "./components/NewProfile/LawyerProfile/lawyerView/LawyerView"
-
-
-
-
+import LawyerView from "./components/NewProfile/LawyerProfile/lawyerView/LawyerView";
+import BlogSearchPage from "./components/publicBlogs/BlogSearchPage";
 
 const Header = lazy(() => import("./components/IndexShared/Header"));
 
@@ -32,7 +29,9 @@ const BusinessProfile = lazy(() =>
 const BusinessSingleBlog = lazy(() =>
   import("./components/BusinessSingleBlog")
 );
-const AddLawyers = lazy(()=>import("./components/NewProfile/BusinessProfile/addLawyers") )
+const AddLawyers = lazy(() =>
+  import("./components/NewProfile/BusinessProfile/addLawyers")
+);
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const HowItWorks = lazy(() => import("./components/HowItWorks"));
 const HelpCenter = lazy(() => import("./components/HelpCenter"));
@@ -44,10 +43,11 @@ const ContactUs = lazy(() => import("./components/ContactUs"));
 const Careers = lazy(() => import("./components/Careers"));
 const Blogs = lazy(() => import("./components/Blogs"));
 const SinglePage = lazy(() => import("./components/Blogs/SinglePage"));
-const ViewProfile = lazy(() => import("./components/ViewProfile"))
-const UserProfile = lazy(()=>import("./components/NewProfile/UserProfile"))
-const LawyerProfile = lazy(()=>import("./components/NewProfile/LawyerProfile"))
-
+const ViewProfile = lazy(() => import("./components/ViewProfile"));
+const UserProfile = lazy(() => import("./components/NewProfile/UserProfile"));
+const LawyerProfile = lazy(() =>
+  import("./components/NewProfile/LawyerProfile")
+);
 
 function Routes(props) {
   console.log(props);
@@ -55,54 +55,29 @@ function Routes(props) {
     <>
       <Switch>
         <>
-          <div className="index" style={{paddingTop:"0px !important"}}>
-         
-       
+          <div className="index" style={{ paddingTop: "0px !important" }}>
             <BottomNav {...props} />
-            {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?
-            <Header {...props}  fixed={true} />
-            :<Header {...props} fixed={false}/>
-            
-          }
+            {!props.location.pathname.includes("/lawfirm/") &&
+            !props.location.pathname.includes("/customer/") &&
+            !props.location.pathname.includes("/lawyer/") &&
+            !props.location.pathname.includes("/user/") ? (
+              <Header {...props} fixed={true} />
+            ) : (
+              <Header {...props} fixed={false} />
+            )}
             <Route exact path="/" component={Index} />
-           
+
             {/* <Route exact path="/newProfile" component={UserProfile} /> */}
             <CustomerPrivateRoute exact path="/user/" component={UserProfile} />
 
-         
-            <Route
-              exact
-              path="/user/appointments"
-              component={UserProfile}
-            />
-            <Route
-              exact
-              path="/user/favourites"
-              component={UserProfile}
-            />
-            <Route
-              exact
-              path="/user/reviews"
-              component={UserProfile}
-            />
-            <Route
-              exact
-              path="/user/paymenthistory"
-              component={UserProfile}
-            />
-            <Route
-              exact
-              path="/user/notifications"
-              component={UserProfile}
-            />
-            <Route
-              exact
-              path="/user/chats"
-              component={UserProfile}
-            />
-            
+            <Route exact path="/user/appointments" component={UserProfile} />
+            <Route exact path="/user/favourites" component={UserProfile} />
+            <Route exact path="/user/reviews" component={UserProfile} />
+            <Route exact path="/user/paymenthistory" component={UserProfile} />
+            <Route exact path="/user/notifications" component={UserProfile} />
+            <Route exact path="/user/chats" component={UserProfile} />
 
-{/*        
+            {/*        
             <Route
               exact
               path="/business/documents"
@@ -160,33 +135,36 @@ function Routes(props) {
               path="/business/blogs/:id"
               component={BusinessSingleBlog}
             /> */}
-      
 
-           {/* 
+            {/* 
            
            Lawyer Routes
            */}
 
-            
-             <Route
-              
-              path="/lawyer/"
-              component={LawyerProfile}
-            />
-          
-       
+            <Route path="/lawyer/" component={LawyerProfile} />
 
+            <Route exact path="/user/profile" component={UserProfile} />
 
-            <Route exact path="/user/profile" component={UserProfile}/>
-            
             <Route exact path="/faqs" component={Faqs} />
             <Route exact path="/help-center" component={HelpCenter} />
             <Route exact path="/view-profile/:id" component={ViewProfile} />
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             <Route exact path="/lawfirm/:postId" component={BusinessProfile} />
-            <Route exact path="/auth/activation/:token" component={EmailConfirmation} />
-          <Route exact path="/auth/activated/:token" component={EmailConfirmation2} />
-            <Route exact path="/auth/verify-email/:token" component={VerifyEmail} />
+            <Route
+              exact
+              path="/auth/activation/:token"
+              component={EmailConfirmation}
+            />
+            <Route
+              exact
+              path="/auth/activated/:token"
+              component={EmailConfirmation2}
+            />
+            <Route
+              exact
+              path="/auth/verify-email/:token"
+              component={VerifyEmail}
+            />
             <Route exact path="/careers" component={Careers} />
             <Route exact path="/about-us" component={AboutUs} />
             <Route exact path="/terms-and-conditions" component={Terms} />
@@ -194,16 +172,33 @@ function Routes(props) {
             <Route exact path="/contact-us" component={ContactUs} />
             <Route exact path="/how-it-works" component={HowItWorks} />
             <Route exact path="/lawfirm/" component={BusinessProfile} />
-            <Route exact path="/lawfirm/blogs/:id" component={BusinessProfile} />
-            <Route exact path="/lawfirm/blogs/editblog/:id" component={BusinessProfile} />
+            <Route
+              exact
+              path="/lawfirm/blogs/:id"
+              component={BusinessProfile}
+            />
+            <Route
+              exact
+              path="/lawfirm/blogs/editblog/:id"
+              component={BusinessProfile}
+            />
             <Route exact path="/lawfirm-view/:id" component={LawfirmView} />
             <Route exact path="/lawyer-view/:id" component={LawyerView} />
             <Route exact path="/blogs" component={Blogs} />
-          
+            <Route
+              exact
+              path="/blogs/search/:pararms"
+              component={BlogSearchPage}
+            />
 
-            {!props.location.pathname.includes("/lawfirm/") && !props.location.pathname.includes("/customer/") && !props.location.pathname.includes("/lawyer/") && !props.location.pathname.includes("/user/")?
-        <Footer {...props} /> : ""
-      }
+            {!props.location.pathname.includes("/lawfirm/") &&
+            !props.location.pathname.includes("/customer/") &&
+            !props.location.pathname.includes("/lawyer/") &&
+            !props.location.pathname.includes("/user/") ? (
+              <Footer {...props} />
+            ) : (
+              ""
+            )}
           </div>
         </>
       </Switch>

@@ -1,13 +1,13 @@
 .main-blog-container {
   width: 100%;
   max-width: 1920px;
-  background-color: #f7f7f7;
+  background-color: white;
   margin-left: auto;
   margin-right: auto;
 }
 .header-blogs {
   height: 700px;
-  background: url(./law.jpg);
+  background: url(./law.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -28,96 +28,6 @@
   height: 100%;
 }
 
-.list-search3 {
-  position: relative;
-  top: -5.5rem;
-  height: 7rem;
-  background-color: white;
-  margin: auto;
-  margin-top: 2rem;
-  display: flex;
-  width: 1400px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 2rem 1rem 1.5rem;
-  gap: 1rem;
-  /* box-shadow: 1px 2px 5px 2px rgb(233, 232, 232); */
-}
-.bg-search-sec {
-  border: 1px solid rgb(230, 228, 228);
-  border-radius: 4px;
-  padding-left: 0.5rem;
-  height: 3rem;
-  flex-basis: 40%;
-  font-size: 1.2rem;
-}
-.bg-search-sec::placeholder {
-  color: #bfbfbf !important;
-  padding-left: 0.5rem;
-}
-.bg-search-sec:hover,
-.bg-sort-inputs input:hover {
-  border: 1px solid #49c5b6;
-}
-.bg-search-sec:focus,
-.bg-sort-inputs input:focus {
-  border: 2px solid #49c5b6;
-}
-.bg-sort-inputs input {
-  border: 1px solid rgb(235, 235, 235);
-  border-radius: 4px;
-  padding-left: 0.5rem;
-  cursor: pointer;
-  height: 3rem;
-  width: 100%;
-}
-.bg-sort-inputs > input::placeholder {
-  color: #bfbfbf !important;
-  padding-left: 0.4rem;
-}
-.bg-sort-inputs {
-  width: 100%;
-  font-weight: bold;
-}
-.bg-input-grid {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-basis: 50%;
-}
-
-.bg-reset-btn {
-  background-color: var(--secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.ant-select-selector {
-  max-width: 100%;
-  height: 3rem !important;
-  border-radius: 4px;
-}
-.ant-select-selection-placeholder {
-  font-weight: normal;
-
-  color: #bfbfbf !important;
-}
-.ant-select-single.ant-select-show-arrow .ant-select-selection-item,
-.ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
-  padding-right: 18px;
-  /* padding-top: .3rem; */
-  display: flex;
-  align-items: center;
-  font-weight: normal;
-}
-.bg-sort-inputs input {
-  border: none;
-}
 .popularBlogs-main {
   margin-top: 2rem;
 }
@@ -144,7 +54,7 @@
     "box4 box2  box5";
   row-gap: 10px;
   gap: 1rem;
-  background-color: #f7f7f7;
+  background-color: white;
 }
 
 .pblogs-normal-box1 {
@@ -152,7 +62,7 @@
   height: 100%;
 }
 .pblogs-normal-box2 {
-  background-color: white;
+  background-color: #f7f7f7;
   grid-area: box2;
 }
 .pblogs-normal-box3 {

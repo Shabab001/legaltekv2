@@ -1,25 +1,22 @@
-import React,{useState,useEffect} from 'react'
-import "./listSidebar.css"
+import React, { useState, useEffect } from "react";
+import "./listSidebar.css";
 import { connect } from "react-redux";
-const ListSidebar = (props) => {
- 
-
- 
-
- 
-
-    return (
-        <>
-
-        <div className="lawfirm-view-sidebar">
-            <div className="lawfirm-view-box1">
-                <div className="lawfirm-view-box1-header">
-                    <p>Hours of Operation</p>
-                </div>
-                <div className="lawfirm-view-box1-body">
-                
- 
-                    {/* <div className="lawfirm-view-timezone">
+const ListSidebar = props => {
+  return (
+    <>
+      <div className="lawfirm-view-sidebar">
+        <div className="lawfirm-view-box3">
+          <div className="lawfirm-view-box1-header">
+            <p>Lawyer Stats</p>
+          </div>
+          <div className="lawfirm-view-box1-body"></div>
+        </div>
+        <div className="lawfirm-view-box1">
+          <div className="lawfirm-view-box1-header">
+            <p>Hours of Operation</p>
+          </div>
+          <div className="lawfirm-view-box1-body">
+            {/* <div className="lawfirm-view-timezone">
                         <p>TimeZone: {props.lawfirmAgency.branches[props.index].availability.timezone.value} </p>
                     </div>
                     <div className="lawfirm-view-schedule">
@@ -61,27 +58,29 @@ const ListSidebar = (props) => {
                              <p>Schedule not fixed yet</p>
                           </div>
                     } */}
-                </div>
-            </div>
-            <div className="lawfirm-view-box2">
-                <div className="lawfirm-view-box1-header">
-                    <p>Hours of Operation</p>
-                </div>
-                <div className="lawfirm-view-box1-body">
-
-                </div>
-                
-            </div>
+          </div>
         </div>
+        <div className="lawfirm-view-box2">
+          <div className="lawfirm-view-box1-header">
+            <p>Direction</p>
+          </div>
+          <div className="lawfirm-view-box1-body"></div>
+        </div>
+        <div className="lawfirm-view-box2">
+          <div className="lawfirm-view-box1-header">
+            <p>Hours of Operation</p>
+          </div>
+          <div className="lawfirm-view-box1-body"></div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-        </>
-    )
-}
+const mapStateToProps = state => ({
+  auth: state.auth,
+  profile: state.auth.lawfirmUserProfile,
+  lawfirmAgency: state.lawfirmAgencies.singleLawfirm,
+});
 
-const mapStateToProps = (state) => ({
-    auth: state.auth,
-    profile: state.auth.lawfirmUserProfile,
-    lawfirmAgency:state.lawfirmAgencies.singleLawfirm
-  });
-
- export default connect(mapStateToProps)(ListSidebar);
+export default connect(mapStateToProps)(ListSidebar);
