@@ -47,24 +47,43 @@ const LawyerView = props => {
           <div className="lawfirm-view-header">
             <div className="lawfirm-view-header-container">
               <div className="lawfirm-view-name">
-                <p style={{ color: "yellow", fontSize: "1.2rem" }}>
-                  {props.lawyer.firstname} {props.lawyer.lastname} <br />{" "}
-                  {props.lawyer.lawfirm_user.lawfirmName}
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "1.2rem",
+                    lineHeight: "1.1",
+                  }}
+                >
+                  <span style={{ color: "white", fontSize: "1.6rem" }}>
+                    {props.lawyer.firstname} {props.lawyer.lastname}{" "}
+                  </span>{" "}
+                  <br />{" "}
+                  <span style={{ color: "white", fontSize: "1rem" }}>
+                    {props.lawyer.lawfirm_user.lawfirmName}
+                  </span>
                 </p>
               </div>
               <div className="lawfirm-view-heder-right">
                 <div className="lawfirm-view-sectios">
                   <div className="lawfirm-view-sec">
-                    <p>13,10posts</p>
+                    <p>
+                      1310 <span style={{ fontSize: ".8rem" }}>Posts</span>
+                    </p>
                   </div>
                   <div className="lawfirm-view-sec">
-                    <p>13,10posts</p>
+                    <p>
+                      12M <span style={{ fontSize: ".8rem" }}>Followers</span>
+                    </p>
                   </div>
                   <div className="lawfirm-view-sec">
-                    <p>13,10posts</p>
+                    <p>
+                      20 <span style={{ fontSize: ".8rem" }}>Likes</span>
+                    </p>
                   </div>
                   <div className="lawfirm-view-sec">
-                    <p>13,10posts</p>
+                    <p>
+                      200 <span style={{ fontSize: ".8rem" }}>Reviews</span>
+                    </p>
                   </div>
                 </div>
 

@@ -11,6 +11,10 @@ import { BsFillCalendarFill, BsEnvelope } from "react-icons/bs";
 import * as lawfirmActions from "../../../../actions/lawfirmActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { BsFillChatDotsFill } from "react-icons/bs";
+import { Tooltip } from "antd";
+import { EmailShareButton } from "react-share";
+import { BiShareAlt } from "react-icons/bi";
 
 const Lower = props => {
   const [tab, setTab] = useState("general");
@@ -90,28 +94,52 @@ const Lower = props => {
               <p>Book Appointment</p>
             </div>
             <div className="lawfirm-view-message">
-              <BsEnvelope />
-              <p>Message</p>
+              <BsFillChatDotsFill />
+
+              <p>Chat</p>
             </div>
           </div>
           <div className="lawfirm-view-btns">
-            <div className="lawfirm-views-click" style={{ color: "yellow" }}>
-              <IoQrCodeSharp fontSize="1.5rem" />
-            </div>
-            <Link target="_blank">
-              <div className="lawfirm-views-click">
-                <GoGlobe fontSize="1.5rem" className={"email"} />
+            <Tooltip title="Email">
+              <div className="lawfirm-views-click" style={{ color: "yellow" }}>
+                <BsEnvelope fontSize="1.5rem" />
               </div>
+            </Tooltip>
+            <Link target="_blank">
+              <Tooltip title="Website">
+                <div className="lawfirm-views-click">
+                  <GoGlobe fontSize="1.5rem" className={"email"} />
+                </div>
+              </Tooltip>
             </Link>
-            <div className="lawfirm-views-click" style={{ color: "yellow" }}>
-              <IoQrCodeSharp fontSize="1.5rem" />
-            </div>
-            <div className="lawfirm-views-click" style={{ color: "yellow" }}>
-              <FaRegHeart fontSize="1.5rem" />
-            </div>
-            <div className="lawfirm-views-click" style={{ color: "yellow" }}>
-              <BiLike fontSize="1.5rem" />
-            </div>
+            <Tooltip title="QrCode">
+              <div className="lawfirm-views-click" style={{ color: "yellow" }}>
+                <IoQrCodeSharp fontSize="1.5rem" />
+              </div>
+            </Tooltip>
+            <Tooltip title="Follow">
+              <div className="lawfirm-views-click" style={{ color: "yellow" }}>
+                <FaRegHeart fontSize="1.5rem" />
+              </div>
+            </Tooltip>
+            <Tooltip title="Like">
+              <div className="lawfirm-views-click" style={{ color: "yellow" }}>
+                <BiLike fontSize="1.5rem" />
+              </div>
+            </Tooltip>
+            <EmailShareButton
+              style={{ outline: "none" }}
+              url={`https://legaltekv2/lawyer-view/${props.lawfirm.id}`}
+            >
+              <Tooltip title="Share">
+                <div
+                  className="lawfirm-views-click"
+                  style={{ color: "yellow" }}
+                >
+                  <BiShareAlt fontSize="1.5rem" />
+                </div>
+              </Tooltip>
+            </EmailShareButton>
           </div>
         </div>
       </div>
