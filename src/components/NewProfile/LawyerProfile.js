@@ -19,7 +19,7 @@ import Message from "./LawyerProfile/message";
 import Notifications from "./LawyerProfile/Notifications";
 import Appointments from "./LawyerProfile/Appointments";
 import LawyerAccount from "./LawyerProfile/lawyerAccount";
-import Management from "./LawyerProfile/management";
+import Credentials from "./LawyerProfile/credentials/credentials";
 import Blogs from "./LawyerProfile/blogs";
 import CreateBlog from "./LawyerProfile/blog-contents/createBlog";
 import SingleBlog from "./LawyerProfile/blog-contents/singleBlog";
@@ -62,7 +62,7 @@ function LawyerProfile(props) {
       setActiveMenu(5);
     }
 
-    if (props.location.pathname === "/lawyer/management") {
+    if (props.location.pathname === "/lawyer/credentials") {
       setActiveMenu(6);
     }
     if (props.location.pathname === "/lawyer/notifications") {
@@ -145,6 +145,13 @@ function LawyerProfile(props) {
               <span className="link-title">Account</span>
             </li>
           </Link>
+          <Link to="/lawyer/credentials" data-tooltip="Subscriptions">
+            <li className={activeMenu === 6 ? "active" : ""}>
+              <span></span>
+              <i className="fa fa-cog stroke-transparent" />{" "}
+              <span className="link-title">Credentials</span>
+            </li>
+          </Link>
           <Link to="/lawyer/documents" data-tooltip="Subscriptions">
             <li className={activeMenu === 3 ? "active" : ""}>
               <span></span>
@@ -182,13 +189,6 @@ function LawyerProfile(props) {
             </li>
           </Link>
 
-          <Link to="/lawyer/management" data-tooltip="Subscriptions">
-            <li className={activeMenu === 6 ? "active" : ""}>
-              <span></span>
-              <i className="fa fa-cog stroke-transparent" />{" "}
-              <span className="link-title">Managements</span>
-            </li>
-          </Link>
           <Link to="/lawyer/chats" data-tooltip="Subscriptions">
             <li className={activeMenu === 8 ? "active" : ""}>
               <span></span>
@@ -226,7 +226,7 @@ function LawyerProfile(props) {
 
         <Route exact path="/lawyer/documents" component={Documents} />
         <Route exact path="/lawyer/profile" component={LawyerAccount} />
-        <Route exact path="/lawyer/management" component={Management} />
+        <Route exact path="/lawyer/credentials" component={Credentials} />
         <Route exact path="/lawyer/reviews" component={Review} />
         <Route exact path="/lawyer/notifications" component={Notifications} />
         <Route exact path="/lawyer/chats" component={Message} />

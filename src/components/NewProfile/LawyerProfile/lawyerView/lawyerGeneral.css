@@ -7,7 +7,15 @@
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
-  height: 5rem;
+  font-weight: bold;
+  height: 2rem;
+}
+.general-intro-body-edu-col2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  height: 2rem;
 }
 .genral-colums {
   flex-basis: 100%;

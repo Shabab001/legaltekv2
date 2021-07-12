@@ -165,7 +165,7 @@ const BlogGallery = props => {
           </p>
         </div>
 
-        <div className="list-search3">
+        <div className="list-search4">
           <input
             className="bg-search-sec"
             disabled={disableInput.title}
